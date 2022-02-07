@@ -1,35 +1,34 @@
 {
   "compilerOptions": {
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./",
+    "downlevelIteration": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
     "jsx": "react-jsx",
-    "lib": [
-      "dom",
-      "es7",
-      "ES2019",
-      "es2020"
-    ],
-    "typeRoots": [
-      "./node_modules/@types",
-      "./types"
-    ],
+    "lib": ["dom", "dom.iterable", "es2021"],
     "module": "CommonJS",
     "moduleResolution": "node",
-    "target": "es2015",
-    "downlevelIteration": true,
-    "allowJs": true,
-    "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "charset": "utf8",
-    "baseUrl": "./",
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": false,
+    "noImplicitThis": false,
+    "noUncheckedIndexedAccess": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "outDir": "./dist",
     "paths": {
-      "~/*": [
-        "./src/*"
-      ]
+      "~/*": ["./src/*"]
     },
-    "outDir": "./dist"
+    "preserveConstEnums": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "strictNullChecks": false,
+    "target": "esnext",
+    "types": ["node", "jest"]
   },
-  "include": [
-    "./src/**/*",
-    "./tests/**/*",
-    "types"
-  ]
+  "include": ["./src/**/*", "./tests/**/*", "types"],
+  "exclude": ["node_modules"]
 }
