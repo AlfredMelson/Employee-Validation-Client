@@ -1,4 +1,4 @@
-import faker from 'faker';
+import { v4 as uuidv4 } from 'uuid'
 
 interface IToken {
     token: string,
@@ -23,4 +23,4 @@ export const getTokenOwner = (token: string) => (
     tokens.find(({token: t }) => t === token)?.userId
 )
 
-export const generateToken = () => faker.random.alphaNumeric(24);
+export const generateToken = () => uuidv4()
