@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 module.exports = {
   settings: {
     react: { version: 'detect' }
@@ -22,7 +21,6 @@ module.exports = {
     'plugin:react-hooks/recommended',
     'plugin:import/recommended',
     'plugin:import/typescript',
-    // 'plugin:prettier/recommended',
     'prettier'
   ],
 
