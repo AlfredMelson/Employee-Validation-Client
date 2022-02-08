@@ -1,15 +1,16 @@
-import { createContext, useContext, useEffect, useState } from 'react';
-import { API } from '~/constants';
-import getUrl from '~/utils/getUrl';
+/* eslint-disable @typescript-eslint/no-empty-function */
+import { createContext, ReactNode, useContext, useEffect, useState } from 'react'
+import { API } from '../constants'
+import getUrl from '../utils/getUrl'
 
 interface IUser {
-  updateUser: () => void;
-  deleteData: () => void;
-  errorMessage: string;
-  isLoading: boolean;
-  username: string;
-  email: string;
-  id: string;
+  updateUser: () => void
+  deleteData: () => void
+  errorMessage: string
+  isLoading: boolean
+  username: string
+  email: string
+  id: string
 }
 
 const UserContext = createContext<IUser>({
@@ -19,52 +20,56 @@ const UserContext = createContext<IUser>({
   isLoading: true,
   username: null,
   email: null,
-  id: null,
-});
+  id: null
+})
 
-export const useUserContext = () => useContext(UserContext);
+export const useUserContext = () => useContext(UserContext)
 
-export const UserContextProvider = ({ children }) => {
-  const [errorMessage, setErrorMessage] = useState<string>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [username, setUsername] = useState<string>(null);
-  const [email, setEmail] = useState<string>(null);
-  const [id, setId] = useState<string>(null);
+interface IUserContextProvider {
+  children: ReactNode
+}
+
+export const UserContextProvider = ({ children }: IUserContextProvider) => {
+  const [errorMessage, setErrorMessage] = useState<string>(null)
+  const [isLoading, setIsLoading] = useState(true)
+  const [username, setUsername] = useState<string>(null)
+  const [email, setEmail] = useState<string>(null)
+  const [id, setId] = useState<string>(null)
 
   const updateUser = async () => {
-    setErrorMessage(null);
-    setIsLoading(true);
+    setErrorMessage(null)
+    setIsLoading(true)
 
     try {
       const response = await fetch(getUrl(API.User), {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          Authorization: `Bearer ${localStorage.getItem('token')}`
         }
-      });
+      })
 
-      const data = await response.json();
+      const data = await response.json()
 
-      setUsername(data?.username);
-      setEmail(data?.email);
-      setId(data?.id);
+      setUsername(data?.username)
+      setEmail(data?.email)
+      setId(data?.id)
     } catch (error) {
-      setErrorMessage(error.message);
+      setErrorMessage(error.message)
     }
 
-    setIsLoading(false);
+    setIsLoading(false)
   }
 
   const deleteData = () => {
-    setErrorMessage(null);
-    setIsLoading(false);
-    setUsername(null);
-    setEmail(null);
-    setId(null);
-  };
+    setErrorMessage(null)
+    setIsLoading(false)
+    setUsername(null)
+    setEmail(null)
+    setId(null)
+  }
 
   useEffect(() => {
-   updateUser();
-  }, []);
+    updateUser()
+  }, [])
 
   const value = {
     updateUser,
@@ -73,14 +78,10 @@ export const UserContextProvider = ({ children }) => {
     isLoading,
     username,
     email,
-    id,
-  };
+    id
+  }
 
-  return (
-    <UserContext.Provider value={value}>
-      {children}
-    </UserContext.Provider>
-  )
+  return <UserContext.Provider value={value}>{children}</UserContext.Provider>
 }
 
-export default UserContext;
+export default UserContext

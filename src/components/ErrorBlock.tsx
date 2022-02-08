@@ -1,19 +1,22 @@
-import {FC, memo} from 'react';
+import { FC, memo } from 'react'
 
 interface IErrorBlock {
-  error: String
+  errorMessage: string
+  ref?: any
 }
 
-const ErrorBlock: FC<IErrorBlock> = ({error}) => {
-  if (!error) {
-    return null;
+const ErrorBlock: FC<IErrorBlock> = ({ errorMessage, ref }) => {
+  if (!errorMessage) {
+    return null
   }
 
   return (
     <div>
-      {error}
+      <p ref={ref} className={errorMessage ? 'errorMessage' : 'offscreen'} aria-live='assertive'>
+        {errorMessage}
+      </p>
     </div>
   )
 }
 
-export default memo(ErrorBlock);
+export default memo(ErrorBlock)
