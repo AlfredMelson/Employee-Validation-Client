@@ -1,4 +1,4 @@
-const timeout = (req, res, next) => {
+const timeout = (_req, _res, next) => {
     setTimeout(() => next(), 500);
 }
   

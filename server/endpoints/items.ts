@@ -4,7 +4,7 @@ import { getItems, updateItem } from '../services/itemManager';
 
 const router = Router();
 
-router.get('/api/items', authentication, (req, res) => {
+router.get('/api/items', authentication, (_req, res) => {
   res.status(200).json({
     items: getItems(),
   });

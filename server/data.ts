@@ -1,7 +1,7 @@
 enum Roles {
   read = 'read',
   write = 'write',
-  amin = 'amin'
+  admin = 'admin'
 }
 
 export const users = [
@@ -17,7 +17,7 @@ export const employees = [
   {
     id: "001",
     name: "Jonas Jonaitis",
-    role: Roles.amin,
+    role: Roles.admin,
     email: "email123",
     createdAt: new Date().toISOString()
   },
@@ -38,14 +38,14 @@ export const employees = [
   {
     id: "004",
     name: "Juozas Juozaitis",
-    role: Roles.amin,
+    role: Roles.admin,
     email: "test@gmail.com",
     createdAt: new Date().toISOString()
   },
   {
     id: "005",
     name: "Tomas Tomaitis",
-    role: Roles.amin,
+    role: Roles.admin,
     email: "Vardenis2000@gmail.com",
     createdAt: new Date().toISOString()
   },
@@ -59,14 +59,14 @@ export const employees = [
   {
     id: "007",
     name: "Justas Justaitis",
-    role: Roles.amin,
+    role: Roles.admin,
     email: "email@gmail.com",
     createdAt: new Date().toISOString()
   },
   {
     id: "008",
     name: "Laurynas Laurinaitis",
-    role: Roles.amin,
+    role: Roles.admin,
     email: "pavardenis321@gmail.com",
     createdAt: new Date().toISOString()
   },
