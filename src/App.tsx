@@ -6,8 +6,6 @@ import { UserContextProvider } from './components/UserContext'
 import UsersManagement from './components/UsersManagement/UsersManagement'
 import { Routes } from './constants'
 
-import './style/styles.scss'
-
 const App = () => (
   <Router>
     <Switch>
