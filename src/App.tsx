@@ -1,26 +1,27 @@
-import { Redirect, BrowserRouter as Router, Switch } from 'react-router-dom'
-import Login from './components/Login/Login'
-import PrivateRoute from './components/PrivateRoute'
-import PublicRoute from './components/PublicRoute'
-import { UserContextProvider } from './components/UserContext'
-import UsersManagement from './components/UsersManagement/UsersManagement'
-import { Routes } from './constants'
+import { Route, Routes } from 'react-router-dom'
+import PersistLogin from './components/persist/PersistLogin'
+import Layout from './layout'
+import AdminDashboard from './pages/AdminDashboard'
+import Login from './pages/Login'
+import NoMatch from './pages/NoMatch'
+import Registration from './pages/Registration'
+import './style/global.css'
 
-const App = () => (
-  <Router>
-    <Switch>
-      <PublicRoute path={Routes.Login} component={Login} />
-      <PrivateRoute
-        path={Routes.Users}
-        component={() => (
-          <UserContextProvider>
-            <UsersManagement />
-          </UserContextProvider>
-        )}
-      />
-      <PrivateRoute path={Routes.Root} component={() => <Redirect to={Routes.Users} />} />
-    </Switch>
-  </Router>
-)
-
-export default App
+export default function App() {
+  return (
+    <Routes>
+      <Route path='/' element={<Layout />}>
+        {/* public routes */}
+        <Route index element={<Login />} />
+        {/* registration route used for dev testing */}
+        <Route path='registration' element={<Registration />} />
+        {/* protected routes */}
+        <Route element={<PersistLogin />}>
+          <Route path='items' element={<AdminDashboard />} />
+        </Route>
+        {/* no-match routes */}
+        <Route path='*' element={<NoMatch />} />
+      </Route>
+    </Routes>
+  )
+}
