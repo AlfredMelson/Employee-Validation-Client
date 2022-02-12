@@ -1,13 +1,13 @@
 import { Route, Routes } from 'react-router-dom'
-import { Filter, Header, List } from '../components/administration'
-import useItemsProvider from '../components/administration/useItemsProvider'
-import ErrorBlock from '../components/ErrorBlock'
-import LoadingScreen from '../components/LoadingScreen'
-import { DefinedRouting } from '../constants'
-import { useUserContext } from '../context/UserContext'
-import reusedEmail from '../utils/reusedEmail'
+import { useUserContext } from '../../context/UserContext'
+import { DefinedRouting } from '../../utils'
+import reusedEmail from '../../utils/reusedEmail'
+import ErrorBlock from '../ErrorBlock'
+import LoadingScreen from '../LoadingScreen'
+import useItemsProvider from './useItemsProvider'
+import { Filter, Header, List } from '.'
 
-export default function AdminDashboard() {
+export default function Dashboard() {
   const {
     errorMessage: userProviderErrorMessage,
     isLoading: userDataIsLoading,

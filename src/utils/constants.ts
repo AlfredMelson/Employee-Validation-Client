@@ -17,10 +17,15 @@ export enum API {
   User = '/user'
 }
 
-export const AXIOS_Configuration = {
+export const AXIOS_LOGIN_Configuration = {
   headers: { 'Content-Type': 'application/json' },
   withCredentials: true
 }
+export const AXIOS_ITEMS_Configuration = {
+  headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+  withCredentials: true
+}
+export const AXIOS_LOGOUT_Configuration = { withCredentials: true }
 
 export enum LOCAL {
   User = 'mygomtechUser',

@@ -1,5 +1,5 @@
 import axios from '../api/axios'
-import { API } from '../constants'
+import { API, AXIOS_ITEMS_Configuration } from '../utils'
 
 export enum Roles {
   read = 'read',
@@ -14,25 +14,34 @@ export interface IItem {
   createdAt: string
 }
 const getUserItems = async (userId?: string): Promise<Array<IItem>> => {
-  const response = await axios.post(API.Items, userId, {
-    headers: { 'Content-Type': 'application/json' },
-    withCredentials: true
-  })
-  console.log(response)
+  try {
+    const response = await axios.post(
+      // pull in the items endpoint
+      API.Items,
 
-  // const url = getUrl(API.Items, {
-  //   userId
-  // })
-  // const response = await fetch(url, {
-  //   headers: {
-  //     Authorization: `Bearer ${localStorage.getItem('token')}`
-  //   }
-  // })
+      // pull in the userId
+      userId,
 
-  // const data = await response.json()
+      // pull in axios items config
+      AXIOS_ITEMS_Configuration
+    )
+    console.log(response.data)
 
-  // return data.items
-  return
+    // handle unsuccessful login responses
+    if (response.data !== 200) {
+      // send status 401: 'unauthorized; response means unauthenticated'
+      if (response.data === 401) {
+        return
+      }
+
+      // handle all other errors
+      throw new Error(`${response.status} ${response.statusText}`)
+    }
+
+    return response.data
+  } catch (error) {
+    console.error(error)
+  }
 }
 
 export default getUserItems

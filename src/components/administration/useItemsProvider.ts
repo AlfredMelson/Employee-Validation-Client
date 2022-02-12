@@ -7,19 +7,12 @@ const useItemsProvider = () => {
   const [items, setItems] = useState<Array<IItem>>([])
 
   useEffect(() => {
-    ;(async () => {
+    async function requestUserItems() {
       setIsLoading(true)
-
-      try {
-        const userItems = await getUserItems()
-
-        setItems(userItems)
-      } catch (error) {
-        setErrorMessage(error.message)
-      }
-
+      await getUserItems().then(setItems).catch(setErrorMessage)
       setIsLoading(false)
-    })()
+    }
+    requestUserItems()
   }, [])
 
   return {

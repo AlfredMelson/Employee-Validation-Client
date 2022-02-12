@@ -1,5 +1,5 @@
 import queryString from 'query-string'
-import { API } from '../constants'
+import { API } from './constants'
 const API_URL = 'http://localhost:9003'
 
 const getUrl = (endpoint: API, params?: any) => {

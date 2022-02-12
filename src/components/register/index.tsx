@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField'
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from '../../api/axios'
-import { API, REGEX_EmailAddress, REGEX_Password, REGEX_Username } from '../../constants'
+import { API, REGEX_EmailAddress, REGEX_Password, REGEX_Username } from '../../utils'
 import { ButtonStyle } from '../mui/button.style'
 
 export default function RegistrationCard() {
@@ -48,8 +48,8 @@ export default function RegistrationCard() {
     setValidEmail(REGEX_EmailAddress.test(email))
   }, [email])
 
-  const handleFormSubmit = async e => {
-    e.preventDefault()
+  const handleFormSubmit = async event => {
+    event.preventDefault()
     // if button enabled with JS hack
     const v1 = REGEX_Username.test(user)
     const v2 = REGEX_Password.test(pwd)

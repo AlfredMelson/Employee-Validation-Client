@@ -1,4 +1,4 @@
-import RouteMismatch from '../components/no-match'
+import { RouteMismatch } from '../components'
 
 export default function NoMatch() {
   return <RouteMismatch />

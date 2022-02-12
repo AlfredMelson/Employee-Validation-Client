@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { FunctionComponent, useState } from 'react'
 import Modal from 'react-modal'
 import { IItem } from '../../../services/getUserItems'
 import updateItem from '../../../services/updateItem'
@@ -59,7 +59,7 @@ interface IList {
   items: Array<IItem>
 }
 
-export default function List({ items }: IList) {
+const List: FunctionComponent<IList> = ({ items }) => {
   return (
     <ul className='list'>
       {items.map(item => (
@@ -75,3 +75,4 @@ export default function List({ items }: IList) {
     </ul>
   )
 }
+export default List

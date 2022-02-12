@@ -1,4 +1,4 @@
-import RegistrationCard from '../components/register/RegistrationCard'
+import { RegistrationCard } from '../components'
 
 export default function Registration() {
   return (

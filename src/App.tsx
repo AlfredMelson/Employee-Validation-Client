@@ -1,10 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
-import PersistLogin from './components/persist/PersistLogin'
-import Layout from './layout'
-import AdminDashboard from './pages/AdminDashboard'
-import Login from './pages/Login'
-import NoMatch from './pages/NoMatch'
-import Registration from './pages/Registration'
+import { AuthRequired, Layout, PersistLogin } from './components'
+import { Administration, Login, NoMatch, Registration } from './pages'
 import './style/global.css'
 
 export default function App() {
@@ -15,9 +11,13 @@ export default function App() {
         <Route index element={<Login />} />
         {/* registration route used for dev testing */}
         <Route path='registration' element={<Registration />} />
-        {/* protected routes */}
+        {/* persistent login routes */}
         <Route element={<PersistLogin />}>
-          <Route path='items' element={<AdminDashboard />} />
+          {/* authenticated routes */}
+          <Route element={<AuthRequired />}>
+            {/* protected routes */}
+            <Route path='items' element={<Administration />} />
+          </Route>
         </Route>
         {/* no-match routes */}
         <Route path='*' element={<NoMatch />} />

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react'
-import { API } from '../constants'
+import { API } from '../utils'
 import getUrl from '../utils/getUrl'
 
 interface IUser {

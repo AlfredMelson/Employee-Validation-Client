@@ -1,14 +1,13 @@
-import { FC } from 'react'
-import { DefinedRouting } from '../../../constants'
+import { FunctionComponent } from 'react'
 import { IItem } from '../../../services/getUserItems'
-import { oldPassword, reusedEmail, wrongEmail } from '../../../utils'
+import { DefinedRouting, oldPassword, reusedEmail, wrongEmail } from '../../../utils'
 import FilterTab from './FilterTab'
 
 interface IFilter {
   items: Array<IItem>
 }
 
-const Filter: FC<IFilter> = ({ items }) => {
+const Filter: FunctionComponent<IFilter> = ({ items }) => {
   const wrongEmailCount = items.filter(wrongEmail).length
 
   const reusedItemsCount = items.filter(item => reusedEmail(item, items)).length

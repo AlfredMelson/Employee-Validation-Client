@@ -1,4 +1,4 @@
-import { API } from '../constants'
+import { API } from '../utils'
 import getUrl from '../utils/getUrl'
 import { IItem } from './getUserItems'
 

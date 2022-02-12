@@ -1,11 +1,11 @@
-import { FC, memo } from 'react'
+import { FunctionComponent, memo } from 'react'
 
 interface IErrorBlock {
   errorMessage: string
   ref?: any
 }
 
-const ErrorBlock: FC<IErrorBlock> = ({ errorMessage, ref }) => {
+const ErrorBlock: FunctionComponent<IErrorBlock> = ({ errorMessage, ref }) => {
   if (!errorMessage) {
     return null
   }

@@ -1,5 +1,5 @@
 import axios from '../api/axios'
-import { API } from '../constants'
+import { API } from '../utils'
 import useAuth from './useAuth'
 
 const useLogin = (user: string, pwd: string) => {

@@ -8,8 +8,8 @@ import Typography from '@mui/material/Typography'
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from '../../api/axios'
-import { API, AXIOS_Configuration, LOCAL } from '../../constants'
 import { useAuth, useInput, useToggle } from '../../hooks'
+import { API, AXIOS_LOGIN_Configuration, LOCAL } from '../../utils'
 import { ButtonStyle } from '../mui/button.style'
 
 export default function LoginCard() {
@@ -23,7 +23,7 @@ export default function LoginCard() {
   const [user, resetUser, userAttributions] = useInput(LOCAL.User, '')
   const [pwd, setPwd] = useState<string>('')
 
-  // if no local persist value, set to false
+  // if no persist value locally, set to false
   const [check, toggleCheck] = useToggle(LOCAL.Persist, false)
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
@@ -31,8 +31,10 @@ export default function LoginCard() {
   const [errorAlert, setErrorAlert] = useState<boolean>(false)
 
   useEffect(() => {
-    // empty any error messages and reset alert when either the username or password state changes
+    // empty any error message
     setErrorMessage('')
+
+    // reset alert when either the username or password state changes
     setErrorAlert(false)
   }, [user, pwd])
 
@@ -41,14 +43,14 @@ export default function LoginCard() {
 
     try {
       const response = await axios.post(
-        // url
+        // pull in the login endpoint
         API.Login,
 
-        // data
+        // pull in the user and password
         JSON.stringify({ user, pwd }),
 
-        // config
-        AXIOS_Configuration
+        // pull in axios login config
+        AXIOS_LOGIN_Configuration
       )
 
       // handle unsuccessful login responses
@@ -72,8 +74,8 @@ export default function LoginCard() {
       resetUser()
       setPwd('')
 
-      // push user to dashboard
-      navigate('/items', { replace: true })
+      // push user to dashboard page
+      navigate('/items')
 
       // open error alert if there is a caught error
     } catch (error) {
@@ -87,11 +89,12 @@ export default function LoginCard() {
       } else if (error.response?.status === 400) {
         setErrorMessage('Missing Username or Password')
 
-        // handle unauthenticated request
+        // handle invalid syntax
       } else if (error.response?.status === 401) {
         setErrorMessage('Unauthorized Creditentials')
-      } else {
+
         // catch-all-other-errors
+      } else {
         setErrorMessage('Login Failed')
       }
       errorReference.current.focus()
