@@ -17,6 +17,11 @@ export enum API {
   User = '/user'
 }
 
+export const AXIOS_LOGIN_Configuration = {
+  headers: { 'Content-Type': 'application/json' },
+  withCredentials: true
+}
+
 export enum LOCAL {
   User = 'mygomtechUser',
   Persist = 'mygomtechPersist'

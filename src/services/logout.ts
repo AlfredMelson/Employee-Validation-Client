@@ -1,5 +1,17 @@
-const logout = () => {
+import { API } from '../constants'
+import getUrl from '../utils/getUrl'
 
-};
+const logout = async (username: string, password: string) => {
+  const url = getUrl(API.Login, {
+    username,
+    password
+  })
 
-export default logout;
+  const response = await fetch(url)
+  const data = await response.json()
+  const { token } = data
+
+  localStorage.setItem('token', token)
+}
+
+export default logout
