@@ -8,7 +8,7 @@
     "isolatedModules": true,
     "jsx": "react-jsx",
     "lib": ["dom", "dom.iterable", "es2021"],
-    "module": "CommonJS",
+    "module": "commonjs",
     "moduleResolution": "node",
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": false,
@@ -22,7 +22,7 @@
     "skipLibCheck": true,
     "strict": false,
     "strictNullChecks": false,
-    "target": "esnext",
+    "target": "es6",
     "types": ["node", "jest"]
   },
   "include": ["./src/**/*", "./tests/**/*", "types"],

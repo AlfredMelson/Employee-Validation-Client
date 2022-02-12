@@ -23,7 +23,6 @@ module.exports = {
     'plugin:import/typescript',
     'prettier'
   ],
-
   plugins: ['@typescript-eslint', 'react', 'react-hooks', 'import'],
   rules: {
     'no-unused-vars': 'off',
