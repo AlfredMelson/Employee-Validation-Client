@@ -139,19 +139,8 @@ body,
 .input {
   height: 32px;
 }
-.button {
-  border-width: 0;
-  border-color: var(--teal);
-  background-color: var(--teal);
-  border-radius: 9999px;
-  cursor: pointer;
-  color: var(--white);
-  padding: 12px 6px;
-  font-weight: bold;
-  font-size: 16px;
-}
+
 .loading-screen {
-  font-size: large;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -236,8 +225,7 @@ body,
 .login-page input[type='text'],
 .login-page input[type='password'],
 .login-page textarea {
-  font-size: 16px;
-  padding: 0.25rem 0.5rem;
+  padding: 0.5rem 1rem;
   border-radius: 3px;
 }
 
@@ -337,7 +325,6 @@ body,
   margin-right: 12px;
 }
 .list .item .title {
-  font-size: larger;
   font-weight: 600;
 }
 .list .item .update {
