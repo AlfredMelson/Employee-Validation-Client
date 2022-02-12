@@ -10,6 +10,10 @@ const ErrorBlock: FC<IErrorBlock> = ({ errorMessage, ref }) => {
     return null
   }
 
+  /*
+   * aria-live="assertive" will have a screen reader annouce the message immediately.
+   */
+
   return (
     <div>
       <p ref={ref} className={errorMessage ? 'errorMessage' : 'offscreen'} aria-live='assertive'>

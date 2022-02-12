@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import Modal from 'react-modal'
-import { IItem } from '../../../../services/getUserItems'
-import updateItem from '../../../../services/updateItem'
-import ItemIcon from './components/ItemIcon'
-import './list-style.scss'
+import { IItem } from '../../../services/getUserItems'
+import updateItem from '../../../services/updateItem'
+import ItemIcon from './ItemIcon'
+
 interface IUpdateModal {
   item: IItem
 }
