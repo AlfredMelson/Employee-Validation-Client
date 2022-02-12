@@ -1,5 +1,5 @@
+import axios from '../api/axios'
 import { API } from '../constants'
-import getUrl from '../utils/getUrl'
 
 export enum Roles {
   read = 'read',
@@ -14,19 +14,25 @@ export interface IItem {
   createdAt: string
 }
 const getUserItems = async (userId?: string): Promise<Array<IItem>> => {
-  const url = getUrl(API.Items, {
-    userId
+  const response = await axios.post(API.Items, userId, {
+    headers: { 'Content-Type': 'application/json' },
+    withCredentials: true
   })
+  console.log(response)
 
-  const response = await fetch(url, {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem('token')}`
-    }
-  })
+  // const url = getUrl(API.Items, {
+  //   userId
+  // })
+  // const response = await fetch(url, {
+  //   headers: {
+  //     Authorization: `Bearer ${localStorage.getItem('token')}`
+  //   }
+  // })
 
-  const data = await response.json()
+  // const data = await response.json()
 
-  return data.items
+  // return data.items
+  return
 }
 
 export default getUserItems
