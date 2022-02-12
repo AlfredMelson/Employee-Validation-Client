@@ -17,7 +17,7 @@ export enum API {
   User = '/user'
 }
 
-export const AXIOS_LOGIN_Configuration = {
+export const AXIOS_Configuration = {
   headers: { 'Content-Type': 'application/json' },
   withCredentials: true
 }

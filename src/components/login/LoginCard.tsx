@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography'
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from '../../api/axios'
-import { API, AXIOS_LOGIN_Configuration, LOCAL } from '../../constants'
+import { API, AXIOS_Configuration, LOCAL } from '../../constants'
 import { useAuth, useInput, useToggle } from '../../hooks'
 import { ButtonStyle } from '../mui/button.style'
 
@@ -28,12 +28,12 @@ export default function LoginCard() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
   // handle error message display transition
-  const [openAlert, setOpenAlert] = useState<boolean>(false)
+  const [errorAlert, setErrorAlert] = useState<boolean>(false)
 
   useEffect(() => {
     // empty any error messages and reset alert when either the username or password state changes
     setErrorMessage('')
-    setOpenAlert(false)
+    setErrorAlert(false)
   }, [user, pwd])
 
   const handleFormSubmit = async event => {
@@ -43,10 +43,12 @@ export default function LoginCard() {
       const response = await axios.post(
         // url
         API.Login,
+
         // data
         JSON.stringify({ user, pwd }),
+
         // config
-        AXIOS_LOGIN_Configuration
+        AXIOS_Configuration
       )
 
       // handle unsuccessful login responses
@@ -55,6 +57,7 @@ export default function LoginCard() {
         if (response.status === 401) {
           return
         }
+
         // handle all other errors
         throw new Error(`${response.status} ${response.statusText}`)
       }
@@ -71,22 +74,25 @@ export default function LoginCard() {
 
       // push user to dashboard
       navigate('/items', { replace: true })
+
+      // open error alert if there is a caught error
     } catch (error) {
+      setErrorAlert(true)
+
+      // handle no response from the server
       if (!error?.response) {
         setErrorMessage('No Server Response')
-        setOpenAlert(true)
+
         // handle invalid syntax
       } else if (error.response?.status === 400) {
         setErrorMessage('Missing Username or Password')
-        setOpenAlert(true)
+
         // handle unauthenticated request
       } else if (error.response?.status === 401) {
         setErrorMessage('Unauthorized Creditentials')
-        setOpenAlert(true)
       } else {
         // catch-all-other-errors
         setErrorMessage('Login Failed')
-        setOpenAlert(true)
       }
       errorReference.current.focus()
     }
@@ -95,7 +101,7 @@ export default function LoginCard() {
   return (
     <section className='login-card'>
       <form className='login-form' onSubmit={handleFormSubmit}>
-        <Collapse in={openAlert}>
+        <Collapse in={errorAlert}>
           <Alert sx={{ mb: 2 }} variant='filled' severity='error' ref={errorReference}>
             {errorMessage}
           </Alert>
