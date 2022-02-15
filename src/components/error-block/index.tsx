@@ -10,9 +10,7 @@ const ErrorBlock: FunctionComponent<IErrorBlock> = ({ errorMessage, ref }) => {
     return null
   }
 
-  /*
-   * aria-live="assertive" will have a screen reader annouce the message immediately.
-   */
+  // aria-live="assertive" will have a screen reader annouce the message immediately.
 
   return (
     <div>

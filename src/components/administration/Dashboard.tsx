@@ -7,9 +7,9 @@ import { IEmployee } from '../../services/getEmployees'
 import MygomSwatch from '../../style/MygomSwatch'
 import { AppRoutes } from '../../utils'
 import reusedEmail from '../../utils/reusedEmail'
-import ErrorBlock from '../ErrorBlock'
-// import LoadingScreen from '../LoadingScreen'
+import ErrorBlock from '../error-block'
 import { Filter, Header, List } from '.'
+// import LoadingScreen from '../LoadingScreen'
 
 export default function Dashboard() {
   const [employees, setEmployees] = useState<Array<IEmployee>>([])

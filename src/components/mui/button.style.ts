@@ -17,10 +17,17 @@ export const LoginButtonSx = styled(Button)(() => ({
 }))
 
 export const LogoutButtonSx = styled(Button)(() => ({
+  color: MygomSwatch.Text.Primary,
+  '&:hover, &.Mui-focused, &.Mui-selected': {
+    color: MygomSwatch.Text.Primary
+  }
+}))
+
+export const FilterButtonSx = styled(Button)(() => ({
   width: '120px',
   height: '42px',
-  color: MygomSwatch.Text.Primary,
-  backgroundColor: MygomSwatch.Grey[800],
+  color: MygomSwatch.Grey[800],
+  backgroundColor: MygomSwatch.Grey[200],
   '&:hover, &.Mui-focused, &.Mui-selected': {
     color: MygomSwatch.Text.Primary,
     backgroundColor: MygomSwatch.Grey[700]
@@ -30,16 +37,17 @@ export const LogoutButtonSx = styled(Button)(() => ({
   }
 }))
 
-export const FilterButtonSx = styled(Button)(() => ({
-  width: '120px',
+export const UpdateEmailButtonSx = styled(Button)(() => ({
+  px: '1px',
   height: '42px',
+  textTransform: 'none',
   color: MygomSwatch.Text.Primary,
-  backgroundColor: MygomSwatch.Grey[800],
+  backgroundColor: MygomSwatch.Green[600],
   '&:hover, &.Mui-focused, &.Mui-selected': {
     color: MygomSwatch.Text.Primary,
-    backgroundColor: MygomSwatch.Grey[700]
+    backgroundColor: MygomSwatch.Green[500]
   },
   '&.Mui-disabled': {
-    backgroundColor: MygomSwatch.Grey[800]
+    backgroundColor: MygomSwatch.Green[500]
   }
 }))

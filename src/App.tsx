@@ -1,6 +1,5 @@
 import { Route, Routes } from 'react-router-dom'
 import { AuthRequired, Layout } from './components'
-import Admin from './components/admin'
 import { Administration, Login, NoMatch, Registration } from './pages'
 import './style/global.css'
 
@@ -18,8 +17,8 @@ export default function App() {
         <Route element={<AuthRequired />}>
           {/* protected routes */}
           <Route path='dashboard/*' element={<Administration />} />
-          <Route path='admin' element={<Admin />} />
         </Route>
+
         {/* no-match routes */}
         <Route path='*' element={<NoMatch />} />
       </Route>

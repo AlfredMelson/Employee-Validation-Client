@@ -1,9 +1,11 @@
+import { Stack } from '@mui/material'
 import Alert from '@mui/material/Alert'
 import Collapse from '@mui/material/Collapse'
 import { useRef, useState } from 'react'
 import Modal from 'react-modal'
 import useUpdateEmployee from '../../../hooks/useUpdateEmployee'
 import { IEmployee } from '../../../services/getEmployees'
+import { LoginButtonSx, UpdateEmailButtonSx } from '../../mui/button.style'
 import ItemIcon from './ItemIcon'
 
 interface IUpdateModal {
@@ -58,6 +60,8 @@ function UpdateModal({ emplId, emplName, emplRole }: IUpdateModal) {
     }
   }
 
+  // only allow setting of new emial if it is a valid email address
+
   return (
     <>
       <Collapse in={errorAlert}>
@@ -65,9 +69,9 @@ function UpdateModal({ emplId, emplName, emplRole }: IUpdateModal) {
           {errorMessage}
         </Alert>
       </Collapse>
-      <button className='update' onClick={() => setShowModal(true)}>
+      <UpdateEmailButtonSx sx={{ ml: 'auto', mr: '10px' }} onClick={() => setShowModal(true)}>
         Update Email
-      </button>
+      </UpdateEmailButtonSx>
       <Modal
         className='modal'
         isOpen={showModal}
@@ -75,23 +79,25 @@ function UpdateModal({ emplId, emplName, emplRole }: IUpdateModal) {
         contentLabel='Example Modal'>
         <h1>Update Email</h1>
         <input
-          placeholder='new password'
+          placeholder='New Email'
           className='input'
           value={newEmail}
           onChange={event => setNewEmail(event.target.value)}
         />
-        <div className='pt-12px text-center'>
-          <button className='button' onClick={handleEmplUpdate}>
-            Change
-          </button>
-          <button
-            className='button ml-12px'
+        <Stack
+          direction='row'
+          justifyContent='space-evenly'
+          alignItems='center'
+          spacing={2}
+          sx={{ my: '20px' }}>
+          <LoginButtonSx onClick={handleEmplUpdate}>Change</LoginButtonSx>
+          <LoginButtonSx
             onClick={() => {
               setShowModal(false)
             }}>
             Cancel
-          </button>
-        </div>
+          </LoginButtonSx>
+        </Stack>
       </Modal>
     </>
   )

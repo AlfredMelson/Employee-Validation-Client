@@ -26,7 +26,7 @@ export default function Header() {
     <div className='header'>
       <div className='user-section'>
         <LogoutButtonSx variant='outlined' type='submit' onClick={handleUserLogout}>
-          <Typography variant='body2'>Logout</Typography>
+          Logout
         </LogoutButtonSx>
       </div>
       <Typography variant='h4' gutterBottom>{`${numWrongEmails} Emails are wrong`}</Typography>
