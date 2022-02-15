@@ -29,11 +29,10 @@ export default function Header() {
           Logout
         </LogoutButtonSx>
       </div>
-      <Typography variant='h4' gutterBottom>{`${numWrongEmails} Emails are wrong`}</Typography>
-      {/* <h1>{`${items.length} Emails are wrong`}</h1> */}
-      <Typography variant='body1'>
-        Email validator to protect your company from bad registrations
+      <Typography variant='body1' sx={{ mx: '40px' }}>
+        Email validator to protect your company from bad registrations.
       </Typography>
+      <Typography variant='h4'>{`${numWrongEmails} Emails are wrong`}</Typography>
     </div>
   )
 }

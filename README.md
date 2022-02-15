@@ -8,9 +8,11 @@
 
 ## Setup
 
-- run `yarn`
+- launch server located in seperate repo : https://github.com/AlfredMelson/mygomtech_server instrutions are in the README.md file
+
+- run `yarn` to install this web module
 - run `yarn start`. make sure required ports are available
-- open `http://localhost:8080/`
+- open `http://localhost:3000/`
 - Enter your mocked user credentials
 
   _username:_ `admin`
@@ -19,13 +21,7 @@
 
 ## Scripts
 
-`yarn start:server` - starts mocked backend.
-
-`yarn start:web` - starts dev server.
-
-`yarn start` - starts both dev server and mocked backend.
-
-`yarn test` - runs tests in project.
+`yarn start` - starts dev server
 
 ## Information
 

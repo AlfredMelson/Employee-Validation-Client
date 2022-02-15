@@ -3,8 +3,6 @@ import { styled } from '@mui/material/styles'
 import MygomSwatch from '../../style/MygomSwatch'
 
 export const LoginButtonSx = styled(Button)(() => ({
-  width: '120px',
-  height: '42px',
   color: MygomSwatch.Text.Primary,
   backgroundColor: MygomSwatch.Blue[800],
   '&:hover, &.Mui-focused, &.Mui-selected': {
@@ -17,15 +15,17 @@ export const LoginButtonSx = styled(Button)(() => ({
 }))
 
 export const LogoutButtonSx = styled(Button)(() => ({
-  color: MygomSwatch.Text.Primary,
+  color: MygomSwatch.White[50],
+  borderColor: MygomSwatch.White[50],
   '&:hover, &.Mui-focused, &.Mui-selected': {
-    color: MygomSwatch.Text.Primary
+    color: MygomSwatch.Black[50],
+    backgroundColor: MygomSwatch.White[50],
+    borderColor: MygomSwatch.White[50]
   }
 }))
 
 export const FilterButtonSx = styled(Button)(() => ({
-  width: '120px',
-  height: '42px',
+  width: '100px',
   color: MygomSwatch.Grey[800],
   backgroundColor: MygomSwatch.Grey[200],
   '&:hover, &.Mui-focused, &.Mui-selected': {
@@ -38,8 +38,6 @@ export const FilterButtonSx = styled(Button)(() => ({
 }))
 
 export const UpdateEmailButtonSx = styled(Button)(() => ({
-  px: '1px',
-  height: '42px',
   textTransform: 'none',
   color: MygomSwatch.Text.Primary,
   backgroundColor: MygomSwatch.Green[600],
