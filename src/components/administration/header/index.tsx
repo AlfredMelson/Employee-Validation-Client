@@ -1,72 +1,39 @@
-import Alert from '@mui/material/Alert'
-import Collapse from '@mui/material/Collapse'
-import { FunctionComponent, useRef, useState } from 'react'
+import { Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
-import useLogout from '../../../hooks/useLogout'
-import { IItem } from '../../../services/getUserItems'
-import { ButtonStyle } from '../../mui/button.style'
+import axios from '../../../api/axios'
+import { useAuth } from '../../../hooks'
+import { AxiosLogoutConfig } from '../../../utils'
+import { LogoutButtonSx } from '../../mui/button.style'
 
-interface IHeader {
-  items: Array<IItem>
-  username: string
-}
-
-const Header: FunctionComponent<IHeader> = ({ items, username }) => {
-  const logout = useLogout()
+export default function Header() {
   const navigate = useNavigate()
+  const { setAuth } = useAuth()
 
-  const [errorMessage, setErrorMessage] = useState<string | null>(null)
+  const handleUserLogout = async event => {
+    event.preventDefault()
 
-  // handle error message display transition
-  const [errorAlert, setErrorAlert] = useState<boolean>(false)
+    await axios.get('/admin/logout', AxiosLogoutConfig)
 
-  // error reference
-  const errorReference = useRef<HTMLParagraphElement | null>(null)
-
-  const handleUserLogout = async e => {
-    e.preventDefault()
-    setErrorAlert(false)
-    try {
-      await logout()
-
-      // push user to login page
-      navigate('/login')
-
-      // open error alert if there is a caught error
-    } catch (err) {
-      setErrorAlert(true)
-
-      // handle no response from the server
-      if (!err?.response) {
-        setErrorMessage('No Server Response')
-
-        // handle invalid syntax
-      } else if (err.response?.status === 401) {
-        setErrorMessage('Unauthorized')
-      } else {
-        // catch-all-other-errors
-        setErrorMessage('Logout Failed')
-      }
-      errorReference.current.focus()
-    }
+    // clear auth
+    setAuth({})
+    // push user to login page
+    navigate('/')
   }
+  // FIX // const numWrongEmails = Object.keys(employees).length
+  const numWrongEmails = 9999
 
   return (
     <div className='header'>
       <div className='user-section'>
-        <ButtonStyle type='submit' variant='contained' onClick={handleUserLogout}>
-          {`Logout ${username}`}
-        </ButtonStyle>
-        <Collapse in={errorAlert}>
-          <Alert sx={{ mb: 2 }} variant='filled' severity='error' ref={errorReference}>
-            {errorMessage}
-          </Alert>
-        </Collapse>
+        <LogoutButtonSx variant='outlined' type='submit' onClick={handleUserLogout}>
+          <Typography variant='body2'>Logout</Typography>
+        </LogoutButtonSx>
       </div>
-      <h1>{`${items.length} Emails are wrong`}</h1>
-      <span>Email validator to protect your company from bad registrations</span>
+      <Typography variant='h4' gutterBottom>{`${numWrongEmails} Emails are wrong`}</Typography>
+      {/* <h1>{`${items.length} Emails are wrong`}</h1> */}
+      <Typography variant='body1'>
+        Email validator to protect your company from bad registrations
+      </Typography>
     </div>
   )
 }
-
-export default Header

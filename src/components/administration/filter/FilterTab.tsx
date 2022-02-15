@@ -1,5 +1,6 @@
 import { FunctionComponent } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { FilterButtonSx } from '../../mui/button.style'
 
 interface IFilterTab {
   title: string
@@ -11,9 +12,9 @@ const FilterTab: FunctionComponent<IFilterTab> = ({ title, count, path }) => {
   const navigate = useNavigate()
 
   return (
-    <div className='filter-tab' onClick={() => navigate(path)}>
+    <FilterButtonSx className='filter-tab' onClick={() => navigate(path)}>
       {`${title} (${count})`}
-    </div>
+    </FilterButtonSx>
   )
 }
 

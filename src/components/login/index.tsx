@@ -1,30 +1,28 @@
 import Alert from '@mui/material/Alert'
 import Collapse from '@mui/material/Collapse'
-import FormControlLabel from '@mui/material/FormControlLabel'
 import Stack from '@mui/material/Stack'
-import Switch from '@mui/material/Switch'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from '../../api/axios'
-import { useAuth, useInput, useToggle } from '../../hooks'
-import { API, AXIOS_LOGIN_Configuration, LOCAL } from '../../utils'
-import { ButtonStyle } from '../mui/button.style'
+import { useAuth, useLoginInput } from '../../hooks'
+import { API, LOCAL } from '../../utils'
+import { LoginButtonSx } from '../mui/button.style'
 
 export default function LoginCard() {
-  const { setAuth } = useAuth()
   const navigate = useNavigate()
+
+  // hook up admin authentication state
+  const { setAuth } = useAuth()
 
   // error reference
   const errorReference = useRef<HTMLParagraphElement | null>(null)
 
   // migrated useState to useInput for localStorage persistence
-  const [user, resetUser, userAttributions] = useInput(LOCAL.User, '')
-  const [pwd, setPwd] = useState<string>('')
+  const [adminUsername, resetUser, userAttributions] = useLoginInput(LOCAL.User, '')
+  const [adminPassword, setAdminPassword] = useState<string>('')
 
-  // if no persist value locally, set to false
-  const [check, toggleCheck] = useToggle(LOCAL.Persist, false)
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
   // handle error message display transition
@@ -36,46 +34,31 @@ export default function LoginCard() {
 
     // reset alert when either the username or password state changes
     setErrorAlert(false)
-  }, [user, pwd])
+  }, [adminUsername, adminPassword])
 
   const handleFormSubmit = async event => {
     event.preventDefault()
 
     try {
       const response = await axios.post(
-        // pull in the login endpoint
         API.Login,
-
-        // pull in the user and password
-        JSON.stringify({ user, pwd }),
-
-        // pull in axios login config
-        AXIOS_LOGIN_Configuration
+        JSON.stringify({ adminUsername, adminPassword }),
+        {
+          headers: { 'Content-Type': 'application/json' },
+          withCredentials: true
+        }
       )
 
-      // handle unsuccessful login responses
-      if (response.status !== 200) {
-        // send status 401: 'unauthorized; response means unauthenticated'
-        if (response.status === 401) {
-          return
-        }
-
-        // handle all other errors
-        throw new Error(`${response.status} ${response.statusText}`)
-      }
-
-      // capture the accessToken from the servers response
-      const accessToken: string = response?.data?.accessToken
-
+      const accessToken = response?.data?.accessToken
       // provide the username, password and accessToken to the auth provider
-      setAuth({ user, pwd, accessToken })
+      setAuth({ adminUsername, adminPassword, accessToken })
 
       // reset the username and password fields
       resetUser()
-      setPwd('')
+      setAdminPassword('')
 
       // push user to dashboard page
-      navigate('/items')
+      navigate('/dashboard', { replace: true })
 
       // open error alert if there is a caught error
     } catch (error) {
@@ -130,24 +113,19 @@ export default function LoginCard() {
           variant='outlined'
           type='password'
           id='password'
-          onChange={event => setPwd(event.target.value)}
-          value={pwd}
+          onChange={event => setAdminPassword(event.target.value)}
+          value={adminPassword}
           required
         />
-
         <Stack
           direction='row'
           justifyContent='center'
           alignItems='center'
           spacing={1}
           sx={{ mt: 2 }}>
-          <FormControlLabel
-            control={<Switch checked={check} onChange={toggleCheck} />}
-            label='Trust This Device'
-          />
-          <ButtonStyle type='submit' variant='contained'>
+          <LoginButtonSx type='submit' variant='contained'>
             Login
-          </ButtonStyle>
+          </LoginButtonSx>
         </Stack>
       </form>
     </section>

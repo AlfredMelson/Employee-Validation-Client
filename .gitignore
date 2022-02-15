@@ -23,5 +23,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # specific files
-/server/logs/errorLog.txt
-/server/logs/requestLog.txt
+/src/context/DataContext.tsx
+/src/context/EmployeeContext.tsx
+/src/context/UserContext.tsx
+/src/hooks/useAxiosFetch.ts

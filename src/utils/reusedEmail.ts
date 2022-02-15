@@ -1,6 +1,6 @@
-import { IItem } from '../services/getUserItems'
+import { IEmployee } from '../services/getEmployees'
 
-const reusedEmail = (item: IItem, itemList: Array<IItem>) => {
+const reusedEmail = (item: IEmployee, itemList: Array<IEmployee>) => {
   const reusedItems = itemList.filter(listItem => listItem.email === item.email)
 
   return reusedItems.length > 1

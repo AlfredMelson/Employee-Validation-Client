@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from '../../api/axios'
 import { API, REGEX_EmailAddress, REGEX_Password, REGEX_Username } from '../../utils'
-import { ButtonStyle } from '../mui/button.style'
+import { LoginButtonSx } from '../mui/button.style'
 
 export default function RegistrationCard() {
   const navigate = useNavigate()
@@ -160,9 +160,9 @@ export default function RegistrationCard() {
           alignItems='center'
           spacing={1}
           sx={{ mt: 3 }}>
-          <ButtonStyle type='submit' variant='contained'>
+          <LoginButtonSx type='submit' variant='contained'>
             Register
-          </ButtonStyle>
+          </LoginButtonSx>
         </Stack>
       </form>
     </section>

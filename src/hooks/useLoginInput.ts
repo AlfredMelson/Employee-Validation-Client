@@ -1,6 +1,6 @@
 import useLocalStorage from './useLocalStorage'
 
-const useInput = (key, initValue) => {
+const useLoginInput = (key, initValue) => {
   const [value, setValue] = useLocalStorage(key, initValue)
 
   const resetUser = () => setValue(initValue)
@@ -13,4 +13,4 @@ const useInput = (key, initValue) => {
   return [value, resetUser, userAttributions]
 }
 
-export default useInput
+export default useLoginInput

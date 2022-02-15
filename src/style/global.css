@@ -1,97 +1,3 @@
-/*
-input[type='text'],
-input[type='password'],
-button,
-textarea {
-  font-family: 'Nunito', sans-serif;
-  font-size: 22px;
-  padding: 0.25rem;
-  border-radius: 0.5rem;
-}
-
-label,
-button {
-  margin-top: 1rem;
-}
-
-button {
-  padding: 0.5rem;
-}
-
-li {
-  list-style-type: none;
-}
-
-.instructions {
-  font-size: 0.75rem;
-  border-radius: 0.5rem;
-  background: #000;
-  color: #fff;
-  padding: 0.25rem;
-  position: relative;
-  bottom: -10px;
-}
-
-.instructions > svg {
-  margin-right: 0.25rem;
-}
-
-.offscreen {
-  position: absolute;
-  left: -9999px;
-}
-
-.hide {
-  display: none;
-}
-
-.valid {
-  color: limegreen;
-  margin-left: 0.25rem;
-}
-
-.invalid {
-  color: red;
-  margin-left: 0.25rem;
-}
-
-.errmsg {
-  background-color: lightpink;
-  color: firebrick;
-  font-weight: bold;
-  padding: 0.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.line {
-  display: inline-block;
-}
-
-.flexGrow {
-  flex-grow: 1;
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-end;
-}
-
-.persistCheck {
-  font-size: 0.75rem;
-  margin-top: 10px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-end;
-}
-
-.persistCheck label {
-  margin: 0;
-}
-
-[type='checkbox'] {
-  height: 20px;
-  width: 20px;
-  margin: 0 5px 2px 2px;
-} */
-
 /**
  * predefined color variables
  */
@@ -172,17 +78,6 @@ body,
   top: 16px;
   right: 32px;
   position: absolute;
-}
-.header .user-section button {
-  font-size: larger;
-  font-weight: 700;
-  background-color: var(--grey-light);
-  padding: 12px 18px;
-  cursor: pointer;
-  user-select: none;
-  margin-left: 12px;
-  border-radius: 9px;
-  border-width: 0;
 }
 
 /**
@@ -282,19 +177,6 @@ body,
   justify-content: center;
   background-color: var(--grey-lightest);
   padding: 12px;
-}
-.filter .filter-tab {
-  background-color: var(--grey-light);
-  font-size: larger;
-  font-weight: 700;
-  padding: 12px 18px;
-  cursor: pointer;
-  user-select: none;
-  margin-left: 12px;
-  border-radius: 9px;
-}
-.filter .filter-tab:hover {
-  background-color: var(--grey);
 }
 
 /**

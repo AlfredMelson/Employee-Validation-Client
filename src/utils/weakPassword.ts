@@ -1,6 +1,6 @@
-import { IItem } from '../services/getUserItems'
+import { IEmployee } from '../services/getEmployees'
 
-const weakPassword = (_item: IItem) => {
+const weakPassword = (_item: IEmployee) => {
   return true
 }
 

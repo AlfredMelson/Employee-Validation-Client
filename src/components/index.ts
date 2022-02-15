@@ -1,6 +1,6 @@
 export { default as LoginCard } from './login'
 export { default as RouteMismatch } from './no-match'
-export { default as AuthRequired } from './authorization'
-export { default as PersistLogin } from './persist'
+export { default as AuthRequired } from './authorization/AuthRequired'
+export { default as PreAuthorized } from './authorization/PreAuthorized'
 export { default as RegistrationCard } from './register'
 export { default as Layout } from './layout'

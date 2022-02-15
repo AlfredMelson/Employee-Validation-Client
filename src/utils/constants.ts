@@ -1,6 +1,6 @@
-export enum DefinedRouting {
+export enum AppRoutes {
   Login = '/login',
-  Users = '/items',
+  Employees = '/dashboard/employees',
   Weak = '/items/weak',
   Reused = '/items/reused',
   Old = '/items/old',
@@ -9,27 +9,38 @@ export enum DefinedRouting {
 }
 
 export enum API {
-  Login = '/auth',
-  Logout = '/logout',
-  Items = '/items',
-  Refresh = '/refresh',
-  Register = '/register', // used for testing
-  User = '/user'
+  Login = '/admin/auth',
+  Logout = '/admin/logout',
+  Employee = '/api/id',
+  Employees = '/api/ids',
+  Refresh = '/admin/refresh',
+  Register = '/admin/register',
+  DeleteEmployee = '/api/delete',
+  UpdateEmployee = '/api/update',
+  RegisterEmployee = '/api/register'
 }
 
-export const AXIOS_LOGIN_Configuration = {
+export const AxiosLoginConfig = {
   headers: { 'Content-Type': 'application/json' },
   withCredentials: true
 }
-export const AXIOS_ITEMS_Configuration = {
+export const AxiosGetDataConfig = {
+  headers: { 'Content-Type': 'application/json' },
+  withCredentials: true
+}
+export const AxiosUpdateConfig = {
   headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
   withCredentials: true
 }
-export const AXIOS_LOGOUT_Configuration = { withCredentials: true }
+export const AxiosEmplUpdateConfig = { withCredentials: true }
+export const AxiosLogoutConfig = { withCredentials: true }
 
+export const AXIOS_ITEMS_CONFIG = {
+  headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+  withCredentials: true
+}
 export enum LOCAL {
-  User = 'mygomtechUser',
-  Persist = 'mygomtechPersist'
+  User = 'mygomtechUser'
 }
 
 /*

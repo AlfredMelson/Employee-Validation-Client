@@ -41,7 +41,7 @@ export const UserContextProvider = ({ children }: IUserContextProvider) => {
     setIsLoading(true)
 
     try {
-      const response = await fetch(getUrl(API.User), {
+      const response = await fetch(getUrl(API.Login), {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`
         }

@@ -1,26 +1,32 @@
+import { Stack } from '@mui/material'
 import { FunctionComponent } from 'react'
-import { IItem } from '../../../services/getUserItems'
-import { DefinedRouting, oldPassword, reusedEmail, wrongEmail } from '../../../utils'
+import { IEmployee } from '../../../services/getEmployees'
+import { AppRoutes, oldPassword, reusedEmail, wrongEmail } from '../../../utils'
 import FilterTab from './FilterTab'
 
 interface IFilter {
-  items: Array<IItem>
+  employees: Array<IEmployee>
 }
 
-const Filter: FunctionComponent<IFilter> = ({ items }) => {
-  const wrongEmailCount = items.filter(wrongEmail).length
+const Filter: FunctionComponent<IFilter> = ({ employees }) => {
+  const wrongEmailCount = employees.filter(wrongEmail).length
 
-  const reusedItemsCount = items.filter(item => reusedEmail(item, items)).length
+  const reusedemployeesCount = employees.filter(item => reusedEmail(item, employees)).length
 
-  const oldPasswordCount = items.filter(oldPassword).length
+  const oldPasswordCount = employees.filter(oldPassword).length
 
   return (
-    <div className='filter'>
-      <FilterTab title='all' count={items.length} path={DefinedRouting.Users} />
-      <FilterTab title='Wrong' count={wrongEmailCount} path={DefinedRouting.Weak} />
-      <FilterTab title='Reused' count={reusedItemsCount} path={DefinedRouting.Reused} />
-      <FilterTab title='Old' count={oldPasswordCount} path={DefinedRouting.Old} />
-    </div>
+    <Stack
+      direction='row'
+      justifyContent='space-evenly'
+      alignItems='center'
+      spacing={2}
+      className='filter'>
+      <FilterTab title='all' count={employees.length} path='/' />
+      <FilterTab title='Wrong' count={wrongEmailCount} path={AppRoutes.Weak} />
+      <FilterTab title='Reused' count={reusedemployeesCount} path={AppRoutes.Reused} />
+      <FilterTab title='Old' count={oldPasswordCount} path={AppRoutes.Old} />
+    </Stack>
   )
 }
 

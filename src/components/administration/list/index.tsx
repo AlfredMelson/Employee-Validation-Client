@@ -1,28 +1,79 @@
-import { FunctionComponent, useState } from 'react'
+import Alert from '@mui/material/Alert'
+import Collapse from '@mui/material/Collapse'
+import { useRef, useState } from 'react'
 import Modal from 'react-modal'
-import { IItem } from '../../../services/getUserItems'
-import updateItem from '../../../services/updateItem'
+import useUpdateEmployee from '../../../hooks/useUpdateEmployee'
+import { IEmployee } from '../../../services/getEmployees'
 import ItemIcon from './ItemIcon'
 
 interface IUpdateModal {
-  item: IItem
+  emplId: string
+  emplName: string
+  emplRole: string
 }
 
-function UpdateModal({ item }: IUpdateModal) {
+function UpdateModal({ emplId, emplName, emplRole }: IUpdateModal) {
   const [showModal, setShowModal] = useState(false)
   const [newEmail, setNewEmail] = useState('')
 
+  const callUpdate = useUpdateEmployee({ emplId, emplName, emplRole, emplEmail: newEmail })
+
+  // error reference
+  const errorReference = useRef<HTMLParagraphElement | null>(null)
+
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
+
+  // handle error message display transition
+  const [errorAlert, setErrorAlert] = useState<boolean>(false)
+
+  const handleEmplUpdate = async event => {
+    event.preventDefault()
+
+    try {
+      callUpdate()
+
+      window.location.reload()
+
+      // open error alert if there is a caught error
+    } catch (error) {
+      setErrorAlert(true)
+
+      // handle no response from the server
+      if (!error?.response) {
+        setErrorMessage('No Server Response')
+
+        // handle invalid syntax
+      } else if (error.response?.status === 400) {
+        setErrorMessage('Missing Username or Password')
+
+        // handle invalid syntax
+      } else if (error.response?.status === 401) {
+        setErrorMessage('Unauthorized Creditentials')
+
+        // catch-all-other-errors
+      } else {
+        setErrorMessage('Login Failed')
+      }
+      errorReference.current.focus()
+    }
+  }
+
   return (
     <>
+      <Collapse in={errorAlert}>
+        <Alert sx={{ mb: 2 }} variant='filled' severity='error' ref={errorReference}>
+          {errorMessage}
+        </Alert>
+      </Collapse>
       <button className='update' onClick={() => setShowModal(true)}>
-        Update Password
+        Update Email
       </button>
       <Modal
         className='modal'
         isOpen={showModal}
         onRequestClose={() => setShowModal(false)}
         contentLabel='Example Modal'>
-        <h1>Update Password</h1>
+        <h1>Update Email</h1>
         <input
           placeholder='new password'
           className='input'
@@ -30,16 +81,7 @@ function UpdateModal({ item }: IUpdateModal) {
           onChange={event => setNewEmail(event.target.value)}
         />
         <div className='pt-12px text-center'>
-          <button
-            className='button'
-            onClick={async () => {
-              await updateItem({
-                ...item,
-                email: newEmail
-              })
-
-              window.location.reload()
-            }}>
+          <button className='button' onClick={handleEmplUpdate}>
             Change
           </button>
           <button
@@ -56,23 +98,22 @@ function UpdateModal({ item }: IUpdateModal) {
 }
 
 interface IList {
-  items: Array<IItem>
+  employees: Array<IEmployee>
 }
 
-const List: FunctionComponent<IList> = ({ items }) => {
+export default function List({ employees }: IList) {
   return (
     <ul className='list'>
-      {items.map(item => (
-        <li className='item' key={item.name}>
-          <ItemIcon name={item.name} />
+      {employees.map(empl => (
+        <li className='item' key={empl.name}>
+          <ItemIcon name={empl.name} />
           <div>
-            <div className='title'>{item.name}</div>
-            <div className='description'>{item.email}</div>
+            <div className='title'>{empl.name}</div>
+            <div className='description'>{empl.email}</div>
           </div>
-          <UpdateModal item={item} />
+          <UpdateModal emplId={empl.id} emplName={empl.name} emplRole={empl.role} />
         </li>
       ))}
     </ul>
   )
 }
-export default List
