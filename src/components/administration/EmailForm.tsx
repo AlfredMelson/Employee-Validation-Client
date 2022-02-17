@@ -8,9 +8,8 @@ import DialogContentText from '@mui/material/DialogContentText'
 import DialogTitle from '@mui/material/DialogTitle'
 import TextField from '@mui/material/TextField'
 import { useRef, useState } from 'react'
-import { z } from 'zod'
-import useAxiosPrivate from '../../hooks/useAxiosPrivate'
 import useUpdateEmployee from '../../hooks/useUpdateEmployee'
+import { wrongEmail } from '../../utils'
 
 interface IUpdateModal {
   emplId: string
@@ -28,8 +27,6 @@ export default function EmailForm({ emplId, emplName, emplRole }: IUpdateModal) 
     emplRole,
     emplEmail: validatedEmail
   })
-
-  console.log(sendUpdatedEmpl)
 
   // error reference
   const errorReference = useRef<HTMLParagraphElement | null>(null)
@@ -49,24 +46,16 @@ export default function EmailForm({ emplId, emplName, emplRole }: IUpdateModal) 
     setOpen(false)
   }
 
-  //   const emplEmail = z.object({
-  //   email: z.string()
-  // })
-  const controller = new AbortController()
-  const axiosPrivate = useAxiosPrivate()
-
   const handleEmplEmailUpdate = async event => {
     event.preventDefault()
 
     try {
-      const EmployeeEmail = z.string().email({ message: 'Invalid email address' })
-      const validEmailAddress = EmployeeEmail.parse(emailFormInput)
-      setValidatedEmail(validEmailAddress)
+      const validEmailAddress = wrongEmail(emailFormInput)
+      // const validEmailAddress = REGEX_Password.test(emailFormInput)
+      setValidatedEmail(validEmailAddress && emailFormInput)
 
-      const response = await axiosPrivate.get('/api/update', {
-        signal: controller.signal
-      })
-      console.log(response)
+      sendUpdatedEmpl()
+
       // await axios.post(
       //   // pull in the update endpoint
       //   API.UpdateEmployee,
@@ -79,6 +68,8 @@ export default function EmailForm({ emplId, emplName, emplRole }: IUpdateModal) 
       // )
 
       // window.location.reload()
+
+      setOpen(false)
 
       // open error alert if there is a caught error
     } catch (error) {

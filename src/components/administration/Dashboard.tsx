@@ -1,3 +1,5 @@
+import LogoutIcon from '@mui/icons-material/Logout'
+import SecurityIcon from '@mui/icons-material/Security'
 import Card from '@mui/material/Card'
 import CardActions from '@mui/material/CardActions'
 import CardContent from '@mui/material/CardContent'
@@ -51,14 +53,14 @@ export default function Dashboard() {
 
   const handleUserLogout = async event => {
     event.preventDefault()
+    // clear auth
+    setAuth({})
     try {
-      await axios.get('/admin/logout', AxiosLogoutConfig)
-      // clear auth
-      setAuth({})
-      // push user to login page
-      navigate('/')
-    } catch (err) {
-      console.error(err)
+      const confirmation = await axios.get('/admin/logout', AxiosLogoutConfig)
+      // push user to login page if confirmation status received is 204
+      return confirmation.status === 204 && navigate('/')
+    } catch (error) {
+      console.error(error)
     }
   }
 
@@ -66,18 +68,33 @@ export default function Dashboard() {
     <Card raised sx={{ bgcolor: MygomSwatch.Grey[100], minWidth: '524px', borderRadius: '4px' }}>
       <CardHeader
         sx={{ p: '30px 30px 0', m: 0 }}
+        avatar={
+          <>
+            <SecurityIcon />
+            <Typography
+              variant='body1'
+              sx={{ ml: '10px', fontWeight: 'bold', textAlign: 'center', fontSize: '18px' }}>
+              Email Validator
+            </Typography>
+          </>
+        }
         action={
-          <LogoutButtonSx size='small' variant='outlined' type='submit' onClick={handleUserLogout}>
+          <LogoutButtonSx
+            size='small'
+            variant='outlined'
+            type='submit'
+            onClick={handleUserLogout}
+            endIcon={<LogoutIcon />}>
             Logout
           </LogoutButtonSx>
         }
       />
       <Typography
         variant='body1'
-        sx={{ p: '20px 30px', fontWeight: 'bold', textAlign: 'center', fontSize: '18px' }}>
-        Email Validator to protect your company from bad registrations.
+        sx={{ p: '30px 30px', fontWeight: 'bold', textAlign: 'center', fontSize: '18px' }}>
+        Protect your company from bad registrations.
       </Typography>
-      <CardContent sx={{ padding: '20px 60px' }}></CardContent>
+      <CardContent sx={{ padding: '0px 60px' }}></CardContent>
       <CardActions>
         <NavTabs employees={employees} />
       </CardActions>

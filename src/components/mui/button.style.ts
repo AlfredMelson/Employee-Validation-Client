@@ -16,8 +16,8 @@ export const LoginButtonSx = styled(Button)(() => ({
 
 export const LogoutButtonSx = styled(Button)(() => ({
   textTransform: 'none',
-  color: MygomSwatch.Grey[500],
-  borderColor: MygomSwatch.Grey[200],
+
+  borderColor: 'transparent',
   '&:hover, &.Mui-focused, &.Mui-selected': {
     color: MygomSwatch.Black[50],
     backgroundColor: MygomSwatch.White[50],

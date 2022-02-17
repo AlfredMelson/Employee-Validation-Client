@@ -1,10 +1,6 @@
-import { IEmployee } from '../services/getEmployees'
-
-const wrongEmail = (item: IEmployee) => {
+export default function wrongEmail(emailAddress) {
   const validEmail = RegExp(
     /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
   )
-  return !validEmail.test(item.email)
+  return !validEmail.test(emailAddress)
 }
-
-export default wrongEmail

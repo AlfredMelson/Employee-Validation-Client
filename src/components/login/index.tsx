@@ -48,17 +48,18 @@ export default function LoginCard() {
           withCredentials: true
         }
       )
+      if (response.status === 200) {
+        const accessToken = response?.data?.accessToken
+        // provide the username, password and accessToken to the auth provider
+        setAuth({ adminUsername, adminPassword, accessToken })
 
-      const accessToken = response?.data?.accessToken
-      // provide the username, password and accessToken to the auth provider
-      setAuth({ adminUsername, adminPassword, accessToken })
+        // reset the username and password fields
+        resetUser()
+        setAdminPassword('')
 
-      // reset the username and password fields
-      resetUser()
-      setAdminPassword('')
-
-      // push user to dashboard page
-      navigate('/dashboard', { replace: true })
+        // push user to dashboard page
+        navigate('/dashboard', { replace: true })
+      }
 
       // open error alert if there is a caught error
     } catch (error) {
@@ -87,7 +88,7 @@ export default function LoginCard() {
 
   return (
     <section className='login-card'>
-      <form className='login-form' onSubmit={handleFormSubmit}>
+      <form className='login-form'>
         <Collapse in={errorAlert}>
           <Alert sx={{ mb: 2 }} variant='filled' severity='error' ref={errorReference}>
             {errorMessage}
@@ -124,7 +125,7 @@ export default function LoginCard() {
           alignItems='center'
           spacing={1}
           sx={{ mt: 2 }}>
-          <LoginButtonSx type='submit' variant='contained'>
+          <LoginButtonSx type='submit' onClick={handleFormSubmit} variant='contained'>
             Login
           </LoginButtonSx>
         </Stack>
