@@ -1,6 +1,6 @@
 import { Stack } from '@mui/material'
 import { FunctionComponent } from 'react'
-import { IEmployee } from '../../../services/getEmployees'
+import { IEmployee } from '../../../hooks/useGetEmployees'
 import { AppRoutes, oldPassword, reusedEmail, wrongEmail } from '../../../utils'
 import FilterTab from './FilterTab'
 
@@ -16,12 +16,7 @@ const Filter: FunctionComponent<IFilter> = ({ employees }) => {
   const oldPasswordCount = employees.filter(oldPassword).length
 
   return (
-    <Stack
-      direction='row'
-      justifyContent='space-evenly'
-      alignItems='center'
-      spacing={2}
-      className='filter'>
+    <Stack direction='row' justifyContent='space-evenly' alignItems='center' spacing={2}>
       <FilterTab title='all' count={employees.length} path='/' />
       <FilterTab title='Wrong' count={wrongEmailCount} path={AppRoutes.Weak} />
       <FilterTab title='Reused' count={reusedemployeesCount} path={AppRoutes.Reused} />

@@ -3,6 +3,8 @@
  */
 :root {
   --teal: #00b9f0;
+  --text-dark-primary: #161b22;
+  --text-dark-secondary: #161b22;
   --grey-dark: #404040;
   --grey: #8a8c91;
   --grey-light: #e8e8e9;
@@ -66,22 +68,19 @@ body,
  * predefined header styles
  */
 .header {
-  height: 160px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: var(--red);
-  color: white;
-}
-.header .user-section {
-  top: 16px;
-  right: 32px;
-  position: absolute;
+  border-radius: 4px 4px 0 0;
+  border-width: 2px;
+  border-style: solid;
+  border-color: var(--grey-dark);
+  color: var(--text-dark-primary);
 }
 
 /**
- * predefined login=page styles
+ * predefined login page styles
  */
 .login-page {
   background: url('/public/assets/mountain.jpg');

@@ -8,7 +8,8 @@ import MygomSwatch from '../../style/MygomSwatch'
 import { AppRoutes } from '../../utils'
 import reusedEmail from '../../utils/reusedEmail'
 import ErrorBlock from '../error-block'
-import { Filter, Header, List } from '.'
+import HeaderCard from './header/HeaderCard'
+import { List } from '.'
 // import LoadingScreen from '../LoadingScreen'
 
 export default function Dashboard() {
@@ -74,8 +75,7 @@ export default function Dashboard() {
           {errorMessage}
         </Alert>
       </Collapse>
-      <Header />
-      <Filter employees={employees} />
+      <HeaderCard employees={employees} />
       <Routes>
         <Route path='/' element={<List employees={employees} />} />
         <Route path={AppRoutes.Weak} element={<List employees={employees} />} />

@@ -1,4 +1,8 @@
-import { Typography } from '@mui/material'
+import Alert from '@mui/material/Alert'
+import Collapse from '@mui/material/Collapse'
+import Stack from '@mui/material/Stack'
+import Typography from '@mui/material/Typography'
+import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from '../../../api/axios'
 import { useAuth } from '../../../hooks'
@@ -19,20 +23,42 @@ export default function Header() {
     // push user to login page
     navigate('/')
   }
+
   // FIX // const numWrongEmails = Object.keys(employees).length
-  const numWrongEmails = 9999
+
+  // error reference
+  const errorReference = useRef<HTMLParagraphElement | null>(null)
+
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
+
+  // handle error message display transition
+  const [errorAlert, setErrorAlert] = useState<boolean>(false)
+
+  useEffect(() => {
+    setErrorMessage('X number of email errors')
+    setErrorAlert(true)
+  }, [])
 
   return (
     <div className='header'>
-      <div className='user-section'>
-        <LogoutButtonSx variant='outlined' type='submit' onClick={handleUserLogout}>
+      <Stack
+        direction='row'
+        justifyContent='space-between'
+        alignItems='center'
+        spacing={2}
+        sx={{ mx: '30px', my: '40px' }}>
+        <Typography variant='body1' sx={{ pr: '20px', fontWeight: 'bold' }}>
+          Email validator to protect your company from bad registrations.
+        </Typography>
+        <LogoutButtonSx size='small' variant='outlined' type='submit' onClick={handleUserLogout}>
           Logout
         </LogoutButtonSx>
-      </div>
-      <Typography variant='body1' sx={{ mx: '40px' }}>
-        Email validator to protect your company from bad registrations.
-      </Typography>
-      <Typography variant='h4'>{`${numWrongEmails} Emails are wrong`}</Typography>
+      </Stack>
+      <Collapse in={errorAlert}>
+        <Alert sx={{ mb: 2 }} variant='filled' severity='error' ref={errorReference}>
+          {errorMessage}
+        </Alert>
+      </Collapse>
     </div>
   )
 }
