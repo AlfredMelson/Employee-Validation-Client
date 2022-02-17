@@ -3,10 +3,10 @@ import Box from '@mui/material/Box'
 import Tab from '@mui/material/Tab'
 import Tabs from '@mui/material/Tabs'
 import { SyntheticEvent, useState } from 'react'
-import { IEmployee } from '../../../hooks/useGetEmployees'
-import MygomSwatch from '../../../style/MygomSwatch'
-import { oldPassword, reusedEmail, wrongEmail } from '../../../utils'
-import EmployeeEntry from '../list'
+import { IEmployee } from '../../hooks/useGetEmployees'
+import MygomSwatch from '../../style/MygomSwatch'
+import { oldPassword, reusedEmail, wrongEmail } from '../../utils'
+import EmployeeEntry from './EmloyeeEntry'
 
 interface TabPanelProps {
   children?: React.ReactNode
@@ -76,13 +76,21 @@ export default function NavTabs({ employees }: INavTabs) {
           aria-label='nav tabs example'
           variant='fullWidth'
           sx={{ padding: '0 20px' }}>
-          <Tab label={`All ${employees.length}`} {...a11yProps(0)} />
-          <Tab label={`Wrong ${wrongEmailCount}`} {...a11yProps(1)} />
-          <Tab label={`Reused ${reusedemployeesCount}`} {...a11yProps(2)} />
-          <Tab label={`Old ${oldPasswordCount}`} {...a11yProps(3)} />
+          <Tab sx={{ textTransform: 'none' }} label={`All ${employees.length}`} {...a11yProps(0)} />
+          <Tab
+            sx={{ textTransform: 'none' }}
+            label={`Wrong ${wrongEmailCount}`}
+            {...a11yProps(1)}
+          />
+          <Tab
+            sx={{ textTransform: 'none' }}
+            label={`Reused ${reusedemployeesCount}`}
+            {...a11yProps(2)}
+          />
+          <Tab sx={{ textTransform: 'none' }} label={`Old ${oldPasswordCount}`} {...a11yProps(3)} />
         </Tabs>
       </Box>
-      <Box sx={{ bgcolor: 'transparent', borderRadius: '4px' }}>
+      <Box sx={{ borderRadius: '4px' }}>
         <TabPanel value={value} index={0}>
           <EmployeeEntry employees={employees} />
         </TabPanel>

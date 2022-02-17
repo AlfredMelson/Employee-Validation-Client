@@ -1,12 +1,20 @@
 import Alert from '@mui/material/Alert'
+import Card from '@mui/material/Card'
+import CardActions from '@mui/material/CardActions'
+import CardContent from '@mui/material/CardContent'
+import CardHeader from '@mui/material/CardHeader'
 import Collapse from '@mui/material/Collapse'
+import Typography from '@mui/material/Typography'
 import { useEffect, useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import axios from '../../api/axios'
+import { useAuth } from '../../hooks'
 import useAxiosPrivate from '../../hooks/useAxiosPrivate'
-import { IEmployee } from '../../services/getEmployees'
+import { IEmployee } from '../../hooks/useGetEmployees'
 import MygomSwatch from '../../style/MygomSwatch'
-import ErrorBlock from '../error-block'
-import HeaderCard from './header/HeaderCard'
-// import LoadingScreen from '../LoadingScreen'
+import { AxiosLogoutConfig } from '../../utils'
+import { LogoutButtonSx } from '../mui/Button.style'
+import NavTabs from './NavTabs'
 
 export default function Dashboard() {
   const [employees, setEmployees] = useState<Array<IEmployee>>([])
@@ -60,18 +68,49 @@ export default function Dashboard() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  if (errorMessage) {
-    return <ErrorBlock errorMessage={errorMessage} />
+  const navigate = useNavigate()
+  const { setAuth } = useAuth()
+
+  const handleUserLogout = async event => {
+    event.preventDefault()
+    try {
+      await axios.get('/admin/logout', AxiosLogoutConfig)
+      // clear auth
+      setAuth({})
+      // push user to login page
+      navigate('/')
+    } catch (err) {
+      console.error(err)
+    }
   }
 
+  // FIX // const numWrongEmails = Object.keys(employees).length
+
   return (
-    <div style={{ backgroundColor: MygomSwatch.Grey[100] }}>
-      <Collapse in={errorAlert}>
-        <Alert sx={{ mb: 2 }} variant='filled' severity='error' ref={errorReference}>
-          {errorMessage}
-        </Alert>
-      </Collapse>
-      <HeaderCard employees={employees} />
-    </div>
+    <Card raised sx={{ bgcolor: MygomSwatch.Grey[100], minWidth: '500px', borderRadius: '4px' }}>
+      <CardHeader
+        sx={{ p: '30px 30px 0', m: 0 }}
+        action={
+          <LogoutButtonSx size='small' variant='outlined' type='submit' onClick={handleUserLogout}>
+            Logout
+          </LogoutButtonSx>
+        }
+      />
+      <Typography
+        variant='body1'
+        sx={{ p: '20px 30px', fontWeight: 'bold', textAlign: 'center', fontSize: '18px' }}>
+        Email Validator to protect your company from bad registrations.
+      </Typography>
+      <CardContent sx={{ padding: '20px 60px' }}>
+        <Collapse in={errorAlert}>
+          <Alert sx={{ mb: 2 }} variant='filled' severity='error' ref={errorReference}>
+            {errorMessage}
+          </Alert>
+        </Collapse>
+      </CardContent>
+      <CardActions>
+        <NavTabs employees={employees} />
+      </CardActions>
+    </Card>
   )
 }
