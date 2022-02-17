@@ -1,15 +1,11 @@
 import Alert from '@mui/material/Alert'
 import Collapse from '@mui/material/Collapse'
 import { useEffect, useRef, useState } from 'react'
-import { Route, Routes } from 'react-router-dom'
 import useAxiosPrivate from '../../hooks/useAxiosPrivate'
 import { IEmployee } from '../../services/getEmployees'
 import MygomSwatch from '../../style/MygomSwatch'
-import { AppRoutes } from '../../utils'
-import reusedEmail from '../../utils/reusedEmail'
 import ErrorBlock from '../error-block'
 import HeaderCard from './header/HeaderCard'
-import { List } from '.'
 // import LoadingScreen from '../LoadingScreen'
 
 export default function Dashboard() {
@@ -76,15 +72,6 @@ export default function Dashboard() {
         </Alert>
       </Collapse>
       <HeaderCard employees={employees} />
-      <Routes>
-        <Route path='/' element={<List employees={employees} />} />
-        <Route path={AppRoutes.Weak} element={<List employees={employees} />} />
-        <Route
-          path={AppRoutes.Reused}
-          element={<List employees={employees.filter(empl => reusedEmail(empl, employees))} />}
-        />
-        <Route path={AppRoutes.Old} element={<List employees={employees} />} />
-      </Routes>
     </div>
   )
 }

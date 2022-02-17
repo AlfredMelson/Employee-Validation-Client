@@ -65,21 +65,6 @@ body,
 }
 
 /**
- * predefined header styles
- */
-.header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  border-radius: 4px 4px 0 0;
-  border-width: 2px;
-  border-style: solid;
-  border-color: var(--grey-dark);
-  color: var(--text-dark-primary);
-}
-
-/**
  * predefined login page styles
  */
 .login-page {
@@ -176,44 +161,6 @@ body,
   justify-content: center;
   background-color: var(--grey-lightest);
   padding: 12px;
-}
-
-/**
- * predefined list styles
- */
-.list {
-  list-style: none;
-  border-top: 2px solid var(--grey-light);
-  padding: 0;
-  margin: 0;
-}
-.list .item {
-  min-height: 32px;
-  border-bottom: 1px solid var(--grey-light);
-  padding: 12px 6px;
-  display: flex;
-}
-.list .item .item-icon {
-  color: white;
-  font-weight: bold;
-  border-radius: 9px;
-  height: 38px;
-  width: 38px;
-  background-color: var(--grey);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: 12px;
-}
-.list .item .title {
-  font-weight: 600;
-}
-.list .item .update {
-  margin-left: auto;
-  margin-right: 32px;
-}
-.list .item:hover {
-  background-color: var(--grey-light);
 }
 
 /**

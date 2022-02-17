@@ -1,12 +1,15 @@
-import { Stack } from '@mui/material'
+import { Divider, ListItemButton, Stack } from '@mui/material'
 import Alert from '@mui/material/Alert'
+import Avatar from '@mui/material/Avatar'
 import Collapse from '@mui/material/Collapse'
+import List from '@mui/material/List'
+import ListItemAvatar from '@mui/material/ListItemAvatar'
+import ListItemText from '@mui/material/ListItemText'
 import { useRef, useState } from 'react'
 import Modal from 'react-modal'
 import useUpdateEmployee from '../../../hooks/useUpdateEmployee'
 import { IEmployee } from '../../../services/getEmployees'
-import { LoginButtonSx, UpdateEmailButtonSx } from '../../mui/button.style'
-import ItemIcon from './ItemIcon'
+import { LoginButtonSx, UpdateEmailButtonSx } from '../../mui/Button.style'
 
 interface IUpdateModal {
   emplId: string
@@ -103,23 +106,54 @@ function UpdateModal({ emplId, emplName, emplRole }: IUpdateModal) {
   )
 }
 
-interface IList {
+interface IEmployeeEntry {
   employees: Array<IEmployee>
 }
 
-export default function List({ employees }: IList) {
+export default function EmployeeEntry({ employees }: IEmployeeEntry) {
+  const [selectedIndex, setSelectedIndex] = useState(1)
+
+  const handleListItemClick = (
+    _event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    index: number
+  ) => {
+    setSelectedIndex(index)
+  }
+
   return (
-    <ul className='list'>
+    <List sx={{ width: '100%', p: 0 }}>
       {employees.map(empl => (
-        <li className='item' key={empl.name}>
-          <ItemIcon name={empl.name} />
-          <div>
-            <div className='title'>{empl.name}</div>
-            <div className='description'>{empl.email}</div>
-          </div>
-          <UpdateModal emplId={empl.id} emplName={empl.name} emplRole={empl.role} />
-        </li>
+        <>
+          <ListItemButton
+            key={empl.id}
+            selected={selectedIndex === parseInt(empl.id)}
+            onClick={event => handleListItemClick(event, 0)}>
+            <ListItemAvatar>
+              <Avatar>{empl.name.substring(0, 2)}</Avatar>
+            </ListItemAvatar>
+            <ListItemText primary={empl.name} secondary={empl.email} />
+            <UpdateModal emplId={empl.id} emplName={empl.name} emplRole={empl.role} />
+          </ListItemButton>
+          <Divider component='li' />
+        </>
       ))}
-    </ul>
+    </List>
   )
 }
+
+// export default function List({ employees }: IList) {
+//   return (
+//     <ul className='list'>
+//       {employees.map(empl => (
+//         <li className='item' key={empl.name}>
+//           <ItemIcon name={empl.name} />
+//           <div>
+//             <div className='title'>{empl.name}</div>
+//             <div className='description'>{empl.email}</div>
+//           </div>
+//           <UpdateModal emplId={empl.id} emplName={empl.name} emplRole={empl.role} />
+//         </li>
+//       ))}
+//     </ul>
+//   )
+// }

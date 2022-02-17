@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { FilterButtonSx } from '../../mui/button.style'
+import { FilterButtonSx } from '../../mui/Button.style'
 
 interface IFilterTab {
   title: string

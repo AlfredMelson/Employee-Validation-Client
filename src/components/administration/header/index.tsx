@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import axios from '../../../api/axios'
 import { useAuth } from '../../../hooks'
 import { AxiosLogoutConfig } from '../../../utils'
-import { LogoutButtonSx } from '../../mui/button.style'
+import { LogoutButtonSx } from '../../mui/Button.style'
 
 export default function Header() {
   const navigate = useNavigate()

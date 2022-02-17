@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom'
 import axios from '../../api/axios'
 import { useAuth, useLoginInput } from '../../hooks'
 import { API, LOCAL } from '../../utils'
-import { LoginButtonSx } from '../mui/button.style'
+import { LoginButtonSx } from '../mui/Button.style'
 
 export default function LoginCard() {
   const navigate = useNavigate()

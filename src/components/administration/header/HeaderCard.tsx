@@ -11,9 +11,10 @@ import { useNavigate } from 'react-router-dom'
 import axios from '../../../api/axios'
 import { useAuth } from '../../../hooks'
 import { IEmployee } from '../../../hooks/useGetEmployees'
+import MygomSwatch from '../../../style/MygomSwatch'
 import { AxiosLogoutConfig } from '../../../utils'
-import { LogoutButtonSx } from '../../mui/button.style'
-import Filter from '../filter'
+import { LogoutButtonSx } from '../../mui/Button.style'
+import NavTabs from './NavTabs'
 
 interface IHeaderCard {
   employees: Array<IEmployee>
@@ -74,9 +75,9 @@ export default function HeaderCard({ employees }: IHeaderCard) {
   // }
 
   return (
-    <Card sx={{ borderRadius: '4px 4px 0 0 ', minWidth: '500px', px: '30px' }}>
+    <Card raised sx={{ bgcolor: MygomSwatch.Grey[100], minWidth: '500px', borderRadius: '4px' }}>
       <CardHeader
-        sx={{ pt: '30px' }}
+        sx={{ p: '30px 30px 0', m: 0 }}
         action={
           <LogoutButtonSx size='small' variant='outlined' type='submit' onClick={handleUserLogout}>
             Logout
@@ -85,18 +86,18 @@ export default function HeaderCard({ employees }: IHeaderCard) {
       />
       <Typography
         variant='body1'
-        sx={{ pt: '20px', pb: '20px', fontWeight: 'bold', textAlign: 'center', fontSize: '18px' }}>
-        Email validator to protect your company from bad registrations.
+        sx={{ p: '20px 30px', fontWeight: 'bold', textAlign: 'center', fontSize: '18px' }}>
+        Email Validator to protect your company from bad registrations.
       </Typography>
-      <CardContent sx={{ padding: '20px 30px' }}>
+      <CardContent sx={{ padding: '20px 60px' }}>
         <Collapse in={errorAlert}>
           <Alert sx={{ mb: 2 }} variant='filled' severity='error' ref={errorReference}>
             {errorMessage}
           </Alert>
         </Collapse>
       </CardContent>
-      <CardActions sx={{ justifyContent: 'space-evenly', alignItems: 'center', pb: '30px' }}>
-        <Filter employees={employees} />
+      <CardActions>
+        <NavTabs employees={employees} />
       </CardActions>
     </Card>
   )

@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from '../../api/axios'
 import { API, REGEX_EmailAddress, REGEX_Password, REGEX_Username } from '../../utils'
-import { LoginButtonSx } from '../mui/button.style'
+import { LoginButtonSx } from '../mui/Button.style'
 
 export default function RegistrationCard() {
   const navigate = useNavigate()
