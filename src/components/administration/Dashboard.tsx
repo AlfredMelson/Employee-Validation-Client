@@ -1,11 +1,9 @@
-import Alert from '@mui/material/Alert'
 import Card from '@mui/material/Card'
 import CardActions from '@mui/material/CardActions'
 import CardContent from '@mui/material/CardContent'
 import CardHeader from '@mui/material/CardHeader'
-import Collapse from '@mui/material/Collapse'
 import Typography from '@mui/material/Typography'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from '../../api/axios'
 import { useAuth } from '../../hooks'
@@ -19,14 +17,6 @@ import NavTabs from './NavTabs'
 export default function Dashboard() {
   const [employees, setEmployees] = useState<Array<IEmployee>>([])
   const axiosPrivate = useAxiosPrivate()
-
-  // error reference
-  const errorReference = useRef<HTMLParagraphElement | null>(null)
-
-  const [errorMessage, setErrorMessage] = useState<string | null>(null)
-
-  // handle error message display transition
-  const [errorAlert, setErrorAlert] = useState<boolean>(false)
 
   useEffect(() => {
     let isMounted = true
@@ -42,22 +32,9 @@ export default function Dashboard() {
 
         // check if the component is mounted and set the response
         isMounted && setEmployees(response.data)
-      } catch (err: unknown) {
-        setErrorAlert(true)
-        setErrorMessage('Fetch Failed')
-
-        // handle no response from the server
-        // if (!err?.response) {
-        //   setErrorMessage('No Server Response')
-
-        //   // handle invalid syntax
-        // } else if (err.response?.status === 401) {
-        //   setErrorMessage('Unauthorized')
-        // } else {
-        //   // catch-all-other-errors
-        //   setErrorMessage('Logout Failed')
-        // }
-        errorReference.current.focus()
+      } catch (error) {
+        console.error(error)
+        navigate('/', { state: { from: location }, replace: true })
       }
     }
     getEmployees()
@@ -85,8 +62,6 @@ export default function Dashboard() {
     }
   }
 
-  // FIX // const numWrongEmails = Object.keys(employees).length
-
   return (
     <Card raised sx={{ bgcolor: MygomSwatch.Grey[100], minWidth: '524px', borderRadius: '4px' }}>
       <CardHeader
@@ -102,13 +77,7 @@ export default function Dashboard() {
         sx={{ p: '20px 30px', fontWeight: 'bold', textAlign: 'center', fontSize: '18px' }}>
         Email Validator to protect your company from bad registrations.
       </Typography>
-      <CardContent sx={{ padding: '20px 60px' }}>
-        <Collapse in={errorAlert}>
-          <Alert sx={{ mb: 2 }} variant='filled' severity='error' ref={errorReference}>
-            {errorMessage}
-          </Alert>
-        </Collapse>
-      </CardContent>
+      <CardContent sx={{ padding: '20px 60px' }}></CardContent>
       <CardActions>
         <NavTabs employees={employees} />
       </CardActions>

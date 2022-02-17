@@ -9,6 +9,7 @@ import DialogTitle from '@mui/material/DialogTitle'
 import TextField from '@mui/material/TextField'
 import { useRef, useState } from 'react'
 import { z } from 'zod'
+import useAxiosPrivate from '../../hooks/useAxiosPrivate'
 import useUpdateEmployee from '../../hooks/useUpdateEmployee'
 
 interface IUpdateModal {
@@ -21,7 +22,14 @@ export default function EmailForm({ emplId, emplName, emplRole }: IUpdateModal) 
   const [emailFormInput, setEmailFormInput] = useState('')
   const [validatedEmail, setValidatedEmail] = useState('')
 
-  const callUpdate = useUpdateEmployee({ emplId, emplName, emplRole, emplEmail: validatedEmail })
+  const sendUpdatedEmpl = useUpdateEmployee({
+    emplId,
+    emplName,
+    emplRole,
+    emplEmail: validatedEmail
+  })
+
+  console.log(sendUpdatedEmpl)
 
   // error reference
   const errorReference = useRef<HTMLParagraphElement | null>(null)
@@ -44,20 +52,33 @@ export default function EmailForm({ emplId, emplName, emplRole }: IUpdateModal) 
   //   const emplEmail = z.object({
   //   email: z.string()
   // })
-
-  const EmployeeEmail = z.string().email({ message: 'Invalid email address' })
+  const controller = new AbortController()
+  const axiosPrivate = useAxiosPrivate()
 
   const handleEmplEmailUpdate = async event => {
     event.preventDefault()
 
     try {
-      const validEmailAddress = await EmployeeEmail.parse(emailFormInput)
-
+      const EmployeeEmail = z.string().email({ message: 'Invalid email address' })
+      const validEmailAddress = EmployeeEmail.parse(emailFormInput)
       setValidatedEmail(validEmailAddress)
 
-      callUpdate()
+      const response = await axiosPrivate.get('/api/update', {
+        signal: controller.signal
+      })
+      console.log(response)
+      // await axios.post(
+      //   // pull in the update endpoint
+      //   API.UpdateEmployee,
 
-      window.location.reload()
+      //   // pull in the employee data
+      //   JSON.stringify({ emplId, emplName, emplRole, emplEmail }),
+
+      //   // pull in axios update config; sending back the secure cookie with the request
+      //   AxiosEmplUpdateConfig
+      // )
+
+      // window.location.reload()
 
       // open error alert if there is a caught error
     } catch (error) {
@@ -95,14 +116,14 @@ export default function EmailForm({ emplId, emplName, emplRole }: IUpdateModal) 
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>{emplName} email address</DialogTitle>
         <DialogContent sx={{ minWidth: '480px' }}>
-          <DialogContentText>
-            <Collapse in={errorAlert}>
+          <Collapse in={errorAlert}>
+            <DialogContentText>
               <Alert sx={{ mb: 2 }} variant='filled' severity='error' ref={errorReference}>
                 {errorMessage}
               </Alert>
-            </Collapse>
-            {/* The email format provided is not valid. Please enter a valid email address. */}
-          </DialogContentText>
+              {/* The email format provided is not valid. Please enter a valid email address. */}
+            </DialogContentText>
+          </Collapse>
           <TextField
             autoFocus
             margin='dense'
