@@ -22,9 +22,10 @@ const useEmployeeFetch = dataUrl => {
           setData(response.data)
           setFetchError(null)
         }
-      } catch (err) {
+      } catch (error) {
         if (isMounted) {
-          setFetchError(err.message)
+          setFetchError(error)
+          // setFetchError(error.message)
           setData([])
         }
       } finally {

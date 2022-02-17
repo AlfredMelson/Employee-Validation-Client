@@ -22,18 +22,19 @@ const useLogout = () => {
 
         // check if the component is mounted and set the response
         isMounted && setAuth({})
-      } catch (err) {
+      } catch (error) {
         // handle no response from the server
-        if (!err?.response) {
-          setErrorMessage('No Server Response')
+        setErrorMessage('Login Failed')
+        // if (!error?.response) {
+        //   setErrorMessage('No Server Response')
 
-          // handle invalid syntax
-        } else if (err.response?.status === 401) {
-          setErrorMessage('Unauthorized')
-        } else {
-          // catch-all-other-errors
-          setErrorMessage('Logout Failed')
-        }
+        //   // handle invalid syntax
+        // } else if (error.response?.status === 401) {
+        //   setErrorMessage('Unauthorized')
+        // } else {
+        //   // catch-all-other-errors
+        //   setErrorMessage('Logout Failed')
+        // }
       }
     }
     logoutAdmin()

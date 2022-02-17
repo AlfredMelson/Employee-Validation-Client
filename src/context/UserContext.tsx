@@ -30,7 +30,7 @@ interface IUserContextProvider {
 }
 
 export const UserContextProvider = ({ children }: IUserContextProvider) => {
-  const [errorMessage, setErrorMessage] = useState<string>(null)
+  const [errorMessage, setErrorMessage] = useState<string | any | null>(null)
   const [isLoading, setIsLoading] = useState(true)
   const [username, setUsername] = useState<string>(null)
   const [email, setEmail] = useState<string>(null)
@@ -53,7 +53,8 @@ export const UserContextProvider = ({ children }: IUserContextProvider) => {
       setEmail(data?.email)
       setId(data?.id)
     } catch (error) {
-      setErrorMessage(error.message)
+      setErrorMessage(error)
+      // setErrorMessage(error.message)
     }
 
     setIsLoading(false)

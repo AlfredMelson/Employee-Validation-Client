@@ -18,7 +18,7 @@
     "outDir": "./dist",
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "strict": false,
+    "strict": true,
     "strictNullChecks": false,
     "target": "es6",
     "types": ["node", "jest"]

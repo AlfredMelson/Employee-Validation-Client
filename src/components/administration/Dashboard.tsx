@@ -42,20 +42,21 @@ export default function Dashboard() {
 
         // check if the component is mounted and set the response
         isMounted && setEmployees(response.data)
-      } catch (err) {
+      } catch (err: unknown) {
         setErrorAlert(true)
+        setErrorMessage('Fetch Failed')
 
         // handle no response from the server
-        if (!err?.response) {
-          setErrorMessage('No Server Response')
+        // if (!err?.response) {
+        //   setErrorMessage('No Server Response')
 
-          // handle invalid syntax
-        } else if (err.response?.status === 401) {
-          setErrorMessage('Unauthorized')
-        } else {
-          // catch-all-other-errors
-          setErrorMessage('Logout Failed')
-        }
+        //   // handle invalid syntax
+        // } else if (err.response?.status === 401) {
+        //   setErrorMessage('Unauthorized')
+        // } else {
+        //   // catch-all-other-errors
+        //   setErrorMessage('Logout Failed')
+        // }
         errorReference.current.focus()
       }
     }
@@ -87,7 +88,7 @@ export default function Dashboard() {
   // FIX // const numWrongEmails = Object.keys(employees).length
 
   return (
-    <Card raised sx={{ bgcolor: MygomSwatch.Grey[100], minWidth: '500px', borderRadius: '4px' }}>
+    <Card raised sx={{ bgcolor: MygomSwatch.Grey[100], minWidth: '524px', borderRadius: '4px' }}>
       <CardHeader
         sx={{ p: '30px 30px 0', m: 0 }}
         action={

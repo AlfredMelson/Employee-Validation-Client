@@ -1,4 +1,3 @@
-import { Typography } from '@mui/material'
 import Box from '@mui/material/Box'
 import Tab from '@mui/material/Tab'
 import Tabs from '@mui/material/Tabs'
@@ -18,18 +17,15 @@ function TabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props
 
   return (
-    <div
+    <Box
+      component='div'
       role='tabpanel'
       hidden={value !== index}
       id={`tabpanel-${index}`}
       aria-labelledby={`tab-${index}`}
       {...other}>
-      {value === index && (
-        <>
-          <Typography>{children}</Typography>
-        </>
-      )}
-    </div>
+      {value === index && children}
+    </Box>
   )
 }
 

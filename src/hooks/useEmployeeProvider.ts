@@ -12,17 +12,18 @@ const useEmployeeProvider = () => {
       const response = await getEmployees()
       setEmployees(response)
     } catch (err) {
+      setErrorMessage('Fetch Failed')
       // handle no response from the server
-      if (!err?.response) {
-        setErrorMessage('No Server Response')
+      // if (!err?.response) {
+      //   setErrorMessage('No Server Response')
 
-        // handle invalid syntax
-      } else if (err.response?.status === 401) {
-        setErrorMessage('Unauthorized')
-      } else {
-        // catch-all-other-errors
-        setErrorMessage('Logout Failed')
-      }
+      //   // handle invalid syntax
+      // } else if (err.response?.status === 401) {
+      //   setErrorMessage('Unauthorized')
+      // } else {
+      //   // catch-all-other-errors
+      //   setErrorMessage('Logout Failed')
+      // }
     }
   }
   fetchEmployees()

@@ -63,23 +63,24 @@ export default function LoginCard() {
       // open error alert if there is a caught error
     } catch (error) {
       setErrorAlert(true)
+      setErrorMessage('Login Failed')
 
       // handle no response from the server
-      if (!error?.response) {
-        setErrorMessage('No Server Response')
+      // if (!error?.response) {
+      //   setErrorMessage('No Server Response')
 
-        // handle invalid syntax
-      } else if (error.response?.status === 400) {
-        setErrorMessage('Missing Username or Password')
+      //   // handle invalid syntax
+      // } else if (error.response?.status === 400) {
+      //   setErrorMessage('Missing Username or Password')
 
-        // handle invalid syntax
-      } else if (error.response?.status === 401) {
-        setErrorMessage('Unauthorized Creditentials')
+      //   // handle invalid syntax
+      // } else if (error.response?.status === 401) {
+      //   setErrorMessage('Unauthorized Creditentials')
 
-        // catch-all-other-errors
-      } else {
-        setErrorMessage('Login Failed')
-      }
+      //   // catch-all-other-errors
+      // } else {
+      //   setErrorMessage('Login Failed')
+      // }
       errorReference.current.focus()
     }
   }

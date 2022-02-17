@@ -72,13 +72,14 @@ export default function RegistrationCard() {
         navigate('/')
       }
     } catch (error) {
-      if (!error?.response) {
-        setErrorMessage('No Server Response')
-      } else if (error.response?.status === 409) {
-        setErrorMessage('Username Taken')
-      } else {
-        setErrorMessage('Registration Failed')
-      }
+      setErrorMessage('Registration Failed')
+      // if (!error?.response) {
+      //   setErrorMessage('No Server Response')
+      // } else if (error.response?.status === 409) {
+      //   setErrorMessage('Username Taken')
+      // } else {
+      //   setErrorMessage('Registration Failed')
+      // }
       errorReference.current.focus()
     }
   }
