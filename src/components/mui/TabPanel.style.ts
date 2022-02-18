@@ -12,13 +12,13 @@ export const TabSx = styled(Tab)(() => ({
   borderRadius: '4px ',
   '&:hover, &.Mui-focused': {
     color: MygomSwatch.Grey[600],
-    backgroundColor: alpha(MygomSwatch.Grey[200], 0.4)
+    backgroundColor: alpha(MygomSwatch.White[50], 0.7)
   },
   '&.Mui-selected': {
     transform: 'translateY(-1px)',
     cursor: 'default',
     color: MygomSwatch.Black[50],
-    backgroundColor: MygomSwatch.Grey[200],
+    backgroundColor: MygomSwatch.White[50],
     boxShadow: 'rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px'
   },
   '.indicator': {

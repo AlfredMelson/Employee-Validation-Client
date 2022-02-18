@@ -24,19 +24,6 @@ export const LogoutButtonSx = styled(Button)(() => ({
   }
 }))
 
-export const FilterButtonSx = styled(Button)(() => ({
-  width: '100px',
-  color: MygomSwatch.Grey[800],
-  backgroundColor: MygomSwatch.Grey[200],
-  '&:hover, &.Mui-focused, &.Mui-selected': {
-    color: MygomSwatch.Text.Primary,
-    backgroundColor: MygomSwatch.Grey[700]
-  },
-  '&.Mui-disabled': {
-    backgroundColor: MygomSwatch.Grey[800]
-  }
-}))
-
 export const UpdateEmailButtonSx = styled(Button)(() => ({
   textTransform: 'none',
   borderColor: 'transparent',

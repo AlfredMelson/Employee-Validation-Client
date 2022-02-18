@@ -9,7 +9,7 @@ import TextField from '@mui/material/TextField'
 import { AxiosResponse } from 'axios'
 import { useRef, useState } from 'react'
 import axios from '../../api/axiosCustom'
-import { API, AxiosEmplUpdateConfig, wrongEmail } from '../../utils'
+import { API, AxiosEmplUpdateConfig, REGEX_Password } from '../../utils'
 import { UpdateEmailButtonSx } from '../mui/Button.style'
 
 interface IUpdateModal {
@@ -20,14 +20,6 @@ interface IUpdateModal {
 
 export default function EmailForm({ emplId, emplName, emplRole }: IUpdateModal) {
   const [emailFormInput, setEmailFormInput] = useState('')
-  const [validatedEmail, setValidatedEmail] = useState('')
-
-  // const sendUpdatedEmpl = useUpdateEmployee({
-  //   emplId,
-  //   emplName,
-  //   emplRole,
-  //   emplEmail: validatedEmail
-  // })
 
   // error reference
   const errorReference = useRef<HTMLParagraphElement | null>(null)
@@ -51,13 +43,12 @@ export default function EmailForm({ emplId, emplName, emplRole }: IUpdateModal) 
     event.preventDefault()
 
     try {
-      const validEmailAddress = wrongEmail(emailFormInput)
-      // const validEmailAddress = REGEX_Password.test(emailFormInput)
-      setValidatedEmail(validEmailAddress && emailFormInput)
+      // FIX: validate email input with regex
+      const validEmailAddress = REGEX_Password.test(emailFormInput)
 
-      const emplEmail = validatedEmail
-
-      // sendUpdatedEmpl()
+      // if valid, setValidatedEmail to emailFormInput
+      // setValidatedEmail(validEmailAddress && emailFormInput)
+      const emplEmail = !validEmailAddress && emailFormInput
 
       const response: AxiosResponse = await axios.post(
         // pull in the update endpoint
@@ -73,6 +64,8 @@ export default function EmailForm({ emplId, emplName, emplRole }: IUpdateModal) 
       // Return JSON
       console.log(response.data)
 
+      // close dialog if positive response frm server
+      // update email address in employee list & ensure recalculation of errors
       // window.location.reload()
 
       setOpen(false)
@@ -102,13 +95,13 @@ export default function EmailForm({ emplId, emplName, emplRole }: IUpdateModal) 
           </Alert>
           {/* The email format provided is not valid. Please enter a valid email address. */}
         </Collapse>
-        <DialogTitle sx={{ minWidth: '480px' }}>{emplName} email address</DialogTitle>
+        <DialogTitle sx={{ minWidth: '480px' }}>{emplName} </DialogTitle>
         <DialogContent>
           <TextField
             autoFocus
             margin='dense'
             id='name'
-            label='Email Address'
+            label='Updated Email Address'
             type='email'
             fullWidth
             variant='standard'
@@ -117,9 +110,13 @@ export default function EmailForm({ emplId, emplName, emplRole }: IUpdateModal) 
             }}
           />
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleEmplEmailUpdate}>Update</Button>
+        <DialogActions sx={{ m: '0 10px 10px 0' }}>
+          <Button onClick={handleClose} sx={{ textTransform: 'none' }}>
+            Cancel
+          </Button>
+          <Button onClick={handleEmplEmailUpdate} sx={{ textTransform: 'none' }}>
+            Update
+          </Button>
         </DialogActions>
       </Dialog>
     </>

@@ -51,14 +51,13 @@ export default function Dashboard() {
   const navigate = useNavigate()
   const { setAuth } = useAuth()
 
-  const handleUserLogout = async event => {
-    event.preventDefault()
+  const handleUserLogout = async (_event: any) => {
     // clear auth
-    setAuth({})
     try {
       const response: AxiosResponse = await axios.get('/admin/logout', AxiosLogoutConfig)
       // push user to login page if response status received is 204
-      return response.status === 204 && navigate('/')
+      setAuth({})
+      response.status === 204 && navigate('/')
     } catch (error) {
       console.error(error)
     }
