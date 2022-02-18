@@ -1,12 +1,14 @@
 import axios from 'axios'
-const API_BASE_URL = 'http://localhost:9003'
 
 export default axios.create({
-  baseURL: API_BASE_URL
+  baseURL: 'http://localhost:9003',
+  headers: {
+    'Content-type': 'application/json'
+  }
 })
 
 export const axiosPrivate = axios.create({
-  baseURL: API_BASE_URL,
+  baseURL: 'http://localhost:9003',
   headers: { 'Content-Type': 'application/json' },
   withCredentials: true
 })

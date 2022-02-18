@@ -1,11 +1,17 @@
+import ShieldIcon from '@mui/icons-material/Shield'
 import Alert from '@mui/material/Alert'
+import Box from '@mui/material/Box'
+import Card from '@mui/material/Card'
+import CardContent from '@mui/material/CardContent'
+import CardHeader from '@mui/material/CardHeader'
 import Collapse from '@mui/material/Collapse'
 import Stack from '@mui/material/Stack'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
+import { AxiosResponse } from 'axios'
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import axios from '../../api/axios'
+import axios from '../../api/axiosCustom'
 import { useAuth, useLoginInput } from '../../hooks'
 import { API, LOCAL } from '../../utils'
 import { LoginButtonSx } from '../mui/Button.style'
@@ -40,7 +46,7 @@ export default function LoginCard() {
     event.preventDefault()
 
     try {
-      const response = await axios.post(
+      const response: AxiosResponse = await axios.post(
         API.Login,
         JSON.stringify({ adminUsername, adminPassword }),
         {
@@ -87,49 +93,110 @@ export default function LoginCard() {
   }
 
   return (
-    <section className='login-card'>
-      <form className='login-form'>
-        <Collapse in={errorAlert}>
-          <Alert sx={{ mb: 2 }} variant='filled' severity='error' ref={errorReference}>
-            {errorMessage}
-          </Alert>
-        </Collapse>
+    <Card raised>
+      <CardHeader
+        title={
+          <Collapse in={errorAlert}>
+            <Alert sx={{ m: '4px' }} variant='filled' severity='error' ref={errorReference}>
+              {errorMessage}
+            </Alert>
+          </Collapse>
+        }
+      />
+      <Box sx={{ mx: '20px' }}>
         <div className='login-card-header' />
-        <Typography variant='body1' sx={{ mt: 3 }}>
-          Username
-        </Typography>
-        <TextField
-          autoFocus
-          variant='outlined'
-          type='text'
-          id='username'
-          required
-          {...userAttributions}
-          sx={{ py: 1 }}
-        />
-        <Typography variant='body1' sx={{ mt: 2 }}>
-          Password
-        </Typography>
-        <TextField
-          sx={{ py: 1 }}
-          variant='outlined'
-          type='password'
-          id='password'
-          onChange={event => setAdminPassword(event.target.value)}
-          value={adminPassword}
-          required
-        />
-        <Stack
-          direction='row'
-          justifyContent='center'
-          alignItems='center'
-          spacing={1}
-          sx={{ mt: 2 }}>
-          <LoginButtonSx type='submit' onClick={handleFormSubmit} variant='contained'>
-            Login
-          </LoginButtonSx>
-        </Stack>
-      </form>
-    </section>
+      </Box>
+      <CardContent sx={{ margin: '0px 10px 0px', width: '320px' }}>
+        <form>
+          <Typography variant='body1' sx={{ mt: 3 }}>
+            Username
+          </Typography>
+          <TextField
+            autoFocus
+            fullWidth
+            variant='outlined'
+            type='text'
+            id='username'
+            required
+            {...userAttributions}
+            sx={{ py: 1 }}
+          />
+          <Typography variant='body1' sx={{ mt: 2 }}>
+            Password
+          </Typography>
+          <TextField
+            fullWidth
+            sx={{ py: 1 }}
+            variant='outlined'
+            type='password'
+            id='password'
+            onChange={event => setAdminPassword(event.target.value)}
+            value={adminPassword}
+            required
+          />
+          <Stack
+            direction='row'
+            justifyContent='center'
+            alignItems='center'
+            spacing={1}
+            sx={{ mt: 2 }}>
+            <LoginButtonSx
+              type='submit'
+              onClick={handleFormSubmit}
+              variant='contained'
+              startIcon={<ShieldIcon />}>
+              Login
+            </LoginButtonSx>
+          </Stack>
+        </form>
+      </CardContent>
+    </Card>
   )
+}
+
+{
+  /* <section className='login-card'>
+        <form className='login-form'>
+          <Collapse in={errorAlert}>
+            <Alert sx={{ mb: 2 }} variant='filled' severity='error' ref={errorReference}>
+              {errorMessage}
+            </Alert>
+          </Collapse>
+          <div className='login-card-header' />
+          <Typography variant='body1' sx={{ mt: 3 }}>
+            Username
+          </Typography>
+          <TextField
+            autoFocus
+            variant='outlined'
+            type='text'
+            id='username'
+            required
+            {...userAttributions}
+            sx={{ py: 1 }}
+          />
+          <Typography variant='body1' sx={{ mt: 2 }}>
+            Password
+          </Typography>
+          <TextField
+            sx={{ py: 1 }}
+            variant='outlined'
+            type='password'
+            id='password'
+            onChange={event => setAdminPassword(event.target.value)}
+            value={adminPassword}
+            required
+          />
+          <Stack
+            direction='row'
+            justifyContent='center'
+            alignItems='center'
+            spacing={1}
+            sx={{ mt: 2 }}>
+            <LoginButtonSx type='submit' onClick={handleFormSubmit} variant='contained'>
+              Login
+            </LoginButtonSx>
+          </Stack>
+        </form>
+      </section> */
 }

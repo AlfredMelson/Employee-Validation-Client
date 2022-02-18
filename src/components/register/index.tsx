@@ -2,7 +2,7 @@ import Stack from '@mui/material/Stack'
 import TextField from '@mui/material/TextField'
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import axios from '../../api/axios'
+import axios from '../../api/axiosCustom'
 import { API, REGEX_EmailAddress, REGEX_Password, REGEX_Username } from '../../utils'
 import { LoginButtonSx } from '../mui/Button.style'
 

@@ -1,4 +1,4 @@
-import axios from '../api/axios'
+import axios from '../api/axiosCustom'
 import { API, AxiosGetDataConfig } from '../utils/constants'
 
 export enum Roles {

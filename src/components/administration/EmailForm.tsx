@@ -4,12 +4,13 @@ import Collapse from '@mui/material/Collapse'
 import Dialog from '@mui/material/Dialog'
 import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
-import DialogContentText from '@mui/material/DialogContentText'
 import DialogTitle from '@mui/material/DialogTitle'
 import TextField from '@mui/material/TextField'
+import { AxiosResponse } from 'axios'
 import { useRef, useState } from 'react'
-import useUpdateEmployee from '../../hooks/useUpdateEmployee'
-import { wrongEmail } from '../../utils'
+import axios from '../../api/axiosCustom'
+import { API, AxiosEmplUpdateConfig, wrongEmail } from '../../utils'
+import { UpdateEmailButtonSx } from '../mui/Button.style'
 
 interface IUpdateModal {
   emplId: string
@@ -21,12 +22,12 @@ export default function EmailForm({ emplId, emplName, emplRole }: IUpdateModal) 
   const [emailFormInput, setEmailFormInput] = useState('')
   const [validatedEmail, setValidatedEmail] = useState('')
 
-  const sendUpdatedEmpl = useUpdateEmployee({
-    emplId,
-    emplName,
-    emplRole,
-    emplEmail: validatedEmail
-  })
+  // const sendUpdatedEmpl = useUpdateEmployee({
+  //   emplId,
+  //   emplName,
+  //   emplRole,
+  //   emplEmail: validatedEmail
+  // })
 
   // error reference
   const errorReference = useRef<HTMLParagraphElement | null>(null)
@@ -54,18 +55,23 @@ export default function EmailForm({ emplId, emplName, emplRole }: IUpdateModal) 
       // const validEmailAddress = REGEX_Password.test(emailFormInput)
       setValidatedEmail(validEmailAddress && emailFormInput)
 
-      sendUpdatedEmpl()
+      const emplEmail = validatedEmail
 
-      // await axios.post(
-      //   // pull in the update endpoint
-      //   API.UpdateEmployee,
+      // sendUpdatedEmpl()
 
-      //   // pull in the employee data
-      //   JSON.stringify({ emplId, emplName, emplRole, emplEmail }),
+      const response: AxiosResponse = await axios.post(
+        // pull in the update endpoint
+        API.UpdateEmployee,
 
-      //   // pull in axios update config; sending back the secure cookie with the request
-      //   AxiosEmplUpdateConfig
-      // )
+        // pull in the employee data
+        JSON.stringify({ emplId, emplName, emplRole, emplEmail }),
+
+        // pull in axios update config; sending back the secure cookie with the request
+        AxiosEmplUpdateConfig
+      )
+
+      // Return JSON
+      console.log(response.data)
 
       // window.location.reload()
 
@@ -74,21 +80,6 @@ export default function EmailForm({ emplId, emplName, emplRole }: IUpdateModal) 
       // open error alert if there is a caught error
     } catch (error) {
       setErrorAlert(true)
-
-      // handle no response from the server
-      // if (!error?.response) {
-      //   setErrorMessage('No Server Response')
-
-      // handle invalid syntax
-      // } else if (error.response?.status === 400) {
-      //   setErrorMessage('Missing Username or Password')
-
-      // handle invalid syntax
-      // } else if (error.response?.status === 401) {
-      //   setErrorMessage('Unauthorized Creditentials')
-
-      // catch-all-other-errors
-      // } else {
       setErrorMessage('Invalid email address')
 
       errorReference.current.focus()
@@ -97,24 +88,22 @@ export default function EmailForm({ emplId, emplName, emplRole }: IUpdateModal) 
 
   return (
     <>
-      <Button
+      <UpdateEmailButtonSx
         size='small'
         variant='outlined'
         onClick={handleClickOpen}
         sx={{ textTransform: 'none' }}>
         Update Email
-      </Button>
+      </UpdateEmailButtonSx>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>{emplName} email address</DialogTitle>
-        <DialogContent sx={{ minWidth: '480px' }}>
-          <Collapse in={errorAlert}>
-            <DialogContentText>
-              <Alert sx={{ mb: 2 }} variant='filled' severity='error' ref={errorReference}>
-                {errorMessage}
-              </Alert>
-              {/* The email format provided is not valid. Please enter a valid email address. */}
-            </DialogContentText>
-          </Collapse>
+        <Collapse in={errorAlert} sx={{ m: '10px 30px' }}>
+          <Alert variant='filled' severity='error' ref={errorReference}>
+            {errorMessage}
+          </Alert>
+          {/* The email format provided is not valid. Please enter a valid email address. */}
+        </Collapse>
+        <DialogTitle sx={{ minWidth: '480px' }}>{emplName} email address</DialogTitle>
+        <DialogContent>
           <TextField
             autoFocus
             margin='dense'
@@ -123,7 +112,9 @@ export default function EmailForm({ emplId, emplName, emplRole }: IUpdateModal) 
             type='email'
             fullWidth
             variant='standard'
-            onChange={event => setEmailFormInput(event.target.value)}
+            onChange={event => {
+              setEmailFormInput(event.target.value), setErrorAlert(false)
+            }}
           />
         </DialogContent>
         <DialogActions>

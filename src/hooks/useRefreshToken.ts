@@ -1,4 +1,4 @@
-import axios from '../api/axios'
+import axios from '../api/axiosCustom'
 import { API } from '../utils'
 import useAuth from './useAuth'
 

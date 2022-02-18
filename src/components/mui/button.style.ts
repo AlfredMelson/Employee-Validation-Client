@@ -16,7 +16,6 @@ export const LoginButtonSx = styled(Button)(() => ({
 
 export const LogoutButtonSx = styled(Button)(() => ({
   textTransform: 'none',
-
   borderColor: 'transparent',
   '&:hover, &.Mui-focused, &.Mui-selected': {
     color: MygomSwatch.Black[50],
@@ -40,13 +39,10 @@ export const FilterButtonSx = styled(Button)(() => ({
 
 export const UpdateEmailButtonSx = styled(Button)(() => ({
   textTransform: 'none',
-  color: MygomSwatch.Text.Primary,
-  backgroundColor: MygomSwatch.Green[600],
+  borderColor: 'transparent',
   '&:hover, &.Mui-focused, &.Mui-selected': {
-    color: MygomSwatch.Text.Primary,
-    backgroundColor: MygomSwatch.Green[500]
-  },
-  '&.Mui-disabled': {
-    backgroundColor: MygomSwatch.Green[500]
+    color: MygomSwatch.Black[50],
+    borderColor: 'transparent',
+    backgroundColor: 'transparent'
   }
 }))

@@ -5,9 +5,10 @@ import CardActions from '@mui/material/CardActions'
 import CardContent from '@mui/material/CardContent'
 import CardHeader from '@mui/material/CardHeader'
 import Typography from '@mui/material/Typography'
+import { AxiosResponse } from 'axios'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import axios from '../../api/axios'
+import axios from '../../api/axiosCustom'
 import { useAuth } from '../../hooks'
 import useAxiosPrivate from '../../hooks/useAxiosPrivate'
 import { IEmployee } from '../../hooks/useGetEmployees'
@@ -28,7 +29,7 @@ export default function Dashboard() {
 
     const getEmployees = async () => {
       try {
-        const response = await axiosPrivate.get('/api/ids', {
+        const response: AxiosResponse = await axiosPrivate.get('/api/ids', {
           signal: controller.signal
         })
 
@@ -56,16 +57,18 @@ export default function Dashboard() {
     // clear auth
     setAuth({})
     try {
-      const confirmation = await axios.get('/admin/logout', AxiosLogoutConfig)
-      // push user to login page if confirmation status received is 204
-      return confirmation.status === 204 && navigate('/')
+      const response: AxiosResponse = await axios.get('/admin/logout', AxiosLogoutConfig)
+      // push user to login page if response status received is 204
+      return response.status === 204 && navigate('/')
     } catch (error) {
       console.error(error)
     }
   }
 
   return (
-    <Card raised sx={{ bgcolor: MygomSwatch.Grey[100], minWidth: '524px', borderRadius: '4px' }}>
+    <Card
+      raised
+      sx={{ bgcolor: MygomSwatch.Grey[100], minWidth: '524px', borderRadius: '4px', top: '0' }}>
       <CardHeader
         sx={{ p: '30px 30px 0', m: 0 }}
         avatar={
