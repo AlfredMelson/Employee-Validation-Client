@@ -1,10 +1,9 @@
 import Box from '@mui/material/Box'
-import Tab from '@mui/material/Tab'
-import Tabs from '@mui/material/Tabs'
 import { SyntheticEvent, useState } from 'react'
 import { IEmployee } from '../../hooks/useGetEmployees'
 import MygomSwatch from '../../style/MygomSwatch'
 import { oldPassword, reusedEmail, wrongEmail } from '../../utils'
+import { TabsSx, TabSx } from '../mui/TabPanel.style'
 import EmployeeEntry from './EmloyeeEntry'
 
 interface TabPanelProps {
@@ -54,39 +53,20 @@ export default function NavTabs({ employees }: INavTabs) {
   }
 
   return (
-    <Box
-      sx={{
-        width: '100%',
-        bgcolor: MygomSwatch.White[50],
-        borderRadius: '4px'
-      }}>
-      <Box
-        sx={{
-          borderBottom: 1,
-          borderColor: 'divider',
-          pt: '10px'
-        }}>
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          aria-label='nav tabs example'
-          variant='fullWidth'
-          sx={{ padding: '0 20px' }}>
-          <Tab sx={{ textTransform: 'none' }} label={`All ${employees.length}`} {...a11yProps(0)} />
-          <Tab
-            sx={{ textTransform: 'none' }}
-            label={`Wrong ${wrongEmailCount}`}
-            {...a11yProps(1)}
-          />
-          <Tab
-            sx={{ textTransform: 'none' }}
-            label={`Reused ${reusedemployeesCount}`}
-            {...a11yProps(2)}
-          />
-          <Tab sx={{ textTransform: 'none' }} label={`Old ${oldPasswordCount}`} {...a11yProps(3)} />
-        </Tabs>
-      </Box>
-      <Box sx={{ borderRadius: '4px' }}>
+    <Box>
+      <TabsSx
+        value={value}
+        onChange={handleChange}
+        aria-label='nav tabs example'
+        variant='fullWidth'
+        classes={{ indicator: 'indicator' }}
+        sx={{ p: '0 20px 20px' }}>
+        <TabSx label={`All ${employees.length}`} {...a11yProps(0)} />
+        <TabSx label={`Wrong ${wrongEmailCount}`} {...a11yProps(1)} />
+        <TabSx label={`Reused ${reusedemployeesCount}`} {...a11yProps(2)} />
+        <TabSx label={`Old ${oldPasswordCount}`} {...a11yProps(3)} />
+      </TabsSx>
+      <Box sx={{ borderRadius: '4px', bgcolor: MygomSwatch.White[50] }}>
         <TabPanel value={value} index={0}>
           <EmployeeEntry employees={employees} />
         </TabPanel>

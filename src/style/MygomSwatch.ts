@@ -112,7 +112,8 @@ const MygomSwatch = {
   Text: {
     Primary: '#f0f6fc',
     Secondary: '#c9d1d9',
-    Disabled: '#6e7681'
+    Disabled: '#6e7681',
+    Link: '#1976d2'
   }
 }
 

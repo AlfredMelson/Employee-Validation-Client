@@ -2,7 +2,6 @@ import LogoutIcon from '@mui/icons-material/Logout'
 import SecurityIcon from '@mui/icons-material/Security'
 import Card from '@mui/material/Card'
 import CardActions from '@mui/material/CardActions'
-import CardContent from '@mui/material/CardContent'
 import CardHeader from '@mui/material/CardHeader'
 import Typography from '@mui/material/Typography'
 import { AxiosResponse } from 'axios'
@@ -94,10 +93,9 @@ export default function Dashboard() {
       />
       <Typography
         variant='body1'
-        sx={{ p: '30px 30px', fontWeight: 'bold', textAlign: 'center', fontSize: '18px' }}>
+        sx={{ p: '40px 30px', fontWeight: 'bold', textAlign: 'center', fontSize: '19px' }}>
         Protect your company from bad registrations.
       </Typography>
-      <CardContent sx={{ padding: '0px 60px' }}></CardContent>
       <CardActions>
         <NavTabs employees={employees} />
       </CardActions>
