@@ -113,6 +113,7 @@ export default function LoginCard() {
           </Typography>
           <TextField
             autoFocus
+            size='small'
             fullWidth
             variant='outlined'
             type='text'
@@ -125,6 +126,7 @@ export default function LoginCard() {
             Password
           </Typography>
           <TextField
+            size='small'
             fullWidth
             sx={{ py: 1 }}
             variant='outlined'

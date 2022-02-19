@@ -5,7 +5,7 @@ import MygomSwatch from '../../style/MygomSwatch'
 
 export const TabSx = styled(Tab)(() => ({
   width: '100px',
-  margin: '0 10px',
+  margin: '0 8px',
   textTransform: 'none',
   color: MygomSwatch.Text.Link,
   backgroundColor: MygomSwatch.Grey[100],

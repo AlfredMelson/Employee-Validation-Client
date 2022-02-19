@@ -20,7 +20,7 @@
     "skipLibCheck": true,
     "strict": false,
     "strictNullChecks": false,
-    "target": "es6",
+    "target": "esnext",
     "types": ["node", "jest"]
   },
   "include": ["./src/**/*", "./tests/**/*", "types"],
