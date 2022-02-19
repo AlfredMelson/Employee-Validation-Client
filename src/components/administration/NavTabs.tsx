@@ -1,8 +1,10 @@
+import { Divider } from '@mui/material'
 import Box from '@mui/material/Box'
+import { AnimatePresence, motion } from 'framer-motion'
 import { SyntheticEvent, useState } from 'react'
 import { IEmployee } from '../../hooks/useGetEmployees'
 import MygomSwatch from '../../style/MygomSwatch'
-import { oldPassword, reusedEmail, wrongEmail } from '../../utils'
+import { emplInvalidEmail, emplOldEmail, emplReusedEmail } from '../../utils/emailFilters'
 import { TabsSx, TabSx } from '../mui/TabPanel.style'
 import EmployeeEntry from './EmloyeeEntry'
 
@@ -16,15 +18,17 @@ function TabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props
 
   return (
-    <Box
-      component='div'
-      role='tabpanel'
-      hidden={value !== index}
-      id={`tabpanel-${index}`}
-      aria-labelledby={`tab-${index}`}
-      {...other}>
-      {value === index && children}
-    </Box>
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }}>
+      <Box
+        component='div'
+        role='tabpanel'
+        hidden={value !== index}
+        id={`tabpanel-${index}`}
+        aria-labelledby={`tab-${index}`}
+        {...other}>
+        {value === index && children}
+      </Box>
+    </motion.div>
   )
 }
 
@@ -40,11 +44,11 @@ interface INavTabs {
 }
 
 export default function NavTabs({ employees }: INavTabs) {
-  const wrongEmailCount = employees.filter(wrongEmail).length
+  const invalidEmailCount = emplInvalidEmail.length
 
-  const reusedemployeesCount = employees.filter(item => reusedEmail(item, employees)).length
+  const reusedEmailCount = employees.filter(empl => emplReusedEmail(empl, employees)).length
 
-  const oldPasswordCount = employees.filter(oldPassword).length
+  const oldEmailCount = emplOldEmail.length
 
   const [value, setValue] = useState(0)
 
@@ -62,24 +66,50 @@ export default function NavTabs({ employees }: INavTabs) {
         classes={{ indicator: 'indicator' }}
         sx={{ p: '0 20px 20px' }}>
         <TabSx label={`All ${employees.length}`} {...a11yProps(0)} />
-        <TabSx label={`Wrong ${wrongEmailCount}`} {...a11yProps(1)} />
-        <TabSx label={`Reused ${reusedemployeesCount}`} {...a11yProps(2)} />
-        <TabSx label={`Old ${oldPasswordCount}`} {...a11yProps(3)} />
+        <Divider orientation='vertical' variant='middle' flexItem sx={{ mx: '4px' }} />
+        <TabSx label={`Invalid ${invalidEmailCount}`} {...a11yProps(1)} />
+        <TabSx label={`Reused ${reusedEmailCount}`} {...a11yProps(2)} />
+        <TabSx label={`Older ${oldEmailCount}`} {...a11yProps(3)} />
       </TabsSx>
-      <Box sx={{ borderRadius: '4px', bgcolor: MygomSwatch.White[50] }}>
-        <TabPanel value={value} index={0}>
-          <EmployeeEntry employees={employees} />
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-          <EmployeeEntry employees={employees} />
-        </TabPanel>
-        <TabPanel value={value} index={2}>
-          <EmployeeEntry employees={employees.filter(empl => reusedEmail(empl, employees))} />
-        </TabPanel>
-        <TabPanel value={value} index={3}>
-          <EmployeeEntry employees={employees} />
-        </TabPanel>
-      </Box>
+
+      <AnimatePresence>
+        <Box
+          sx={{
+            borderRadius: '4px',
+            bgcolor: MygomSwatch.White[50]
+          }}>
+          <TabPanel value={value} index={0}>
+            <motion.div
+              variants={{ collapsed: { opacity: 0 }, open: { opacity: 1 } }}
+              transition={{ duration: 0.5 }}>
+              <EmployeeEntry employees={employees} />
+            </motion.div>
+          </TabPanel>
+          <TabPanel value={value} index={1}>
+            <motion.div
+              variants={{ collapsed: { opacity: 0 }, open: { opacity: 1 } }}
+              transition={{ duration: 0.5 }}>
+              <EmployeeEntry employees={emplInvalidEmail(employees)} />
+            </motion.div>
+          </TabPanel>
+          <TabPanel value={value} index={2}>
+            <motion.div
+              variants={{ collapsed: { opacity: 0 }, open: { opacity: 1 } }}
+              transition={{ duration: 0.5 }}>
+              <EmployeeEntry
+                employees={employees.filter(empl => emplReusedEmail(empl, employees))}
+              />
+            </motion.div>
+          </TabPanel>
+          <TabPanel value={value} index={3}>
+            <motion.div
+              variants={{ collapsed: { opacity: 0 }, open: { opacity: 1 } }}
+              transition={{ duration: 0.5 }}>
+              <EmployeeEntry employees={emplOldEmail(employees)} />
+            </motion.div>
+          </TabPanel>
+        </Box>
+      </AnimatePresence>
     </Box>
   )
 }

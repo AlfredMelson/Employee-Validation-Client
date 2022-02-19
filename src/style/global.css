@@ -29,11 +29,23 @@ body,
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  display: flex;
-  justify-content: center;
+  display: grid;
   align-items: center;
+  justify-items: center;
   height: 100vh;
 }
+
+.dashboard-page {
+  background: url('/public/assets/mountain.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: grid;
+  align-items: start;
+  justify-items: center;
+  height: 100vh;
+}
+
 .login-card-header {
   background: url('/public/assets/loginHeader.png');
   background-size: contain;

@@ -4,7 +4,7 @@ import Tabs from '@mui/material/Tabs'
 import MygomSwatch from '../../style/MygomSwatch'
 
 export const TabSx = styled(Tab)(() => ({
-  width: '100px',
+  width: '110px',
   margin: '0 8px',
   textTransform: 'none',
   color: MygomSwatch.Text.Link,

@@ -66,7 +66,13 @@ export default function Dashboard() {
   return (
     <Card
       raised
-      sx={{ bgcolor: MygomSwatch.Grey[100], minWidth: '524px', borderRadius: '4px', top: '0' }}>
+      sx={{
+        bgcolor: MygomSwatch.Grey[100],
+        minWidth: '524px',
+        borderRadius: '4px',
+        mt: '100px',
+        height: 'auto'
+      }}>
       <CardHeader
         sx={{ p: '30px 30px 0', m: 0 }}
         avatar={

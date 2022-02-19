@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react'
-import { API } from '../utils'
-import getUrl from '../utils/getUrl'
+// import { API } from '../utils'
+// import getUrl from '../utils/getUrl'
 
 interface IUser {
   updateUser: () => void
@@ -41,7 +41,7 @@ export const UserContextProvider = ({ children }: IUserContextProvider) => {
     setIsLoading(true)
 
     try {
-      const response = await fetch(getUrl(API.Login), {
+      const response = await fetch('http://localhost:9003', {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`
         }
