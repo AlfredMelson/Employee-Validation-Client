@@ -2,7 +2,7 @@ import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import { Component, ErrorInfo, ReactNode } from 'react'
-import MygomSwatch from '../style/MygomSwatch'
+import UMSwatch from '../style/UMSwatch'
 
 interface Props {
   children: ReactNode
@@ -18,7 +18,7 @@ export default function Error({ children }: Props) {
       justifyContent='center'
       alignItems='center'
       spacing={10}
-      sx={{ color: MygomSwatch.Red[500], my: 20 }}>
+      sx={{ color: UMSwatch.Red[500], my: 20 }}>
       <ErrorOutlineIcon fontSize='medium' />
       <Typography variant='body2'>{children}</Typography>
     </Stack>

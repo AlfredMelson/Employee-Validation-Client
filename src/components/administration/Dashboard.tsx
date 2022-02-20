@@ -11,7 +11,7 @@ import axios from '../../api/axiosCustom'
 import { useAuth } from '../../hooks'
 import useAxiosPrivate from '../../hooks/useAxiosPrivate'
 import { IEmployee } from '../../hooks/useGetEmployees'
-import MygomSwatch from '../../style/MygomSwatch'
+import UMSwatch from '../../style/UMSwatch'
 import { AxiosLogoutConfig } from '../../utils'
 import { LogoutButtonSx } from '../mui/Button.style'
 import NavTabs from './NavTabs'
@@ -67,11 +67,12 @@ export default function Dashboard() {
     <Card
       raised
       sx={{
-        bgcolor: MygomSwatch.Grey[100],
-        minWidth: '524px',
+        bgcolor: UMSwatch.Grey[100],
+        // minWidth: '524px',
         borderRadius: '4px',
-        mt: '100px',
-        height: 'auto'
+        // mt: '100px',
+        height: 'auto',
+        m: '20px'
       }}>
       <CardHeader
         sx={{ p: '30px 30px 0', m: 0 }}

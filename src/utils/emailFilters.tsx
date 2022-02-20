@@ -9,6 +9,8 @@ export const emplInvalidEmail = (employees: Array<IEmployee>) => {
   return invalid
 }
 
+// validate an email address and return the valid email without regex
+
 export const emplOldEmail = (employees: Array<IEmployee>) => {
   const today = new Date().getTime()
   const moreThanThirty = employees.filter(

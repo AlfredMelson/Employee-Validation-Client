@@ -8,46 +8,20 @@ body.loading * {
 }
 
 /**
- * predefined common styles
+ * predefined app background
  */
-html,
-body,
-#app {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif,
-    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-}
-
-/**
- * predefined login page styles
- */
-.login-page {
-  background: url('/public/assets/mountain.jpg');
+.app-background {
+  background-image: url('/public/assets/mountain.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  display: grid;
-  align-items: center;
-  justify-items: center;
+  position: fixed;
   height: 100vh;
-}
-
-.dashboard-page {
-  background: url('/public/assets/mountain.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  display: grid;
-  align-items: start;
-  justify-items: center;
-  height: 100vh;
+  width: 100vw;
 }
 
 .login-card-header {
-  background: url('/public/assets/loginHeader.png');
+  background-image: url('/public/assets/loginHeader.png');
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;

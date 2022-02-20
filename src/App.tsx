@@ -2,8 +2,6 @@ import { Route, Routes } from 'react-router-dom'
 import { AuthRequired, Layout } from './components'
 import { Administration, Login, NoMatch, Registration } from './pages'
 
-import './style/global.css'
-
 export default function App() {
   return (
     <Routes>
@@ -17,7 +15,6 @@ export default function App() {
         {/* authenticated routes */}
         <Route element={<AuthRequired />}>
           {/* protected routes */}
-
           <Route path='dashboard/*' element={<Administration />} />
         </Route>
 

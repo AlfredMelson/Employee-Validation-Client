@@ -1,4 +1,3 @@
-import ShieldIcon from '@mui/icons-material/Shield'
 import Alert from '@mui/material/Alert'
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
@@ -14,6 +13,7 @@ import { useNavigate } from 'react-router-dom'
 import axios from '../../api/axiosCustom'
 import { useAuth, useLoginInput } from '../../hooks'
 import { API, LOCAL } from '../../utils'
+import { ShieldIcon } from '../icons'
 import { LoginButtonSx } from '../mui/Button.style'
 
 export default function LoginCard() {
@@ -103,45 +103,27 @@ export default function LoginCard() {
           </Collapse>
         }
       />
-      <Box sx={{ mx: '20px' }}>
+      <Box sx={{ mx: '30px' }}>
         <div className='login-card-header' />
       </Box>
-      <CardContent sx={{ margin: '0px 10px 0px', width: '320px' }}>
+      <CardContent sx={{ m: '10px', minWidth: '320px' }}>
         <form>
-          <Typography variant='body1' sx={{ mt: 3 }}>
+          <Typography variant='body1' color='text.primary' gutterBottom>
             Username
           </Typography>
-          <TextField
-            autoFocus
-            size='small'
-            fullWidth
-            variant='outlined'
-            type='text'
-            id='username'
-            required
-            {...userAttributions}
-            sx={{ py: 1 }}
-          />
-          <Typography variant='body1' sx={{ mt: 2 }}>
+          <TextField autoFocus fullWidth type='text' id='username' required {...userAttributions} />
+          <Typography variant='body1' color='text.primary' gutterBottom sx={{ mt: '20px' }}>
             Password
           </Typography>
           <TextField
-            size='small'
             fullWidth
-            sx={{ py: 1 }}
-            variant='outlined'
             type='password'
             id='password'
-            onChange={event => setAdminPassword(event.target.value)}
             value={adminPassword}
             required
+            onChange={event => setAdminPassword(event.target.value)}
           />
-          <Stack
-            direction='row'
-            justifyContent='center'
-            alignItems='center'
-            spacing={1}
-            sx={{ mt: 2 }}>
+          <Stack direction='row' justifyContent='center' alignItems='center' sx={{ mt: '30px' }}>
             <LoginButtonSx
               type='submit'
               onClick={handleFormSubmit}
