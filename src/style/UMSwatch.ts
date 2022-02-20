@@ -1,4 +1,4 @@
-const MygomSwatch = {
+const UMSwatch = {
   Pink: {
     50: '#ffdaec',
     100: '#ffbedd',
@@ -117,4 +117,4 @@ const MygomSwatch = {
   }
 }
 
-export default MygomSwatch
+export default UMSwatch
