@@ -9,11 +9,14 @@ const DashboardStack = styled(
   { name: 'Dashboard', slot: 'stack' }
 )(({ theme }) => ({
   height: '100%',
-  [theme.breakpoints.down('md')]: {
-    paddingTop: '100px'
+  [theme.breakpoints.only('xs')]: {
+    paddingTop: '0px'
+  },
+  [theme.breakpoints.only('sm')]: {
+    paddingTop: '20px'
   },
   [theme.breakpoints.up('md')]: {
-    justifyContent: 'center'
+    paddingTop: '100px'
   }
 }))
 

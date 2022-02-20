@@ -33,3 +33,19 @@ export const UpdateEmailButtonSx = styled(Button)(() => ({
     backgroundColor: 'transparent'
   }
 }))
+
+export const HeaderButtonSx = styled(Button, {
+  name: 'HeaderButton',
+  slot: 'style'
+})(() => ({
+  cursor: 'default',
+  textTransform: 'none',
+  color: UMSwatch.Black[50],
+  borderColor: 'transparent',
+  backgroundColor: 'transparent',
+  '&:hover, &.Mui-focused, &.Mui-selected': {
+    color: UMSwatch.Black[50],
+    borderColor: 'transparent',
+    backgroundColor: 'transparent'
+  }
+}))

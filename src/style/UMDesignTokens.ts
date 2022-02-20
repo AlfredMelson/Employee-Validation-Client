@@ -17,7 +17,6 @@ const UMDesignTokens = () =>
         secondary: UMSwatch.Grey[700],
         disabled: UMSwatch.Grey[500]
       },
-      divider: UMSwatch.Grey[900],
       primary: {
         main: UMSwatch.White[50],
         light: UMSwatch.Grey[200]

@@ -5,7 +5,10 @@ export default function UMThemedComponents(theme: Theme) {
   return {
     components: {
       MuiButton: {
-        defaultProps: {}
+        defaultProps: {
+          size: 'small',
+          variant: 'outlined'
+        }
       },
       styleOverrides: {
         root: {

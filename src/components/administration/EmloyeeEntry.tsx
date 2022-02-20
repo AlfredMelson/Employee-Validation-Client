@@ -3,7 +3,6 @@ import List from '@mui/material/List'
 import ListItemAvatar from '@mui/material/ListItemAvatar'
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemText from '@mui/material/ListItemText'
-import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { IEmployee } from '../../services/getEmployees'
 import EmailForm from './EmailForm'
@@ -25,18 +24,17 @@ export default function EmployeeEntry({ employees }: IEmployeeEntry) {
   return (
     <List sx={{ width: '100%', p: 0 }}>
       {employees.map(empl => (
-        <motion.li key={empl.id} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-          <ListItemButton
-            divider
-            selected={selectedIndex === parseInt(empl.id)}
-            onClick={event => handleListItemClick(event, 0)}>
-            <ListItemAvatar>
-              <Avatar>{empl.name.substring(0, 2)}</Avatar>
-            </ListItemAvatar>
-            <ListItemText primary={empl.name} secondary={empl.email} />
-            <EmailForm emplId={empl.id} emplName={empl.name} emplRole={empl.role} />
-          </ListItemButton>
-        </motion.li>
+        <ListItemButton
+          key={empl.id}
+          divider
+          selected={selectedIndex === parseInt(empl.id)}
+          onClick={event => handleListItemClick(event, 0)}>
+          <ListItemAvatar>
+            <Avatar>{empl.name.substring(0, 2)}</Avatar>
+          </ListItemAvatar>
+          <ListItemText primary={empl.name} secondary={empl.email} />
+          <EmailForm emplId={empl.id} emplName={empl.name} emplRole={empl.role} />
+        </ListItemButton>
       ))}
     </List>
   )

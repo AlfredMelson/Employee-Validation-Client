@@ -1,11 +1,11 @@
-// import { Divider } from '@mui/material'
+import { Divider } from '@mui/material'
 import Box from '@mui/material/Box'
-import { AnimatePresence, motion } from 'framer-motion'
+import Tabs from '@mui/material/Tabs'
 import { SyntheticEvent, useState } from 'react'
 import { IEmployee } from '../../hooks/useGetEmployees'
 import UMSwatch from '../../style/UMSwatch'
 import { emplInvalidEmail, emplOldEmail, emplReusedEmail } from '../../utils/emailFilters'
-import { TabsSx, TabSx } from '../mui/TabPanel.style'
+import { TabSx } from '../mui/TabPanel.style'
 import EmployeeEntry from './EmloyeeEntry'
 
 interface TabPanelProps {
@@ -18,17 +18,15 @@ function TabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props
 
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }}>
-      <Box
-        component='div'
-        role='tabpanel'
-        hidden={value !== index}
-        id={`tabpanel-${index}`}
-        aria-labelledby={`tab-${index}`}
-        {...other}>
-        {value === index && children}
-      </Box>
-    </motion.div>
+    <Box
+      component='div'
+      role='tabpanel'
+      hidden={value !== index}
+      id={`tabpanel-${index}`}
+      aria-labelledby={`tab-${index}`}
+      {...other}>
+      {value === index && children}
+    </Box>
   )
 }
 
@@ -58,58 +56,45 @@ export default function NavTabs({ employees }: INavTabs) {
 
   return (
     <Box>
-      <TabsSx
+      <Tabs
+        centered
         value={value}
         onChange={handleChange}
         aria-label='nav tabs example'
-        variant='fullWidth'
+        scrollButtons
+        allowScrollButtonsMobile
         classes={{ indicator: 'indicator' }}
-        sx={{ p: '0 20px 20px', flexWrap: 'wrap' }}>
+        sx={{ p: '0 20px 20px' }}>
         <TabSx label={`All ${employees.length}`} {...a11yProps(0)} />
-        {/* <Divider orientation='vertical' variant='middle' flexItem sx={{ mx: '4px' }} /> */}
+        <Divider
+          orientation='vertical'
+          variant='middle'
+          flexItem
+          sx={{ m: '8px 4px', borderColor: UMSwatch.Grey[300] }}
+        />
         <TabSx label={`Invalid ${invalidEmailCount}`} {...a11yProps(1)} />
         <TabSx label={`Reused ${reusedEmailCount}`} {...a11yProps(2)} />
         <TabSx label={`Older ${oldEmailCount}`} {...a11yProps(3)} />
-      </TabsSx>
+      </Tabs>
 
-      <AnimatePresence>
-        <Box
-          sx={{
-            borderRadius: '4px',
-            bgcolor: UMSwatch.White[50]
-          }}>
-          <TabPanel value={value} index={0}>
-            <motion.div
-              variants={{ collapsed: { opacity: 0 }, open: { opacity: 1 } }}
-              transition={{ duration: 0.5 }}>
-              <EmployeeEntry employees={employees} />
-            </motion.div>
-          </TabPanel>
-          <TabPanel value={value} index={1}>
-            <motion.div
-              variants={{ collapsed: { opacity: 0 }, open: { opacity: 1 } }}
-              transition={{ duration: 0.5 }}>
-              <EmployeeEntry employees={emplInvalidEmail(employees)} />
-            </motion.div>
-          </TabPanel>
-          <TabPanel value={value} index={2}>
-            <motion.div
-              variants={{ collapsed: { opacity: 0 }, open: { opacity: 1 } }}
-              transition={{ duration: 0.5 }}>
-              <EmployeeEntry
-                employees={employees.filter(empl => emplReusedEmail(empl, employees))}
-              />
-            </motion.div>
-          </TabPanel>
-          <TabPanel value={value} index={3}>
-            <motion.div
-              variants={{ collapsed: { opacity: 0 }, open: { opacity: 1 } }}
-              transition={{ duration: 0.5 }}>
-              <EmployeeEntry employees={emplOldEmail(employees)} />
-            </motion.div>
-          </TabPanel>
-        </Box>
-      </AnimatePresence>
+      <Box
+        sx={{
+          borderRadius: '4px',
+          bgcolor: UMSwatch.White[50]
+        }}>
+        <TabPanel value={value} index={0}>
+          <EmployeeEntry employees={employees} />
+        </TabPanel>
+        <TabPanel value={value} index={1}>
+          <EmployeeEntry employees={emplInvalidEmail(employees)} />
+        </TabPanel>
+        <TabPanel value={value} index={2}>
+          <EmployeeEntry employees={employees.filter(empl => emplReusedEmail(empl, employees))} />
+        </TabPanel>
+        <TabPanel value={value} index={3}>
+          <EmployeeEntry employees={emplOldEmail(employees)} />
+        </TabPanel>
+      </Box>
     </Box>
   )
 }

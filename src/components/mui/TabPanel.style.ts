@@ -4,22 +4,22 @@ import Tabs from '@mui/material/Tabs'
 import UMSwatch from '../../style/UMSwatch'
 
 export const TabSx = styled(Tab)(() => ({
-  width: '110px',
+  minWidth: '110px',
   margin: '0 8px',
   textTransform: 'none',
   color: UMSwatch.Text.Link,
   backgroundColor: UMSwatch.Grey[100],
   borderRadius: '4px ',
+  boxShadow: 'none',
   '&:hover, &.Mui-focused': {
-    color: UMSwatch.Grey[600],
+    // color: UMSwatch.Grey[600],
     backgroundColor: alpha(UMSwatch.White[50], 0.7)
   },
   '&.Mui-selected': {
     transform: 'translateY(-1px)',
     cursor: 'default',
     color: UMSwatch.Black[50],
-    backgroundColor: UMSwatch.White[50],
-    boxShadow: 'rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px'
+    backgroundColor: UMSwatch.White[50]
   },
   '.indicator': {
     backgroundColor: 'transparent'

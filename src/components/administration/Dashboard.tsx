@@ -1,8 +1,5 @@
-import LogoutIcon from '@mui/icons-material/Logout'
-import SecurityIcon from '@mui/icons-material/Security'
 import Card from '@mui/material/Card'
-import CardActions from '@mui/material/CardActions'
-import CardHeader from '@mui/material/CardHeader'
+import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import { AxiosResponse } from 'axios'
 import { useEffect, useState } from 'react'
@@ -13,7 +10,8 @@ import useAxiosPrivate from '../../hooks/useAxiosPrivate'
 import { IEmployee } from '../../hooks/useGetEmployees'
 import UMSwatch from '../../style/UMSwatch'
 import { AxiosLogoutConfig } from '../../utils'
-import { LogoutButtonSx } from '../mui/Button.style'
+import { LogoutIcon, SecurityIcon } from '../icons'
+import { HeaderButtonSx, LogoutButtonSx } from '../mui/Button.style'
 import NavTabs from './NavTabs'
 
 export default function Dashboard() {
@@ -68,43 +66,42 @@ export default function Dashboard() {
       raised
       sx={{
         bgcolor: UMSwatch.Grey[100],
-        // minWidth: '524px',
-        borderRadius: '4px',
-        // mt: '100px',
-        height: 'auto',
-        m: '20px'
+        borderRadius: { xs: '0px', sm: '4px' },
+        minWidth: { xs: '100%', sm: '600px' }
       }}>
-      <CardHeader
-        sx={{ p: '30px 30px 0', m: 0 }}
-        avatar={
-          <>
-            <SecurityIcon />
-            <Typography
-              variant='body1'
-              sx={{ ml: '10px', fontWeight: 'bold', textAlign: 'center', fontSize: '18px' }}>
-              Email Validator
-            </Typography>
-          </>
-        }
-        action={
-          <LogoutButtonSx
-            size='small'
-            variant='outlined'
-            type='submit'
-            onClick={handleUserLogout}
-            endIcon={<LogoutIcon />}>
-            Logout
-          </LogoutButtonSx>
-        }
-      />
+      <Stack direction='row' justifyContent='space-between' alignItems='center' sx={{ p: '20px' }}>
+        <HeaderButtonSx
+          disableElevation
+          disableFocusRipple
+          disableRipple
+          startIcon={<SecurityIcon />}>
+          <Typography
+            variant='h6'
+            sx={{
+              textTransform: 'none'
+            }}>
+            Email Validator
+          </Typography>
+        </HeaderButtonSx>
+        <LogoutButtonSx
+          type='submit'
+          onClick={handleUserLogout}
+          endIcon={<LogoutIcon />}
+          sx={{ color: UMSwatch.Text.Link }}>
+          Logout
+        </LogoutButtonSx>
+      </Stack>
       <Typography
         variant='body1'
-        sx={{ p: '40px 30px', fontWeight: 'bold', textAlign: 'center', fontSize: '19px' }}>
+        sx={{
+          p: '20px 30px 40px 30px',
+          fontWeight: 'bold',
+          textAlign: 'center',
+          fontSize: '19px'
+        }}>
         Protect your company from bad registrations.
       </Typography>
-      <CardActions>
-        <NavTabs employees={employees} />
-      </CardActions>
+      <NavTabs employees={employees} />
     </Card>
   )
 }
