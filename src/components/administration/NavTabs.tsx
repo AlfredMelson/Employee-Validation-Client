@@ -1,13 +1,19 @@
-import { Divider } from '@mui/material'
 import Box from '@mui/material/Box'
 import Tabs from '@mui/material/Tabs'
 import { SyntheticEvent, useState } from 'react'
 import { IEmployee } from '../../hooks/useGetEmployees'
 import UMSwatch from '../../style/UMSwatch'
-import { emplInvalidEmail, emplOldEmail, emplReusedEmail } from '../../utils/emailFilters'
+import { filteredEmplEmails } from '../../utils/emailFilters'
 import { TabSx } from '../mui/TabPanel.style'
 import EmployeeEntry from './EmloyeeEntry'
 
+// import { Divider } from '@mui/material'
+//  ;<Divider
+//    orientation='vertical'
+//    variant='middle'
+//    flexItem
+//    sx={{ m: '8px 4px', borderColor: UMSwatch.Grey[300] }}
+//  />
 interface TabPanelProps {
   children?: React.ReactNode
   index: number
@@ -42,11 +48,7 @@ interface INavTabs {
 }
 
 export default function NavTabs({ employees }: INavTabs) {
-  const invalidEmailCount = emplInvalidEmail.length
-
-  const reusedEmailCount = employees.filter(empl => emplReusedEmail(empl, employees)).length
-
-  const oldEmailCount = emplOldEmail.length
+  const filteredEmails = filteredEmplEmails(employees)
 
   const [value, setValue] = useState(0)
 
@@ -65,16 +67,10 @@ export default function NavTabs({ employees }: INavTabs) {
         allowScrollButtonsMobile
         classes={{ indicator: 'indicator' }}
         sx={{ p: '0 20px 20px' }}>
-        <TabSx label={`All ${employees.length}`} {...a11yProps(0)} />
-        <Divider
-          orientation='vertical'
-          variant='middle'
-          flexItem
-          sx={{ m: '8px 4px', borderColor: UMSwatch.Grey[300] }}
-        />
-        <TabSx label={`Invalid ${invalidEmailCount}`} {...a11yProps(1)} />
-        <TabSx label={`Reused ${reusedEmailCount}`} {...a11yProps(2)} />
-        <TabSx label={`Older ${oldEmailCount}`} {...a11yProps(3)} />
+        <TabSx label={`Total ${filteredEmails.all.length}`} {...a11yProps(1)} />
+        <TabSx label={`Invalid ${filteredEmails.invalid.length}`} {...a11yProps(2)} />
+        <TabSx label={`Duplicate ${filteredEmails.duplicate.length}`} {...a11yProps(3)} />
+        <TabSx label={`Older ${filteredEmails.older.length}`} {...a11yProps(4)} />
       </Tabs>
 
       <Box
@@ -83,16 +79,16 @@ export default function NavTabs({ employees }: INavTabs) {
           bgcolor: UMSwatch.White[50]
         }}>
         <TabPanel value={value} index={0}>
-          <EmployeeEntry employees={employees} />
+          <EmployeeEntry employees={filteredEmails.all} />
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <EmployeeEntry employees={emplInvalidEmail(employees)} />
+          <EmployeeEntry employees={filteredEmails.invalid} />
         </TabPanel>
         <TabPanel value={value} index={2}>
-          <EmployeeEntry employees={employees.filter(empl => emplReusedEmail(empl, employees))} />
+          <EmployeeEntry employees={filteredEmails.duplicate} />
         </TabPanel>
         <TabPanel value={value} index={3}>
-          <EmployeeEntry employees={emplOldEmail(employees)} />
+          <EmployeeEntry employees={filteredEmails.older} />
         </TabPanel>
       </Box>
     </Box>

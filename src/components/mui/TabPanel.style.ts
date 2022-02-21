@@ -12,11 +12,9 @@ export const TabSx = styled(Tab)(() => ({
   borderRadius: '4px ',
   boxShadow: 'none',
   '&:hover, &.Mui-focused': {
-    // color: UMSwatch.Grey[600],
     backgroundColor: alpha(UMSwatch.White[50], 0.7)
   },
   '&.Mui-selected': {
-    transform: 'translateY(-1px)',
     cursor: 'default',
     color: UMSwatch.Black[50],
     backgroundColor: UMSwatch.White[50]

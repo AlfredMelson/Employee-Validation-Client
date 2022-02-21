@@ -1,53 +1,52 @@
 import { IEmployee } from '../services/getEmployees'
 
-export const emplInvalidEmail = (employees: Array<IEmployee>) => {
-  const validEmail = new RegExp(
-    "([!#-'*+/-9=?A-Z^-~-]+(.[!#-'*+/-9=?A-Z^-~-]+)*|\"([]!#-[^-~ \t]|(\\[\t -~]))+\")@([!#-'*+/-9=?A-Z^-~-]+(.[!#-'*+/-9=?A-Z^-~-]+)*|[[\t -Z^-~]*])"
-  )
+// regular expression: https://regexr.com/2rhq7
+const regexEmailValidation = new RegExp(
+  "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])"
+)
 
-  const invalid = employees.filter(empl => !empl.email.match(validEmail))
-  return invalid
+const moreThanThirty = (registered: string) => {
+  const registrationDate = new Date(registered).getTime()
+
+  // one month calc = 30 days * 24 hours * 3600 seconds * 1000 milliseconds
+  const oneMonth = 30 * 24 * 3600 * 1000
+
+  // date one month ago
+  const thirtyDaysAgo = Date.now() - oneMonth
+
+  // return true if registration date is more than 30 days old
+  return registrationDate < thirtyDaysAgo
 }
 
-// validate an email address and return the valid email without regex
-
-export const emplOldEmail = (employees: Array<IEmployee>) => {
-  const today = new Date().getTime()
-  const moreThanThirty = employees.filter(
-    empl => today - Date.parse(empl.createdAt) >= 30 * 24 * 3600 * 1000
-  )
-  return moreThanThirty
+export interface IfilteredEmplEmails {
+  all: IEmployee[]
+  invalid: IEmployee[]
+  duplicate: IEmployee[]
+  older: IEmployee[]
 }
 
-// TESTING
-export const emplOldEmail2 = (empl: IEmployee) => {
-  const currentDate = new Date()
-  const creationDate = new Date(empl.createdAt)
-  const differenceInDates = {
-    inDays: (d1: Date, d2: Date) => (d2.getTime() - d1.getTime()) / (24 * 3600 * 1000)
+export const filteredEmplEmails = (employees: IEmployee[]): IfilteredEmplEmails => {
+  return {
+    all: employees,
+    ...employees.reduce(
+      (result, empl) => {
+        const email = empl.email
+        if (!regexEmailValidation.test(empl.email)) {
+          result.invalid.push(empl)
+        }
+        if (employees.filter(empl => empl.email === email).length > 1) {
+          result.duplicate.push(empl)
+        }
+        if (moreThanThirty(empl.createdAt)) {
+          result.older.push(empl)
+        }
+        return result
+      },
+      {
+        invalid: [],
+        duplicate: [],
+        older: []
+      }
+    )
   }
-
-  return differenceInDates.inDays(creationDate, currentDate) > 30
-}
-export const emplOldEmail3 = (empl: IEmployee) => {
-  const currentDate = new Date()
-  const creationDate = new Date(empl.createdAt)
-  const differenceInDates = {
-    inDays: (d1: Date, d2: Date) => (d2.getTime() - d1.getTime()) / (24 * 3600 * 1000)
-  }
-
-  return differenceInDates.inDays(creationDate, currentDate) > 30
-
-  // const moreThanThirty = employees.filter(
-  //   empl => today - Date.parse(empl.createdAt) >= 30 * 24 * 3600 * 1000
-  // )
-}
-
-export const emplReusedEmail = (empl: IEmployee, employees: Array<IEmployee>) => {
-  // check if any emails are the same
-  const emailAlreadyTaken: boolean = employees.some(
-    (value: IEmployee) => value.email === empl.email
-  )
-
-  return emailAlreadyTaken && employees.filter(empl => empl.email === empl.email)
 }
