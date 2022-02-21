@@ -4,7 +4,7 @@ import ListItemAvatar from '@mui/material/ListItemAvatar'
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemText from '@mui/material/ListItemText'
 import { useState } from 'react'
-import { IEmployee } from '../../services/getEmployees'
+import { IEmployee } from '../../hooks/useGetEmployees'
 import EmailForm from './EmailForm'
 
 interface IEmployeeEntry {

@@ -27,3 +27,5 @@ yarn-error.log*
 /src/context/EmployeeContext.tsx
 /src/context/UserContext.tsx
 /src/hooks/useAxiosFetch.ts
+/src/context/ItemsContext.tsx
+Task.md

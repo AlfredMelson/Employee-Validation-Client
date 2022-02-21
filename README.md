@@ -1,12 +1,6 @@
-# Interview task: User management
+# User management
 
-## How to start
-
-- create a GitHub project from the template by clicking `Use this template` and filling the information required
-- create a new branch `develop`
-- before returning the task create a merge request from `develop` to `master` in your repository, so it's easier to see all the changes
-
-## Setup
+## Setup & Scripts
 
 - launch server located in seperate repo: https://github.com/AlfredMelson/mygomtech_server instrutions are in the README.md file
 
@@ -19,27 +13,28 @@
 
   _password:_ `admin`
 
-## Scripts
+## Remaining tasks (21Feb2022)
 
-`yarn start` - starts dev server
-
-## Information
-
-Don't forget that mocked backed server doesn't store your tokens in database they are stored in memory, so your tokens will be invalid after server restart.
-
-## Tasks
-
-[ ] Complete administrator validatation
-[ ] Setup employee validatation
 [ ] Add tests
-[ ] Refactor code
+[ ] Refactor as needed
 
-[*] logout button
-[*] Create additional tab (old) that should show emails older than 30d
-[*] Validate login username, password
-[ ] Add loader to login page
-[ ] After Email update page should not be reloaded
-[*] Add worng emails filter
-[ ] Add tests
-[ ] Refactor to make the code neat and clean - this will keep your teammates happy
-[ ] Fix as many errors as you notice
+## Feature set
+
+1. Register an administrator
+2. Verify administrator's email address
+3. Login/authenticate administrator (json web token stored in non-accessible-to-js memory)
+4. Get current administrator
+5. Logout administrator
+6. Handle accessToken
+7. Handle refreshToken
+8. CRUD employees
+
+## Libraries
+
+- [TypeScript](https://www.typescriptlang.org/) - Static type checking
+- [ReactJs](https://reactjs.org/)
+- [React-router-dom](https://github.com/remix-run/react-router#readme) - Declarative routing
+- [Mui](https://mui.com/) - Component library
+- [Axios](https://axios-http.com/) - Promise based HTTP client
+- [Framer-motion](https://github.com/framer/motion#readme) - Animation library
+- [Zod](https://github.com/colinhacks/zod) - Validation (testing)

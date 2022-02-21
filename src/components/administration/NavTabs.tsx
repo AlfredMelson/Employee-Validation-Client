@@ -1,9 +1,10 @@
+import { Skeleton } from '@mui/material'
 import Box from '@mui/material/Box'
 import Tabs from '@mui/material/Tabs'
 import { SyntheticEvent, useState } from 'react'
 import { IEmployee } from '../../hooks/useGetEmployees'
-import UMSwatch from '../../style/UMSwatch'
-import { filteredEmplEmails } from '../../utils/emailFilters'
+import { UMSwatch } from '../../style'
+import { EmplEmailFilters } from '../../utils'
 import { TabSx } from '../mui/TabPanel.style'
 import EmployeeEntry from './EmloyeeEntry'
 
@@ -14,6 +15,18 @@ import EmployeeEntry from './EmloyeeEntry'
 //    flexItem
 //    sx={{ m: '8px 4px', borderColor: UMSwatch.Grey[300] }}
 //  />
+
+interface ITabData {
+  index: number
+  label: string
+  disable: boolean
+}
+interface IPanelData {
+  index: number
+  value: number
+  employees: Array<IEmployee>
+}
+
 interface TabPanelProps {
   children?: React.ReactNode
   index: number
@@ -48,9 +61,39 @@ interface INavTabs {
 }
 
 export default function NavTabs({ employees }: INavTabs) {
-  const filteredEmails = filteredEmplEmails(employees)
+  const filteredEmails = EmplEmailFilters(employees)
 
   const [value, setValue] = useState(0)
+
+  const TabData: ITabData[] = [
+    {
+      index: 1,
+      label: `Total ${filteredEmails.all.length}`,
+      disable: filteredEmails.all.length === 0
+    },
+    {
+      index: 2,
+      label: `Invalid ${filteredEmails.invalid.length}`,
+      disable: filteredEmails.invalid.length === 0
+    },
+    {
+      index: 3,
+      label: `Duplicate ${filteredEmails.duplicate.length}`,
+      disable: filteredEmails.duplicate.length === 0
+    },
+    {
+      index: 4,
+      label: `Older ${filteredEmails.older.length}`,
+      disable: filteredEmails.older.length === 0
+    }
+  ]
+
+  const PanelData: IPanelData[] = [
+    { index: 0, value: value, employees: filteredEmails.all },
+    { index: 1, value: value, employees: filteredEmails.invalid },
+    { index: 2, value: value, employees: filteredEmails.duplicate },
+    { index: 3, value: value, employees: filteredEmails.older }
+  ]
 
   const handleChange = (_event: SyntheticEvent, newValue: number) => {
     setValue(newValue)
@@ -58,38 +101,52 @@ export default function NavTabs({ employees }: INavTabs) {
 
   return (
     <Box>
-      <Tabs
-        centered
-        value={value}
-        onChange={handleChange}
-        aria-label='nav tabs example'
-        scrollButtons
-        allowScrollButtonsMobile
-        classes={{ indicator: 'indicator' }}
-        sx={{ p: '0 20px 20px' }}>
-        <TabSx label={`Total ${filteredEmails.all.length}`} {...a11yProps(1)} />
-        <TabSx label={`Invalid ${filteredEmails.invalid.length}`} {...a11yProps(2)} />
-        <TabSx label={`Duplicate ${filteredEmails.duplicate.length}`} {...a11yProps(3)} />
-        <TabSx label={`Older ${filteredEmails.older.length}`} {...a11yProps(4)} />
-      </Tabs>
+      {TabData ? (
+        <Tabs
+          centered
+          value={value}
+          onChange={handleChange}
+          aria-label='nav tabs example'
+          scrollButtons
+          allowScrollButtonsMobile
+          classes={{ indicator: 'indicator' }}
+          sx={{ mx: '20px' }}>
+          {TabData.map(tab => (
+            <TabSx
+              key={tab.index}
+              label={tab.label}
+              disabled={tab.disable}
+              {...a11yProps(tab.index)}
+            />
+          ))}
+        </Tabs>
+      ) : (
+        <Tabs
+          centered
+          value={value}
+          aria-label='nav tabs skeleton'
+          scrollButtons
+          allowScrollButtonsMobile
+          classes={{ indicator: 'indicator' }}
+          sx={{ mx: '20px' }}>
+          <Skeleton variant='rectangular' width={110} height={48} sx={{ mx: '8px' }} />
+          <Skeleton variant='rectangular' width={110} height={48} sx={{ mx: '8px' }} />
+          <Skeleton variant='rectangular' width={110} height={48} sx={{ mx: '8px' }} />
+          <Skeleton variant='rectangular' width={110} height={48} sx={{ mx: '8px' }} />
+        </Tabs>
+      )}
 
       <Box
         sx={{
           borderRadius: '4px',
-          bgcolor: UMSwatch.White[50]
+          bgcolor: UMSwatch.White[50],
+          m: '20px'
         }}>
-        <TabPanel value={value} index={0}>
-          <EmployeeEntry employees={filteredEmails.all} />
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-          <EmployeeEntry employees={filteredEmails.invalid} />
-        </TabPanel>
-        <TabPanel value={value} index={2}>
-          <EmployeeEntry employees={filteredEmails.duplicate} />
-        </TabPanel>
-        <TabPanel value={value} index={3}>
-          <EmployeeEntry employees={filteredEmails.older} />
-        </TabPanel>
+        {PanelData.map(panel => (
+          <TabPanel key={panel.index} value={panel.value} index={panel.index}>
+            <EmployeeEntry employees={panel.employees} />
+          </TabPanel>
+        ))}
       </Box>
     </Box>
   )

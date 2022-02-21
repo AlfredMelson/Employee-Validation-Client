@@ -26,6 +26,7 @@ export const LogoutButtonSx = styled(Button)(() => ({
 
 export const UpdateEmailButtonSx = styled(Button)(() => ({
   textTransform: 'none',
+  color: UMSwatch.Text.Link,
   borderColor: 'transparent',
   '&:hover, &.Mui-focused, &.Mui-selected': {
     color: UMSwatch.Black[50],
