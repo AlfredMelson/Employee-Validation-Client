@@ -12,13 +12,13 @@ import axios from '../../api/axiosCustom'
 import { API, AxiosEmplUpdateConfig, REGEX_Password } from '../../utils'
 import { UpdateEmailButtonSx } from '../mui/Button.style'
 
-interface IUpdateModal {
+interface IUpdateEmailDialog {
   emplId: string
   emplName: string
   emplRole: string
 }
 
-export default function EmailForm({ emplId, emplName, emplRole }: IUpdateModal) {
+export default function UpdateEmailDialog({ emplId, emplName, emplRole }: IUpdateEmailDialog) {
   const [emailFormInput, setEmailFormInput] = useState('')
 
   // error reference

@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios'
-import IEmployeeType from '../types/employee.type'
+import { Empl } from '../api/empl'
 
 const apiClient = axios.create({
   baseURL: 'http://localhost:9003/api',
@@ -19,21 +19,21 @@ DELETE      /api/empl         delete all empl
 */
 
 export const findAll = async () => {
-  const response: AxiosResponse = await apiClient.get<IEmployeeType[]>('/ids')
+  const response: AxiosResponse = await apiClient.get<Empl[]>('/ids')
   return response.data
 }
 
 export const findById = async (id: string) => {
-  const response: AxiosResponse = await apiClient.get<IEmployeeType>(`/empl/${id}`)
+  const response: AxiosResponse = await apiClient.get<Empl>(`/empl/${id}`)
   return response.data
 }
 
-export const create = async ({ id, name, role, email }: IEmployeeType) => {
+export const create = async ({ id, name, role, email }: Empl) => {
   const response: AxiosResponse = await apiClient.post<any>('/create', { id, name, role, email })
   return response.data
 }
 
-export const update = async (id: string, { name, role, email }: IEmployeeType) => {
+export const update = async (id: string, { name, role, email }: Empl) => {
   const response: AxiosResponse = await apiClient.put<any>(`/update/${id}`, {
     id,
     name,

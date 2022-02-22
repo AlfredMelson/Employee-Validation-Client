@@ -1,54 +1,24 @@
-import { useEffect, useState } from 'react'
+import axios from '../api/axiosCustom'
 import useAuth from './useAuth'
-import useAxiosPrivate from './useAxiosPrivate'
 
-const useLogout = () => {
+const useLogout = accessToken => {
   const { setAuth } = useAuth()
-  const axiosPrivate = useAxiosPrivate()
-  const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
-  useEffect(() => {
-    let isMounted = true
+  const logoutAdmin = async () => {
+    console.log('accessToken', accessToken)
+    try {
+      await axios.post('/admin/logout', accessToken, {
+        withCredentials: true
+      })
 
-    // replaces axios cancel tokens
-    const controller = new AbortController()
-
-    const logoutAdmin = async () => {
-      try {
-        const response = await axiosPrivate.get('/admin/logout', {
-          signal: controller.signal
-        })
-        console.log('useLogout: ', response)
-
-        // check if the component is mounted and set the response
-        isMounted && setAuth({})
-      } catch (error) {
-        // handle no response from the server
-        setErrorMessage('Login Failed')
-        // if (!error?.response) {
-        //   setErrorMessage('No Server Response')
-
-        //   // handle invalid syntax
-        // } else if (error.response?.status === 401) {
-        //   setErrorMessage('Unauthorized')
-        // } else {
-        //   // catch-all-other-errors
-        //   setErrorMessage('Logout Failed')
-        // }
-      }
+      // empty context
+      setAuth({})
+    } catch (err) {
+      console.error(err)
     }
-    logoutAdmin()
 
-    return () => {
-      isMounted = false
-      controller.abort()
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  console.log(errorMessage)
-
-  return errorMessage
+    return logoutAdmin
+  }
 }
 
 export default useLogout

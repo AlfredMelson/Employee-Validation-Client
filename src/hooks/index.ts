@@ -1,5 +1,4 @@
 export { default as useAuth } from './useAuth'
-export { default as useLoginInput } from './useLoginInput'
+export { default as useEmpl } from './useEmpl'
 export { default as useLogout } from './useLogout'
-export { default as useAxiosFetch } from './useAxiosFetch'
-export { default as useGetEmployees } from './useGetEmployees'
+export { default as useAxiosPrivate } from './useAxiosPrivate'

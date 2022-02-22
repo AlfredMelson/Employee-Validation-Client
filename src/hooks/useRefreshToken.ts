@@ -5,7 +5,7 @@ import useAuth from './useAuth'
 const useRefreshToken = () => {
   const { setAuth } = useAuth()
 
-  const refresh = async () => {
+  const refreshAdmin = async () => {
     const response = await axios.get(API.Refresh, {
       // setting that allows the secure cookie with response to be sent
       withCredentials: true
@@ -20,7 +20,7 @@ const useRefreshToken = () => {
     })
     return response.data.accessToken
   }
-  return refresh
+  return refreshAdmin
 }
 
 export default useRefreshToken

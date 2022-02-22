@@ -1,3 +1,4 @@
+import Box from '@mui/material/Box'
 import Stack, { StackProps } from '@mui/material/Stack'
 import { styled } from '@mui/material/styles'
 import { LoginCard } from '../components'
@@ -19,8 +20,10 @@ const LoginStack = styled(
 
 export default function Login() {
   return (
-    <LoginStack>
-      <LoginCard />
-    </LoginStack>
+    <Box component='main'>
+      <LoginStack>
+        <LoginCard />
+      </LoginStack>
+    </Box>
   )
 }

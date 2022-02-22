@@ -2,8 +2,8 @@
 # vscode
 .vscode
 
-# tsdocs
-/docs
+# network testing
+/network
 
 # dependencies
 /node_modules

@@ -1,3 +1,4 @@
+import Box from '@mui/material/Box'
 import Stack, { StackProps } from '@mui/material/Stack'
 import { styled } from '@mui/material/styles'
 import { Dashboard } from '../components'
@@ -22,8 +23,10 @@ const DashboardStack = styled(
 
 export default function Administration() {
   return (
-    <DashboardStack>
-      <Dashboard />
-    </DashboardStack>
+    <Box component='main'>
+      <DashboardStack>
+        <Dashboard />
+      </DashboardStack>
+    </Box>
   )
 }

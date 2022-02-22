@@ -1,4 +1,4 @@
-import { IEmployee } from '../hooks/useGetEmployees'
+import { Empl } from '../api/empl'
 
 // regular expression: https://regexr.com/2rhq7
 const regexEmailValidation = new RegExp(
@@ -19,13 +19,13 @@ const moreThanThirty = (registered: string) => {
 }
 
 interface IEmplEmailFilters {
-  all: IEmployee[]
-  invalid: IEmployee[]
-  duplicate: IEmployee[]
-  older: IEmployee[]
+  all: Empl[]
+  invalid: Empl[]
+  duplicate: Empl[]
+  older: Empl[]
 }
 
-const EmplEmailFilters = (employees: IEmployee[]): IEmplEmailFilters => {
+const EmplEmailFilters = (employees: Empl[]): IEmplEmailFilters => {
   return {
     all: employees,
     ...employees.reduce(

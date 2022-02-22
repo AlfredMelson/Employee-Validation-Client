@@ -2,7 +2,8 @@ import { Skeleton } from '@mui/material'
 import Box from '@mui/material/Box'
 import Tabs from '@mui/material/Tabs'
 import { SyntheticEvent, useState } from 'react'
-import { IEmployee } from '../../hooks/useGetEmployees'
+import { Empl } from '../../api/empl'
+import { useEmployeesContext } from '../../context/EmplProvider'
 import { UMSwatch } from '../../style'
 import { EmplEmailFilters } from '../../utils'
 import { TabSx } from '../mui/TabPanel.style'
@@ -24,7 +25,7 @@ interface ITabData {
 interface IPanelData {
   index: number
   value: number
-  employees: Array<IEmployee>
+  employees: Empl[]
 }
 
 interface TabPanelProps {
@@ -56,11 +57,13 @@ function a11yProps(index: number) {
   }
 }
 
-interface INavTabs {
-  employees: Array<IEmployee>
+interface ISelectorTabs {
+  employees: Empl[]
 }
 
-export default function NavTabs({ employees }: INavTabs) {
+export default function SelectorTabs({ employees }: ISelectorTabs) {
+  const { isLoading: isEmployeesLoading } = useEmployeesContext()
+
   const filteredEmails = EmplEmailFilters(employees)
 
   const [value, setValue] = useState(0)
@@ -101,7 +104,29 @@ export default function NavTabs({ employees }: INavTabs) {
 
   return (
     <Box>
-      {TabData ? (
+      {isEmployeesLoading ? (
+        <Tabs
+          centered
+          value={value}
+          aria-label='nav tabs skeleton'
+          scrollButtons
+          allowScrollButtonsMobile
+          classes={{ indicator: 'indicator' }}
+          sx={{ mx: '20px' }}>
+          <Box sx={{ mx: '8px' }}>
+            <Skeleton variant='rectangular' width={110} height={48} />
+          </Box>
+          <Box sx={{ mx: '8px' }}>
+            <Skeleton variant='rectangular' width={110} height={48} />
+          </Box>
+          <Box sx={{ mx: '8px' }}>
+            <Skeleton variant='rectangular' width={110} height={48} />
+          </Box>
+          <Box sx={{ mx: '8px' }}>
+            <Skeleton variant='rectangular' width={110} height={48} />
+          </Box>
+        </Tabs>
+      ) : (
         <Tabs
           centered
           value={value}
@@ -120,34 +145,29 @@ export default function NavTabs({ employees }: INavTabs) {
             />
           ))}
         </Tabs>
-      ) : (
-        <Tabs
-          centered
-          value={value}
-          aria-label='nav tabs skeleton'
-          scrollButtons
-          allowScrollButtonsMobile
-          classes={{ indicator: 'indicator' }}
-          sx={{ mx: '20px' }}>
-          <Skeleton variant='rectangular' width={110} height={48} sx={{ mx: '8px' }} />
-          <Skeleton variant='rectangular' width={110} height={48} sx={{ mx: '8px' }} />
-          <Skeleton variant='rectangular' width={110} height={48} sx={{ mx: '8px' }} />
-          <Skeleton variant='rectangular' width={110} height={48} sx={{ mx: '8px' }} />
-        </Tabs>
       )}
-
-      <Box
-        sx={{
-          borderRadius: '4px',
-          bgcolor: UMSwatch.White[50],
-          m: '20px'
-        }}>
-        {PanelData.map(panel => (
-          <TabPanel key={panel.index} value={panel.value} index={panel.index}>
-            <EmployeeEntry employees={panel.employees} />
-          </TabPanel>
-        ))}
-      </Box>
+      {isEmployeesLoading ? (
+        <Box
+          sx={{
+            borderRadius: '4px',
+            m: '20px'
+          }}>
+          <Skeleton variant='rectangular' width={550} height={72} />
+        </Box>
+      ) : (
+        <Box
+          sx={{
+            borderRadius: '4px',
+            bgcolor: UMSwatch.White[50],
+            m: '20px'
+          }}>
+          {PanelData.map(panel => (
+            <TabPanel key={panel.index} value={panel.value} index={panel.index}>
+              <EmployeeEntry employees={panel.employees} />
+            </TabPanel>
+          ))}
+        </Box>
+      )}
     </Box>
   )
 }

@@ -24,6 +24,10 @@ export const AxiosLoginConfig = {
   headers: { 'Content-Type': 'application/json' },
   withCredentials: true
 }
+export const AxiosLogoutConfig = {
+  headers: { 'Content-Type': 'application/json' },
+  withCredentials: true
+}
 export const AxiosGetDataConfig = {
   headers: { 'Content-Type': 'application/json' },
   withCredentials: true
@@ -33,14 +37,10 @@ export const AxiosUpdateConfig = {
   withCredentials: true
 }
 export const AxiosEmplUpdateConfig = { withCredentials: true }
-export const AxiosLogoutConfig = { withCredentials: true }
 
 export const AXIOS_ITEMS_CONFIG = {
   headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
   withCredentials: true
-}
-export enum LOCAL {
-  User = 'mygomtechUser'
 }
 
 /*

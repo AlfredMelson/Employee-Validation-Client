@@ -4,11 +4,11 @@ import ListItemAvatar from '@mui/material/ListItemAvatar'
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemText from '@mui/material/ListItemText'
 import { useState } from 'react'
-import { IEmployee } from '../../hooks/useGetEmployees'
-import EmailForm from './EmailForm'
+import { Empl } from '../../api/empl'
+import UpdateEmailDialog from './UpdateEmailDialog'
 
 interface IEmployeeEntry {
-  employees: Array<IEmployee>
+  employees: Empl[]
 }
 
 export default function EmployeeEntry({ employees }: IEmployeeEntry) {
@@ -33,7 +33,7 @@ export default function EmployeeEntry({ employees }: IEmployeeEntry) {
             <Avatar>{empl.name.substring(0, 2)}</Avatar>
           </ListItemAvatar>
           <ListItemText primary={empl.name} secondary={empl.email} />
-          <EmailForm emplId={empl.id} emplName={empl.name} emplRole={empl.role} />
+          <UpdateEmailDialog emplId={empl.id} emplName={empl.name} emplRole={empl.role} />
         </ListItemButton>
       ))}
     </List>

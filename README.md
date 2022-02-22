@@ -10,7 +10,6 @@
 - Enter your mocked user credentials
 
   _username:_ `admin`
-
   _password:_ `admin`
 
 ## Remaining tasks (21Feb2022)
@@ -20,14 +19,10 @@
 
 ## Feature set
 
-1. Register an administrator
-2. Verify administrator's email address
-3. Login/authenticate administrator (json web token stored in non-accessible-to-js memory)
-4. Get current administrator
-5. Logout administrator
-6. Handle accessToken
-7. Handle refreshToken
-8. CRUD employees
+1. Administrator registration/login/logout
+2. Persistent authentication with JWT Tokens
+3. Authentication secured without localStorage or sessionStorage
+4. CRUD employees
 
 ## Libraries
 

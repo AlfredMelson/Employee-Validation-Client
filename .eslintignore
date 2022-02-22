@@ -2,8 +2,8 @@
 # vscode
 .vscode
 
-# tsdocs
-/docs
+# network testing
+/network
 
 # dependencies
 /node_modules
@@ -28,3 +28,4 @@ yarn-error.log*
 jest.config.ts
 lerna.json
 webpack.config.js
+
