@@ -4,7 +4,6 @@ import Tabs from '@mui/material/Tabs'
 import { SyntheticEvent, useState } from 'react'
 import { Empl } from '../../api/empl'
 import { useEmployeesContext } from '../../context/EmplProvider'
-import { UMSwatch } from '../../style'
 import { EmplEmailFilters } from '../../utils'
 import { TabSx } from '../mui/TabPanel.style'
 import EmployeeEntry from './EmloyeeEntry'
@@ -157,8 +156,7 @@ export default function SelectorTabs({ employees }: ISelectorTabs) {
       ) : (
         <Box
           sx={{
-            borderRadius: '4px',
-            bgcolor: UMSwatch.White[50],
+            bgcolor: 'transparent',
             m: '20px'
           }}>
           {PanelData.map(panel => (

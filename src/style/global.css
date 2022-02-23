@@ -27,3 +27,20 @@ body.loading * {
   background-repeat: no-repeat;
   height: 62px;
 }
+
+.list-group-empl {
+  border-radius: 0;
+  background-color: #f0f6fc;
+}
+.list-group-empl:first-child {
+  border-radius: 4px 4px 0 0;
+  background-color: #f0f6fc;
+}
+.list-group-empl:last-child {
+  border-radius: 0 0 4px 4px;
+  background-color: #f0f6fc;
+}
+.list-group-empl:only-child {
+  border-radius: 4px;
+  background-color: #f0f6fc;
+}
