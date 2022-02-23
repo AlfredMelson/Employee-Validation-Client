@@ -1,9 +1,13 @@
 import { Empl } from '../api/empl'
 
 // regular expression: https://regexr.com/2rhq7
-const regexEmailValidation = new RegExp(
-  "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])"
-)
+
+// export const regexEmailValidation = new RegExp(
+//   "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])"
+// )
+
+export const regexEmailValidation =
+  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
 const moreThanThirty = (registered: string) => {
   const registrationDate = new Date(registered).getTime()
@@ -31,7 +35,7 @@ const EmplEmailFilters = (employees: Empl[]): IEmplEmailFilters => {
     ...employees.reduce(
       (result, empl) => {
         const email = empl.email
-        if (!regexEmailValidation.test(empl.email)) {
+        if (!regexEmailValidation.test(empl.email.toLowerCase())) {
           result.invalid.push(empl)
         }
         if (employees.filter(empl => empl.email === email).length > 1) {

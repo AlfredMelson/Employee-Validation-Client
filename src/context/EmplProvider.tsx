@@ -41,8 +41,21 @@ export const EmplProvider = ({ children }: IEmplProvider) => {
       const response: AxiosResponse = await axiosPrivate.get('/api/ids', {
         signal: controller.signal
       })
-      // check if the component is mounted and set the response
-      setEmployees(response.data)
+      // sort employee list alphabetically
+      setEmployees(
+        response.data.sort(function (first, second) {
+          const firstName = first.name.toUpperCase() // ignore upper and lowercase
+          const secondName = second.name.toUpperCase() // ignore upper and lowercase
+          if (firstName < secondName) {
+            return -1
+          }
+          if (firstName > secondName) {
+            return 1
+          }
+          // names are the same
+          return 0
+        })
+      )
       setIsLoading(false)
     } catch (error) {
       setIsLoading(false)

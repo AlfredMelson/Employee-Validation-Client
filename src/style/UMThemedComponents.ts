@@ -229,7 +229,8 @@ export default function UMThemedComponents(theme: Theme) {
       MuiTextField: {
         defaultProps: {
           variant: 'outlined',
-          size: 'small'
+          size: 'small',
+          margin: 'dense'
         },
         styleOverrides: {
           root: {

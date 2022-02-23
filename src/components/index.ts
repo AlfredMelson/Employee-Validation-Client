@@ -1,6 +1,6 @@
 export { default as LoginCard } from './login'
 export { default as RouteMismatch } from './no-match'
-export { default as AuthRequired } from './authorization/AuthRequired'
+export { default as AuthRequired } from './authorization'
 export { default as RegistrationCard } from './register'
 export { default as Layout } from './layout'
-export { default as Dashboard } from './administration/Dashboard'
+export { default as Dashboard } from './administration'
