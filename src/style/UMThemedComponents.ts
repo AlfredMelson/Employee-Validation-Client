@@ -249,21 +249,19 @@ export default function UMThemedComponents(theme: Theme) {
           placement: 'bottom' // position the tooltip will appear, 'bottom' is default
         },
         styleOverrides: {
+          arrow: {}, // Styles applied to the arrow element
           popper: {}, // Styles applied to the Popper component.
           popperInteractive: {}, // Styles applied to the Popper component unless disableInteractive={true}
           popperArrow: {}, // Styles applied to the Popper component if arrow={true}
           popperClose: {}, // Styles applied to the Popper component unless the tooltip is open
           tooltip: {
             ...theme.typography.caption,
-            fontWeight: 400,
-            color: theme.palette.text.primary,
-            backgroundColor: UMSwatch.Green[500],
+            fontWeight: 600,
+            color: UMSwatch.Black[50],
+            backgroundColor: UMSwatch.White[50],
             boxShadow: theme.shadows[1]
           }, // Styles applied to the tooltip (label wrapper) element
           tooltipArrow: {}, // Styles applied to the tooltip (label wrapper) element if arrow={true}
-          arrow: {
-            color: UMSwatch.Green[500]
-          }, // Styles applied to the arrow element
           touch: {}, // Styles applied to the tooltip (label wrapper) element if the tooltip is opened by touch
           tooltipPlacementLeft: {}, // Styles applied to the tooltip (label wrapper) element if placement contains "left"
           tooltipPlacementRight: {}, // Styles applied to the tooltip (label wrapper) element if placement contains "right"
@@ -274,12 +272,7 @@ export default function UMThemedComponents(theme: Theme) {
       MuiTypography: {
         defaultProps: {},
         styleOverrides: {
-          root: {
-            transition: theme.transitions.create(['all'], {
-              duration: theme.transitions.duration.standard,
-              easing: theme.transitions.easing.easeInOut
-            })
-          }, // Styles applied to the root element if variant="root"
+          root: {}, // Styles applied to the root element if variant="root"
           body1: {}, // Styles applied to the root element if variant="body1"
           body2: {}, // Styles applied to the root element if variant="body2"
           caption: {}, // Styles applied to the root element if variant="caption"

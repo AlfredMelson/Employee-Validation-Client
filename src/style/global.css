@@ -30,17 +30,37 @@ body.loading * {
 
 .list-group-empl {
   border-radius: 0;
-  background-color: #f0f6fc;
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+  transition: background-color 350ms ease-out;
 }
+.list-group-empl:hover {
+  background-color: #eef8ff;
+}
+
 .list-group-empl:first-child {
   border-radius: 4px 4px 0 0;
-  background-color: #f0f6fc;
+  background-color: #fff;
+  transition: background-color 350ms ease-out;
 }
+.list-group-empl:first-child:hover {
+  background-color: #eef8ff;
+}
+
 .list-group-empl:last-child {
   border-radius: 0 0 4px 4px;
-  background-color: #f0f6fc;
+  background-color: #fff;
+  transition: background-color 350ms ease-out;
 }
+.list-group-empl:last-child:hover {
+  background-color: #eef8ff;
+}
+
 .list-group-empl:only-child {
   border-radius: 4px;
-  background-color: #f0f6fc;
+  background-color: #fff;
+  transition: background-color 350ms ease-out;
+}
+.list-group-empl:only-child:hover {
+  background-color: #eef8ff;
 }

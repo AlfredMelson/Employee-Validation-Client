@@ -1,6 +1,6 @@
-import Box from '@mui/material/Box'
 import Stack, { StackProps } from '@mui/material/Stack'
 import { styled } from '@mui/material/styles'
+import { motion } from 'framer-motion'
 import { LoginCard } from '../components'
 
 const LoginStack = styled(
@@ -20,10 +20,10 @@ const LoginStack = styled(
 
 export default function Login() {
   return (
-    <Box component='main'>
+    <motion.section exit={{ opacity: 0 }}>
       <LoginStack>
         <LoginCard />
       </LoginStack>
-    </Box>
+    </motion.section>
   )
 }

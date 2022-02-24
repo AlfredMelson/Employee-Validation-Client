@@ -1,6 +1,6 @@
-import Box from '@mui/material/Box'
 import Stack, { StackProps } from '@mui/material/Stack'
 import { styled } from '@mui/material/styles'
+import { motion } from 'framer-motion'
 import { Dashboard } from '../components'
 
 const DashboardStack = styled(
@@ -23,10 +23,10 @@ const DashboardStack = styled(
 
 export default function Administration() {
   return (
-    <Box component='main'>
+    <motion.section exit={{ opacity: 0 }}>
       <DashboardStack>
         <Dashboard />
       </DashboardStack>
-    </Box>
+    </motion.section>
   )
 }

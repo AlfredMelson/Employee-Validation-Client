@@ -5,7 +5,8 @@ import { SyntheticEvent, useState } from 'react'
 import { Empl } from '../../api/empl'
 import { useEmployeesContext } from '../../context/EmplProvider'
 import { EmplEmailFilters } from '../../utils'
-import { TabSx } from '../mui/TabPanel.style'
+import { BadgeSx } from '../mui/Badge.style'
+import { TabSx } from '../mui/Tab.style'
 import EmployeeEntry from './EmloyeeEntry'
 
 // import { Divider } from '@mui/material'
@@ -19,6 +20,7 @@ import EmployeeEntry from './EmloyeeEntry'
 interface ITabData {
   index: number
   label: string
+  value: number
   disable: boolean
 }
 interface IPanelData {
@@ -70,22 +72,26 @@ export default function SelectorTabs({ employees }: ISelectorTabs) {
   const TabData: ITabData[] = [
     {
       index: 1,
-      label: `Total ${filteredEmails.all.length}`,
+      label: 'Registrants',
+      value: filteredEmails.all.length,
       disable: filteredEmails.all.length === 0
     },
     {
       index: 2,
-      label: `Invalid ${filteredEmails.invalid.length}`,
+      label: 'Invalid',
+      value: filteredEmails.invalid.length,
       disable: filteredEmails.invalid.length === 0
     },
     {
       index: 3,
-      label: `Duplicate ${filteredEmails.duplicate.length}`,
+      label: 'Duplicate',
+      value: filteredEmails.duplicate.length,
       disable: filteredEmails.duplicate.length === 0
     },
     {
       index: 4,
-      label: `Older ${filteredEmails.older.length}`,
+      label: 'Older',
+      value: filteredEmails.older.length,
       disable: filteredEmails.older.length === 0
     }
   ]
@@ -107,11 +113,10 @@ export default function SelectorTabs({ employees }: ISelectorTabs) {
         <Tabs
           centered
           value={value}
-          aria-label='nav tabs skeleton'
+          aria-label='selector tabs skeleton'
           scrollButtons
           allowScrollButtonsMobile
-          classes={{ indicator: 'indicator' }}
-          sx={{ mx: '20px' }}>
+          classes={{ indicator: 'indicator' }}>
           <Box sx={{ mx: '8px' }}>
             <Skeleton variant='rectangular' width={110} height={48} />
           </Box>
@@ -130,17 +135,23 @@ export default function SelectorTabs({ employees }: ISelectorTabs) {
           centered
           value={value}
           onChange={handleChange}
-          aria-label='nav tabs example'
+          aria-label='selector tabs'
           scrollButtons
           allowScrollButtonsMobile
-          classes={{ indicator: 'indicator' }}
-          sx={{ mx: '20px' }}>
+          classes={{ indicator: 'indicator' }}>
           {TabData.map(tab => (
             <TabSx
               key={tab.index}
               label={tab.label}
               disabled={tab.disable}
               {...a11yProps(tab.index)}
+              icon={
+                tab.index !== 1 &&
+                tab.value !== 0 && (
+                  <BadgeSx badgeContent={tab.value} color='error' sx={{ pl: '14px' }} />
+                )
+              }
+              iconPosition='end'
             />
           ))}
         </Tabs>

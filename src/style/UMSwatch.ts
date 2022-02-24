@@ -72,7 +72,7 @@ const UMSwatch = {
     900: '#04260f'
   },
   Blue: {
-    50: '#cae8ff',
+    50: '#eef8ff',
     100: '#a5d6ff',
     200: '#79c0ff',
     300: '#58a6ff',

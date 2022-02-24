@@ -1,31 +1,34 @@
+import PersonRemoveIcon from '@mui/icons-material/PersonRemove'
+import FormControl from '@mui/material/FormControl'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import FormLabel from '@mui/material/FormLabel'
 import Stack from '@mui/material/Stack'
 import { useTheme } from '@mui/material/styles'
+import Switch from '@mui/material/Switch'
 import Typography from '@mui/material/Typography'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { AxiosResponse } from 'axios'
-import { useEffect, useRef, useState } from 'react'
+import { ChangeEvent, useRef, useState } from 'react'
 import axios from '../../api/axiosCustom'
-import { UMSwatch } from '../../style'
 import { API, AxiosEmplUpdateConfig } from '../../utils'
-import { regexEmailValidation } from '../../utils/EmplEmailFilters'
 import { BadgeIcon, CloseIcon } from '../icons'
-import { DialogContentSx, DialogContentTextSx, DialogSx, TextFieldSx } from '../mui'
-import { HeaderButtonSx, UpdateButtonSx, UpdateEmailButtonSx } from '../mui/Button.style'
-import { CloseIconButtonSx } from '../mui/IconButton.style'
+import { DialogContentSx, DialogContentTextSx, DialogSx, ToolTipSx } from '../mui'
+import { HeaderButtonSx, UpdateButtonSx } from '../mui/Button.style'
+import { CloseIconButtonSx, DeleteIconButtonSx } from '../mui/IconButton.style'
 
-interface IUpdateEmailDialog {
+interface IDeleteContactDialog {
   emplId: string
   emplName: string
   emplRole: string
   emplEmail: string
 }
 
-export default function UpdateEmailDialog({
+export default function DeleteContactDialog({
   emplId,
   emplName,
   emplRole,
   emplEmail
-}: IUpdateEmailDialog) {
+}: IDeleteContactDialog) {
   // update email dialog state
   const [open, setOpen] = useState(false)
   const theme = useTheme()
@@ -41,41 +44,13 @@ export default function UpdateEmailDialog({
     setOpen(false)
   }
 
-  // email address input state
-  const [emailUpdate, setEmailUpdate] = useState('')
-  const [emailHelperText, setEmailHelperText] = useState<string>('')
-
-  // email address validation state
-  const [emailValidation, setEmailValidation] = useState<boolean>(false)
-
   // error reference
   const errorReference = useRef<HTMLParagraphElement | null>(null)
-
-  // handle setting and updating error message and state
-  useEffect(() => {
-    return () => {
-      // reset alert when either the username or password state changes
-      setEmailHelperText('')
-    }
-  }, [emailUpdate])
-
-  // handle email address input validation
-  useEffect(() => {
-    const validateEmail = regexEmailValidation.test(emailUpdate.toLowerCase())
-    setEmailValidation(!validateEmail)
-  }, [emailUpdate])
 
   const handleUpdateEmplEmail = async event => {
     event.preventDefault()
 
-    // alert user if email address input is empty
-    if (!emplEmail) {
-      return setEmailHelperText('Please enter an email')
-    }
-
     try {
-      const emplEmail = emailUpdate
-
       const response: AxiosResponse = await axios.post(
         // pull in the update endpoint
         API.UpdateEmployee,
@@ -98,23 +73,23 @@ export default function UpdateEmailDialog({
 
       // open error alert if there is a caught error
     } catch (error) {
-      setEmailHelperText('Invalid email address')
-
       errorReference.current.focus()
     }
   }
 
-  const isValid = regexEmailValidation.test(emplEmail) ? 'valid' : 'invalid'
+  const [checked, setChecked] = useState(false)
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setChecked(event.target.checked)
+  }
 
   return (
     <>
-      <UpdateEmailButtonSx
-        size='small'
-        variant='outlined'
-        onClick={handleClickOpen}
-        sx={{ textTransform: 'none', mr: '10px' }}>
-        Update Email
-      </UpdateEmailButtonSx>
+      <ToolTipSx tooltipTitle={'Delete registrant'} placement='right'>
+        <DeleteIconButtonSx onClick={handleClickOpen} aria-label='delete'>
+          <PersonRemoveIcon />
+        </DeleteIconButtonSx>
+      </ToolTipSx>
       <DialogSx fullScreen={fullScreen} open={open} onClose={handleClose}>
         <Stack
           direction='row'
@@ -140,47 +115,26 @@ export default function UpdateEmailDialog({
         </Stack>
         <DialogContentSx>
           <DialogContentTextSx>
-            Provide a valid email address for {emplName}. The current email address associated with
-            this account{' '}
-            <span
-              style={{
-                color: isValid === 'valid' ? UMSwatch.Text.Link : UMSwatch.Red[500],
-                fontWeight: isValid !== 'valid' && 'bold'
-              }}>
-              {emplEmail}
-            </span>
-            , is{' '}
-            <span
-              style={{
-                color: isValid !== 'valid' && UMSwatch.Red[500],
-                fontWeight: isValid !== 'valid' && 'bold'
-              }}>
-              {isValid}
-            </span>
-            .
+            Are you sure that you wish to continue with the deletion of {emplName}'s account?
           </DialogContentTextSx>
           <Stack
             direction='row'
-            justifyContent='space-between'
+            justifyContent='space-around'
             alignItems='center'
             spacing={30}
             sx={{ mt: '20px' }}>
-            <TextFieldSx
-              autoFocus
-              fullWidth
-              error={emailHelperText !== ''}
-              id='update-email'
-              helperText={emailHelperText}
-              placeholder='Update Email Address'
-              onChange={event => {
-                setEmailUpdate(event.target.value)
-              }}
-            />
+            <FormControl component='fieldset' variant='standard'>
+              <FormLabel component='legend'>Account deletion</FormLabel>
+              <FormControlLabel
+                control={<Switch checked={checked} onChange={handleChange} />}
+                label={emplName}
+              />
+            </FormControl>
             <UpdateButtonSx
-              disabled={emailValidation}
+              disabled={!checked}
               onClick={handleUpdateEmplEmail}
               sx={{ textTransform: 'none' }}>
-              Update
+              Delete
             </UpdateButtonSx>
           </Stack>
         </DialogContentSx>

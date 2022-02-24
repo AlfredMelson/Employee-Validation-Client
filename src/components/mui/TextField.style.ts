@@ -7,7 +7,7 @@ export const TextFieldSx = styled(TextField)(({ theme }) => ({
     ...theme.typography.body1,
     fontWeight: '500',
     color: UMSwatch.Blue[900],
-    backgroundColor: alpha(UMSwatch.Blue[100], 0.3)
+    backgroundColor: UMSwatch.Blue[50]
   },
   '& .MuiOutlinedInput-root': {
     ...theme.typography.body1,
@@ -15,18 +15,18 @@ export const TextFieldSx = styled(TextField)(({ theme }) => ({
     '& fieldset': {
       borderWidth: '2px',
       borderRadius: '4px',
-      borderColor: alpha(UMSwatch.Blue[100], 0.2),
+      borderColor: alpha(UMSwatch.Blue[50], 0.5),
       transition: theme.transitions.create(['all'], {
         duration: theme.transitions.duration.standard,
         easing: theme.transitions.easing.easeInOut
       })
     },
     '&:hover fieldset': {
-      borderColor: alpha(UMSwatch.Blue[800], 0.4),
+      borderColor: UMSwatch.Blue[100],
       cursor: 'pointer'
     },
     '&.Mui-focused fieldset': {
-      borderColor: alpha(UMSwatch.Blue[800], 0.8),
+      borderColor: UMSwatch.Blue[100],
       borderWidth: '2px'
     }
   }

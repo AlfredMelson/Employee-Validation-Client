@@ -1,5 +1,5 @@
 import Button from '@mui/material/Button'
-import { styled } from '@mui/material/styles'
+import { alpha, styled } from '@mui/material/styles'
 import UMSwatch from '../../style/UMSwatch'
 
 export const LoginButtonSx = styled(Button)(() => ({
@@ -40,22 +40,29 @@ export const CloseButtonSx = styled(Button)(() => ({
 
 export const LogoutButtonSx = styled(Button)(() => ({
   textTransform: 'none',
+  color: UMSwatch.Blue[500],
   borderColor: 'transparent',
   '&:hover, &.Mui-focused, &.Mui-selected': {
-    color: UMSwatch.Black[50],
-    backgroundColor: UMSwatch.White[50],
-    borderColor: UMSwatch.White[50]
+    color: UMSwatch.Blue[600],
+    backgroundColor: UMSwatch.Blue[50],
+    borderColor: 'transparent'
   }
 }))
 
-export const UpdateEmailButtonSx = styled(Button)(() => ({
+export const UpdateEmailButtonSx = styled(Button)(({ theme }) => ({
+  minHeight: '38px',
   textTransform: 'none',
-  color: UMSwatch.Text.Link,
-  borderColor: 'transparent',
+  color: UMSwatch.Blue[500],
+  backgroundColor: 'transparent',
+  border: 'transparent',
+  transition: theme.transitions.create(['all'], {
+    duration: theme.transitions.duration.standard,
+    easing: theme.transitions.easing.easeInOut
+  }),
   '&:hover, &.Mui-focused, &.Mui-selected': {
-    color: UMSwatch.Black[50],
-    borderColor: 'transparent',
-    backgroundColor: 'transparent'
+    color: UMSwatch.Blue[600],
+    backgroundColor: alpha(UMSwatch.Blue[100], 0.3),
+    border: 'transparent'
   }
 }))
 
