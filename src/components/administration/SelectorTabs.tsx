@@ -1,21 +1,15 @@
-import { Skeleton } from '@mui/material'
 import Box from '@mui/material/Box'
+import Divider from '@mui/material/Divider'
+import Skeleton from '@mui/material/Skeleton'
 import Tabs from '@mui/material/Tabs'
 import { SyntheticEvent, useState } from 'react'
 import { Empl } from '../../api/empl'
 import { useEmployeesContext } from '../../context/EmplProvider'
+import { UMSwatch } from '../../style'
 import { EmplEmailFilters } from '../../utils'
 import { BadgeSx } from '../mui/Badge.style'
 import { TabSx } from '../mui/Tab.style'
 import EmployeeEntry from './EmloyeeEntry'
-
-// import { Divider } from '@mui/material'
-//  ;<Divider
-//    orientation='vertical'
-//    variant='middle'
-//    flexItem
-//    sx={{ m: '8px 4px', borderColor: UMSwatch.Grey[300] }}
-//  />
 
 interface ITabData {
   index: number
@@ -71,12 +65,6 @@ export default function SelectorTabs({ employees }: ISelectorTabs) {
 
   const TabData: ITabData[] = [
     {
-      index: 1,
-      label: 'Registrants',
-      value: filteredEmails.all.length,
-      disable: filteredEmails.all.length === 0
-    },
-    {
       index: 2,
       label: 'Invalid',
       value: filteredEmails.invalid.length,
@@ -108,7 +96,7 @@ export default function SelectorTabs({ employees }: ISelectorTabs) {
   }
 
   return (
-    <Box>
+    <>
       {isEmployeesLoading ? (
         <Tabs
           centered
@@ -118,44 +106,82 @@ export default function SelectorTabs({ employees }: ISelectorTabs) {
           allowScrollButtonsMobile
           classes={{ indicator: 'indicator' }}>
           <Box sx={{ mx: '8px' }}>
-            <Skeleton variant='rectangular' width={110} height={48} />
+            <Skeleton
+              sx={{ bgcolor: UMSwatch.Gold[50], borderRadius: '4px' }}
+              variant='rectangular'
+              width={110}
+              height={48}
+            />
           </Box>
           <Box sx={{ mx: '8px' }}>
-            <Skeleton variant='rectangular' width={110} height={48} />
+            <Skeleton
+              sx={{ bgcolor: UMSwatch.Gold[50], borderRadius: '4px' }}
+              variant='rectangular'
+              width={110}
+              height={48}
+            />
           </Box>
           <Box sx={{ mx: '8px' }}>
-            <Skeleton variant='rectangular' width={110} height={48} />
+            <Skeleton
+              sx={{ bgcolor: UMSwatch.Gold[50], borderRadius: '4px' }}
+              variant='rectangular'
+              width={110}
+              height={48}
+            />
           </Box>
           <Box sx={{ mx: '8px' }}>
-            <Skeleton variant='rectangular' width={110} height={48} />
+            <Skeleton
+              sx={{ bgcolor: UMSwatch.Gold[50], borderRadius: '4px' }}
+              variant='rectangular'
+              width={110}
+              height={48}
+            />
           </Box>
         </Tabs>
       ) : (
-        <Tabs
-          centered
-          sx={{ height: '60px' }}
-          value={value}
-          onChange={handleChange}
-          aria-label='selector tabs'
-          scrollButtons
-          allowScrollButtonsMobile
-          classes={{ indicator: 'indicator' }}>
-          {TabData.map(tab => (
-            <TabSx
-              key={tab.index}
-              label={tab.label}
-              disabled={tab.disable}
-              {...a11yProps(tab.index)}
-              icon={
-                tab.index !== 1 &&
-                tab.value !== 0 && (
-                  <BadgeSx badgeContent={tab.value} color='error' sx={{ pl: '14px', mr: '14px' }} />
-                )
-              }
-              iconPosition='end'
-            />
-          ))}
-        </Tabs>
+        <>
+          <Box
+            sx={{
+              display: 'grid',
+              gridTemplateColumns: '35px 1fr 3fr 30px',
+              alignItems: 'center'
+            }}>
+            <Divider sx={{ gridColumn: 3, color: UMSwatch.Grey[500], pb: '12px' }}>
+              <Box sx={{ mx: '8px' }}>email address errors</Box>
+            </Divider>
+          </Box>
+
+          <Tabs
+            centered
+            sx={{ pb: '4px' }}
+            value={value}
+            onChange={handleChange}
+            aria-label='selector tabs'
+            scrollButtons
+            allowScrollButtonsMobile
+            classes={{ indicator: 'indicator' }}>
+            <TabSx label='Registrants' {...a11yProps(1)} />
+            {TabData.map(tab => (
+              <TabSx
+                key={tab.index}
+                label={tab.label}
+                disabled={tab.disable}
+                {...a11yProps(tab.index)}
+                icon={
+                  tab.index !== 1 &&
+                  tab.value !== 0 && (
+                    <BadgeSx
+                      badgeContent={tab.value}
+                      color='error'
+                      sx={{ pl: '14px', mr: '14px' }}
+                    />
+                  )
+                }
+                iconPosition='end'
+              />
+            ))}
+          </Tabs>
+        </>
       )}
       {isEmployeesLoading ? (
         <Box
@@ -163,13 +189,18 @@ export default function SelectorTabs({ employees }: ISelectorTabs) {
             borderRadius: '4px',
             m: '20px'
           }}>
-          <Skeleton variant='rectangular' width={550} height={72} />
+          <Skeleton
+            sx={{ bgcolor: UMSwatch.Gold[50], borderRadius: '4px' }}
+            variant='rectangular'
+            width={550}
+            height={72}
+          />
         </Box>
       ) : (
         <Box
           sx={{
             bgcolor: 'transparent',
-            m: '20px 20px 24px'
+            m: '20px 20px '
           }}>
           {PanelData.map(panel => (
             <TabPanel key={panel.index} value={panel.value} index={panel.index}>
@@ -178,6 +209,6 @@ export default function SelectorTabs({ employees }: ISelectorTabs) {
           ))}
         </Box>
       )}
-    </Box>
+    </>
   )
 }

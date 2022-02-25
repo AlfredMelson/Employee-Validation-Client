@@ -1,19 +1,20 @@
 import Alert from '@mui/material/Alert'
-import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import CardHeader from '@mui/material/CardHeader'
 import Collapse from '@mui/material/Collapse'
 import Stack from '@mui/material/Stack'
-import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
+import { motion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from '../../api/axiosCustom'
 import { useAuth } from '../../hooks'
+import { UMSwatch } from '../../style'
 import { API, AxiosLoginConfig } from '../../utils'
-import { ShieldIcon } from '../icons'
-import { LoginButtonSx } from '../mui/Button.style'
+import { SecurityIcon } from '../icons'
+import { TextFieldSx } from '../mui'
+import { HeaderButtonSx, LoginButtonSx } from '../mui/Button.style'
 
 export default function LoginCard() {
   const navigate = useNavigate()
@@ -118,8 +119,26 @@ export default function LoginCard() {
     }
   }
 
+  const title = {
+    initial: { y: 20, opacity: 0 },
+    animate: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.6,
+        ease: [0.6, -0.05, 0.01, 0.99]
+      }
+    }
+  }
+
   return (
-    <Card raised>
+    <Card
+      raised
+      sx={{
+        bgcolor: UMSwatch.Grey[700],
+        borderRadius: { xs: '0px', sm: '4px' },
+        minWidth: { xs: '100%', sm: '400px' }
+      }}>
       <CardHeader
         title={
           <Collapse in={errorAlert}>
@@ -129,15 +148,35 @@ export default function LoginCard() {
           </Collapse>
         }
       />
-      <Box sx={{ mx: '30px' }}>
-        <div className='login-card-header' />
-      </Box>
+      <motion.div variants={title}>
+        <Stack
+          direction='row'
+          justifyContent='center'
+          alignItems='center'
+          sx={{ p: '10px 10px 0' }}>
+          <HeaderButtonSx
+            disableElevation
+            disableFocusRipple
+            disableRipple
+            startIcon={<SecurityIcon sx={{ width: 36, height: 36 }} />}>
+            <Typography
+              variant='h5'
+              sx={{
+                textTransform: 'none',
+                fontSize: '28px',
+                pl: '8px'
+              }}>
+              Registration Validator
+            </Typography>
+          </HeaderButtonSx>
+        </Stack>
+      </motion.div>
       <CardContent sx={{ m: '10px', minWidth: '340px' }}>
         <form>
-          <Typography variant='body1' color='text.primary' gutterBottom>
+          <Typography variant='body1' gutterBottom sx={{ color: UMSwatch.White[100] }}>
             Username
           </Typography>
-          <TextField
+          <TextFieldSx
             error={usernameHelperText !== ''}
             autoFocus
             fullWidth
@@ -147,10 +186,10 @@ export default function LoginCard() {
             onChange={event => setAdminUsername(event.target.value)}
             helperText={usernameHelperText}
           />
-          <Typography variant='body1' color='text.primary' gutterBottom sx={{ mt: '20px' }}>
+          <Typography variant='body1' gutterBottom sx={{ mt: '20px', color: UMSwatch.White[100] }}>
             Password
           </Typography>
-          <TextField
+          <TextFieldSx
             error={passwordHelperText !== ''}
             fullWidth
             type='password'
@@ -162,11 +201,12 @@ export default function LoginCard() {
           />
           <Stack direction='row' justifyContent='center' alignItems='center' sx={{ mt: '30px' }}>
             <LoginButtonSx
+              size='medium'
               disabled={isLoading}
               type='submit'
               onClick={handleFormSubmit}
               variant='contained'
-              startIcon={<ShieldIcon />}>
+              startIcon={<SecurityIcon sx={{ width: 24, height: 24 }} />}>
               Login
             </LoginButtonSx>
           </Stack>

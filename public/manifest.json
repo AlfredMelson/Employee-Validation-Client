@@ -1,6 +1,6 @@
 {
-  "name": "MyGom.tech Email",
-  "short_name": "MyGom.tech",
+  "name": "Registration Validator",
+  "short_name": "Registration Validator",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +20,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#ffe57f",
+  "background_color": "#161b22"
 }

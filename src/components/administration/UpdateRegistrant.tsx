@@ -11,8 +11,8 @@ import { API, AxiosEmplUpdateConfig } from '../../utils'
 import { regexEmailValidation } from '../../utils/EmplEmailFilters'
 import { BadgeIcon, CloseIcon } from '../icons'
 import { DialogContentSx, DialogContentTextSx, DialogSx, TextFieldSx, ToolTipSx } from '../mui'
-import { HeaderButtonSx, UpdateButtonSx } from '../mui/Button.style'
-import { IconButtonSx, ListItemIconButtonSx } from '../mui/IconButton.style'
+import { CRUDHeaderSx, UpdateButtonSx } from '../mui/Button.style'
+import { ListItemIconButtonSx } from '../mui/IconButton.style'
 
 interface IUpdateRegistrant {
   emplId: string
@@ -121,11 +121,7 @@ export default function UpdateRegistrant({
           justifyContent='space-between'
           alignItems='center'
           sx={{ p: '20px 20px 0' }}>
-          <HeaderButtonSx
-            disableElevation
-            disableFocusRipple
-            disableRipple
-            startIcon={<BadgeIcon />}>
+          <CRUDHeaderSx disableElevation disableFocusRipple disableRipple startIcon={<BadgeIcon />}>
             <Typography
               variant='h6'
               sx={{
@@ -133,10 +129,10 @@ export default function UpdateRegistrant({
               }}>
               {emplName}
             </Typography>
-          </HeaderButtonSx>
-          <IconButtonSx onClick={handleClose}>
+          </CRUDHeaderSx>
+          <ListItemIconButtonSx onClick={handleClose}>
             <CloseIcon />
-          </IconButtonSx>
+          </ListItemIconButtonSx>
         </Stack>
         <DialogContentSx>
           <DialogContentTextSx>
@@ -144,16 +140,14 @@ export default function UpdateRegistrant({
             this account{' '}
             <span
               style={{
-                color: isValid === 'valid' ? UMSwatch.Text.Link : UMSwatch.Red[500],
-                fontWeight: isValid !== 'valid' && 'bold'
+                color: isValid === 'valid' ? UMSwatch.Text.Link : UMSwatch.Coral[400]
               }}>
-              {emplEmail}
+              {emplEmail}{' '}
             </span>
             , is{' '}
             <span
               style={{
-                color: isValid !== 'valid' && UMSwatch.Red[500],
-                fontWeight: isValid !== 'valid' && 'bold'
+                color: isValid !== 'valid' && UMSwatch.Coral[400]
               }}>
               {isValid}
             </span>

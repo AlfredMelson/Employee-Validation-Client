@@ -1,6 +1,4 @@
-import FormControl from '@mui/material/FormControl'
 import FormControlLabel from '@mui/material/FormControlLabel'
-import FormLabel from '@mui/material/FormLabel'
 import Stack from '@mui/material/Stack'
 import { useTheme } from '@mui/material/styles'
 import Switch from '@mui/material/Switch'
@@ -9,11 +7,12 @@ import useMediaQuery from '@mui/material/useMediaQuery'
 import { AxiosResponse } from 'axios'
 import { ChangeEvent, useRef, useState } from 'react'
 import axios from '../../api/axiosCustom'
+import { UMSwatch } from '../../style'
 import { API, AxiosEmplUpdateConfig } from '../../utils'
 import { BadgeIcon, CloseIcon, PersonRemoveIcon } from '../icons'
 import { DialogContentSx, DialogContentTextSx, DialogSx, ToolTipSx } from '../mui'
-import { HeaderButtonSx, UpdateButtonSx } from '../mui/Button.style'
-import { IconButtonSx, ListItemIconButtonSx } from '../mui/IconButton.style'
+import { CRUDHeaderSx, UpdateButtonSx } from '../mui/Button.style'
+import { ListItemIconButtonSx } from '../mui/IconButton.style'
 
 interface IDeleteRegistrant {
   emplId: string
@@ -95,11 +94,7 @@ export default function DeleteRegistrant({
           justifyContent='space-between'
           alignItems='center'
           sx={{ p: '20px 20px 0' }}>
-          <HeaderButtonSx
-            disableElevation
-            disableFocusRipple
-            disableRipple
-            startIcon={<BadgeIcon />}>
+          <CRUDHeaderSx disableElevation disableFocusRipple disableRipple startIcon={<BadgeIcon />}>
             <Typography
               variant='h6'
               sx={{
@@ -107,10 +102,10 @@ export default function DeleteRegistrant({
               }}>
               {emplName}
             </Typography>
-          </HeaderButtonSx>
-          <IconButtonSx onClick={handleClose}>
+          </CRUDHeaderSx>
+          <ListItemIconButtonSx onClick={handleClose}>
             <CloseIcon />
-          </IconButtonSx>
+          </ListItemIconButtonSx>
         </Stack>
         <DialogContentSx>
           <DialogContentTextSx>
@@ -118,17 +113,15 @@ export default function DeleteRegistrant({
           </DialogContentTextSx>
           <Stack
             direction='row'
-            justifyContent='space-around'
+            justifyContent='center'
             alignItems='center'
-            spacing={30}
+            spacing={20}
             sx={{ mt: '20px' }}>
-            <FormControl component='fieldset' variant='standard'>
-              <FormLabel component='legend'>Account deletion</FormLabel>
-              <FormControlLabel
-                control={<Switch checked={checked} onChange={handleChange} />}
-                label={emplName}
-              />
-            </FormControl>
+            <FormControlLabel
+              sx={{ color: UMSwatch.Coral[400] }}
+              control={<Switch checked={checked} onChange={handleChange} />}
+              label={emplName}
+            />
             <UpdateButtonSx
               disabled={!checked}
               onClick={handleUpdateEmplEmail}

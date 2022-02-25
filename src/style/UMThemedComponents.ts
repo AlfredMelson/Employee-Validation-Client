@@ -91,7 +91,16 @@ export default function UMThemedComponents(theme: Theme) {
       MuiDivider: {
         defaultProps: {},
         styleOverrides: {
-          root: {} // Styles applied to the root element
+          root: {
+            ...theme.typography.body2,
+            fontWeight: 500,
+            '&:before': {
+              borderTopColor: UMSwatch.Grey[600]
+            },
+            '&:after': {
+              borderTopColor: UMSwatch.Grey[600]
+            }
+          } // Styles applied to the root element
         }
       },
       MuiIcon: {

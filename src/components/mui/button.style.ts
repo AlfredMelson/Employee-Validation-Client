@@ -3,29 +3,28 @@ import { alpha, styled } from '@mui/material/styles'
 import UMSwatch from '../../style/UMSwatch'
 
 export const LoginButtonSx = styled(Button)(() => ({
-  color: UMSwatch.Text.Primary,
-  backgroundColor: UMSwatch.Blue[800],
+  color: UMSwatch.Black[50],
+  backgroundColor: UMSwatch.Gold[50],
   '&:hover, &.Mui-focused, &.Mui-selected': {
-    color: UMSwatch.Text.Primary,
-    backgroundColor: UMSwatch.Blue[700]
+    color: UMSwatch.Black[50],
+    backgroundColor: UMSwatch.Gold[50]
   },
   '&.Mui-disabled': {
-    backgroundColor: UMSwatch.Blue[800]
+    backgroundColor: UMSwatch.Grey[500]
   }
 }))
 
 export const UpdateButtonSx = styled(Button)(() => ({
   minHeight: '38px',
   minWidth: '90px',
-  color: UMSwatch.Text.Primary,
-  backgroundColor: UMSwatch.Blue[800],
+  color: UMSwatch.Black[50],
+  backgroundColor: UMSwatch.Gold[50],
   '&:hover, &.Mui-focused, &.Mui-selected': {
-    color: UMSwatch.Text.Primary,
-    backgroundColor: UMSwatch.Blue[700]
+    color: UMSwatch.Black[50],
+    backgroundColor: UMSwatch.Gold[50]
   },
   '&.Mui-disabled': {
-    color: UMSwatch.Text.Primary,
-    backgroundColor: UMSwatch.Grey[200]
+    backgroundColor: UMSwatch.Grey[500]
   }
 }))
 
@@ -57,6 +56,22 @@ export const HeaderButtonSx = styled(Button, {
   backgroundColor: 'transparent',
   '&:hover, &.Mui-focused, &.Mui-selected': {
     color: UMSwatch.Gold[50],
+    borderColor: 'transparent',
+    backgroundColor: 'transparent'
+  }
+}))
+
+export const CRUDHeaderSx = styled(Button, {
+  name: 'CRUDHeader',
+  slot: 'style'
+})(() => ({
+  cursor: 'default',
+  textTransform: 'none',
+  color: UMSwatch.White[50],
+  borderColor: 'transparent',
+  backgroundColor: 'transparent',
+  '&:hover, &.Mui-focused, &.Mui-selected': {
+    color: UMSwatch.White[50],
     borderColor: 'transparent',
     backgroundColor: 'transparent'
   }

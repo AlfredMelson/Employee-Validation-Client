@@ -81,13 +81,13 @@ export default function Dashboard() {
               disableElevation
               disableFocusRipple
               disableRipple
-              startIcon={<SecurityIcon />}>
+              startIcon={<SecurityIcon sx={{ width: 24, height: 24 }} />}>
               <Typography
                 variant='h6'
                 sx={{
                   textTransform: 'none'
                 }}>
-                Email Validator
+                Registration Validator
               </Typography>
             </HeaderButtonSx>
             <Stack direction='row' justifyContent='space-around' alignItems='center'>
@@ -109,12 +109,12 @@ export default function Dashboard() {
             variant='body1'
             sx={{
               color: UMSwatch.Coral[400],
-              p: '40px 30px 60px 30px',
+              p: '40px 30px 50px 30px',
               fontWeight: 500,
               textAlign: 'center',
-              fontSize: '23px'
+              fontSize: '21px'
             }}>
-            Protect your company from bad registrations.
+            Protect your company from erroneous registrations.
           </Typography>
         </motion.div>
         <SelectorTabs employees={employees} />
