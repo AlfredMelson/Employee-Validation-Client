@@ -133,6 +133,7 @@ export default function SelectorTabs({ employees }: ISelectorTabs) {
       ) : (
         <Tabs
           centered
+          sx={{ height: '60px' }}
           value={value}
           onChange={handleChange}
           aria-label='selector tabs'
@@ -148,7 +149,7 @@ export default function SelectorTabs({ employees }: ISelectorTabs) {
               icon={
                 tab.index !== 1 &&
                 tab.value !== 0 && (
-                  <BadgeSx badgeContent={tab.value} color='error' sx={{ pl: '14px' }} />
+                  <BadgeSx badgeContent={tab.value} color='error' sx={{ pl: '14px', mr: '14px' }} />
                 )
               }
               iconPosition='end'
@@ -168,7 +169,7 @@ export default function SelectorTabs({ employees }: ISelectorTabs) {
         <Box
           sx={{
             bgcolor: 'transparent',
-            m: '20px'
+            m: '20px 20px 24px'
           }}>
           {PanelData.map(panel => (
             <TabPanel key={panel.index} value={panel.value} index={panel.index}>

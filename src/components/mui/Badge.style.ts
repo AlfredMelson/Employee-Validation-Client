@@ -1,11 +1,10 @@
-import Badge, { BadgeProps } from '@mui/material/Badge'
+import Badge from '@mui/material/Badge'
 import { styled } from '@mui/material/styles'
 
-export const BadgeSx = styled(Badge)<BadgeProps>(({ theme }) => ({
+export const BadgeSx = styled(Badge)(({ theme }) => ({
   '& .MuiBadge-badge': {
-    right: 0,
+    right: -2,
     top: -3,
-    padding: '0 4px',
-    boxShadow: theme.shadows[2]
+    boxShadow: theme.shadows[0]
   }
 }))

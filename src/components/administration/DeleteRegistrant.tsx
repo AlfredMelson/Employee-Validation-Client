@@ -1,4 +1,3 @@
-import PersonRemoveIcon from '@mui/icons-material/PersonRemove'
 import FormControl from '@mui/material/FormControl'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import FormLabel from '@mui/material/FormLabel'
@@ -11,24 +10,24 @@ import { AxiosResponse } from 'axios'
 import { ChangeEvent, useRef, useState } from 'react'
 import axios from '../../api/axiosCustom'
 import { API, AxiosEmplUpdateConfig } from '../../utils'
-import { BadgeIcon, CloseIcon } from '../icons'
+import { BadgeIcon, CloseIcon, PersonRemoveIcon } from '../icons'
 import { DialogContentSx, DialogContentTextSx, DialogSx, ToolTipSx } from '../mui'
 import { HeaderButtonSx, UpdateButtonSx } from '../mui/Button.style'
-import { CloseIconButtonSx, DeleteIconButtonSx } from '../mui/IconButton.style'
+import { IconButtonSx, ListItemIconButtonSx } from '../mui/IconButton.style'
 
-interface IDeleteContactDialog {
+interface IDeleteRegistrant {
   emplId: string
   emplName: string
   emplRole: string
   emplEmail: string
 }
 
-export default function DeleteContactDialog({
+export default function DeleteRegistrant({
   emplId,
   emplName,
   emplRole,
   emplEmail
-}: IDeleteContactDialog) {
+}: IDeleteRegistrant) {
   // update email dialog state
   const [open, setOpen] = useState(false)
   const theme = useTheme()
@@ -85,10 +84,10 @@ export default function DeleteContactDialog({
 
   return (
     <>
-      <ToolTipSx tooltipTitle={'Delete registrant'} placement='right'>
-        <DeleteIconButtonSx onClick={handleClickOpen} aria-label='delete'>
+      <ToolTipSx tooltipTitle={'Delete'}>
+        <ListItemIconButtonSx onClick={handleClickOpen} aria-label='delete' sx={{ mr: '4px' }}>
           <PersonRemoveIcon />
-        </DeleteIconButtonSx>
+        </ListItemIconButtonSx>
       </ToolTipSx>
       <DialogSx fullScreen={fullScreen} open={open} onClose={handleClose}>
         <Stack
@@ -109,9 +108,9 @@ export default function DeleteContactDialog({
               {emplName}
             </Typography>
           </HeaderButtonSx>
-          <CloseIconButtonSx onClick={handleClose}>
+          <IconButtonSx onClick={handleClose}>
             <CloseIcon />
-          </CloseIconButtonSx>
+          </IconButtonSx>
         </Stack>
         <DialogContentSx>
           <DialogContentTextSx>

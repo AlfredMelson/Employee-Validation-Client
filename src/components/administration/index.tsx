@@ -1,3 +1,4 @@
+import PersonAddIcon from '@mui/icons-material/PersonAdd'
 import Card from '@mui/material/Card'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
@@ -10,7 +11,7 @@ import { UMSwatch } from '../../style'
 import { LogoutIcon, SecurityIcon } from '../icons'
 import { ToolTipSx } from '../mui'
 import { HeaderButtonSx } from '../mui/Button.style'
-import { CloseIconButtonSx } from '../mui/IconButton.style'
+import { IconButtonSx } from '../mui/IconButton.style'
 import SelectorTabs from './SelectorTabs'
 
 export default function Dashboard() {
@@ -66,7 +67,7 @@ export default function Dashboard() {
       <Card
         raised
         sx={{
-          bgcolor: UMSwatch.Grey[100],
+          bgcolor: UMSwatch.Grey[800],
           borderRadius: { xs: '0px', sm: '4px' },
           minWidth: { xs: '100%', sm: '600px' }
         }}>
@@ -89,21 +90,29 @@ export default function Dashboard() {
                 Email Validator
               </Typography>
             </HeaderButtonSx>
-            <ToolTipSx tooltipTitle={'Logout'}>
-              <CloseIconButtonSx onClick={handleAdminLogout}>
-                <LogoutIcon />
-              </CloseIconButtonSx>
-            </ToolTipSx>
+            <Stack direction='row' justifyContent='space-around' alignItems='center'>
+              <ToolTipSx tooltipTitle={'Add Registrant'}>
+                <IconButtonSx sx={{ mr: '10px' }}>
+                  <PersonAddIcon />
+                </IconButtonSx>
+              </ToolTipSx>
+              <ToolTipSx tooltipTitle={'Logout'}>
+                <IconButtonSx onClick={handleAdminLogout} sx={{ mr: '4px' }}>
+                  <LogoutIcon />
+                </IconButtonSx>
+              </ToolTipSx>
+            </Stack>
           </Stack>
         </motion.div>
         <motion.div variants={inputs}>
           <Typography
             variant='body1'
             sx={{
-              p: '20px 30px 40px 30px',
-              fontWeight: 'bold',
+              color: UMSwatch.Coral[400],
+              p: '40px 30px 60px 30px',
+              fontWeight: 500,
               textAlign: 'center',
-              fontSize: '19px'
+              fontSize: '23px'
             }}>
             Protect your company from bad registrations.
           </Typography>

@@ -1,3 +1,4 @@
+import SettingsIcon from '@mui/icons-material/Settings'
 import Stack from '@mui/material/Stack'
 import { useTheme } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
@@ -9,25 +10,26 @@ import { UMSwatch } from '../../style'
 import { API, AxiosEmplUpdateConfig } from '../../utils'
 import { regexEmailValidation } from '../../utils/EmplEmailFilters'
 import { BadgeIcon, CloseIcon } from '../icons'
-import { DialogContentSx, DialogContentTextSx, DialogSx, TextFieldSx } from '../mui'
-import { HeaderButtonSx, UpdateButtonSx, UpdateEmailButtonSx } from '../mui/Button.style'
-import { CloseIconButtonSx } from '../mui/IconButton.style'
+import { DialogContentSx, DialogContentTextSx, DialogSx, TextFieldSx, ToolTipSx } from '../mui'
+import { HeaderButtonSx, UpdateButtonSx } from '../mui/Button.style'
+import { IconButtonSx, ListItemIconButtonSx } from '../mui/IconButton.style'
 
-interface IUpdateEmailDialog {
+interface IUpdateRegistrant {
   emplId: string
   emplName: string
   emplRole: string
   emplEmail: string
 }
 
-export default function UpdateEmailDialog({
+export default function UpdateRegistrant({
   emplId,
   emplName,
   emplRole,
   emplEmail
-}: IUpdateEmailDialog) {
+}: IUpdateRegistrant) {
   // update email dialog state
   const [open, setOpen] = useState(false)
+
   const theme = useTheme()
 
   // dialog width on tablet size and smaller
@@ -108,13 +110,11 @@ export default function UpdateEmailDialog({
 
   return (
     <>
-      <UpdateEmailButtonSx
-        size='small'
-        variant='outlined'
-        onClick={handleClickOpen}
-        sx={{ textTransform: 'none', mr: '10px' }}>
-        Update Email
-      </UpdateEmailButtonSx>
+      <ToolTipSx tooltipTitle={'Update'}>
+        <ListItemIconButtonSx onClick={handleClickOpen} aria-label='update' sx={{ mr: '8px' }}>
+          <SettingsIcon />
+        </ListItemIconButtonSx>
+      </ToolTipSx>
       <DialogSx fullScreen={fullScreen} open={open} onClose={handleClose}>
         <Stack
           direction='row'
@@ -134,9 +134,9 @@ export default function UpdateEmailDialog({
               {emplName}
             </Typography>
           </HeaderButtonSx>
-          <CloseIconButtonSx onClick={handleClose}>
+          <IconButtonSx onClick={handleClose}>
             <CloseIcon />
-          </CloseIconButtonSx>
+          </IconButtonSx>
         </Stack>
         <DialogContentSx>
           <DialogContentTextSx>

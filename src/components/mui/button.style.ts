@@ -29,26 +29,6 @@ export const UpdateButtonSx = styled(Button)(() => ({
   }
 }))
 
-export const CloseButtonSx = styled(Button)(() => ({
-  color: UMSwatch.Blue[800],
-  backgroundColor: 'transparent',
-  '&:hover, &.Mui-focused, &.Mui-selected': {
-    color: UMSwatch.Blue[700],
-    backgroundColor: 'transparent'
-  }
-}))
-
-export const LogoutButtonSx = styled(Button)(() => ({
-  textTransform: 'none',
-  color: UMSwatch.Blue[500],
-  borderColor: 'transparent',
-  '&:hover, &.Mui-focused, &.Mui-selected': {
-    color: UMSwatch.Blue[600],
-    backgroundColor: UMSwatch.Blue[50],
-    borderColor: 'transparent'
-  }
-}))
-
 export const UpdateEmailButtonSx = styled(Button)(({ theme }) => ({
   minHeight: '38px',
   textTransform: 'none',
@@ -72,11 +52,11 @@ export const HeaderButtonSx = styled(Button, {
 })(() => ({
   cursor: 'default',
   textTransform: 'none',
-  color: UMSwatch.Black[50],
+  color: UMSwatch.Gold[50],
   borderColor: 'transparent',
   backgroundColor: 'transparent',
   '&:hover, &.Mui-focused, &.Mui-selected': {
-    color: UMSwatch.Black[50],
+    color: UMSwatch.Gold[50],
     borderColor: 'transparent',
     backgroundColor: 'transparent'
   }

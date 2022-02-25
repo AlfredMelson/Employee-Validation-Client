@@ -107,8 +107,9 @@ const UMSwatch = {
     800: '#161b22',
     900: '#0d1117'
   },
-  White: { 50: '#f0f6fc' },
-  Black: { 50: '#010409' },
+  White: { 50: '#f0f6fc', 100: '#ffffff' },
+  Black: { 50: '#010409', 100: '#000000' },
+  Gold: { 50: '#ffe57f' },
   Text: {
     Primary: '#f0f6fc',
     Secondary: '#c9d1d9',

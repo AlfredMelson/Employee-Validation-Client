@@ -4,24 +4,25 @@ import UMSwatch from '../../style/UMSwatch'
 
 export const TabSx = styled(Tab)(({ theme }) => ({
   minWidth: '120px',
-  margin: '0 8px',
+  margin: '0 10px',
   textTransform: 'none',
+  borderRadius: '4px',
   color: UMSwatch.Blue[500],
-  backgroundColor: UMSwatch.Grey[100],
-  borderRadius: '4px ',
-  boxShadow: 'none',
+  // backgroundColor: alpha(UMSwatch.Blue[500], 0.05),
   transition: theme.transitions.create(['all'], {
     duration: theme.transitions.duration.standard,
     easing: theme.transitions.easing.easeInOut
   }),
   '&:hover, &.Mui-focused': {
-    color: UMSwatch.Blue[600],
-    backgroundColor: UMSwatch.White[50]
+    borderRadius: '4px',
+    color: UMSwatch.Blue[400],
+    backgroundColor: UMSwatch.Grey[700]
   },
   '&.Mui-selected': {
     cursor: 'default',
-    color: UMSwatch.Black[50],
-    backgroundColor: UMSwatch.White[50]
+    borderRadius: '4px',
+    color: UMSwatch.White[100],
+    backgroundColor: UMSwatch.Grey[700]
   },
   '.indicator': {
     backgroundColor: 'transparent'

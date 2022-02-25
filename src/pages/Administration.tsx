@@ -23,7 +23,7 @@ const DashboardStack = styled(
 
 export default function Administration() {
   return (
-    <motion.section exit={{ opacity: 0 }}>
+    <motion.section exit={{ opacity: 0 }} className='dashboard-background'>
       <DashboardStack>
         <Dashboard />
       </DashboardStack>

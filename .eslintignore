@@ -27,5 +27,5 @@ yarn-error.log*
 # specific files
 jest.config.ts
 lerna.json
-webpack.config.js
+setall.jsx
 

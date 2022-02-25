@@ -4,6 +4,18 @@ import UMSwatch from './UMSwatch'
 export default function UMThemedComponents(theme: Theme) {
   return {
     components: {
+      MuiBadge: {
+        defaultProps: {},
+        styleOverrides: {
+          root: {
+            backgroundImage: 'none'
+          }, // Styles applied to the root element
+          badge: {
+            borderRadius: '4px',
+            bgcolor: UMSwatch.Coral[400]
+          } // Styles applied to the root element
+        }
+      },
       MuiButton: {
         defaultProps: {
           size: 'small',
@@ -101,6 +113,23 @@ export default function UMThemedComponents(theme: Theme) {
               backgroundColor: 'transparent'
             }
           }
+        }
+      },
+      MuiListItemButton: {
+        defaultProps: {},
+        styleOverrides: {
+          root: {}, // Styles applied to the root element
+          divider: {} // Styles applied to the inner `component` element if divider={true}.
+        }
+      },
+      MuiListItemText: {
+        defaultProps: {},
+        styleOverrides: {
+          root: {}, // Styles applied to the root element
+          multiline: {
+            '&.MuiListItemText-primary': { color: UMSwatch.White[100] },
+            '&.MuiListItemText-secondary': { color: UMSwatch.White[50] }
+          } // Styles applied to the Typography component if primary and secondary are set.
         }
       },
       MuiMenu: {
@@ -257,8 +286,8 @@ export default function UMThemedComponents(theme: Theme) {
           tooltip: {
             ...theme.typography.caption,
             fontWeight: 600,
-            color: UMSwatch.Black[50],
-            backgroundColor: UMSwatch.White[50],
+            color: UMSwatch.White[100],
+            backgroundColor: UMSwatch.Grey[700],
             boxShadow: theme.shadows[1]
           }, // Styles applied to the tooltip (label wrapper) element
           tooltipArrow: {}, // Styles applied to the tooltip (label wrapper) element if arrow={true}

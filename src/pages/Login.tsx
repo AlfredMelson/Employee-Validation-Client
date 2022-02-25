@@ -20,7 +20,7 @@ const LoginStack = styled(
 
 export default function Login() {
   return (
-    <motion.section exit={{ opacity: 0 }}>
+    <motion.section exit={{ opacity: 0 }} className='app-background'>
       <LoginStack>
         <LoginCard />
       </LoginStack>

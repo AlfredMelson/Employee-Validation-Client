@@ -24,7 +24,9 @@ const UMDesignTokens = () =>
         // contrastText: UMSwatch.White[50]
       },
       // secondary: {},
-      // error: {},
+      error: {
+        main: UMSwatch.Coral[500]
+      },
       // warning: {},
       // info: {},
       success: {
