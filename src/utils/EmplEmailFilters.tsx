@@ -21,7 +21,7 @@ interface IEmplEmailFilters {
   all: Empl[]
   invalid: Empl[]
   duplicate: Empl[]
-  older: Empl[]
+  old: Empl[]
 }
 
 const EmplEmailFilters = (employees: Empl[]): IEmplEmailFilters => {
@@ -37,14 +37,14 @@ const EmplEmailFilters = (employees: Empl[]): IEmplEmailFilters => {
           result.duplicate.push(empl)
         }
         if (moreThanThirty(empl.createdAt)) {
-          result.older.push(empl)
+          result.old.push(empl)
         }
         return result
       },
       {
         invalid: [],
         duplicate: [],
-        older: []
+        old: []
       }
     )
   }

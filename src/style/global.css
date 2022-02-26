@@ -11,7 +11,10 @@ body.loading * {
  * predefined app background
  */
 .app-background {
-  background-image: url('/public/assets/mountain.jpg');
+  background-color: #0d1117;
+}
+.login-background {
+  background-image: url('/public/assets/bg-pattern-login.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -21,7 +24,6 @@ body.loading * {
 }
 
 .dashboard-background {
-  background-color: #0d1117;
   background-image: url('/public/assets/bg-pattern.png');
   background-size: cover;
   background-position: center;

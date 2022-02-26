@@ -3,7 +3,7 @@ import { useAuth, useLogout } from '../../../hooks'
 import { LogoutIcon } from '../../icons'
 import { AdminHeaderIconButtonSx, ToolTipSx } from '../../mui'
 
-export default function AdminHeaderLogout() {
+export default function AdminLogout() {
   const { accessToken } = useAuth()
   const logoutAdmin = useLogout(accessToken)
   const navigate = useNavigate()

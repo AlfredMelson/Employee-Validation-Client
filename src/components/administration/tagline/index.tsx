@@ -12,7 +12,7 @@ export default function AdminTagline() {
         textAlign: 'center',
         fontSize: '21px'
       }}>
-      Protect your company from erroneous registrations.
+      Shield your entity from erroneous registrations.
     </Typography>
   )
 }

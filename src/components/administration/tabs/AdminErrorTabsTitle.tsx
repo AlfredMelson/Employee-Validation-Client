@@ -18,7 +18,7 @@ export default function AdminErrorTabsTitle() {
   return (
     <ErrorTabsTitleContainer>
       <Divider sx={{ gridColumn: 3, color: UMSwatch.Grey[500], pb: '12px' }}>
-        <Box sx={{ mx: '8px' }}>email address errors</Box>
+        <Box sx={{ mx: '8px' }}>registration errors</Box>
       </Divider>
     </ErrorTabsTitleContainer>
   )

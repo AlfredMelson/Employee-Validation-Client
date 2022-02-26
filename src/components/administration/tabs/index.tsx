@@ -7,7 +7,7 @@ import { useEmployeesContext } from '../../../context'
 import { UMSwatch } from '../../../style'
 import { EmplEmailFilters } from '../../../utils'
 import { BadgeSx, TabSx } from '../../mui'
-import RegistrantList from '../panel'
+import RegistrantList from '../panels'
 import AdminErrorTabsTitle from './AdminErrorTabsTitle'
 
 interface ITabData {
@@ -77,9 +77,9 @@ export default function AdminSelectorTabs({ employees }: IAdminSelectorTabs) {
     },
     {
       index: 4,
-      label: 'Older',
-      value: filteredEmails.older.length,
-      disable: filteredEmails.older.length === 0
+      label: 'Old',
+      value: filteredEmails.old.length,
+      disable: filteredEmails.old.length === 0
     }
   ]
 
@@ -87,7 +87,7 @@ export default function AdminSelectorTabs({ employees }: IAdminSelectorTabs) {
     { index: 0, value: value, employees: filteredEmails.all },
     { index: 1, value: value, employees: filteredEmails.invalid },
     { index: 2, value: value, employees: filteredEmails.duplicate },
-    { index: 3, value: value, employees: filteredEmails.older }
+    { index: 3, value: value, employees: filteredEmails.old }
   ]
 
   const handleChange = (_event: SyntheticEvent, newValue: number) => {

@@ -1,10 +1,10 @@
 import Typography from '@mui/material/Typography'
 import { SecurityIcon } from '../../icons'
-import { HeaderButtonSx } from '../../mui'
+import { LogoNameGroupingSx } from '../../mui'
 
-export default function AdminHeaderLogo() {
+export default function LogoAppName() {
   return (
-    <HeaderButtonSx
+    <LogoNameGroupingSx
       disableElevation
       disableFocusRipple
       disableRipple
@@ -14,8 +14,8 @@ export default function AdminHeaderLogo() {
         sx={{
           textTransform: 'none'
         }}>
-        Registration Validator
+        Registrant Validation
       </Typography>
-    </HeaderButtonSx>
+    </LogoNameGroupingSx>
   )
 }
