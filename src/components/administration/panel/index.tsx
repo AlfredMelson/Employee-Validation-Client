@@ -4,16 +4,16 @@ import List from '@mui/material/List'
 import ListItemAvatar from '@mui/material/ListItemAvatar'
 import ListItemText from '@mui/material/ListItemText'
 import { motion } from 'framer-motion'
-import { Empl } from '../../api/empl'
-import { UMSwatch } from '../../style'
-import DeleteRegistrant from './DeleteRegistrant'
-import UpdateRegistrant from './UpdateRegistrant'
+import { Empl } from '../../../api/empl'
+import { UMSwatch } from '../../../style'
+import RegistrantDeletion from './RegistrantDeletion'
+import RegistrantUpdate from './RegistrantUpdate'
 
-interface IEmployeeEntry {
+interface IRegistrantList {
   employees: Empl[]
 }
 
-export default function EmployeeEntry({ employees }: IEmployeeEntry) {
+export default function RegistrantList({ employees }: IRegistrantList) {
   const container = {
     hidden: { opacity: 1, scale: 0 },
     visible: {
@@ -65,13 +65,13 @@ export default function EmployeeEntry({ employees }: IEmployeeEntry) {
                   }}
                 />
 
-                <UpdateRegistrant
+                <RegistrantUpdate
                   emplId={empl.id}
                   emplName={empl.name}
                   emplRole={empl.role}
                   emplEmail={empl.email}
                 />
-                <DeleteRegistrant
+                <RegistrantDeletion
                   emplId={empl.id}
                   emplName={empl.name}
                   emplRole={empl.role}

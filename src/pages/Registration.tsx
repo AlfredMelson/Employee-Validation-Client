@@ -1,29 +1,13 @@
-import Box from '@mui/material/Box'
-import Stack, { StackProps } from '@mui/material/Stack'
-import { styled } from '@mui/material/styles'
+import { motion } from 'framer-motion'
 import { RegistrationCard } from '../components'
-
-const RegistrationStack = styled(
-  (props: StackProps) => (
-    <Stack direction='column' justifyContent='flex-start' alignItems='center' {...props} />
-  ),
-  { name: 'Registration', slot: 'stack' }
-)(({ theme }) => ({
-  height: '100%',
-  [theme.breakpoints.down('md')]: {
-    paddingTop: '100px'
-  },
-  [theme.breakpoints.up('md')]: {
-    justifyContent: 'center'
-  }
-}))
+import { RegistrationContainerStack } from '../components/mui'
 
 export default function Registration() {
   return (
-    <Box component='main'>
-      <RegistrationStack>
+    <motion.section exit={{ opacity: 0 }}>
+      <RegistrationContainerStack>
         <RegistrationCard />
-      </RegistrationStack>
-    </Box>
+      </RegistrationContainerStack>
+    </motion.section>
   )
 }

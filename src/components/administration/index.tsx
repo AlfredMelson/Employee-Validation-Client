@@ -1,37 +1,18 @@
-import PersonAddIcon from '@mui/icons-material/PersonAdd'
-import Card from '@mui/material/Card'
-import Stack from '@mui/material/Stack'
-import Typography from '@mui/material/Typography'
 import { motion } from 'framer-motion'
 import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { useEmployeesContext } from '../../context'
-import { useAuth, useLogout } from '../../hooks'
-import { UMSwatch } from '../../style'
-import { LogoutIcon, SecurityIcon } from '../icons'
-import { ToolTipSx } from '../mui'
-import { HeaderButtonSx } from '../mui/Button.style'
-import { IconButtonSx } from '../mui/IconButton.style'
-import SelectorTabs from './SelectorTabs'
+import { CardSx } from '../mui'
+import AdminHeader from './header'
+import AdminSelectorTabs from './tabs'
+import AdminTagline from './tagline'
 
 export default function Dashboard() {
-  const { accessToken } = useAuth()
   const { employees, getEmployees } = useEmployeesContext()
-  const logoutAdmin = useLogout(accessToken)
-  const navigate = useNavigate()
 
   useEffect(() => {
     getEmployees()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-
-  const handleAdminLogout = async (_event: any) => {
-    console.log('logging out')
-    await logoutAdmin
-    navigate('/')
-
-    console.log('logged out')
-  }
 
   const content = {
     animate: {
@@ -64,61 +45,15 @@ export default function Dashboard() {
 
   return (
     <motion.div variants={content} animate='animate' initial='initial'>
-      <Card
-        raised
-        sx={{
-          bgcolor: UMSwatch.Grey[800],
-          borderRadius: { xs: '0px', sm: '4px' },
-          minWidth: { xs: '100%', sm: '600px' }
-        }}>
+      <CardSx>
         <motion.div variants={title}>
-          <Stack
-            direction='row'
-            justifyContent='space-between'
-            alignItems='center'
-            sx={{ p: '20px 20px 10px' }}>
-            <HeaderButtonSx
-              disableElevation
-              disableFocusRipple
-              disableRipple
-              startIcon={<SecurityIcon sx={{ width: 24, height: 24 }} />}>
-              <Typography
-                variant='h6'
-                sx={{
-                  textTransform: 'none'
-                }}>
-                Registration Validator
-              </Typography>
-            </HeaderButtonSx>
-            <Stack direction='row' justifyContent='space-around' alignItems='center'>
-              <ToolTipSx tooltipTitle={'Add Registrant'}>
-                <IconButtonSx sx={{ mr: '10px' }}>
-                  <PersonAddIcon />
-                </IconButtonSx>
-              </ToolTipSx>
-              <ToolTipSx tooltipTitle={'Logout'}>
-                <IconButtonSx onClick={handleAdminLogout} sx={{ mr: '4px' }}>
-                  <LogoutIcon />
-                </IconButtonSx>
-              </ToolTipSx>
-            </Stack>
-          </Stack>
+          <AdminHeader />
         </motion.div>
         <motion.div variants={inputs}>
-          <Typography
-            variant='body1'
-            sx={{
-              color: UMSwatch.Coral[400],
-              p: '40px 30px 50px 30px',
-              fontWeight: 500,
-              textAlign: 'center',
-              fontSize: '21px'
-            }}>
-            Protect your company from erroneous registrations.
-          </Typography>
+          <AdminTagline />
         </motion.div>
-        <SelectorTabs employees={employees} />
-      </Card>
+        <AdminSelectorTabs employees={employees} />
+      </CardSx>
     </motion.div>
   )
 }

@@ -6,27 +6,33 @@ import Typography from '@mui/material/Typography'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { AxiosResponse } from 'axios'
 import { ChangeEvent, useRef, useState } from 'react'
-import axios from '../../api/axiosCustom'
-import { UMSwatch } from '../../style'
-import { API, AxiosEmplUpdateConfig } from '../../utils'
-import { BadgeIcon, CloseIcon, PersonRemoveIcon } from '../icons'
-import { DialogContentSx, DialogContentTextSx, DialogSx, ToolTipSx } from '../mui'
-import { CRUDHeaderSx, UpdateButtonSx } from '../mui/Button.style'
-import { ListItemIconButtonSx } from '../mui/IconButton.style'
+import axios from '../../../api/axiosCustom'
+import { UMSwatch } from '../../../style'
+import { API, AxiosEmplUpdateConfig } from '../../../utils'
+import { BadgeIcon, CloseIcon, RemoveEmplIcon } from '../../icons'
+import {
+  CRUDHeaderSx,
+  DialogContentSx,
+  DialogContentTextSx,
+  DialogSx,
+  ListItemIconButtonSx,
+  ToolTipSx,
+  UpdateButtonSx
+} from '../../mui'
 
-interface IDeleteRegistrant {
+interface IRegistrantDeletion {
   emplId: string
   emplName: string
   emplRole: string
   emplEmail: string
 }
 
-export default function DeleteRegistrant({
+export default function RegistrantDeletion({
   emplId,
   emplName,
   emplRole,
   emplEmail
-}: IDeleteRegistrant) {
+}: IRegistrantDeletion) {
   // update email dialog state
   const [open, setOpen] = useState(false)
   const theme = useTheme()
@@ -85,7 +91,7 @@ export default function DeleteRegistrant({
     <>
       <ToolTipSx tooltipTitle={'Delete'}>
         <ListItemIconButtonSx onClick={handleClickOpen} aria-label='delete' sx={{ mr: '4px' }}>
-          <PersonRemoveIcon />
+          <RemoveEmplIcon />
         </ListItemIconButtonSx>
       </ToolTipSx>
       <DialogSx fullScreen={fullScreen} open={open} onClose={handleClose}>

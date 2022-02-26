@@ -5,28 +5,35 @@ import Typography from '@mui/material/Typography'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { AxiosResponse } from 'axios'
 import { useEffect, useRef, useState } from 'react'
-import axios from '../../api/axiosCustom'
-import { UMSwatch } from '../../style'
-import { API, AxiosEmplUpdateConfig } from '../../utils'
-import { regexEmailValidation } from '../../utils/EmplEmailFilters'
-import { BadgeIcon, CloseIcon } from '../icons'
-import { DialogContentSx, DialogContentTextSx, DialogSx, TextFieldSx, ToolTipSx } from '../mui'
-import { CRUDHeaderSx, UpdateButtonSx } from '../mui/Button.style'
-import { ListItemIconButtonSx } from '../mui/IconButton.style'
+import axios from '../../../api/axiosCustom'
+import { UMSwatch } from '../../../style'
+import { API, AxiosEmplUpdateConfig } from '../../../utils'
+import { regexEmailValidation } from '../../../utils/EmplEmailFilters'
+import { BadgeIcon, CloseIcon } from '../../icons'
+import {
+  CRUDHeaderSx,
+  DialogContentSx,
+  DialogContentTextSx,
+  DialogSx,
+  ListItemIconButtonSx,
+  TextFieldSx,
+  ToolTipSx,
+  UpdateButtonSx
+} from '../../mui'
 
-interface IUpdateRegistrant {
+interface IRegistrantUpdate {
   emplId: string
   emplName: string
   emplRole: string
   emplEmail: string
 }
 
-export default function UpdateRegistrant({
+export default function RegistrantUpdate({
   emplId,
   emplName,
   emplRole,
   emplEmail
-}: IUpdateRegistrant) {
+}: IRegistrantUpdate) {
   // update email dialog state
   const [open, setOpen] = useState(false)
 

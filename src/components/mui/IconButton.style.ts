@@ -16,6 +16,18 @@ export const DeleteIconButtonSx = styled(IconButton)(({ theme }) => ({
   }
 }))
 
+export const AdminHeaderIconButtonSx = styled(IconButton)(({ theme }) => ({
+  color: UMSwatch.Blue[500],
+  backgroundColor: 'transparent',
+  transition: theme.transitions.create(['all'], {
+    duration: theme.transitions.duration.standard,
+    easing: theme.transitions.easing.easeInOut
+  }),
+  '&:hover, &.Mui-focused, &.Mui-selected': {
+    color: UMSwatch.Blue[400]
+  }
+}))
+
 export const IconButtonSx = styled(IconButton)(({ theme }) => ({
   color: UMSwatch.Blue[500],
   backgroundColor: 'transparent',

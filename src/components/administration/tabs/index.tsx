@@ -1,15 +1,14 @@
 import Box from '@mui/material/Box'
-import Divider from '@mui/material/Divider'
 import Skeleton from '@mui/material/Skeleton'
 import Tabs from '@mui/material/Tabs'
 import { SyntheticEvent, useState } from 'react'
-import { Empl } from '../../api/empl'
-import { useEmployeesContext } from '../../context/EmplProvider'
-import { UMSwatch } from '../../style'
-import { EmplEmailFilters } from '../../utils'
-import { BadgeSx } from '../mui/Badge.style'
-import { TabSx } from '../mui/Tab.style'
-import EmployeeEntry from './EmloyeeEntry'
+import { Empl } from '../../../api/empl'
+import { useEmployeesContext } from '../../../context'
+import { UMSwatch } from '../../../style'
+import { EmplEmailFilters } from '../../../utils'
+import { BadgeSx, TabSx } from '../../mui'
+import RegistrantList from '../panel'
+import AdminErrorTabsTitle from './AdminErrorTabsTitle'
 
 interface ITabData {
   index: number
@@ -52,11 +51,11 @@ function a11yProps(index: number) {
   }
 }
 
-interface ISelectorTabs {
+interface IAdminSelectorTabs {
   employees: Empl[]
 }
 
-export default function SelectorTabs({ employees }: ISelectorTabs) {
+export default function AdminSelectorTabs({ employees }: IAdminSelectorTabs) {
   const { isLoading: isEmployeesLoading } = useEmployeesContext()
 
   const filteredEmails = EmplEmailFilters(employees)
@@ -140,47 +139,44 @@ export default function SelectorTabs({ employees }: ISelectorTabs) {
         </Tabs>
       ) : (
         <>
+          <AdminErrorTabsTitle />
           <Box
             sx={{
               display: 'grid',
-              gridTemplateColumns: '35px 1fr 3fr 30px',
+              gridTemplateColumns: '20px 1fr 20px',
               alignItems: 'center'
             }}>
-            <Divider sx={{ gridColumn: 3, color: UMSwatch.Grey[500], pb: '12px' }}>
-              <Box sx={{ mx: '8px' }}>email address errors</Box>
-            </Divider>
+            <Tabs
+              centered
+              sx={{ gridColumn: 2, pb: '4px' }}
+              value={value}
+              onChange={handleChange}
+              aria-label='selector tabs'
+              variant='scrollable'
+              scrollButtons='auto'
+              classes={{ indicator: 'indicator' }}>
+              <TabSx label='Registrants' {...a11yProps(1)} />
+              {TabData.map(tab => (
+                <TabSx
+                  key={tab.index}
+                  label={tab.label}
+                  disabled={tab.disable}
+                  {...a11yProps(tab.index)}
+                  icon={
+                    tab.index !== 1 &&
+                    tab.value !== 0 && (
+                      <BadgeSx
+                        badgeContent={tab.value}
+                        color='error'
+                        sx={{ pl: '14px', mr: '14px' }}
+                      />
+                    )
+                  }
+                  iconPosition='end'
+                />
+              ))}
+            </Tabs>
           </Box>
-
-          <Tabs
-            centered
-            sx={{ pb: '4px' }}
-            value={value}
-            onChange={handleChange}
-            aria-label='selector tabs'
-            scrollButtons
-            allowScrollButtonsMobile
-            classes={{ indicator: 'indicator' }}>
-            <TabSx label='Registrants' {...a11yProps(1)} />
-            {TabData.map(tab => (
-              <TabSx
-                key={tab.index}
-                label={tab.label}
-                disabled={tab.disable}
-                {...a11yProps(tab.index)}
-                icon={
-                  tab.index !== 1 &&
-                  tab.value !== 0 && (
-                    <BadgeSx
-                      badgeContent={tab.value}
-                      color='error'
-                      sx={{ pl: '14px', mr: '14px' }}
-                    />
-                  )
-                }
-                iconPosition='end'
-              />
-            ))}
-          </Tabs>
         </>
       )}
       {isEmployeesLoading ? (
@@ -204,7 +200,7 @@ export default function SelectorTabs({ employees }: ISelectorTabs) {
           }}>
           {PanelData.map(panel => (
             <TabPanel key={panel.index} value={panel.value} index={panel.index}>
-              <EmployeeEntry employees={panel.employees} />
+              <RegistrantList employees={panel.employees} />
             </TabPanel>
           ))}
         </Box>

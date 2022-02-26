@@ -44,7 +44,9 @@ export default function UMThemedComponents(theme: Theme) {
         } // Styles applied to the endIcon element if supplied.
       },
       MuiCard: {
-        defaultProps: {},
+        defaultProps: {
+          raised: true
+        },
         styleOverrides: {
           root: {
             backgroundImage: 'none'
