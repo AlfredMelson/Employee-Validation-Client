@@ -62,22 +62,26 @@ export default function AdminSelectorTabs({ employees }: IAdminSelectorTabs) {
 
   const [value, setValue] = useState(0)
 
+  const InvalidLabel = filteredEmails.invalid.length === 0 ? 'No invalid' : 'Invalid'
+  const DuplicateLabel = filteredEmails.duplicate.length === 0 ? 'No duplicate' : 'Duplicate'
+  const OldLabel = filteredEmails.old.length === 0 ? 'No old' : 'Old'
+
   const TabData: ITabData[] = [
     {
       index: 2,
-      label: 'Invalid',
+      label: `${InvalidLabel}`,
       value: filteredEmails.invalid.length,
       disable: filteredEmails.invalid.length === 0
     },
     {
       index: 3,
-      label: 'Duplicate',
+      label: `${DuplicateLabel}`,
       value: filteredEmails.duplicate.length,
       disable: filteredEmails.duplicate.length === 0
     },
     {
       index: 4,
-      label: 'Old',
+      label: `${OldLabel}`,
       value: filteredEmails.old.length,
       disable: filteredEmails.old.length === 0
     }
@@ -98,7 +102,6 @@ export default function AdminSelectorTabs({ employees }: IAdminSelectorTabs) {
     <>
       {isEmployeesLoading ? (
         <Tabs
-          centered
           value={value}
           aria-label='selector tabs skeleton'
           scrollButtons
@@ -147,7 +150,6 @@ export default function AdminSelectorTabs({ employees }: IAdminSelectorTabs) {
               alignItems: 'center'
             }}>
             <Tabs
-              centered
               sx={{ gridColumn: 2, pb: '4px' }}
               value={value}
               onChange={handleChange}
