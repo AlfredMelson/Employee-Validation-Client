@@ -4,8 +4,8 @@ import { LoginContainerStack } from '../components/mui'
 
 export default function Login() {
   return (
-    <motion.section exit={{ opacity: 0 }} className='login-background'>
-      <LoginContainerStack>
+    <motion.section exit={{ opacity: 0 }}>
+      <LoginContainerStack className='login-background'>
         <LoginCard />
       </LoginContainerStack>
     </motion.section>

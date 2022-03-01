@@ -27,9 +27,12 @@ export default function LoginCard() {
     <Card
       raised
       sx={{
-        bgcolor: UMSwatch.Grey[700],
-        borderRadius: { xs: '0px', sm: '4px' },
-        minWidth: { xs: '100%', sm: '400px' }
+        backgroundColor: UMSwatch.Grey[700],
+        borderRadius: '4px',
+        minWidth: '420px',
+        maxWidth: '500px',
+        minHeight: '400px',
+        maxHeight: '500px'
       }}>
       <AlertHeader
         // errorMessage={errorMessage}

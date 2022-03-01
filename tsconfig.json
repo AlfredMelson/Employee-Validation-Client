@@ -5,10 +5,12 @@
     "downlevelIteration": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
     "jsx": "react-jsx",
     "lib": ["dom", "dom.iterable", "esnext"],
     "module": "esnext",
     "moduleResolution": "node",
+    "noEmit": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": false,
     "noImplicitThis": false,
@@ -23,6 +25,5 @@
     "target": "esnext",
     "types": ["node"]
   },
-  "include": ["./src/**/*", "./tests/**/*", "types"],
-  "exclude": ["node_modules"]
+  "include": ["./src/**/*", "./tests/**/*", "react.d.ts"]
 }

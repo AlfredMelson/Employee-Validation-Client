@@ -28,17 +28,7 @@ body.loading * {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  position: fixed;
-  height: 100vh;
-  width: 100vw;
-}
-
-.login-card-header {
-  background-image: url('/public/assets/loginHeader.png');
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-  height: 62px;
+  background-attachment: fixed;
 }
 
 .list-group-empl {

@@ -1,15 +1,14 @@
-import FormControlLabel from '@mui/material/FormControlLabel'
+import SettingsIcon from '@mui/icons-material/Settings'
 import Stack from '@mui/material/Stack'
 import { useTheme } from '@mui/material/styles'
-import Switch from '@mui/material/Switch'
 import Typography from '@mui/material/Typography'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { AxiosResponse } from 'axios'
-import { ChangeEvent, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import axios from '../../../api/axiosCustom'
 import { UMSwatch } from '../../../style'
-import { API, AxiosEmplUpdateConfig } from '../../../utils'
-import { BadgeIcon, CloseIcon, RemoveEmplIcon } from '../../icons'
+import { API, AxiosEmplUpdateConfig, regexEmailValidation } from '../../../utils'
+import { BadgeIcon, CloseIcon } from '../../icons'
 import {
   CRUDHeaderGroupSx,
   DialogContentSx,
@@ -17,24 +16,26 @@ import {
   DialogSx,
   ListItemIconButtonSx,
   SubmissionButtonSx,
+  TextFieldSx,
   ToolTipSx
 } from '../../mui'
 
-interface IRegistrantDeletion {
+interface IRegistrantUpdate {
   emplId: string
   emplName: string
   emplRole: string
   emplEmail: string
 }
 
-export default function RegistrantDeletion({
+export default function RegistrantUpdate({
   emplId,
   emplName,
   emplRole,
   emplEmail
-}: IRegistrantDeletion) {
+}: IRegistrantUpdate) {
   // update email dialog state
   const [open, setOpen] = useState(false)
+
   const theme = useTheme()
 
   // dialog width on tablet size and smaller
@@ -48,13 +49,41 @@ export default function RegistrantDeletion({
     setOpen(false)
   }
 
+  // email address input state
+  const [emailUpdate, setEmailUpdate] = useState('')
+  const [emailHelperText, setEmailHelperText] = useState<string>('')
+
+  // email address validation state
+  const [emailValidation, setEmailValidation] = useState<boolean>(false)
+
   // error reference
   const errorReference = useRef<HTMLParagraphElement | null>(null)
+
+  // handle setting and updating error message and state
+  useEffect(() => {
+    return () => {
+      // reset alert when either the username or password state changes
+      setEmailHelperText('')
+    }
+  }, [emailUpdate])
+
+  // handle email address input validation
+  useEffect(() => {
+    const validateEmail = regexEmailValidation.test(emailUpdate.toLowerCase())
+    setEmailValidation(!validateEmail)
+  }, [emailUpdate])
 
   const handleUpdateEmplEmail = async event => {
     event.preventDefault()
 
+    // alert user if email address input is empty
+    if (!emplEmail) {
+      return setEmailHelperText('Please enter an email')
+    }
+
     try {
+      const emplEmail = emailUpdate
+
       const response: AxiosResponse = await axios.post(
         // pull in the update endpoint
         API.UpdateEmployee,
@@ -77,21 +106,19 @@ export default function RegistrantDeletion({
 
       // open error alert if there is a caught error
     } catch (error) {
+      setEmailHelperText('Invalid email address')
+
       errorReference.current.focus()
     }
   }
 
-  const [checked, setChecked] = useState(false)
-
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setChecked(event.target.checked)
-  }
+  const isValid = regexEmailValidation.test(emplEmail) ? 'valid' : 'invalid'
 
   return (
     <>
-      <ToolTipSx tooltipTitle={'Delete'}>
-        <ListItemIconButtonSx onClick={handleClickOpen} aria-label='delete' sx={{ mr: '4px' }}>
-          <RemoveEmplIcon />
+      <ToolTipSx tooltipTitle={'Update'}>
+        <ListItemIconButtonSx onClick={handleClickOpen} aria-label='update' sx={{ mr: '8px' }}>
+          <SettingsIcon />
         </ListItemIconButtonSx>
       </ToolTipSx>
       <DialogSx fullScreen={fullScreen} open={open} onClose={handleClose}>
@@ -119,24 +146,45 @@ export default function RegistrantDeletion({
         </Stack>
         <DialogContentSx>
           <DialogContentTextSx>
-            Are you sure that you wish to continue with the deletion of {emplName}'s account?
+            Provide a valid email address for {emplName}. The current email address associated with
+            this account{' '}
+            <span
+              style={{
+                color: isValid === 'valid' ? UMSwatch.Text.Link : UMSwatch.Coral[400]
+              }}>
+              {emplEmail}{' '}
+            </span>
+            , is{' '}
+            <span
+              style={{
+                color: isValid !== 'valid' && UMSwatch.Coral[400]
+              }}>
+              {isValid}
+            </span>
+            .
           </DialogContentTextSx>
           <Stack
             direction='row'
-            justifyContent='center'
+            justifyContent='space-between'
             alignItems='center'
-            spacing={20}
+            spacing={30}
             sx={{ mt: '20px' }}>
-            <FormControlLabel
-              sx={{ color: UMSwatch.Coral[400] }}
-              control={<Switch checked={checked} onChange={handleChange} />}
-              label={emplName}
+            <TextFieldSx
+              autoFocus
+              fullWidth
+              error={emailHelperText !== ''}
+              id='update-email'
+              helperText={emailHelperText}
+              placeholder='Update Email Address'
+              onChange={event => {
+                setEmailUpdate(event.target.value)
+              }}
             />
             <SubmissionButtonSx
-              disabled={!checked}
+              disabled={emailValidation}
               onClick={handleUpdateEmplEmail}
               sx={{ textTransform: 'none' }}>
-              Delete
+              Update
             </SubmissionButtonSx>
           </Stack>
         </DialogContentSx>

@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { useEmployeesContext } from '../../context'
 import { CardSx } from '../mui'
 import AdminHeader from './header'
+import DashboardPagination from './pagination/DashboardPagination'
 import AdminSelectorTabs from './tabs'
 import AdminTagline from './tagline'
 
@@ -52,7 +53,8 @@ export default function Dashboard() {
         <motion.div variants={inputs}>
           <AdminTagline />
         </motion.div>
-        <AdminSelectorTabs employees={employees} />
+        <AdminSelectorTabs />
+        <DashboardPagination employees={employees} />
       </CardSx>
     </motion.div>
   )

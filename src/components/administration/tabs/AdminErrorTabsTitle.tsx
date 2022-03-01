@@ -9,7 +9,7 @@ const ErrorTabsTitleContainer = styled(Box)(({ theme }) => ({
   },
   [theme.breakpoints.up('md')]: {
     display: 'grid',
-    gridTemplateColumns: '35px 1fr 3fr 30px',
+    gridTemplateColumns: '36px 1fr 3fr 30px',
     alignItems: 'center'
   }
 }))

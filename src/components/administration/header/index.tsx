@@ -1,5 +1,5 @@
 import Stack from '@mui/material/Stack'
-import AddEmployee from './AddEmployee'
+import { RegistrantAddition } from '../dialogs'
 import AdminLogout from './AdminLogout'
 import LogoAppName from './LogoAppName'
 
@@ -12,7 +12,7 @@ export default function AdminHeader() {
       sx={{ p: '20px 20px 10px' }}>
       <LogoAppName />
       <Stack direction='row' justifyContent='space-around' alignItems='center'>
-        <AddEmployee />
+        <RegistrantAddition />
         <AdminLogout />
       </Stack>
     </Stack>

@@ -48,6 +48,7 @@ export const CRUDHeaderGroupSx = styled(Button, {
   name: 'CRUDHeaderGroup',
   slot: 'style'
 })(() => ({
+  maxWidth: '530px',
   cursor: 'default',
   textTransform: 'none',
   color: UMSwatch.White[50],

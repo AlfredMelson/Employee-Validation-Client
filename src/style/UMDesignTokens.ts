@@ -49,6 +49,10 @@ const UMDesignTokens = () =>
         '"Segoe UI Symbol"'
       ].join(',')
     },
+    h5: {
+      // fontSize: 'clamp(1.37rem, 1.21rem + 0.8vw, 1.78rem)'
+      fontSize: 'clamp(2.625rem, 1.2857rem + 3.5714vw, 4.5rem)'
+    },
     transitions: {
       duration: {
         shortest: 150,

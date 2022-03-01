@@ -1,24 +1,22 @@
 import { AnimatePresence } from 'framer-motion'
-import { Route, Routes } from 'react-router-dom'
-import { AuthRequired, Layout } from './components'
-import { Administration, Login, NoMatch, Registration } from './pages'
+import { Route, Routes, useLocation } from 'react-router-dom'
+import { Layout } from './components'
+import { Administration, Login, NoMatch } from './pages'
 
 export default function App() {
+  const location = useLocation()
   return (
     <AnimatePresence exitBeforeEnter>
-      <Routes>
+      <Routes key={location.pathname}>
         <Route path='/' element={<Layout />}>
           {/* public routes */}
           <Route index element={<Login />} />
 
-          {/* registration route used for dev testing */}
-          <Route path='registration' element={<Registration />} />
-
           {/* authenticated routes */}
-          <Route element={<AuthRequired />}>
-            {/* protected routes */}
-            <Route path='dashboard/*' element={<Administration />} />
-          </Route>
+          {/* <Route element={<AuthRequired />}> */}
+          {/* protected routes */}
+          <Route path='dashboard/*' element={<Administration />} />
+          {/* </Route> */}
 
           {/* no-match routes */}
           <Route path='*' element={<NoMatch />} />

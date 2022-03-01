@@ -6,8 +6,7 @@ import ListItemText from '@mui/material/ListItemText'
 import { motion } from 'framer-motion'
 import { Empl } from '../../../api/empl'
 import { UMSwatch } from '../../../style'
-import RegistrantDeletion from './RegistrantDeletion'
-import RegistrantUpdate from './RegistrantUpdate'
+import { RegistrantDeletion, RegistrantUpdate } from '../dialogs'
 
 interface IRegistrantList {
   employees: Empl[]
@@ -42,7 +41,7 @@ export default function RegistrantList({ employees }: IRegistrantList) {
         animate='visible'
         style={{ listStyle: 'none', paddingInlineStart: 0 }}>
         {employees.map(empl => (
-          <motion.li key={empl.id} variants={item} className='list-group-empl'>
+          <motion.div key={empl.id} variants={item} className='list-group-empl'>
             <Stack direction='row' justifyContent='center' alignItems='center'>
               <ListItem divider>
                 <ListItemAvatar>
@@ -79,7 +78,7 @@ export default function RegistrantList({ employees }: IRegistrantList) {
                 />
               </ListItem>
             </Stack>
-          </motion.li>
+          </motion.div>
         ))}
       </motion.ul>
     </List>

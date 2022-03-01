@@ -19,5 +19,5 @@ export const DialogContentTextSx = styled(DialogContentText)(() => ({
   color: UMSwatch.White[100],
   px: '30px',
   py: '20px',
-  maxWidth: '550px'
+  maxWidth: '530px'
 }))

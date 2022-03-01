@@ -1,21 +1,6 @@
 import Stack, { StackProps } from '@mui/material/Stack'
 import { styled } from '@mui/material/styles'
 
-export const RegistrationContainerStack = styled(
-  (props: StackProps) => (
-    <Stack direction='column' justifyContent='flex-start' alignItems='center' {...props} />
-  ),
-  { name: 'RegistrationContainer', slot: 'stack' }
-)(({ theme }) => ({
-  height: '100%',
-  [theme.breakpoints.down('md')]: {
-    paddingTop: '100px'
-  },
-  [theme.breakpoints.up('md')]: {
-    justifyContent: 'center'
-  }
-}))
-
 export const LoginContainerStack = styled(
   (props: StackProps) => (
     <Stack direction='column' justifyContent='flex-start' alignItems='center' {...props} />
@@ -23,11 +8,17 @@ export const LoginContainerStack = styled(
   { name: 'LoginContainer', slot: 'stack' }
 )(({ theme }) => ({
   height: '100%',
-  [theme.breakpoints.down('md')]: {
+  [theme.breakpoints.only('xs')]: {
+    padding: '20px 10px 0'
+  },
+  [theme.breakpoints.only('sm')]: {
+    paddingTop: '50px'
+  },
+  [theme.breakpoints.only('md')]: {
     paddingTop: '100px'
   },
-  [theme.breakpoints.up('md')]: {
-    justifyContent: 'center'
+  [theme.breakpoints.up('lg')]: {
+    paddingTop: '200px'
   }
 }))
 
@@ -45,7 +36,7 @@ export const AdministrationContainerStack = styled(
     paddingTop: '20px'
   },
   [theme.breakpoints.up('md')]: {
-    paddingTop: '100px'
+    padding: '50px 0'
   }
 }))
 

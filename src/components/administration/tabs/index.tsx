@@ -1,26 +1,16 @@
 import Box from '@mui/material/Box'
-import Skeleton from '@mui/material/Skeleton'
-import Tabs from '@mui/material/Tabs'
 import { SyntheticEvent, useState } from 'react'
-import { Empl } from '../../../api/empl'
+import { useRecoilValue } from 'recoil'
 import { useEmployeesContext } from '../../../context'
-import { UMSwatch } from '../../../style'
+import { paginatedEmplAtom } from '../../../recoil/pagination'
 import { EmplEmailFilters } from '../../../utils'
-import { BadgeSx, TabSx } from '../../mui'
+import { SkeletonPanel, SkeletonTab } from '../../loaders'
+import { BadgeSx, PanelWrapper, TabsWrapper } from '../../mui'
+import { TabSx } from '../../mui/Tab.style'
+import { TabsSx } from '../../mui/Tabs.style'
 import RegistrantList from '../panels'
 import AdminErrorTabsTitle from './AdminErrorTabsTitle'
-
-interface ITabData {
-  index: number
-  label: string
-  value: number
-  disable: boolean
-}
-interface IPanelData {
-  index: number
-  value: number
-  employees: Empl[]
-}
+import { IPanelData, ITabData } from './types'
 
 interface TabPanelProps {
   children?: React.ReactNode
@@ -51,14 +41,11 @@ function a11yProps(index: number) {
   }
 }
 
-interface IAdminSelectorTabs {
-  employees: Empl[]
-}
-
-export default function AdminSelectorTabs({ employees }: IAdminSelectorTabs) {
+export default function AdminSelectorTabs() {
+  const paginatedEmpl = useRecoilValue(paginatedEmplAtom)
   const { isLoading: isEmployeesLoading } = useEmployeesContext()
 
-  const filteredEmails = EmplEmailFilters(employees)
+  const filteredEmails = EmplEmailFilters(paginatedEmpl)
 
   const [value, setValue] = useState(0)
 
@@ -97,115 +84,47 @@ export default function AdminSelectorTabs({ employees }: IAdminSelectorTabs) {
   const handleChange = (_event: SyntheticEvent, newValue: number) => {
     setValue(newValue)
   }
-
   return (
     <>
+      <AdminErrorTabsTitle />
       {isEmployeesLoading ? (
-        <Tabs
-          value={value}
-          aria-label='selector tabs skeleton'
-          scrollButtons
-          allowScrollButtonsMobile
-          classes={{ indicator: 'indicator' }}>
-          <Box sx={{ mx: '8px' }}>
-            <Skeleton
-              sx={{ bgcolor: UMSwatch.Gold[50], borderRadius: '4px' }}
-              variant='rectangular'
-              width={110}
-              height={48}
-            />
-          </Box>
-          <Box sx={{ mx: '8px' }}>
-            <Skeleton
-              sx={{ bgcolor: UMSwatch.Gold[50], borderRadius: '4px' }}
-              variant='rectangular'
-              width={110}
-              height={48}
-            />
-          </Box>
-          <Box sx={{ mx: '8px' }}>
-            <Skeleton
-              sx={{ bgcolor: UMSwatch.Gold[50], borderRadius: '4px' }}
-              variant='rectangular'
-              width={110}
-              height={48}
-            />
-          </Box>
-          <Box sx={{ mx: '8px' }}>
-            <Skeleton
-              sx={{ bgcolor: UMSwatch.Gold[50], borderRadius: '4px' }}
-              variant='rectangular'
-              width={110}
-              height={48}
-            />
-          </Box>
-        </Tabs>
+        <TabsWrapper>
+          <TabsSx>
+            <SkeletonTab />
+            <SkeletonTab />
+            <SkeletonTab />
+            <SkeletonTab />
+          </TabsSx>
+        </TabsWrapper>
       ) : (
-        <>
-          <AdminErrorTabsTitle />
-          <Box
-            sx={{
-              display: 'grid',
-              gridTemplateColumns: '20px 1fr 20px',
-              alignItems: 'center'
-            }}>
-            <Tabs
-              sx={{ gridColumn: 2, pb: '4px' }}
-              value={value}
-              onChange={handleChange}
-              aria-label='selector tabs'
-              variant='scrollable'
-              scrollButtons='auto'
-              classes={{ indicator: 'indicator' }}>
-              <TabSx label='Registrants' {...a11yProps(1)} />
-              {TabData.map(tab => (
-                <TabSx
-                  key={tab.index}
-                  label={tab.label}
-                  disabled={tab.disable}
-                  {...a11yProps(tab.index)}
-                  icon={
-                    tab.index !== 1 &&
-                    tab.value !== 0 && (
-                      <BadgeSx
-                        badgeContent={tab.value}
-                        color='error'
-                        sx={{ pl: '14px', mr: '14px' }}
-                      />
-                    )
-                  }
-                  iconPosition='end'
-                />
-              ))}
-            </Tabs>
-          </Box>
-        </>
+        <TabsWrapper>
+          <TabsSx value={value} onChange={handleChange} aria-label='selector tabs'>
+            <TabSx label='Registrants' {...a11yProps(1)} />
+            {TabData.map(tab => (
+              <TabSx
+                key={tab.index}
+                label={tab.label}
+                disabled={tab.disable}
+                {...a11yProps(tab.index)}
+                icon={tab.index !== 1 && tab.value !== 0 && <BadgeSx badgeContent={tab.value} />}
+                iconPosition='end'
+              />
+            ))}
+          </TabsSx>
+        </TabsWrapper>
       )}
       {isEmployeesLoading ? (
-        <Box
-          sx={{
-            borderRadius: '4px',
-            m: '20px'
-          }}>
-          <Skeleton
-            sx={{ bgcolor: UMSwatch.Gold[50], borderRadius: '4px' }}
-            variant='rectangular'
-            width={550}
-            height={72}
-          />
-        </Box>
+        <PanelWrapper>
+          <SkeletonPanel />
+        </PanelWrapper>
       ) : (
-        <Box
-          sx={{
-            bgcolor: 'transparent',
-            m: '20px 20px '
-          }}>
+        <PanelWrapper>
           {PanelData.map(panel => (
             <TabPanel key={panel.index} value={panel.value} index={panel.index}>
               <RegistrantList employees={panel.employees} />
             </TabPanel>
           ))}
-        </Box>
+        </PanelWrapper>
       )}
     </>
   )

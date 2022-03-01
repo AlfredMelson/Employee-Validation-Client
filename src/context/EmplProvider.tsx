@@ -30,6 +30,7 @@ export const EmplProvider = ({ children }: IEmplProvider) => {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
   const [employees, setEmployees] = useState<Empl[]>([])
+  console.log('employees', employees)
   const axiosPrivate = useAxiosPrivate()
 
   const getEmployees = async () => {
@@ -37,25 +38,27 @@ export const EmplProvider = ({ children }: IEmplProvider) => {
     const controller = new AbortController()
     try {
       // check if the component is mounted and set the response
-
       const response: AxiosResponse = await axiosPrivate.get('/api/ids', {
         signal: controller.signal
       })
       // sort employee list alphabetically
-      setEmployees(
-        response.data.sort(function (first, second) {
-          const firstName = first.name.toUpperCase() // ignore upper and lowercase
-          const secondName = second.name.toUpperCase() // ignore upper and lowercase
-          if (firstName < secondName) {
-            return -1
-          }
-          if (firstName > secondName) {
-            return 1
-          }
-          // names are the same
-          return 0
-        })
-      )
+      const sortedEmployees = await response.data.sort(function (first, second) {
+        const firstName = first.name.toUpperCase() // ignore upper and lowercase
+        const secondName = second.name.toUpperCase() // ignore upper and lowercase
+        if (firstName < secondName) {
+          return -1
+        }
+        if (firstName > secondName) {
+          return 1
+        }
+        // names are the same
+        return 0
+      })
+      // add sortId to each employee for pagination
+      const sortedEmployeesWithId = await sortedEmployees.map((empl, index) => {
+        return { ...empl, sortId: index + 1 }
+      })
+      setEmployees(sortedEmployeesWithId)
       setIsLoading(false)
     } catch (error) {
       setIsLoading(false)
