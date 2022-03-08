@@ -1,8 +1,9 @@
 {
-  "arrowParens": "avoid",
+  "arrowParens": "always",
+  "bracketSameLine": true,
   "endOfLine": "crlf",
   "jsxSingleQuote": true,
-  "bracketSameLine": true,
+  "quoteProps": "as-needed",
   "printWidth": 100,
   "semi": false,
   "singleQuote": true,

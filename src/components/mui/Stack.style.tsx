@@ -7,7 +7,8 @@ export const LoginContainerStack = styled(
   ),
   { name: 'LoginContainer', slot: 'stack' }
 )(({ theme }) => ({
-  height: '100%',
+  height: '100vh',
+  width: '100vw',
   [theme.breakpoints.only('xs')]: {
     padding: '20px 10px 0'
   },
@@ -28,7 +29,8 @@ export const AdministrationContainerStack = styled(
   ),
   { name: 'AdministrationContainer', slot: 'stack' }
 )(({ theme }) => ({
-  height: '100%',
+  height: '100vh',
+  width: '100vw',
   [theme.breakpoints.only('xs')]: {
     paddingTop: '0px'
   },
@@ -46,7 +48,8 @@ export const NoMatchContainerStack = styled(
   ),
   { name: 'NoMatchContainer', slot: 'stack' }
 )(({ theme }) => ({
-  height: '100%',
+  height: '100vh',
+  width: '100vw',
   [theme.breakpoints.only('xs')]: {
     paddingTop: '0px'
   },

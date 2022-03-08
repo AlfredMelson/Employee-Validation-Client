@@ -215,7 +215,9 @@ export default function UMThemedComponents(theme: Theme) {
       },
       MuiOutlinedInput: {
         defaultProps: {},
-        styleOverrides: {}
+        styleOverrides: {
+          input: {}
+        }
       },
       MuiPaper: {
         defaultProps: {},
@@ -273,9 +275,7 @@ export default function UMThemedComponents(theme: Theme) {
           margin: 'dense'
         },
         styleOverrides: {
-          root: {
-            ...theme.typography.body1
-          }
+          root: {} // Styles applied to the root element
         }
       },
       MuiTooltip: {

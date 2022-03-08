@@ -1,8 +1,10 @@
-import Button from '@mui/material/Button'
+import Button, { ButtonProps } from '@mui/material/Button'
 import { alpha, styled } from '@mui/material/styles'
 import UMSwatch from '../../style/UMSwatch'
 
-export const LoginButtonSx = styled(Button)(() => ({
+export const LoginButtonSx = styled((props: ButtonProps) => (
+  <Button size='medium' variant='contained' type='submit' {...props} />
+))(() => ({
   color: alpha(UMSwatch.Gold[50], 0.8),
   backgroundColor: UMSwatch.Black[50],
   '&:hover, &.Mui-focused, &.Mui-selected': {

@@ -1,16 +1,16 @@
 import { useNavigate } from 'react-router-dom'
 import { useAuth, useLogout } from '../../../hooks'
 import { LogoutIcon } from '../../icons'
-import { AdminHeaderIconButtonSx, ToolTipSx } from '../../mui'
+import { AdminIconButtonSx, ToolTipSx } from '../../mui'
 
 export default function AdminLogout() {
   const { accessToken } = useAuth()
   const logoutAdmin = useLogout(accessToken)
   const navigate = useNavigate()
 
-  const handleAdminLogout = async (_event: any) => {
+  const handleAdminLogout = (_event: any) => {
     console.log('logging out')
-    await logoutAdmin
+    logoutAdmin
     navigate('/')
 
     console.log('logged out')
@@ -18,9 +18,9 @@ export default function AdminLogout() {
 
   return (
     <ToolTipSx tooltipTitle={'Logout'}>
-      <AdminHeaderIconButtonSx onClick={handleAdminLogout} sx={{ mr: '4px' }}>
+      <AdminIconButtonSx onClick={handleAdminLogout} sx={{ mr: '4px' }}>
         <LogoutIcon />
-      </AdminHeaderIconButtonSx>
+      </AdminIconButtonSx>
     </ToolTipSx>
   )
 }

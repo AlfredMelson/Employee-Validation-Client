@@ -1,8 +1,11 @@
 import { styled } from '@mui/material/styles'
-import Tab from '@mui/material/Tab'
-import UMSwatch from '../../style/UMSwatch'
+import Tab, { TabProps } from '@mui/material/Tab'
+import { UMSwatch } from '../../style'
 
-export const TabSx = styled(Tab)(({ theme }) => ({
+export const TabStyle = styled((props: TabProps) => <Tab {...props} />, {
+  name: 'Tab',
+  slot: 'styled'
+})(({ theme }) => ({
   minWidth: '120px',
   margin: '0 10px',
   textTransform: 'none',

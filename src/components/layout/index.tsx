@@ -1,4 +1,3 @@
-import Box from '@mui/material/Box'
 import { Outlet } from 'react-router-dom'
 // import { useEffect } from 'react'
 // import { Outlet, useLocation, useNavigate } from 'react-router-dom'
@@ -32,9 +31,5 @@ export default function Layout() {
   //   // eslint-disable-next-line react-hooks/exhaustive-deps
   // }, [])
 
-  return (
-    <Box component='div' className='app-background'>
-      <Outlet />
-    </Box>
-  )
+  return <Outlet />
 }

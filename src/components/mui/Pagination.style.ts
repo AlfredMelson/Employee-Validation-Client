@@ -33,7 +33,7 @@ export const PaginationSX = styled(Pagination)(({ theme }) => ({
       backgroundColor: UMSwatch.Grey[900]
     },
     '&.Mui-selected': {
-      color: UMSwatch.White[100],
+      color: UMSwatch.White[50],
       backgroundColor: 'transparent'
     },
     '&.Mui-disabled': {

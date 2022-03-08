@@ -1,21 +1,18 @@
 import Alert from '@mui/material/Alert'
 import CardHeader from '@mui/material/CardHeader'
 import Collapse from '@mui/material/Collapse'
-import { MutableRefObject } from 'react'
+import { useRecoilValue } from 'recoil'
+import { loginAlertErrorAtom, loginErrorMessageAtom } from '../../../recoil-state'
 
-interface IAlertHeader {
-  errorMessage?: string
-  errorAlert?: boolean
-  errorReference?: MutableRefObject<HTMLParagraphElement>
-}
-
-export default function AlertHeader({ errorMessage, errorAlert, errorReference }: IAlertHeader) {
+export default function AlertHeader() {
+  const loginErrorMessage = useRecoilValue(loginErrorMessageAtom)
+  const loginAlertError = useRecoilValue(loginAlertErrorAtom)
   return (
     <CardHeader
       title={
-        <Collapse in={errorAlert}>
-          <Alert sx={{ m: '4px' }} variant='filled' severity='error' ref={errorReference}>
-            {errorMessage}
+        <Collapse in={loginAlertError}>
+          <Alert sx={{ m: '4px' }} variant='filled' severity='error'>
+            {loginErrorMessage}
           </Alert>
         </Collapse>
       }

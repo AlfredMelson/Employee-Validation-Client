@@ -5,7 +5,6 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { RecoilRoot } from 'recoil'
 import App from './App'
 import { AuthProvider } from './context/AuthProvider'
-import { EmplProvider } from './context/EmplProvider'
 import { UMThemeProvider } from './style'
 import './style/global.css'
 
@@ -16,11 +15,9 @@ ReactDOM.render(
         <CssBaseline>
           <BrowserRouter>
             <AuthProvider>
-              <EmplProvider>
-                <Routes>
-                  <Route path='/*' element={<App />} />
-                </Routes>
-              </EmplProvider>
+              <Routes>
+                <Route path='/*' element={<App />} />
+              </Routes>
             </AuthProvider>
           </BrowserRouter>
         </CssBaseline>

@@ -4,11 +4,9 @@ import { useTheme } from '@mui/material/styles'
 import Switch from '@mui/material/Switch'
 import Typography from '@mui/material/Typography'
 import useMediaQuery from '@mui/material/useMediaQuery'
-import { AxiosResponse } from 'axios'
-import { ChangeEvent, useRef, useState } from 'react'
-import axios from '../../../api/axiosCustom'
+import { ChangeEvent, useState } from 'react'
+import { EmplProvider } from '../../../context'
 import { UMSwatch } from '../../../style'
-import { API, AxiosEmplUpdateConfig } from '../../../utils'
 import { BadgeIcon, CloseIcon, RemoveEmplIcon } from '../../icons'
 import {
   CRUDHeaderGroupSx,
@@ -20,22 +18,12 @@ import {
   ToolTipSx
 } from '../../mui'
 
-interface IRegistrantDeletion {
-  emplId: string
-  emplName: string
-  emplRole: string
-  emplEmail: string
-}
-
-export default function RegistrantDeletion({
-  emplId,
-  emplName,
-  emplRole,
-  emplEmail
-}: IRegistrantDeletion) {
+export default function RegistrantDeletion(emplId, emplFirstname, emplLastname) {
   // update email dialog state
   const [open, setOpen] = useState(false)
   const theme = useTheme()
+
+  const deleteEmpl = EmplProvider
 
   // dialog width on tablet size and smaller
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'))
@@ -49,43 +37,40 @@ export default function RegistrantDeletion({
   }
 
   // error reference
-  const errorReference = useRef<HTMLParagraphElement | null>(null)
+  // const errorReference = useRef<HTMLParagraphElement | null>(null)
 
-  const handleUpdateEmplEmail = async event => {
-    event.preventDefault()
+  // const handleEmplDeletion = async event => {
+  //   event.preventDefault()
+  //   deleteEmpl(emplEmail)
 
-    try {
-      const response: AxiosResponse = await axios.post(
-        // pull in the update endpoint
-        API.UpdateEmployee,
+  //   try {
+  //     // const response = await axios.delete(
+  //     //   // pull in the update endpoint
+  //     //   API.DeleteEmployee,
 
-        // pull in the employee data
-        JSON.stringify({ emplId, emplName, emplRole, emplEmail }),
+  //     //   // pull in the employee data
+  //     //   JSON.stringify({ emplName, emplEmail })
+  //     // )
 
-        // pull in axios update config; sending back the secure cookie with the request
-        AxiosEmplUpdateConfig
-      )
+  //     await api.delete(`${API.DeleteEmployee}/${emplEmail}`)
+  //     const emplList = empls.filter(empl => empl.emplEmail !== emplEmail)
+  //     setEmpls(emplList)
 
-      // Return JSON
-      console.log(response.data)
+  //     setOpen(false)
 
-      // close dialog if positive response frm server
-      // update email address in employee list & ensure recalculation of errors
-      // window.location.reload()
-
-      setOpen(false)
-
-      // open error alert if there is a caught error
-    } catch (error) {
-      errorReference.current.focus()
-    }
-  }
+  //     // open error alert if there is a caught error
+  //   } catch (error) {
+  //     errorReference.current.focus()
+  //   }
+  // }
 
   const [checked, setChecked] = useState(false)
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.checked)
   }
+
+  // const HeadingText = {[emplFirstname, emplLastname].join(' ')}
 
   return (
     <>
@@ -113,7 +98,7 @@ export default function RegistrantDeletion({
               sx={{
                 textTransform: 'none'
               }}>
-              {emplName}
+              {[emplFirstname, emplLastname].join(' ')}
             </Typography>
           </CRUDHeaderGroupSx>
           <ListItemIconButtonSx onClick={handleClose}>
@@ -122,7 +107,8 @@ export default function RegistrantDeletion({
         </Stack>
         <DialogContentSx>
           <DialogContentTextSx>
-            Are you sure that you wish to continue with the deletion of {emplName}'s account?
+            `Are you sure that you wish to continue with the deletion of ${emplFirstname}$
+            {emplLastname}'s account?`
           </DialogContentTextSx>
           <Stack
             direction='row'
@@ -133,11 +119,11 @@ export default function RegistrantDeletion({
             <FormControlLabel
               sx={{ color: UMSwatch.Coral[400] }}
               control={<Switch checked={checked} onChange={handleChange} />}
-              label={emplName}
+              label={`${emplFirstname} ${emplLastname}`}
             />
             <SubmissionButtonSx
               disabled={!checked}
-              onClick={handleUpdateEmplEmail}
+              onClick={() => deleteEmpl(emplId)}
               sx={{ textTransform: 'none' }}>
               Delete
             </SubmissionButtonSx>

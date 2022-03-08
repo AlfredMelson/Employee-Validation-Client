@@ -8,12 +8,14 @@
 interface IPaginate {
   totalEmpl: number
   selectedPage: number
-  emplPerPage: number
-  maxPages: number
 }
 
-export function Paginate({ totalEmpl, selectedPage, emplPerPage, maxPages }: IPaginate) {
-  // total number of pages calculated
+export function Paginate({ totalEmpl, selectedPage }: IPaginate) {
+  // FIX MOBILE - number of employees per page set to 10
+  const emplPerPage = 10
+  // FIX MOBILE - maximum number of pages set to 10
+  const maxPages = 10
+  // determine totalPages by returning the next integar of totalEmpl/emplPerPage
   const totalPages = Math.ceil(totalEmpl / emplPerPage)
 
   // ensure current page isn't out of range
@@ -53,7 +55,7 @@ export function Paginate({ totalEmpl, selectedPage, emplPerPage, maxPages }: IPa
   const endingIndex = Math.min(beginningIndex + emplPerPage - 1, totalEmpl - 1)
 
   // create an array of pages to ng-repeat in page control
-  const pages = Array.from(Array(endPage + 1 - startPage).keys()).map(i => startPage + i)
+  const pages = Array.from(Array(endPage + 1 - startPage).keys()).map((index) => startPage + index)
 
   // return object with all page properties
   return {

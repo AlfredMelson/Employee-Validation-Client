@@ -22,14 +22,16 @@ import {
 
 interface IRegistrantUpdate {
   emplId: string
-  emplName: string
+  emplFirstname: string
+  emplLastname: string
   emplRole: string
   emplEmail: string
 }
 
 export default function RegistrantUpdate({
   emplId,
-  emplName,
+  emplFirstname,
+  emplLastname,
   emplRole,
   emplEmail
 }: IRegistrantUpdate) {
@@ -89,7 +91,7 @@ export default function RegistrantUpdate({
         API.UpdateEmployee,
 
         // pull in the employee data
-        JSON.stringify({ emplId, emplName, emplRole, emplEmail }),
+        JSON.stringify({ emplId, emplFirstname, emplLastname, emplRole, emplEmail }),
 
         // pull in axios update config; sending back the secure cookie with the request
         AxiosEmplUpdateConfig
@@ -137,7 +139,7 @@ export default function RegistrantUpdate({
               sx={{
                 textTransform: 'none'
               }}>
-              {emplName}
+              {[emplFirstname, emplLastname].join(' ')}
             </Typography>
           </CRUDHeaderGroupSx>
           <ListItemIconButtonSx onClick={handleClose}>
@@ -146,8 +148,8 @@ export default function RegistrantUpdate({
         </Stack>
         <DialogContentSx>
           <DialogContentTextSx>
-            Provide a valid email address for {emplName}. The current email address associated with
-            this account{' '}
+            Provide a valid email address for {[emplFirstname, emplLastname].join(' ')}. The current
+            email address associated with this account{' '}
             <span
               style={{
                 color: isValid === 'valid' ? UMSwatch.Text.Link : UMSwatch.Coral[400]

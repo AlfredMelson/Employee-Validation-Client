@@ -28,15 +28,22 @@ export const findById = async (id: string) => {
   return response.data
 }
 
-export const create = async ({ id, name, role, email }: Empl) => {
-  const response: AxiosResponse = await apiClient.post<any>('/create', { id, name, role, email })
+export const create = async ({ id, firstname, lastname, role, email }: Empl) => {
+  const response: AxiosResponse = await apiClient.post<any>('/create', {
+    id,
+    firstname,
+    lastname,
+    role,
+    email
+  })
   return response.data
 }
 
-export const update = async (id: string, { name, role, email }: Empl) => {
+export const update = async (id: string, { firstname, lastname, role, email }: Empl) => {
   const response: AxiosResponse = await apiClient.put<any>(`/update/${id}`, {
     id,
-    name,
+    firstname,
+    lastname,
     role,
     email
   })

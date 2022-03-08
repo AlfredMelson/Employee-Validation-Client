@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios'
 import { API } from '../utils/constants'
-import { axiosPrivate } from './axiosCustom'
+import api, { axiosPrivate } from './axiosCustom'
 
 export enum Roles {
   read = 'read',
@@ -10,8 +10,9 @@ export enum Roles {
 
 export interface Empl {
   id: string
-  name: string
-  role: Roles
+  firstname: string
+  lastname: string
+  role: string
   email: string
   createdAt: string
 }
@@ -31,6 +32,14 @@ const getEmployees = async () => {
   }
 }
 
+const deleteEmpl = async (emplId): Promise<void> => {
+  try {
+    await api.delete(API.DeleteEmployee, emplId)
+  } catch (error) {
+    throw new Error(error.message)
+  }
+}
+
 const updateEmpl = async (empl: Empl): Promise<void> => {
   try {
     const response: AxiosResponse = await axiosPrivate.put(API.Employees, JSON.stringify(empl), {
@@ -45,5 +54,6 @@ const updateEmpl = async (empl: Empl): Promise<void> => {
 
 export const empl = {
   getAll: getEmployees,
+  delete: deleteEmpl,
   update: updateEmpl
 }

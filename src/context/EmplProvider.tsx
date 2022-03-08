@@ -1,13 +1,17 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import { AxiosResponse } from 'axios'
+import axios, { AxiosResponse } from 'axios'
 import { createContext, ReactNode, useContext, useState } from 'react'
+import { useSetRecoilState } from 'recoil'
 import { Empl, empl as emplApi } from '../api/empl'
 import { useAxiosPrivate } from '../hooks'
+import { employeeStateAtom } from '../recoil-state/controls/selector'
+import { API } from '../utils'
 
 interface Employees {
   employees: Empl[]
   isLoading: boolean
   getEmployees: () => void
+  deleteEmpl: (email: Empl) => void
   updateEmpl: (empl: Empl) => void
   error: string
 }
@@ -16,6 +20,7 @@ const EmplContext = createContext<Employees>({
   employees: [],
   isLoading: false,
   getEmployees: () => {},
+  deleteEmpl: () => {},
   updateEmpl: () => {},
   error: ''
 })
@@ -27,10 +32,11 @@ interface IEmplProvider {
 }
 
 export const EmplProvider = ({ children }: IEmplProvider) => {
+  const setEmployeeState = useSetRecoilState(employeeStateAtom)
+
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
   const [employees, setEmployees] = useState<Empl[]>([])
-  console.log('employees', employees)
   const axiosPrivate = useAxiosPrivate()
 
   const getEmployees = async () => {
@@ -41,28 +47,23 @@ export const EmplProvider = ({ children }: IEmplProvider) => {
       const response: AxiosResponse = await axiosPrivate.get('/api/ids', {
         signal: controller.signal
       })
-      // sort employee list alphabetically
-      const sortedEmployees = await response.data.sort(function (first, second) {
-        const firstName = first.name.toUpperCase() // ignore upper and lowercase
-        const secondName = second.name.toUpperCase() // ignore upper and lowercase
-        if (firstName < secondName) {
-          return -1
-        }
-        if (firstName > secondName) {
-          return 1
-        }
-        // names are the same
-        return 0
-      })
-      // add sortId to each employee for pagination
-      const sortedEmployeesWithId = await sortedEmployees.map((empl, index) => {
-        return { ...empl, sortId: index + 1 }
-      })
-      setEmployees(sortedEmployeesWithId)
+
+      setEmployees(response.data)
+      setEmployeeState(response.data)
       setIsLoading(false)
     } catch (error) {
       setIsLoading(false)
       setError((error as Error).message)
+    }
+  }
+
+  const deleteEmpl = async (emplId) => {
+    try {
+      await axios.delete(API.DeleteEmployee, emplId)
+      const emplList = employees.filter((empl) => empl.id !== emplId)
+      setEmployees(emplList)
+    } catch (error) {
+      throw new Error('Employee deletion failed')
     }
   }
 
@@ -71,18 +72,19 @@ export const EmplProvider = ({ children }: IEmplProvider) => {
       emplApi.update(empl)
       const updatedEmployees = [...employees]
       updatedEmployees.splice(
-        employees.findIndex(empl => empl.id === empl.id),
+        employees.findIndex((empl) => empl.id === empl.id),
         1,
         empl
       )
       setEmployees(updatedEmployees)
     } catch (error) {
-      throw new Error('Item update failed')
+      throw new Error('Employee update failed')
     }
   }
 
   return (
-    <EmplContext.Provider value={{ employees, getEmployees, isLoading, error, updateEmpl }}>
+    <EmplContext.Provider
+      value={{ employees, getEmployees, isLoading, error, deleteEmpl, updateEmpl }}>
       {children}
     </EmplContext.Provider>
   )

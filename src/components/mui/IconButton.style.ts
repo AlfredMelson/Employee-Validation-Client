@@ -2,7 +2,7 @@ import IconButton from '@mui/material/IconButton'
 import { styled } from '@mui/material/styles'
 import UMSwatch from '../../style/UMSwatch'
 
-export const AdminHeaderIconButtonSx = styled(IconButton)(({ theme }) => ({
+export const AdminIconButtonSx = styled(IconButton)(({ theme }) => ({
   color: UMSwatch.Blue[500],
   backgroundColor: 'transparent',
   transition: theme.transitions.create(['all'], {

@@ -40,7 +40,7 @@ export interface IAxiosRequestConfig {
   xsrfHeaderName: string // default 'X-XSRF-TOKEN'
 }
 
-const useAxios = configObj => {
+const useAxios = (configObj) => {
   const { axiosInstance, method, url, requestConfig = {} } = configObj
 
   const [axiosResponse, setAxiosResponse] = useState([])
@@ -48,7 +48,7 @@ const useAxios = configObj => {
   const [loading, setLoading] = useState<boolean>(true)
   const [reload, setReload] = useState(0)
 
-  const refetch = () => setReload(prev => prev + 1)
+  const refetch = () => setReload((prev) => prev + 1)
 
   useEffect(() => {
     // create new instance of AbortController that will allow request cancellation if needed and prevent memory leaks
@@ -62,7 +62,6 @@ const useAxios = configObj => {
           // attach abort controller to request config to allow cancellation
           signal: controller.signal
         })
-        console.log('useAxios response', response)
         setAxiosResponse(response.data)
       } catch (err) {
         console.log(err.message)

@@ -15,7 +15,7 @@ export const SkeletonTab = () => {
   )
 }
 
-export const SkeletonPanel = () => {
+export const SkeletonPanelSx = () => {
   return (
     <Skeleton
       sx={{ bgcolor: UMSwatch.Gold[50], borderRadius: '4px' }}

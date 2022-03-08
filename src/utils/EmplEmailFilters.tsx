@@ -2,7 +2,7 @@ import { Empl } from '../api/empl'
 
 // regular expression: https://regexr.com/2rhq7
 export const regexEmailValidation =
-  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  /^(([^<>()\\[\]\\.,;:\s@"]+(\.[^<>()\\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
 const moreThanThirty = (registered: string) => {
   const registrationDate = new Date(registered).getTime()
@@ -17,14 +17,14 @@ const moreThanThirty = (registered: string) => {
   return registrationDate < thirtyDaysAgo
 }
 
-interface IEmplEmailFilters {
+interface IEmplSorting {
   all: Empl[]
   invalid: Empl[]
   duplicate: Empl[]
   old: Empl[]
 }
 
-const EmplEmailFilters = (employees: Empl[]): IEmplEmailFilters => {
+const EmplEmailFilters = (employees: Empl[]): IEmplSorting => {
   return {
     all: employees,
     ...employees.reduce(
@@ -33,7 +33,7 @@ const EmplEmailFilters = (employees: Empl[]): IEmplEmailFilters => {
         if (!regexEmailValidation.test(empl.email.toLowerCase())) {
           result.invalid.push(empl)
         }
-        if (employees.filter(empl => empl.email === email).length > 1) {
+        if (employees.filter((empl) => empl.email === email).length > 1) {
           result.duplicate.push(empl)
         }
         if (moreThanThirty(empl.createdAt)) {

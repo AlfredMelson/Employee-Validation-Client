@@ -6,11 +6,10 @@ import useMediaQuery from '@mui/material/useMediaQuery'
 import { AxiosResponse } from 'axios'
 import { useEffect, useRef, useState } from 'react'
 import axios from '../../../api/axiosCustom'
-import { UMSwatch } from '../../../style'
 import { API, AxiosEmplUpdateConfig, regexEmailValidation } from '../../../utils'
 import { AddEmplIcon, BadgeIcon, CloseIcon } from '../../icons'
 import {
-  AdminHeaderIconButtonSx,
+  AdminIconButtonSx,
   CRUDHeaderGroupSx,
   DialogContentSx,
   DialogContentTextSx,
@@ -18,7 +17,8 @@ import {
   ListItemIconButtonSx,
   SubmissionButtonSx,
   TextFieldSx,
-  ToolTipSx
+  ToolTipSx,
+  TypoTextfieldSx
 } from '../../mui'
 
 export default function RegistrantAddition() {
@@ -72,7 +72,7 @@ export default function RegistrantAddition() {
     setEmailValidation(!validateEmail)
   }, [newEmplEmail])
 
-  const handleUpdateEmplEmail = async event => {
+  const handleUpdateEmplEmail = async (event) => {
     event.preventDefault()
 
     // alert user if email address input is empty
@@ -109,9 +109,6 @@ export default function RegistrantAddition() {
     }
   }
 
-  const isValid = regexEmailValidation.test(newEmplEmail) ? 'valid' : 'invalid'
-  console.log('RegistrantAddition isValid', isValid)
-
   const roles = [
     {
       value: '',
@@ -134,12 +131,12 @@ export default function RegistrantAddition() {
   return (
     <>
       <ToolTipSx tooltipTitle={'Add Registrant'}>
-        <AdminHeaderIconButtonSx
+        <AdminIconButtonSx
           onClick={handleClickOpen}
           aria-label='add registrant'
           sx={{ mr: '10px' }}>
           <AddEmplIcon />
-        </AdminHeaderIconButtonSx>
+        </AdminIconButtonSx>
       </ToolTipSx>
       <DialogSx fullScreen={fullScreen} open={open} onClose={handleClose}>
         <Stack
@@ -167,45 +164,28 @@ export default function RegistrantAddition() {
         <DialogContentSx>
           <DialogContentTextSx>Provide a valid email address.</DialogContentTextSx>
           <Stack direction='column' justifyContent='flex-start' alignItems='flex-start'>
-            <Typography
-              variant='body1'
-              gutterBottom
-              sx={{ color: UMSwatch.White[100], m: '16px 0 4px 10px' }}>
-              Username
-            </Typography>
+            <TypoTextfieldSx sx={{ m: '16px 0 4px 10px' }}>Username</TypoTextfieldSx>
             <TextFieldSx
               autoFocus
-              fullWidth
-              error={nameHelperText !== ''}
               id='username'
-              helperText={nameHelperText}
               placeholder='Username'
-              onChange={event => {
+              error={nameHelperText !== ''}
+              onChange={(event) => {
                 setNewEmplName(event.target.value)
               }}
+              helperText={nameHelperText}
             />
-            <Typography
-              variant='body1'
-              gutterBottom
-              sx={{ color: UMSwatch.White[100], m: '16px 0 4px 10px' }}>
-              Email Address
-            </Typography>
+            <TypoTextfieldSx sx={{ m: '16px 0 4px 10px' }}>Email Address</TypoTextfieldSx>
             <TextFieldSx
-              fullWidth
-              error={emailHelperText !== ''}
               id='update-email'
-              helperText={emailHelperText}
               placeholder='Update Email Address'
-              onChange={event => {
+              error={emailHelperText !== ''}
+              onChange={(event) => {
                 setNewEmplEmail(event.target.value)
               }}
+              helperText={emailHelperText}
             />
-            <Typography
-              variant='body1'
-              gutterBottom
-              sx={{ color: UMSwatch.White[100], m: '16px 0 10px 10px' }}>
-              User Role
-            </Typography>
+            <TypoTextfieldSx sx={{ m: '16px 0 10px 10px' }}>User Role</TypoTextfieldSx>
           </Stack>
           <Stack
             direction='row'
@@ -217,12 +197,12 @@ export default function RegistrantAddition() {
               select
               id='select-role'
               value={newEmplRole}
-              onChange={event => {
+              onChange={(event) => {
                 setNewEmplRole(event.target.value)
               }}
               error={roleHelperText !== ''}
               helperText={roleHelperText}>
-              {roles.map(option => (
+              {roles.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
                   {option.label}
                 </MenuItem>
