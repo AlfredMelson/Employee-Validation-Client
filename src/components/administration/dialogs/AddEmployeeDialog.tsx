@@ -9,19 +9,18 @@ import axios from '../../../api/axiosCustom'
 import { API, AxiosEmplUpdateConfig, regexEmailValidation } from '../../../utils'
 import { AddEmplIcon, BadgeIcon, CloseIcon } from '../../icons'
 import {
-  AdminIconButtonSx,
   CRUDHeaderGroupSx,
   DialogContentSx,
   DialogContentTextSx,
   DialogSx,
-  ListItemIconButtonSx,
+  IconButtonSx,
   SubmissionButtonSx,
   TextFieldSx,
   ToolTipSx,
   TypoTextfieldSx
 } from '../../mui'
 
-export default function RegistrantAddition() {
+export default function AddEmployeeDialog() {
   // update email dialog state
   const [open, setOpen] = useState(false)
 
@@ -131,12 +130,9 @@ export default function RegistrantAddition() {
   return (
     <>
       <ToolTipSx tooltipTitle={'Add Registrant'}>
-        <AdminIconButtonSx
-          onClick={handleClickOpen}
-          aria-label='add registrant'
-          sx={{ mr: '10px' }}>
+        <IconButtonSx onClick={handleClickOpen} aria-label='add registrant' sx={{ mr: '10px' }}>
           <AddEmplIcon />
-        </AdminIconButtonSx>
+        </IconButtonSx>
       </ToolTipSx>
       <DialogSx fullScreen={fullScreen} open={open} onClose={handleClose}>
         <Stack
@@ -144,11 +140,7 @@ export default function RegistrantAddition() {
           justifyContent='space-between'
           alignItems='center'
           sx={{ p: '20px 20px 0' }}>
-          <CRUDHeaderGroupSx
-            disableElevation
-            disableFocusRipple
-            disableRipple
-            startIcon={<BadgeIcon />}>
+          <CRUDHeaderGroupSx startIcon={<BadgeIcon />}>
             <Typography
               variant='h6'
               sx={{
@@ -157,9 +149,9 @@ export default function RegistrantAddition() {
               Add Registrant
             </Typography>
           </CRUDHeaderGroupSx>
-          <ListItemIconButtonSx onClick={handleClose}>
+          <IconButtonSx onClick={handleClose}>
             <CloseIcon />
-          </ListItemIconButtonSx>
+          </IconButtonSx>
         </Stack>
         <DialogContentSx>
           <DialogContentTextSx>Provide a valid email address.</DialogContentTextSx>

@@ -7,7 +7,7 @@ import { motion } from 'framer-motion'
 import { useRecoilValue } from 'recoil'
 import { paginatedEmplListAtom } from '../../../recoil-state'
 import { UMSwatch } from '../../../style'
-import { RegistrantDeletion, RegistrantUpdate } from '../dialogs'
+import { DeleteEmployeeDialog, UpdateEmployeeDialog } from '../dialogs'
 
 export default function RegistrantList() {
   const paginatedEmplList = useRecoilValue(paginatedEmplListAtom)
@@ -32,7 +32,7 @@ export default function RegistrantList() {
   }
 
   return (
-    <List sx={{ width: '100%', p: 0, backgroundColor: 'transparent' }}>
+    <List sx={{ p: 0, backgroundColor: 'transparent' }}>
       <motion.ul
         variants={container}
         initial='hidden'
@@ -40,7 +40,12 @@ export default function RegistrantList() {
         exit={{ opacity: 0 }}
         style={{ listStyle: 'none', paddingInlineStart: 0 }}>
         {paginatedEmplList.map((empl) => (
-          <motion.div key={empl.id} variants={employee} className='list-group-empl'>
+          <motion.div
+            key={empl.id}
+            variants={employee}
+            initial='hidden'
+            animate='visible'
+            className='list-group-empl'>
             <Stack direction='row' justifyContent='center' alignItems='center'>
               <ListItem divider>
                 <ListItemAvatar>
@@ -64,14 +69,14 @@ export default function RegistrantList() {
                   }}
                 />
 
-                <RegistrantUpdate
+                <UpdateEmployeeDialog
                   emplId={empl.id}
                   emplFirstname={empl.firstname}
                   emplLastname={empl.lastname}
                   emplRole={empl.role}
                   emplEmail={empl.email}
                 />
-                <RegistrantDeletion
+                <DeleteEmployeeDialog
                   emplId={empl.id}
                   emplFirstname={empl.firstname}
                   emplLastname={empl.lastname}

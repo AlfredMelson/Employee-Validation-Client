@@ -4,11 +4,11 @@ import { filteredEmployeeStateSelector, paginatedEmplListAtom } from '../../../r
 import { Paginate } from '../../../services'
 import { PaginationSx } from '../../mui'
 
-export default function DataPagination() {
+export default function Pagination() {
   const [page, setPage] = useState<number>(1)
   const [numPages, setNumPages] = useState<number>(1)
 
-  const employeeFilterState = useRecoilValue(filteredEmployeeStateSelector)
+  const filteredEmployeeState = useRecoilValue(filteredEmployeeStateSelector)
 
   const setPaginatedEmplList = useSetRecoilState(paginatedEmplListAtom)
 
@@ -18,7 +18,12 @@ export default function DataPagination() {
   }
 
   useEffect(() => {
-    const count = employeeFilterState.length
+    // check filteredEmployeeState contains a value
+    if (filteredEmployeeState === undefined || null) {
+      return
+    }
+
+    const count = filteredEmployeeState.length
 
     const pageObj = {
       totalEmpl: count,
@@ -27,7 +32,7 @@ export default function DataPagination() {
 
     const paginateRes = Paginate(pageObj)
 
-    const emplIDs = employeeFilterState.slice(
+    const emplIDs = filteredEmployeeState?.slice(
       paginateRes.beginningIndex,
       paginateRes.endingIndex + 1
     )
@@ -35,7 +40,14 @@ export default function DataPagination() {
 
     setNumPages(paginateRes.totalPages)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page, employeeFilterState])
+  }, [page, filteredEmployeeState])
 
-  return <PaginationSx count={numPages} shape='rounded' page={page} onChange={handleChange} />
+  // return pagination component only if there are more than one page
+  return (
+    <>
+      {numPages > 1 && (
+        <PaginationSx count={numPages} shape='rounded' page={page} onChange={handleChange} />
+      )}
+    </>
+  )
 }

@@ -1,7 +1,7 @@
 import { AnimatePresence } from 'framer-motion'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import { AppLayout } from './components'
-import { Administration, Login, NoMatch } from './pages'
+import { Administration, Login, Mismatch } from './pages'
 
 export default function App() {
   const location = useLocation()
@@ -18,8 +18,8 @@ export default function App() {
           <Route path='dashboard/*' element={<Administration />} />
           {/* </Route> */}
 
-          {/* no-match routes */}
-          <Route path='*' element={<NoMatch />} />
+          {/* mismatch route */}
+          <Route path='*' element={<Mismatch />} />
         </Route>
       </Routes>
     </AnimatePresence>

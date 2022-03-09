@@ -1,3 +1,3 @@
-export { default as RegistrantDeletion } from './RegistrantDeletion'
-export { default as RegistrantUpdate } from './RegistrantUpdate'
-export { default as RegistrantAddition } from './RegistrantAddition'
+export { default as DeleteEmployeeDialog } from './DeleteEmployeeDialog'
+export { default as UpdateEmployeeDialog } from './UpdateEmployeeDialog'
+export { default as AddEmployeeDialog } from './AddEmployeeDialog'

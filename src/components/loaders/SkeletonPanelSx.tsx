@@ -1,8 +1,8 @@
 import Skeleton from '@mui/material/Skeleton'
-import { UMSwatch } from '../../../style'
-import { TabPanelWrapper } from '../../mui'
+import { UMSwatch } from '../../style'
+import { TabPanelWrapper } from '../mui'
 
-export default function SkeletonPanel() {
+export default function SkeletonPanelSx() {
   return (
     <TabPanelWrapper>
       <Skeleton

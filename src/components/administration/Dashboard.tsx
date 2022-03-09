@@ -1,14 +1,14 @@
-import { Stack } from '@mui/material'
+import Stack from '@mui/material/Stack'
 import { motion } from 'framer-motion'
 import { useEffect } from 'react'
 import { useEmployeesContext } from '../../context'
 import { CardSx } from '../mui'
-import { DataCollocation, DataPagination } from './controls'
-import { AdminHeader } from './header'
-import { AdminTabSelectors } from './tabs'
-import { AdminTagline } from './tagline'
+import { Collocation, Pagination } from './controls'
+import { HeaderSection } from './header'
+import { TabSelectors } from './tabs'
+import { Tagline } from './tagline'
 
-export default function AdminDashboard() {
+export default function Dashboard() {
   const { getEmployees } = useEmployeesContext()
 
   useEffect(() => {
@@ -45,7 +45,7 @@ export default function AdminDashboard() {
     }
   }
 
-  const pagination = {
+  const paginate = {
     initial: { y: -20, opacity: 0 },
     animate: {
       y: 0,
@@ -61,20 +61,20 @@ export default function AdminDashboard() {
     <motion.div variants={content} animate='animate' initial='initial'>
       <CardSx>
         <motion.div variants={title}>
-          <AdminHeader />
+          <HeaderSection />
         </motion.div>
         <motion.div variants={inputs}>
-          <AdminTagline />
+          <Tagline />
         </motion.div>
-        <AdminTabSelectors />
-        <motion.div variants={pagination}>
+        <TabSelectors />
+        <motion.div variants={paginate}>
           <Stack
             direction='row'
             justifyContent='space-around'
             alignItems='center'
             sx={{ padding: '0 0 14px' }}>
-            <DataCollocation />
-            <DataPagination />
+            <Collocation />
+            <Pagination />
           </Stack>
         </motion.div>
       </CardSx>

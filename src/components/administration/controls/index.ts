@@ -1,2 +1,2 @@
-export { default as DataCollocation } from './DataCollocation'
-export { default as DataPagination } from './DataPagination'
+export { default as Collocation } from './Collocation'
+export { default as Pagination } from './Pagination'

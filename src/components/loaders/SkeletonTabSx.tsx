@@ -1,10 +1,10 @@
 import Box from '@mui/material/Box'
 import Skeleton from '@mui/material/Skeleton'
 import Stack from '@mui/material/Stack'
-import { UMSwatch } from '../../../style'
-import { TabWrapper } from '../../mui'
+import { UMSwatch } from '../../style'
+import { TabWrapper } from '../mui'
 
-const SkeletonTab = () => {
+function SkeletonTabStyle() {
   return (
     <Box sx={{ mx: '10px' }}>
       <Skeleton
@@ -17,7 +17,7 @@ const SkeletonTab = () => {
   )
 }
 
-export default function SkeletonTabs() {
+export default function SkeletonTabSx() {
   return (
     <TabWrapper>
       <Stack
@@ -25,10 +25,10 @@ export default function SkeletonTabs() {
         justifyContent='space-evenly'
         alignItems='center'
         sx={{ gridColumn: 2 }}>
-        <SkeletonTab />
-        <SkeletonTab />
-        <SkeletonTab />
-        <SkeletonTab />
+        <SkeletonTabStyle />
+        <SkeletonTabStyle />
+        <SkeletonTabStyle />
+        <SkeletonTabStyle />
       </Stack>
     </TabWrapper>
   )

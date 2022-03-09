@@ -12,16 +12,16 @@ function a11yProps(value: string) {
   }
 }
 
-export default function AdminTabs() {
+export default function TabOptions() {
   const [employeeFilterState, setEmployeeFilterState] = useRecoilState(employeeFilterStateAtom)
 
   const employeeState = useRecoilValue(employeeStateAtom)
 
   const filteredEmails = EmplEmailFilters(employeeState)
 
-  const InvalidLabel = filteredEmails.invalid.length === 0 ? 'No invalid' : 'Invalid'
-  const DuplicateLabel = filteredEmails.duplicate.length === 0 ? 'No duplicate' : 'Duplicate'
-  const OldLabel = filteredEmails.old.length === 0 ? 'No old' : 'Old'
+  const InvalidLabel = filteredEmails?.invalid.length === 0 ? 'No invalid' : 'Invalid'
+  const DuplicateLabel = filteredEmails?.duplicate.length === 0 ? 'No duplicate' : 'Duplicate'
+  const OldLabel = filteredEmails?.old.length === 0 ? 'No old' : 'Old'
 
   const TabData: ITabData[] = [
     {
@@ -35,22 +35,22 @@ export default function AdminTabs() {
       index: 1,
       label: `${InvalidLabel}`,
       value: 'invalid',
-      errorQuantity: filteredEmails.invalid.length,
-      disable: filteredEmails.invalid.length === 0
+      errorQuantity: filteredEmails?.invalid.length,
+      disable: filteredEmails?.invalid.length === 0
     },
     {
       index: 2,
       label: `${DuplicateLabel}`,
       value: 'duplicate',
-      errorQuantity: filteredEmails.duplicate.length,
-      disable: filteredEmails.duplicate.length === 0
+      errorQuantity: filteredEmails?.duplicate.length,
+      disable: filteredEmails?.duplicate.length === 0
     },
     {
       index: 3,
       label: `${OldLabel}`,
       value: 'old',
-      errorQuantity: filteredEmails.old.length,
-      disable: filteredEmails.old.length === 0
+      errorQuantity: filteredEmails?.old.length,
+      disable: filteredEmails?.old.length === 0
     }
   ]
 

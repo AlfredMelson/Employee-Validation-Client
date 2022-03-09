@@ -13,12 +13,12 @@ import {
   DialogContentSx,
   DialogContentTextSx,
   DialogSx,
-  ListItemIconButtonSx,
+  IconButtonSx,
   SubmissionButtonSx,
   ToolTipSx
 } from '../../mui'
 
-export default function RegistrantDeletion(emplId, emplFirstname, emplLastname) {
+export default function DeleteEmployeeDialog(emplId, emplFirstname, emplLastname) {
   // update email dialog state
   const [open, setOpen] = useState(false)
   const theme = useTheme()
@@ -75,12 +75,9 @@ export default function RegistrantDeletion(emplId, emplFirstname, emplLastname) 
   return (
     <>
       <ToolTipSx tooltipTitle={'Delete'}>
-        <ListItemIconButtonSx
-          onClick={handleClickOpen}
-          aria-label='delete registrant'
-          sx={{ mr: '4px' }}>
+        <IconButtonSx onClick={handleClickOpen} aria-label='delete registrant' sx={{ mr: '4px' }}>
           <RemoveEmplIcon />
-        </ListItemIconButtonSx>
+        </IconButtonSx>
       </ToolTipSx>
       <DialogSx fullScreen={fullScreen} open={open} onClose={handleClose}>
         <Stack
@@ -88,11 +85,7 @@ export default function RegistrantDeletion(emplId, emplFirstname, emplLastname) 
           justifyContent='space-between'
           alignItems='center'
           sx={{ p: '20px 20px 0' }}>
-          <CRUDHeaderGroupSx
-            disableElevation
-            disableFocusRipple
-            disableRipple
-            startIcon={<BadgeIcon />}>
+          <CRUDHeaderGroupSx startIcon={<BadgeIcon />}>
             <Typography
               variant='h6'
               sx={{
@@ -101,9 +94,9 @@ export default function RegistrantDeletion(emplId, emplFirstname, emplLastname) 
               {[emplFirstname, emplLastname].join(' ')}
             </Typography>
           </CRUDHeaderGroupSx>
-          <ListItemIconButtonSx onClick={handleClose}>
+          <IconButtonSx onClick={handleClose}>
             <CloseIcon />
-          </ListItemIconButtonSx>
+          </IconButtonSx>
         </Stack>
         <DialogContentSx>
           <DialogContentTextSx>

@@ -14,13 +14,13 @@ import {
   DialogContentSx,
   DialogContentTextSx,
   DialogSx,
-  ListItemIconButtonSx,
+  IconButtonSx,
   SubmissionButtonSx,
   TextFieldSx,
   ToolTipSx
 } from '../../mui'
 
-interface IRegistrantUpdate {
+interface IUpdateEmployeeDialog {
   emplId: string
   emplFirstname: string
   emplLastname: string
@@ -28,13 +28,13 @@ interface IRegistrantUpdate {
   emplEmail: string
 }
 
-export default function RegistrantUpdate({
+export default function UpdateEmployeeDialog({
   emplId,
   emplFirstname,
   emplLastname,
   emplRole,
   emplEmail
-}: IRegistrantUpdate) {
+}: IUpdateEmployeeDialog) {
   // update email dialog state
   const [open, setOpen] = useState(false)
 
@@ -75,7 +75,7 @@ export default function RegistrantUpdate({
     setEmailValidation(!validateEmail)
   }, [emailUpdate])
 
-  const handleUpdateEmplEmail = async event => {
+  const handleUpdateEmplEmail = async (event) => {
     event.preventDefault()
 
     // alert user if email address input is empty
@@ -119,9 +119,9 @@ export default function RegistrantUpdate({
   return (
     <>
       <ToolTipSx tooltipTitle={'Update'}>
-        <ListItemIconButtonSx onClick={handleClickOpen} aria-label='update' sx={{ mr: '8px' }}>
+        <IconButtonSx onClick={handleClickOpen} aria-label='update' sx={{ mr: '8px' }}>
           <SettingsIcon />
-        </ListItemIconButtonSx>
+        </IconButtonSx>
       </ToolTipSx>
       <DialogSx fullScreen={fullScreen} open={open} onClose={handleClose}>
         <Stack
@@ -129,11 +129,7 @@ export default function RegistrantUpdate({
           justifyContent='space-between'
           alignItems='center'
           sx={{ p: '20px 20px 0' }}>
-          <CRUDHeaderGroupSx
-            disableElevation
-            disableFocusRipple
-            disableRipple
-            startIcon={<BadgeIcon />}>
+          <CRUDHeaderGroupSx startIcon={<BadgeIcon />}>
             <Typography
               variant='h6'
               sx={{
@@ -142,9 +138,9 @@ export default function RegistrantUpdate({
               {[emplFirstname, emplLastname].join(' ')}
             </Typography>
           </CRUDHeaderGroupSx>
-          <ListItemIconButtonSx onClick={handleClose}>
+          <IconButtonSx onClick={handleClose}>
             <CloseIcon />
-          </ListItemIconButtonSx>
+          </IconButtonSx>
         </Stack>
         <DialogContentSx>
           <DialogContentTextSx>
@@ -178,7 +174,7 @@ export default function RegistrantUpdate({
               id='update-email'
               helperText={emailHelperText}
               placeholder='Update Email Address'
-              onChange={event => {
+              onChange={(event) => {
                 setEmailUpdate(event.target.value)
               }}
             />

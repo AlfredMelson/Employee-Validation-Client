@@ -1,7 +1,7 @@
 import Typography from '@mui/material/Typography'
 import { UMSwatch } from '../../../style'
 
-export default function AdminTagline() {
+export default function Tagline() {
   return (
     <Typography
       variant='body1'

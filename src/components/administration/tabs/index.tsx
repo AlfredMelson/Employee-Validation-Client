@@ -1,1 +1,1 @@
-export { default as AdminTabSelectors } from './AdminTabSelectors'
+export { default as TabSelectors } from './TabSelectors'

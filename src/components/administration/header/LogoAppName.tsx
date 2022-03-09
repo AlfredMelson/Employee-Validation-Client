@@ -4,11 +4,7 @@ import { LogoNameGroupingSx } from '../../mui'
 
 export default function LogoAppName() {
   return (
-    <LogoNameGroupingSx
-      disableElevation
-      disableFocusRipple
-      disableRipple
-      startIcon={<SecurityIcon sx={{ width: 24, height: 24 }} />}>
+    <LogoNameGroupingSx startIcon={<SecurityIcon sx={{ width: 24, height: 24 }} />}>
       <Typography
         variant='h6'
         sx={{

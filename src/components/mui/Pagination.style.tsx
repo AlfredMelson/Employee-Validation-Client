@@ -8,6 +8,20 @@ export const PaginationSx = styled((props: PaginationProps) => <Pagination {...p
 })(({ theme }) => ({
   color: UMSwatch.Blue[500],
   backgroundColor: 'transparent',
+  transition: theme.transitions.create(['all'], {
+    duration: theme.transitions.duration.standard,
+    easing: theme.transitions.easing.easeInOut
+  }),
+  '&:hover, &.Mui-focused ': {
+    backgroundColor: 'transparent'
+  },
+  '&.Mui-selected': {
+    cursor: 'default',
+    backgroundColor: 'transparent'
+  },
+  '&.Mui-disabled': {
+    color: 'transparent'
+  },
   ['.MuiPaginationItem-rounded ']: {
     width: '36px',
     height: '36px',

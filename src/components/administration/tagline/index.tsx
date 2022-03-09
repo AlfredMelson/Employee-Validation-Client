@@ -1,1 +1,1 @@
-export { default as AdminTagline } from './AdminTagline'
+export { default as Tagline } from './Tagline'

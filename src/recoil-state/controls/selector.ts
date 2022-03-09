@@ -1,6 +1,7 @@
 import { atom, selector } from 'recoil'
 import { Empl } from '../../api'
-import { EmplEmailFilters } from '../../utils'
+import { EmplEmailFilters, IEmplSorting } from '../../utils'
+import SortFilteredList from '../../utils/EmplSorting'
 
 /**
  * Recoil managed state representing employees list per pagination
@@ -97,80 +98,38 @@ export const employeeFilterStateAtom = atom<'all' | 'invalid' | 'duplicate' | 'o
 export const filteredEmployeeStateSelector = selector<Empl[]>({
   key: 'filteredEmployeeState',
   get: ({ get }) => {
-    const filter = get(employeeFilterStateAtom)
-    const allEmployees = get(employeeStateAtom)
+    const sort: 'alphabetical' | 'reverse' = get(alphabeticalSortAtom)
+    const filter: 'all' | 'invalid' | 'duplicate' | 'old' = get(employeeFilterStateAtom)
+    const allEmployees: Empl[] = get(employeeStateAtom)
+    const filteredEmails: IEmplSorting = EmplEmailFilters(allEmployees)
 
-    const filteredEmails = EmplEmailFilters(allEmployees)
+    console.log('filteredEmails', filteredEmails.invalid)
+    console.log('filteredEmails', filteredEmails.all)
 
-    switch (filter) {
-      case 'invalid':
-        return filteredEmails.invalid
-      case 'duplicate':
-        return filteredEmails.duplicate
-      case 'old':
-        return filteredEmails.old
-      default:
-        return filteredEmails.all
+    if (sort === 'alphabetical') {
+      switch (filter) {
+        case 'invalid':
+          return SortFilteredList(filteredEmails.invalid)
+        case 'duplicate':
+          return SortFilteredList(filteredEmails.duplicate)
+        case 'old':
+          return SortFilteredList(filteredEmails.old)
+        case 'all':
+          return allEmployees
+      }
+    }
+
+    if (sort === 'reverse') {
+      switch (filter) {
+        case 'invalid':
+          return SortFilteredList(filteredEmails.invalid).reverse()
+        case 'duplicate':
+          return SortFilteredList(filteredEmails.duplicate).reverse()
+        case 'old':
+          return SortFilteredList(filteredEmails.old).reverse()
+        case 'all':
+          return allEmployees
+      }
     }
   }
 })
-
-// export const alphabeticalEmployeeSelector = selector<Empl[]>({
-//   key: 'alphabeticalEmployeeSort',
-//   get: ({ get }) => {
-//     const employeeFilterState = get(filteredEmployeeStateSelector)
-//     console.log('alphabeticalEmployeeSort - employeeFilterState:', employeeFilterState)
-
-//     const alphabeticalSort = get(alphabeticalSortAtom)
-//     console.log('alphabeticalEmployeeSort - alphabeticalSort:', alphabeticalSort)
-
-//     const sortedEmpls = EmplSorting(employeeFilterState)
-//     console.log('alphabeticalEmployeeSort - sortedEmpls:', sortedEmpls)
-
-//     if (employeeFilterState.length === 0) {
-//       return []
-//     }
-
-//     // sort employee list by lastname alphabetically
-
-//     switch (alphabeticalSort) {
-//       case 'alphabetical':
-//         return sortedEmpls.alphabetical
-//       // case 'reverse':
-//       //   return sortedEmpls.reverse
-//     }
-//   }
-// })
-
-//   const filteredEmails = EmplEmailFilters(paginatedEmpl)
-
-//   const InvalidLabel = filteredEmails.invalid.length === 0 ? 'No invalid' : 'Invalid'
-//   const DuplicateLabel = filteredEmails.duplicate.length === 0 ? 'No duplicate' : 'Duplicate'
-//   const OldLabel = filteredEmails.old.length === 0 ? 'No old' : 'Old'
-
-//   const TabData: ITabData[] = [
-//     {
-//       index: 0,
-//       label: 'Registrants',
-//       errorQuantity: 0,
-//       disable: false
-//     },
-//     {
-//       index: 1,
-//       label: `${InvalidLabel}`,
-//       errorQuantity: filteredEmails.invalid.length,
-//       disable: filteredEmails.invalid.length === 0
-//     },
-//     {
-//       index: 2,
-//       label: `${DuplicateLabel}`,
-//       errorQuantity: filteredEmails.duplicate.length,
-//       disable: filteredEmails.duplicate.length === 0
-//     },
-//     {
-//       index: 3,
-//       label: `${OldLabel}`,
-//       errorQuantity: filteredEmails.old.length,
-//       disable: filteredEmails.old.length === 0
-//     }
-//   ]

@@ -6,11 +6,7 @@ import { LogoNameGroupingSx } from '../../mui'
 export default function LoginHeader() {
   return (
     <Stack direction='row' justifyContent='center' alignItems='center'>
-      <LogoNameGroupingSx
-        disableElevation
-        disableFocusRipple
-        disableRipple
-        startIcon={<SecurityIcon sx={{ width: 36, height: 36 }} />}>
+      <LogoNameGroupingSx startIcon={<SecurityIcon sx={{ width: 36, height: 36 }} />}>
         <Typography
           variant='h5'
           sx={{
