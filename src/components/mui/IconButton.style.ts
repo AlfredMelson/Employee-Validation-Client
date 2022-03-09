@@ -22,8 +22,6 @@ export const ListItemIconButtonSx = styled(IconButton)(({ theme }) => ({
     easing: theme.transitions.easing.easeInOut
   }),
   '&:hover, &.Mui-focused, &.Mui-selected': {
-    color: UMSwatch.Blue[400],
-    borderRadius: '4px',
-    backgroundColor: UMSwatch.Grey[800]
+    color: UMSwatch.Blue[400]
   }
 }))

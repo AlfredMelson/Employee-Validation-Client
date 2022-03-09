@@ -4,22 +4,13 @@ import List from '@mui/material/List'
 import ListItemAvatar from '@mui/material/ListItemAvatar'
 import ListItemText from '@mui/material/ListItemText'
 import { motion } from 'framer-motion'
-import { useEffect, useState } from 'react'
 import { useRecoilValue } from 'recoil'
 import { paginatedEmplListAtom } from '../../../recoil-state'
 import { UMSwatch } from '../../../style'
-import EmplSorting from '../../../utils/EmplSorting'
 import { RegistrantDeletion, RegistrantUpdate } from '../dialogs'
 
 export default function RegistrantList() {
   const paginatedEmplList = useRecoilValue(paginatedEmplListAtom)
-
-  const [emplListData, setEmplListData] = useState([])
-
-  useEffect(() => {
-    const response = EmplSorting(paginatedEmplList)
-    setEmplListData(response)
-  }, [paginatedEmplList])
 
   const container = {
     hidden: { opacity: 1 },
@@ -48,7 +39,7 @@ export default function RegistrantList() {
         animate='visible'
         exit={{ opacity: 0 }}
         style={{ listStyle: 'none', paddingInlineStart: 0 }}>
-        {emplListData.map((empl) => (
+        {paginatedEmplList.map((empl) => (
           <motion.div key={empl.id} variants={employee} className='list-group-empl'>
             <Stack direction='row' justifyContent='center' alignItems='center'>
               <ListItem divider>

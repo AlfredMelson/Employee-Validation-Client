@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom'
 // import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 // import { useAxiosPrivate } from '../../hooks'
 
-export default function Layout() {
+export default function AppLayout() {
   // const axiosPrivate = useAxiosPrivate()
   // const navigate = useNavigate()
   // const location = useLocation()

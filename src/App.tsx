@@ -1,6 +1,6 @@
 import { AnimatePresence } from 'framer-motion'
 import { Route, Routes, useLocation } from 'react-router-dom'
-import { Layout } from './components'
+import { AppLayout } from './components'
 import { Administration, Login, NoMatch } from './pages'
 
 export default function App() {
@@ -8,7 +8,7 @@ export default function App() {
   return (
     <AnimatePresence exitBeforeEnter>
       <Routes key={location.pathname}>
-        <Route path='/' element={<Layout />}>
+        <Route path='/' element={<AppLayout />}>
           {/* public routes */}
           <Route index element={<Login />} />
 

@@ -20,28 +20,33 @@ export default function UMThemedComponents(theme: Theme) {
         defaultProps: {
           size: 'small',
           variant: 'outlined'
+        },
+        styleOverrides: {
+          root: {
+            msTouchAction: 'manipulation',
+            touchAction: 'manipulation',
+            webkitTapHighlightColor: 'transparent',
+            transition: theme.transitions.create(['all'], {
+              duration: theme.transitions.duration.standard,
+              easing: theme.transitions.easing.easeInOut
+            })
+          }, // Styles applied to the root element
+          text: {}, // Styles applied to the root element if variant="text"
+          outlined: {}, // Styles applied to the root element if variant="outlined"
+          contained: {}, // Styles applied to the root element if variant="contained"
+          disabled: {}, // State class applied to the root element if disabled={true}
+          textSizeSmall: { borderRadius: theme.spacing(3) }, // State class applied to the root element if disabled={true}
+          endIcon: {
+            '& .MuiButton-iconSizeSmall': {
+              margin: 0
+            }
+          } // Styles applied to the endIcon element if supplied.
         }
       },
-      styleOverrides: {
-        root: {
-          msTouchAction: 'manipulation',
-          touchAction: 'manipulation',
-          webkitTapHighlightColor: 'transparent',
-          transition: theme.transitions.create(['all'], {
-            duration: theme.transitions.duration.standard,
-            easing: theme.transitions.easing.easeInOut
-          })
-        }, // Styles applied to the root element
-        text: {}, // Styles applied to the root element if variant="text"
-        outlined: {}, // Styles applied to the root element if variant="outlined"
-        contained: {}, // Styles applied to the root element if variant="contained"
-        disabled: {}, // State class applied to the root element if disabled={true}
-        textSizeSmall: { borderRadius: theme.spacing(3) }, // State class applied to the root element if disabled={true}
-        endIcon: {
-          '& .MuiButton-iconSizeSmall': {
-            margin: 0
-          }
-        } // Styles applied to the endIcon element if supplied.
+      MuiButtonBase: {
+        defaultProps: {
+          disableTouchRipple: true
+        }
       },
       MuiCard: {
         defaultProps: {
@@ -108,8 +113,7 @@ export default function UMThemedComponents(theme: Theme) {
       MuiIcon: {
         defaultProps: {
           fontSize: 'small'
-        },
-        styleOverrides: {}
+        }
       },
       MuiIconButton: {
         defaultProps: {},
@@ -124,13 +128,6 @@ export default function UMThemedComponents(theme: Theme) {
               backgroundColor: 'transparent'
             }
           }
-        }
-      },
-      MuiListItemButton: {
-        defaultProps: {},
-        styleOverrides: {
-          root: {}, // Styles applied to the root element
-          divider: {} // Styles applied to the inner `component` element if divider={true}.
         }
       },
       MuiListItemText: {
@@ -174,7 +171,6 @@ export default function UMThemedComponents(theme: Theme) {
               }
             }
           }, // Styles applied to the root element
-          //  MuiButtonBase-root-MuiMenuItem-root.Mui-selected
           focusVisible: {}, // State class applied to the root element if keyboard focused
           dense: {}, // Styles applied to the root element if dense
           disabled: {}, // State class applied to the root element if disabled={true}
@@ -183,7 +179,6 @@ export default function UMThemedComponents(theme: Theme) {
           selected: {} // State class applied to the root element if selected={true}
         }
       },
-
       MuiMenuList: {
         defaultProps: {
           dense: true
@@ -213,34 +208,9 @@ export default function UMThemedComponents(theme: Theme) {
           selected: {} // State class applied to the root element if selected={true}
         }
       },
-      MuiOutlinedInput: {
-        defaultProps: {},
-        styleOverrides: {
-          input: {}
-        }
-      },
-      MuiPaper: {
-        defaultProps: {},
-        styleOverrides: {
-          root: {}, // Styles applied to the root element
-          rounded: {}, // Styles applied to the root element unless square={true}
-          outlined: {}, // Styles applied to the root element if variant="outlined"
-          elevation: {} // Styles applied to the root element if variant="elevation"
-        }
-      },
-      MuiPopover: {
-        defaultProps: {},
-        styleOverrides: {
-          root: {}, // Styles applied to the root element
-          paper: {} // Styles applied to the root element unless square={true}
-        }
-      },
       MuiSvgIcon: {
         defaultProps: {
           fontSize: 'small'
-        },
-        styleOverrides: {
-          root: {} // Styles applied to the root element
         }
       },
       MuiTab: {

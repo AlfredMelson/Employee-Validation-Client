@@ -1,4 +1,4 @@
-export { default as LoginCard } from './login'
-export { default as RouteMismatch } from './no-match'
-export { default as AuthRequired } from './authorization'
-export { default as Layout } from './layout'
+export { LoginCard } from './login'
+export { RouteMismatch } from './no-match'
+export { AuthRequired } from './authorization'
+export { AppLayout } from './layout'
