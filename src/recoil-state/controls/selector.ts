@@ -1,7 +1,6 @@
 import { atom, selector } from 'recoil'
 import { Empl } from '../../api'
-import { EmplEmailFilters, IEmplSorting } from '../../utils'
-import SortFilteredList from '../../utils/EmplSorting'
+import { EmailFilters, SortFilteredList } from '../../utils'
 
 /**
  * Recoil managed state representing employees list per pagination
@@ -101,10 +100,7 @@ export const filteredEmployeeStateSelector = selector<Empl[]>({
     const sort: 'alphabetical' | 'reverse' = get(alphabeticalSortAtom)
     const filter: 'all' | 'invalid' | 'duplicate' | 'old' = get(employeeFilterStateAtom)
     const allEmployees: Empl[] = get(employeeStateAtom)
-    const filteredEmails: IEmplSorting = EmplEmailFilters(allEmployees)
-
-    console.log('filteredEmails', filteredEmails.invalid)
-    console.log('filteredEmails', filteredEmails.all)
+    const filteredEmails = EmailFilters(allEmployees)
 
     if (sort === 'alphabetical') {
       switch (filter) {
@@ -114,8 +110,8 @@ export const filteredEmployeeStateSelector = selector<Empl[]>({
           return SortFilteredList(filteredEmails.duplicate)
         case 'old':
           return SortFilteredList(filteredEmails.old)
-        case 'all':
-          return allEmployees
+        default:
+          return SortFilteredList(filteredEmails.all)
       }
     }
 
@@ -128,7 +124,7 @@ export const filteredEmployeeStateSelector = selector<Empl[]>({
         case 'old':
           return SortFilteredList(filteredEmails.old).reverse()
         case 'all':
-          return allEmployees
+          return SortFilteredList(allEmployees).reverse()
       }
     }
   }

@@ -1,16 +1,22 @@
 import { motion } from 'framer-motion'
-import { Dashboard } from '../components/administration'
-import { AdministrationContainerStack } from '../components/mui'
+import { AdminCard } from '../components'
+import { AdminContainerStack } from '../components/mui'
 import { EmplProvider } from '../context'
+import { adminContainer } from '../style/UMAnimations'
 
 export default function Administration() {
   return (
-    <motion.section exit={{ opacity: 0 }} className='dashboard-background'>
-      <AdministrationContainerStack>
+    <motion.section
+      className='dashboard-background'
+      variants={adminContainer}
+      initial='initial'
+      animate='animate'
+      exit='exit'>
+      <AdminContainerStack>
         <EmplProvider>
-          <Dashboard />
+          <AdminCard />
         </EmplProvider>
-      </AdministrationContainerStack>
+      </AdminContainerStack>
     </motion.section>
   )
 }

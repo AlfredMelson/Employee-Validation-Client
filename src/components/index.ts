@@ -1,4 +1,5 @@
 export { LoginCard } from './login'
+export { AdminCard } from './administration'
 export { RouteMismatch } from './no-match'
 export { AuthRequired } from './authorization'
 export { AppLayout } from './layout'

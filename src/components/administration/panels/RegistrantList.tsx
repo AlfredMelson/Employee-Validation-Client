@@ -1,13 +1,8 @@
-import { ListItem, Stack } from '@mui/material'
-import Avatar from '@mui/material/Avatar'
 import List from '@mui/material/List'
-import ListItemAvatar from '@mui/material/ListItemAvatar'
-import ListItemText from '@mui/material/ListItemText'
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { useRecoilValue } from 'recoil'
 import { paginatedEmplListAtom } from '../../../recoil-state'
-import { UMSwatch } from '../../../style'
-import { DeleteEmployeeDialog, UpdateEmployeeDialog } from '../dialogs'
+import Individual from './Individual'
 
 export default function RegistrantList() {
   const paginatedEmplList = useRecoilValue(paginatedEmplListAtom)
@@ -28,64 +23,37 @@ export default function RegistrantList() {
     visible: {
       y: 0,
       opacity: 1
-    }
+    },
+    exit: { opacity: 0 }
   }
 
   return (
     <List sx={{ p: 0, backgroundColor: 'transparent' }}>
-      <motion.ul
-        variants={container}
-        initial='hidden'
-        animate='visible'
-        exit={{ opacity: 0 }}
-        style={{ listStyle: 'none', paddingInlineStart: 0 }}>
-        {paginatedEmplList.map((empl) => (
-          <motion.div
-            key={empl.id}
-            variants={employee}
-            initial='hidden'
-            animate='visible'
-            className='list-group-empl'>
-            <Stack direction='row' justifyContent='center' alignItems='center'>
-              <ListItem divider>
-                <ListItemAvatar>
-                  <Avatar
-                    sx={{
-                      bgcolor: UMSwatch.Gold[50],
-                      borderRadius: '4px',
-                      color: UMSwatch.Black[100],
-                      fontWeight: 500
-                    }}>
-                    {empl.firstname.substring(0, 1)}
-                    {empl.lastname.substring(0, 1)}
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText
-                  primary={[empl.firstname, empl.lastname].join(' ')}
-                  secondary={empl.email}
-                  sx={{
-                    '.MuiListItemText-primary': { fontSize: '20px', color: UMSwatch.White[100] },
-                    '.MuiListItemText-secondary': { color: UMSwatch.White[50] }
-                  }}
-                />
-
-                <UpdateEmployeeDialog
-                  emplId={empl.id}
-                  emplFirstname={empl.firstname}
-                  emplLastname={empl.lastname}
-                  emplRole={empl.role}
-                  emplEmail={empl.email}
-                />
-                <DeleteEmployeeDialog
-                  emplId={empl.id}
-                  emplFirstname={empl.firstname}
-                  emplLastname={empl.lastname}
-                />
-              </ListItem>
-            </Stack>
-          </motion.div>
-        ))}
-      </motion.ul>
+      <AnimatePresence exitBeforeEnter>
+        <motion.ul
+          variants={container}
+          initial='hidden'
+          animate='visible'
+          style={{ listStyle: 'none', paddingInlineStart: 0 }}>
+          {paginatedEmplList.map((empl) => (
+            <motion.div
+              key={empl.id}
+              variants={employee}
+              initial='hidden'
+              animate='visible'
+              exit='exit'
+              className='list-group-empl'>
+              <Individual
+                id={empl.id}
+                firstname={empl.firstname}
+                lastname={empl.lastname}
+                role={empl.role}
+                email={empl.email}
+              />
+            </motion.div>
+          ))}
+        </motion.ul>
+      </AnimatePresence>
     </List>
   )
 }

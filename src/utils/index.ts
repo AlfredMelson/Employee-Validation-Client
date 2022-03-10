@@ -1,3 +1,4 @@
 export * from './constants'
-export * from './EmplEmailFilters'
-export { default as EmplEmailFilters } from './EmplEmailFilters'
+export * from './EmailFilters'
+export { default as EmailFilters } from './EmailFilters'
+export { default as SortFilteredList } from './SortFilteredList'

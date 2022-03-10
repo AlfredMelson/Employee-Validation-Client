@@ -10,20 +10,20 @@ export const LoginContainerStack = styled(
   height: '100vh',
   width: '100vw',
   [theme.breakpoints.only('xs')]: {
-    padding: '20px 10px 0'
+    padding: '10px 0 0 0'
   },
   [theme.breakpoints.only('sm')]: {
-    paddingTop: '50px'
+    padding: '50px 0 0 0'
   },
   [theme.breakpoints.only('md')]: {
-    paddingTop: '100px'
+    padding: '100px 0 0 0'
   },
   [theme.breakpoints.up('lg')]: {
-    paddingTop: '200px'
+    padding: '200px 0 0 0'
   }
 }))
 
-export const AdministrationContainerStack = styled(
+export const AdminContainerStack = styled(
   (props: StackProps) => (
     <Stack direction='column' justifyContent='flex-start' alignItems='center' {...props} />
   ),

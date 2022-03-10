@@ -1,12 +1,13 @@
 import { styled } from '@mui/material/styles'
-import ToggleButton, { ToggleButtonProps } from '@mui/material/ToggleButton'
+import ToggleButton from '@mui/material/ToggleButton'
+import React from 'react'
 import { useSetRecoilState } from 'recoil'
 import { alphabeticalSortAtom } from '../../recoil-state'
 import { UMSwatch } from '../../style'
 import { ABCIcon, CBAIcon } from '../icons'
 import { ToolTipSx } from './ToolTip.style'
 
-const ToggleButtonStyle = styled((props: ToggleButtonProps) => <ToggleButton {...props} />, {
+const ToggleButtonStyle = styled(ToggleButton, {
   name: 'ToggleButton',
   slot: 'style'
 })(({ theme }) => ({

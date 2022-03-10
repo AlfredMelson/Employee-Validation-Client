@@ -11,7 +11,7 @@ body.loading * {
 .login-background {
   background-image: url('/public/assets/bg-pattern-login.png');
   background-size: cover;
-  background-position: center;
+  background-position: top center;
   background-repeat: no-repeat;
   background-attachment: fixed;
 }

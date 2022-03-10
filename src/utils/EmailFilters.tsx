@@ -17,14 +17,14 @@ const moreThanThirty = (registered: string) => {
   return registrationDate < thirtyDaysAgo
 }
 
-export interface IEmplSorting {
+export interface IEmailFilters {
   all: Empl[]
   invalid: Empl[]
   duplicate: Empl[]
   old: Empl[]
 }
 
-const EmplEmailFilters = (employees: Empl[]): IEmplSorting => {
+const EmailFilters = (employees: Empl[]): IEmailFilters => {
   // check employees contains a value
   if (employees === undefined || null) {
     return
@@ -53,4 +53,4 @@ const EmplEmailFilters = (employees: Empl[]): IEmplSorting => {
     )
   }
 }
-export default EmplEmailFilters
+export default EmailFilters

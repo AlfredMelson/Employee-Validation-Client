@@ -6,22 +6,6 @@ export const PaginationSx = styled((props: PaginationProps) => <Pagination {...p
   name: 'PaginationSx',
   slot: 'style'
 })(({ theme }) => ({
-  color: UMSwatch.Blue[500],
-  backgroundColor: 'transparent',
-  transition: theme.transitions.create(['all'], {
-    duration: theme.transitions.duration.standard,
-    easing: theme.transitions.easing.easeInOut
-  }),
-  '&:hover, &.Mui-focused ': {
-    backgroundColor: 'transparent'
-  },
-  '&.Mui-selected': {
-    cursor: 'default',
-    backgroundColor: 'transparent'
-  },
-  '&.Mui-disabled': {
-    color: 'transparent'
-  },
   ['.MuiPaginationItem-rounded ']: {
     width: '36px',
     height: '36px',
@@ -33,17 +17,21 @@ export const PaginationSx = styled((props: PaginationProps) => <Pagination {...p
       duration: theme.transitions.duration.standard,
       easing: theme.transitions.easing.easeInOut
     }),
-    '&:hover, &.Mui-focused ': {
+    '&:hover, &.Mui-focused': {
       color: UMSwatch.Blue[400],
       backgroundColor: 'transparent'
     },
     '&.Mui-selected': {
       cursor: 'default',
       color: UMSwatch.White[50],
-      backgroundColor: 'transparent'
+      backgroundColor: 'transparent',
+      '&:hover': {
+        backgroundColor: 'transparent'
+      }
     },
     '&.Mui-disabled': {
-      color: 'transparent'
+      color: 'transparent',
+      backgroundColor: 'transparent'
     }
   }
 }))

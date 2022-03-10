@@ -1,5 +1,5 @@
-import Box from '@mui/material/Box'
-import Stack from '@mui/material/Stack'
+import Typography from '@mui/material/Typography'
+import { motion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSetRecoilState } from 'recoil'
@@ -7,10 +7,10 @@ import axios from '../../../api/axiosCustom'
 import { useAuth } from '../../../hooks'
 import { loginAlertErrorAtom, loginErrorMessageAtom } from '../../../recoil-state'
 import { UMSwatch } from '../../../style'
+import { loginField, loginFieldTitle } from '../../../style/UMAnimations'
 import { API, AxiosLoginConfig } from '../../../utils'
-import { CheckIcon } from '../../icons'
-import { CircularProgressSx, LoginButtonSx, TextFieldSx, TypoTextfieldSx } from '../../mui'
-import SecurityIconSx from './SecurityIconSx'
+import { TextFieldSx } from '../../mui'
+import LoginSubmission from './LoginSubmission'
 
 export default function LoginTextFields() {
   const navigate = useNavigate()
@@ -52,7 +52,7 @@ export default function LoginTextFields() {
     }
   }, [adminUsername, adminPassword, setLoginErrorMessage, setLoginAlertError])
 
-  const handleFormSubmit = async (event) => {
+  const handleLoginSubmission = async (event) => {
     event.preventDefault()
 
     // alert user if username textfield is empty
@@ -126,50 +126,45 @@ export default function LoginTextFields() {
     }
   }, [])
 
-  const [loginHover, setLoginHover] = useState(false)
-
   return (
     <form>
-      <TypoTextfieldSx>Username</TypoTextfieldSx>
-      <TextFieldSx
-        autoFocus
-        type='text'
-        id='username'
-        color='success'
-        error={usernameHelperText !== ''}
-        onChange={(event) => setAdminUsername(event.target.value)}
-        helperText={usernameHelperText}
-      />
-      <TypoTextfieldSx sx={{ mt: '20px', ml: '10px' }}>Password</TypoTextfieldSx>
-      <TextFieldSx
-        type='password'
-        id='password'
-        error={passwordHelperText !== ''}
-        onChange={(event) => setAdminPassword(event.target.value)}
-        value={adminPassword}
-        helperText={passwordHelperText}
-      />
-      <Stack direction='row' justifyContent='center' alignItems='center' sx={{ m: '30px 0 0' }}>
-        <Box sx={{ position: 'relative' }}>
-          <LoginButtonSx
-            // disabled={submitting}
-            onClick={handleFormSubmit}
-            onMouseEnter={() => setLoginHover(true)}
-            onMouseLeave={() => setLoginHover(false)}
-            startIcon={<SecurityIconSx submitting={submitting} loginHover={loginHover} />}>
-            {!submitting
-              ? 'Login'
-              : successSubmit && (
-                  <CheckIcon
-                    sx={{
-                      color: UMSwatch.Gold[50]
-                    }}
-                  />
-                )}
-          </LoginButtonSx>
-          {submitting && <CircularProgressSx />}
-        </Box>
-      </Stack>
+      <motion.div variants={loginFieldTitle}>
+        <Typography variant='body1' sx={{ color: UMSwatch.White[100], margin: '0 0 4px 10px' }}>
+          Username
+        </Typography>
+      </motion.div>
+      <motion.div variants={loginField}>
+        <TextFieldSx
+          autoFocus
+          id='username'
+          type='text'
+          error={usernameHelperText !== ''}
+          onChange={(event) => setAdminUsername(event.target.value)}
+          helperText={usernameHelperText}
+        />
+      </motion.div>
+      <motion.div variants={loginFieldTitle}>
+        <Typography variant='body1' sx={{ color: UMSwatch.White[100], margin: '20px 0 4px 10px' }}>
+          Password
+        </Typography>
+      </motion.div>
+      <motion.div variants={loginField}>
+        <TextFieldSx
+          id='password'
+          type='password'
+          error={passwordHelperText !== ''}
+          onChange={(event) => setAdminPassword(event.target.value)}
+          value={adminPassword}
+          helperText={passwordHelperText}
+        />
+      </motion.div>
+      <motion.div variants={loginField}>
+        <LoginSubmission
+          onClick={handleLoginSubmission}
+          submitting={submitting}
+          successSubmit={successSubmit}
+        />
+      </motion.div>
     </form>
   )
 }
