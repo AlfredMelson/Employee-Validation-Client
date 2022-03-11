@@ -3,6 +3,7 @@ import { useRecoilState, useRecoilValue } from 'recoil'
 import { employeeFilterStateAtom, employeeStateAtom } from '../../../recoil-state'
 import { EmailFilters } from '../../../utils'
 import { BadgeSx, TabStyle, TabWrapper } from '../../mui'
+import TabBackground from './TabBackground'
 import { ITabData } from './types'
 
 function a11yProps(value: string) {
@@ -63,13 +64,14 @@ export default function TabOptions() {
 
   return (
     <TabWrapper>
+      <TabBackground employeeFilterState={employeeFilterState} />
       <Tabs
         aria-label='selector tabs'
         variant='scrollable'
         scrollButtons='auto'
         value={employeeFilterState}
         onChange={handleChange}
-        sx={{ gridColumn: 2 }}>
+        sx={{ gridColumn: 2, gridRow: 1 }}>
         {TabData.map((tab) => (
           <TabStyle
             key={tab.index}

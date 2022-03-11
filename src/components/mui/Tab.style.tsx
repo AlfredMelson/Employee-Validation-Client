@@ -23,7 +23,7 @@ export const TabStyle = styled((props: TabProps) => <Tab {...props} />, {
   '&.Mui-selected': {
     cursor: 'default',
     color: UMSwatch.White[100],
-    backgroundColor: alpha(UMSwatch.Grey[500], 0.1)
+    backgroundColor: 'transparent'
   },
   '.indicator': {
     backgroundColor: 'transparent'
@@ -32,4 +32,21 @@ export const TabStyle = styled((props: TabProps) => <Tab {...props} />, {
     minHeight: '30px',
     height: '48px'
   }
+}))
+
+export const SelectedTabSx = styled(Tab, {
+  name: 'MotionTab',
+  slot: 'styled'
+})(() => ({
+  minWidth: '120px',
+  margin: '0 10px',
+  backgroundColor: alpha(UMSwatch.Grey[500], 0.15)
+}))
+export const UnselectedTabSx = styled(Tab, {
+  name: 'MotionTab',
+  slot: 'styled'
+})(() => ({
+  minWidth: '120px',
+  margin: '0 10px',
+  backgroundColor: 'transparent'
 }))

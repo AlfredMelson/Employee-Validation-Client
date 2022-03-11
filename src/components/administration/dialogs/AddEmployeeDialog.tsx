@@ -1,17 +1,14 @@
 import MenuItem from '@mui/material/MenuItem'
 import Stack from '@mui/material/Stack'
 import { useTheme } from '@mui/material/styles'
-import Typography from '@mui/material/Typography'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { AxiosResponse } from 'axios'
 import { useEffect, useRef, useState } from 'react'
 import axios from '../../../api/axiosCustom'
 import { API, AxiosEmplUpdateConfig, regexEmailValidation } from '../../../utils'
-import { AddEmplIcon, BadgeIcon, CloseIcon } from '../../icons'
+import { AddEmplIcon } from '../../icons'
 import {
-  CRUDHeaderGroupSx,
   DialogContentSx,
-  DialogContentTextSx,
   DialogSx,
   IconButtonSx,
   SubmissionButtonSx,
@@ -19,6 +16,7 @@ import {
   ToolTipSx,
   TypoTextfieldSx
 } from '../../mui'
+import { DialogHeader } from './header'
 
 export default function AddEmployeeDialog() {
   // update email dialog state
@@ -135,26 +133,8 @@ export default function AddEmployeeDialog() {
         </IconButtonSx>
       </ToolTipSx>
       <DialogSx fullScreen={fullScreen} open={open} onClose={handleClose}>
-        <Stack
-          direction='row'
-          justifyContent='space-between'
-          alignItems='center'
-          sx={{ p: '20px 20px 0' }}>
-          <CRUDHeaderGroupSx startIcon={<BadgeIcon />}>
-            <Typography
-              variant='h6'
-              sx={{
-                textTransform: 'none'
-              }}>
-              Add Registrant
-            </Typography>
-          </CRUDHeaderGroupSx>
-          <IconButtonSx onClick={handleClose}>
-            <CloseIcon />
-          </IconButtonSx>
-        </Stack>
+        <DialogHeader title='Add Registrant' onClick={handleClose} />
         <DialogContentSx>
-          <DialogContentTextSx>Provide a valid email address.</DialogContentTextSx>
           <Stack direction='column' justifyContent='flex-start' alignItems='flex-start'>
             <TypoTextfieldSx sx={{ m: '16px 0 4px 10px' }}>Username</TypoTextfieldSx>
             <TextFieldSx

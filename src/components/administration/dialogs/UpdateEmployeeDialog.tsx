@@ -1,16 +1,13 @@
 import SettingsIcon from '@mui/icons-material/Settings'
 import Stack from '@mui/material/Stack'
 import { useTheme } from '@mui/material/styles'
-import Typography from '@mui/material/Typography'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { AxiosResponse } from 'axios'
 import { useEffect, useRef, useState } from 'react'
 import axios from '../../../api/axiosCustom'
 import { UMSwatch } from '../../../style'
 import { API, AxiosEmplUpdateConfig, regexEmailValidation } from '../../../utils'
-import { BadgeIcon, CloseIcon } from '../../icons'
 import {
-  CRUDHeaderGroupSx,
   DialogContentSx,
   DialogContentTextSx,
   DialogSx,
@@ -19,6 +16,7 @@ import {
   TextFieldSx,
   ToolTipSx
 } from '../../mui'
+import { DialogHeader } from './header'
 
 interface IUpdateEmployeeDialog {
   emplId: string
@@ -124,24 +122,8 @@ export default function UpdateEmployeeDialog({
         </IconButtonSx>
       </ToolTipSx>
       <DialogSx fullScreen={fullScreen} open={open} onClose={handleClose}>
-        <Stack
-          direction='row'
-          justifyContent='space-between'
-          alignItems='center'
-          sx={{ p: '20px 20px 0' }}>
-          <CRUDHeaderGroupSx startIcon={<BadgeIcon />}>
-            <Typography
-              variant='h6'
-              sx={{
-                textTransform: 'none'
-              }}>
-              {[emplFirstname, emplLastname].join(' ')}
-            </Typography>
-          </CRUDHeaderGroupSx>
-          <IconButtonSx onClick={handleClose}>
-            <CloseIcon />
-          </IconButtonSx>
-        </Stack>
+        <DialogHeader title={[emplFirstname, emplLastname].join(' ')} onClick={handleClose} />
+
         <DialogContentSx>
           <DialogContentTextSx>
             Provide a valid email address for {[emplFirstname, emplLastname].join(' ')}. The current

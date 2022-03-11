@@ -6,7 +6,7 @@ export default function Tagline() {
     <Typography
       variant='body1'
       sx={{
-        color: UMSwatch.Gold[50],
+        color: UMSwatch.White[100],
         padding: {
           xs: '40px 10px 50px',
           sm: '40px 30px 50px'

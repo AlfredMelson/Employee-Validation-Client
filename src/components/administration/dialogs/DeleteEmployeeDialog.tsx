@@ -2,14 +2,12 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 import Stack from '@mui/material/Stack'
 import { useTheme } from '@mui/material/styles'
 import Switch from '@mui/material/Switch'
-import Typography from '@mui/material/Typography'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { ChangeEvent, useState } from 'react'
 import { EmplProvider } from '../../../context'
 import { UMSwatch } from '../../../style'
-import { BadgeIcon, CloseIcon, RemoveEmplIcon } from '../../icons'
+import { RemoveEmplIcon } from '../../icons'
 import {
-  CRUDHeaderGroupSx,
   DialogContentSx,
   DialogContentTextSx,
   DialogSx,
@@ -17,6 +15,7 @@ import {
   SubmissionButtonSx,
   ToolTipSx
 } from '../../mui'
+import { DialogHeader } from './header'
 
 export default function DeleteEmployeeDialog(emplId, emplFirstname, emplLastname) {
   // update email dialog state
@@ -80,7 +79,8 @@ export default function DeleteEmployeeDialog(emplId, emplFirstname, emplLastname
         </IconButtonSx>
       </ToolTipSx>
       <DialogSx fullScreen={fullScreen} open={open} onClose={handleClose}>
-        <Stack
+        <DialogHeader title={[emplFirstname, emplLastname].join(' ')} onClick={handleClose} />
+        {/* <Stack
           direction='row'
           justifyContent='space-between'
           alignItems='center'
@@ -97,7 +97,7 @@ export default function DeleteEmployeeDialog(emplId, emplFirstname, emplLastname
           <IconButtonSx onClick={handleClose}>
             <CloseIcon />
           </IconButtonSx>
-        </Stack>
+        </Stack> */}
         <DialogContentSx>
           <DialogContentTextSx>
             `Are you sure that you wish to continue with the deletion of ${emplFirstname}$
