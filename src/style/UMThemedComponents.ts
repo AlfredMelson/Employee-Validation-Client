@@ -54,7 +54,9 @@ export default function UMThemedComponents(theme: Theme) {
         },
         styleOverrides: {
           root: {
-            backgroundImage: 'none'
+            backgroundImage: 'none',
+            backgroundColor: UMSwatch.Grey[800],
+            borderRadius: '4px'
           } // Styles applied to the root element
         }
       },

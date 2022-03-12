@@ -1,3 +1,4 @@
+import { CardContent } from '@mui/material'
 import Typography from '@mui/material/Typography'
 import { motion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
@@ -132,45 +133,49 @@ export default function LoginTextFields() {
   }, [])
 
   return (
-    <form>
-      <motion.div variants={loginFieldTitle}>
-        <Typography variant='body1' sx={{ color: UMSwatch.White[100], margin: '0 0 4px 10px' }}>
-          Username
-        </Typography>
-      </motion.div>
-      <motion.div variants={loginField}>
-        <TextFieldSx
-          autoFocus
-          id='username'
-          type='text'
-          error={usernameHelperText !== ''}
-          onChange={(event) => setAdminUsername(event.target.value)}
-          helperText={usernameHelperText}
-        />
-      </motion.div>
-      <motion.div variants={loginFieldTitle}>
-        <Typography variant='body1' sx={{ color: UMSwatch.White[100], margin: '20px 0 4px 10px' }}>
-          Password
-        </Typography>
-      </motion.div>
-      <motion.div variants={loginField}>
-        <TextFieldSx
-          id='password'
-          type='password'
-          error={passwordHelperText !== ''}
-          onChange={(event) => setAdminPassword(event.target.value)}
-          value={adminPassword}
-          helperText={passwordHelperText}
-        />
-      </motion.div>
-      <motion.div variants={loginField}>
-        <LoginSubmission
-          onClick={handleLoginSubmission}
-          disabled={disabled}
-          submitting={submitting}
-          successSubmit={successSubmit}
-        />
-      </motion.div>
-    </form>
+    <CardContent sx={{ mx: { xs: '10px', sm: '20px', md: '30px' } }}>
+      <form>
+        <motion.div variants={loginFieldTitle}>
+          <Typography variant='body1' sx={{ color: UMSwatch.White[100], margin: '0 0 4px 10px' }}>
+            Username
+          </Typography>
+        </motion.div>
+        <motion.div variants={loginField}>
+          <TextFieldSx
+            autoFocus
+            id='username'
+            type='text'
+            error={usernameHelperText !== ''}
+            onChange={(event) => setAdminUsername(event.target.value)}
+            helperText={usernameHelperText}
+          />
+        </motion.div>
+        <motion.div variants={loginFieldTitle}>
+          <Typography
+            variant='body1'
+            sx={{ color: UMSwatch.White[100], margin: '20px 0 4px 10px' }}>
+            Password
+          </Typography>
+        </motion.div>
+        <motion.div variants={loginField}>
+          <TextFieldSx
+            id='password'
+            type='password'
+            error={passwordHelperText !== ''}
+            onChange={(event) => setAdminPassword(event.target.value)}
+            value={adminPassword}
+            helperText={passwordHelperText}
+          />
+        </motion.div>
+        <motion.div variants={loginField}>
+          <LoginSubmission
+            onClick={handleLoginSubmission}
+            disabled={disabled}
+            submitting={submitting}
+            successSubmit={successSubmit}
+          />
+        </motion.div>
+      </form>
+    </CardContent>
   )
 }
