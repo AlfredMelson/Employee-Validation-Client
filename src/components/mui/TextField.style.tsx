@@ -1,4 +1,4 @@
-import { styled } from '@mui/material/styles'
+import { alpha, styled } from '@mui/material/styles'
 import TextField, { TextFieldProps } from '@mui/material/TextField'
 import { UMSwatch } from '../../style'
 
@@ -23,16 +23,17 @@ export const TextFieldSx = styled((props: TextFieldProps) => (
       })
     },
     '&:hover fieldset': {
-      border: `1px solid ${UMSwatch.Blue[400]}`
+      border: `1px solid ${alpha(UMSwatch.Gold[50], 0.5)}`
     },
     '&.Mui-focused fieldset': {
-      border: `1px solid ${UMSwatch.Blue[700]}`
+      border: `1px solid ${alpha(UMSwatch.Gold[50], 0.8)}`
     },
     '&.Mui-selected fieldset': {
-      border: `1px solid ${UMSwatch.Blue[700]}`
+      border: `1px solid ${UMSwatch.Gold[50]}`
     }
   },
-  '& input:-webkit-autofill, & input:-webkit-autofill:hover, & input:-webkit-autofill:focus': {
-    transition: 'background-color 600000s 0s, color 600000s 0s'
-  }
+  '& input:-webkit-autofill, & input:-webkit-autofill:hover, & input:-webkit-autofill:focus, & textarea:-webkit-autofill, & textarea:-webkit-autofill:hover, & textarea:-webkit-autofill:focus, & select:-webkit-autofill, & select:-webkit-autofill:hover, & select:-webkit-autofill:focus':
+    {
+      transition: 'background-color 600000s 0s, color 600000s 0s'
+    }
 }))

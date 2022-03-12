@@ -1,3 +1,4 @@
+export * from './UMAnimations'
 export { default as UMSwatch } from './UMSwatch'
 export { default as UMThemeProvider } from './UMThemeProvider'
 export { default as UMDesignTokens } from './UMDesignTokens'

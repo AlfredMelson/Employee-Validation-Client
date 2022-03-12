@@ -1,24 +1,26 @@
 import Box from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
 import { useState } from 'react'
-import { UMSwatch } from '../../../style'
-import { CheckIcon } from '../../icons'
-import { CircularProgressSx, LoginButtonSx } from '../../mui'
-import SecurityIconSx from './SecurityIconSx'
+import { UMSwatch } from '../../../../style'
+import { CheckIcon } from '../../../icons'
+import { CircularProgressSx, LoginButtonSx } from '../../../mui'
+import AddEmplIconSx from './AddEmplIconSx'
 
-interface ILoginSubmission {
+interface IAddRegistrant {
   onClick: any
-  disabled: boolean
-  submitting: boolean
-  successSubmit: boolean
+  btnText: string
+  verified: boolean
+  submitting?: boolean
+  successSubmit?: boolean
 }
 
-export default function LoginSubmission({
+export default function AddRegistrant({
   onClick,
-  disabled,
+  btnText,
+  verified,
   submitting,
   successSubmit
-}: ILoginSubmission) {
+}: IAddRegistrant) {
   const [loginHover, setLoginHover] = useState(false)
 
   return (
@@ -30,15 +32,15 @@ export default function LoginSubmission({
           p: 0
         }}>
         <LoginButtonSx
-          disabled={disabled}
+          disabled={!verified || submitting}
           onClick={onClick}
           onMouseEnter={() => setLoginHover(true)}
           onMouseLeave={() => setLoginHover(false)}
           startIcon={
-            <SecurityIconSx submitting={submitting} disabled={disabled} loginHover={loginHover} />
+            <AddEmplIconSx verified={verified} submitting={submitting} loginHover={loginHover} />
           }>
           {!submitting
-            ? 'Login'
+            ? btnText
             : successSubmit && (
                 <CheckIcon
                   sx={{

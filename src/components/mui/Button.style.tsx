@@ -5,6 +5,7 @@ import UMSwatch from '../../style/UMSwatch'
 export const LoginButtonSx = styled((props: ButtonProps) => (
   <Button size='medium' variant='contained' type='submit' {...props} />
 ))(() => ({
+  minWidth: '102px',
   color: alpha(UMSwatch.Gold[50], 0.8),
   backgroundColor: UMSwatch.Black[50],
   '&:hover, &.Mui-focused, &.Mui-selected': {
@@ -12,7 +13,8 @@ export const LoginButtonSx = styled((props: ButtonProps) => (
     backgroundColor: UMSwatch.Black[100]
   },
   '&.Mui-disabled': {
-    backgroundColor: UMSwatch.Grey[500]
+    color: UMSwatch.Grey[600],
+    backgroundColor: UMSwatch.Black[100]
   }
 }))
 

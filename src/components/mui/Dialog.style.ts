@@ -6,13 +6,14 @@ import { UMSwatch } from '../../style'
 
 export const DialogSx = styled(Dialog)(() => ({
   '& .MuiDialog-paper': {
-    backgroundColor: UMSwatch.Grey[800]
+    backgroundColor: UMSwatch.Grey[700]
   }
 }))
 
 export const DialogContentSx = styled(DialogContent)(({ theme }) => ({
   ...theme.typography.body2,
-  fontWeight: 500
+  fontWeight: 500,
+  paddingTop: '10px'
 }))
 
 export const DialogContentTextSx = styled(DialogContentText)(() => ({

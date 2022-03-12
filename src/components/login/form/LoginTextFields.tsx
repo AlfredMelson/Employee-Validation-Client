@@ -34,9 +34,12 @@ export default function LoginTextFields() {
   const [adminPassword, setAdminPassword] = useState<string>('')
   const [passwordHelperText, setPasswordHelperText] = useState<string>('')
 
-  // Login button state
+  // Login button states
+  // handle disabled state
+  const [disabled, setDisabled] = useState(false)
+  // handle submission state
   const [submitting, setSubmitting] = useState(false)
-  // handle transitions during sumission
+  // handle successful submission state
   const [successSubmit, setSuccessfulSubmit] = useState(false)
 
   // Handle setting and updating error message and state
@@ -47,6 +50,7 @@ export default function LoginTextFields() {
 
       // reset alert when either the username or password state changes
       setLoginAlertError(false)
+      setDisabled(false)
       setPasswordHelperText('')
       setUsernameHelperText('')
     }
@@ -68,7 +72,6 @@ export default function LoginTextFields() {
     setSubmitting(true)
 
     try {
-      console.log('Pre-Request')
       const response = await axios.post(
         API.Login,
         JSON.stringify({ adminUsername, adminPassword }),
@@ -88,6 +91,7 @@ export default function LoginTextFields() {
 
           setSuccessfulSubmit(true)
           setSubmitting(false)
+          setDisabled(false)
         }, 1250)
       }
 
@@ -97,10 +101,11 @@ export default function LoginTextFields() {
       // open error alert if there is a caught error
     } catch (error) {
       setLoginAlertError(true)
+      setSubmitting(false)
+      setDisabled(true)
 
       // handle no response from the server
       if (!error.response) {
-        setSubmitting(false)
         setLoginErrorMessage('No Server Response')
 
         // handle invalid syntax (400 Bad Request)
@@ -161,6 +166,7 @@ export default function LoginTextFields() {
       <motion.div variants={loginField}>
         <LoginSubmission
           onClick={handleLoginSubmission}
+          disabled={disabled}
           submitting={submitting}
           successSubmit={successSubmit}
         />

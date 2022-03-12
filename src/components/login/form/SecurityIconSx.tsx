@@ -4,16 +4,19 @@ import { SecurityIcon } from '../../icons'
 
 interface ISecurityIconSx {
   submitting: boolean
+  disabled: boolean
   loginHover: boolean
 }
 
-export default function SecurityIconSx({ submitting, loginHover }: ISecurityIconSx) {
+export default function SecurityIconSx({ submitting, disabled, loginHover }: ISecurityIconSx) {
   return (
     <SecurityIcon
       sx={{
         width: '24px',
         height: '24px',
-        color: submitting
+        color: disabled
+          ? UMSwatch.Grey[600]
+          : submitting
           ? UMSwatch.Black[100]
           : loginHover
           ? UMSwatch.Gold[50]
