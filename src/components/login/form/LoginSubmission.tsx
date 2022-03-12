@@ -1,9 +1,8 @@
 import Box from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
 import { useState } from 'react'
-import { UMSwatch } from '../../../style'
-import { CheckIcon } from '../../icons'
 import { CircularProgressSx, LoginButtonSx } from '../../mui'
+import { CheckedProgressSx } from '../../mui/Progress.style'
 import SecurityIconSx from './SecurityIconSx'
 
 interface ILoginSubmission {
@@ -37,17 +36,9 @@ export default function LoginSubmission({
           startIcon={
             <SecurityIconSx submitting={submitting} disabled={disabled} loginHover={loginHover} />
           }>
-          {!submitting
-            ? 'Login'
-            : successSubmit && (
-                <CheckIcon
-                  sx={{
-                    color: UMSwatch.Gold[50]
-                  }}
-                />
-              )}
+          {!submitting && 'Login'}
         </LoginButtonSx>
-        {submitting && <CircularProgressSx />}
+        {submitting && (!successSubmit ? <CircularProgressSx /> : <CheckedProgressSx />)}
       </Box>
     </Stack>
   )

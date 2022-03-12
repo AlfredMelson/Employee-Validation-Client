@@ -1,7 +1,7 @@
 import { CardContent } from '@mui/material'
 import Typography from '@mui/material/Typography'
 import { motion } from 'framer-motion'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSetRecoilState } from 'recoil'
 import axios from '../../../api/axiosCustom'
@@ -18,9 +18,6 @@ export default function LoginTextFields() {
 
   // Hook up admin authentication state
   const { setAuth } = useAuth()
-
-  // useRef to avoid re-renders during button handler
-  const interactionTimer = useRef<number>()
 
   // Error message display transition
   const setLoginAlertError = useSetRecoilState(loginAlertErrorAtom)
@@ -57,8 +54,13 @@ export default function LoginTextFields() {
     }
   }, [adminUsername, adminPassword, setLoginErrorMessage, setLoginAlertError])
 
+  function delay(time) {
+    return new Promise((resolve) => setTimeout(resolve, time))
+  }
+
   const handleLoginSubmission = async (event) => {
     event.preventDefault()
+    setSuccessfulSubmit(false)
 
     // alert user if username textfield is empty
     if (!adminUsername) {
@@ -81,23 +83,23 @@ export default function LoginTextFields() {
 
       if (response.status === 200) {
         // set state to success
-        interactionTimer.current = window.setTimeout(() => {
-          const accessToken: string = response.data.accessToken
-          // pass adminUsername, adminPassword and accessToken into auth context
-          setAuth({ adminUsername, adminPassword, accessToken })
+        const accessToken: string = response.data.accessToken
+        // pass adminUsername, adminPassword and accessToken into auth context
+        setAuth({ adminUsername, adminPassword, accessToken })
+        await delay(1000)
+        setAdminUsername('')
+        // reset the username and password fields
+        setAdminPassword('')
+        await delay(1000)
 
-          // reset the username and password fields
-          setAdminUsername('')
-          setAdminPassword('')
-
-          setSuccessfulSubmit(true)
-          setSubmitting(false)
-          setDisabled(false)
-        }, 1250)
+        setDisabled(false)
+        setSuccessfulSubmit(true)
+        await delay(1000)
+        // push admin to dashboard page
+        navigate('/dashboard', { replace: true })
+        await delay(100)
+        setSubmitting(false)
       }
-
-      // push admin to dashboard page
-      navigate('/dashboard', { replace: true })
 
       // open error alert if there is a caught error
     } catch (error) {
@@ -123,14 +125,6 @@ export default function LoginTextFields() {
       }
     }
   }
-
-  // handle side effect proceeding button handler
-  useEffect(() => {
-    return () => {
-      // cancel the timeout established by setTimeout()
-      clearTimeout(interactionTimer.current)
-    }
-  }, [])
 
   return (
     <CardContent sx={{ mx: { xs: '10px', sm: '20px', md: '30px' } }}>
