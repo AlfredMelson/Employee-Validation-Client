@@ -9,7 +9,7 @@ import { useAuth } from '../../../hooks'
 import { loginAlertErrorAtom, loginErrorMessageAtom } from '../../../recoil-state'
 import { UMSwatch } from '../../../style'
 import { loginField, loginFieldTitle } from '../../../style/UMAnimations'
-import { API, AxiosLoginConfig } from '../../../utils'
+import { API, AxiosLoginConfig, uxdelay } from '../../../utils'
 import { TextFieldSx } from '../../mui'
 import LoginSubmission from './LoginSubmission'
 
@@ -54,10 +54,6 @@ export default function LoginTextFields() {
     }
   }, [adminUsername, adminPassword, setLoginErrorMessage, setLoginAlertError])
 
-  function delay(time) {
-    return new Promise((resolve) => setTimeout(resolve, time))
-  }
-
   const handleLoginSubmission = async (event) => {
     event.preventDefault()
     setSuccessfulSubmit(false)
@@ -86,26 +82,27 @@ export default function LoginTextFields() {
         const accessToken: string = response.data.accessToken
         // pass adminUsername, adminPassword and accessToken into auth context
         setAuth({ adminUsername, adminPassword, accessToken })
-        await delay(1000)
+        await uxdelay(1000)
         setAdminUsername('')
         // reset the username and password fields
         setAdminPassword('')
-        await delay(1000)
+        await uxdelay(1000)
 
         setDisabled(false)
         setSuccessfulSubmit(true)
-        await delay(1000)
+        await uxdelay(1000)
         // push admin to dashboard page
         navigate('/dashboard', { replace: true })
-        await delay(100)
+        await uxdelay(100)
         setSubmitting(false)
       }
 
       // open error alert if there is a caught error
     } catch (error) {
-      setLoginAlertError(true)
       setSubmitting(false)
       setDisabled(true)
+      await uxdelay(300)
+      setLoginAlertError(true)
 
       // handle no response from the server
       if (!error.response) {

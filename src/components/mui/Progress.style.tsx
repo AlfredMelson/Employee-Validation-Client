@@ -26,6 +26,6 @@ export const CheckedProgressSx = styled(CheckIcon, {
   position: 'absolute',
   top: '50%',
   left: '50%',
-  marginTop: '-10px',
+  marginTop: '-12px',
   marginLeft: '-9px'
 }))
