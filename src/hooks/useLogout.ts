@@ -1,19 +1,26 @@
 import axios from '../api/axiosCustom'
+import { API, AxiosLogoutConfig } from '../utils'
 import useAuth from './useAuth'
 
-const useLogout = (accessToken: string) => {
-  const { setAuth } = useAuth()
+export default function useLogout() {
+  const { setAuth, adminAccessToken } = useAuth()
 
   const logoutAdmin = async () => {
-    const response = await axios.post('/admin/logout', accessToken, {
-      withCredentials: true
-    })
+    try {
+      const response = await axios.post(
+        API.Logout,
+        JSON.stringify(adminAccessToken),
+        AxiosLogoutConfig
+      )
 
-    // empty context
-    setAuth({})
-    return response
+      console.log('logoutAdmin response: ', response)
+
+      // empty context
+      setAuth({})
+      return response
+    } catch (error) {
+      console.log('logoutAdmin error: ', error)
+    }
+    return logoutAdmin
   }
-  return logoutAdmin
 }
-
-export default useLogout

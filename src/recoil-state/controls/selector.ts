@@ -1,5 +1,6 @@
 import { atom, selector } from 'recoil'
 import { Empl } from '../../api'
+import { TabValueType } from '../../components/administration/tabs/types'
 import { EmailFilters, SortFilteredList } from '../../utils'
 
 /**
@@ -85,7 +86,7 @@ export const sortedEmplListAtom = atom<Empl[]>({
  * Utilise hooks to manage state changes and notify components subscribing to re-render.
  *
  */
-export const employeeFilterStateAtom = atom<'all' | 'invalid' | 'duplicate' | 'old'>({
+export const employeeFilterStateAtom = atom<TabValueType>({
   key: 'employeeFilterState',
   default: 'all'
 })
@@ -98,33 +99,33 @@ export const filteredEmployeeStateSelector = selector<Empl[]>({
   key: 'filteredEmployeeState',
   get: ({ get }) => {
     const sort: 'alphabetical' | 'reverse' = get(alphabeticalSortAtom)
-    const filter: 'all' | 'invalid' | 'duplicate' | 'old' = get(employeeFilterStateAtom)
+    const filter: TabValueType = get(employeeFilterStateAtom)
     const allEmployees: Empl[] = get(employeeStateAtom)
     const filteredEmails = EmailFilters(allEmployees)
 
     if (sort === 'alphabetical') {
       switch (filter) {
+        case 'all':
+          return SortFilteredList(filteredEmails.all)
         case 'invalid':
           return SortFilteredList(filteredEmails.invalid)
         case 'duplicate':
           return SortFilteredList(filteredEmails.duplicate)
         case 'old':
           return SortFilteredList(filteredEmails.old)
-        default:
-          return SortFilteredList(filteredEmails.all)
       }
     }
 
     if (sort === 'reverse') {
       switch (filter) {
+        case 'all':
+          return SortFilteredList(allEmployees).reverse()
         case 'invalid':
           return SortFilteredList(filteredEmails.invalid).reverse()
         case 'duplicate':
           return SortFilteredList(filteredEmails.duplicate).reverse()
         case 'old':
           return SortFilteredList(filteredEmails.old).reverse()
-        case 'all':
-          return SortFilteredList(allEmployees).reverse()
       }
     }
   }

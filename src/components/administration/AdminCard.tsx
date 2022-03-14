@@ -2,6 +2,7 @@ import Stack from '@mui/material/Stack'
 import { motion } from 'framer-motion'
 import { useEffect } from 'react'
 import { useEmployeesContext } from '../../context'
+import { useAuth } from '../../hooks'
 import {
   adminCard,
   adminCollocate,
@@ -18,6 +19,10 @@ import { Tagline } from './tagline'
 
 export default function AdminCard() {
   const { getEmployees } = useEmployeesContext()
+
+  const { adminAccessToken } = useAuth()
+
+  console.log('adminAccessToken', adminAccessToken)
 
   useEffect(() => {
     getEmployees()

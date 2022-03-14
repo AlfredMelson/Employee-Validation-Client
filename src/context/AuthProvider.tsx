@@ -8,8 +8,13 @@ interface IAuthProvider {
 
 export const AuthProvider = ({ children }: IAuthProvider) => {
   const [auth, setAuth] = useState({})
+  const [adminAccessToken, setAdminAccessToken] = useState(null)
 
-  return <AuthContext.Provider value={{ auth, setAuth }}>{children}</AuthContext.Provider>
+  return (
+    <AuthContext.Provider value={{ auth, setAuth, adminAccessToken, setAdminAccessToken }}>
+      {children}
+    </AuthContext.Provider>
+  )
 }
 
 export default AuthContext

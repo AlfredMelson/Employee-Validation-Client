@@ -10,17 +10,13 @@ body.loading * {
 
 .login-background {
   background-image: url('/public/assets/bg-pattern-login.png');
-  background-size: cover;
   background-position: top center;
-  background-repeat: no-repeat;
   background-attachment: fixed;
 }
 
 .dashboard-background {
   background-image: url('/public/assets/bg-pattern.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background-position: top center;
   background-attachment: fixed;
 }
 

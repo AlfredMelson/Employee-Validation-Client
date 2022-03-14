@@ -26,28 +26,24 @@ export default function TabOptions() {
 
   const TabData: ITabData[] = [
     {
-      index: 0,
       label: 'Registrants',
       value: 'all',
       errorQuantity: 0,
       disable: false
     },
     {
-      index: 1,
       label: `${InvalidLabel}`,
       value: 'invalid',
       errorQuantity: filteredEmails?.invalid.length,
       disable: filteredEmails?.invalid.length === 0
     },
     {
-      index: 2,
       label: `${DuplicateLabel}`,
       value: 'duplicate',
       errorQuantity: filteredEmails?.duplicate.length,
       disable: filteredEmails?.duplicate.length === 0
     },
     {
-      index: 3,
       label: `${OldLabel}`,
       value: 'old',
       errorQuantity: filteredEmails?.old.length,
@@ -55,10 +51,7 @@ export default function TabOptions() {
     }
   ]
 
-  const handleChange = (
-    _event: React.SyntheticEvent,
-    value: 'all' | 'invalid' | 'duplicate' | 'old'
-  ) => {
+  const handleChange = (_event: React.SyntheticEvent, value) => {
     setEmployeeFilterState(value)
   }
 
@@ -74,7 +67,7 @@ export default function TabOptions() {
         sx={{ gridColumn: 2, gridRow: 1 }}>
         {TabData.map((tab) => (
           <TabStyle
-            key={tab.index}
+            key={tab.value}
             label={tab.label}
             value={tab.value}
             disabled={tab.disable}
@@ -83,7 +76,7 @@ export default function TabOptions() {
               <BadgeSx
                 badgeContent={tab.errorQuantity}
                 sx={{
-                  display: tab.errorQuantity === 0 && 'none'
+                  display: tab.errorQuantity === 0 && 'contents'
                 }}
               />
             }

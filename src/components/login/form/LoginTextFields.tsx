@@ -17,7 +17,7 @@ export default function LoginTextFields() {
   const navigate = useNavigate()
 
   // Hook up admin authentication state
-  const { setAuth } = useAuth()
+  const { setAuth, adminAccessToken, setAdminAccessToken } = useAuth()
 
   // Error message display transition
   const setLoginAlertError = useSetRecoilState(loginAlertErrorAtom)
@@ -71,28 +71,47 @@ export default function LoginTextFields() {
     setSubmitting(true)
 
     try {
-      const response = await axios.post(
-        API.Login,
-        JSON.stringify({ adminUsername, adminPassword }),
-        AxiosLoginConfig
-      )
+      console.log('adminAccessToken', adminAccessToken)
+
+      const loginData =
+        adminAccessToken === null
+          ? { adminUsername, adminPassword }
+          : { adminUsername, adminPassword, adminAccessToken }
+
+      console.log('loginData', loginData)
+      const response = await axios.post(API.Login, JSON.stringify(loginData), AxiosLoginConfig)
+
+      console.log('response', response)
 
       if (response.status === 200) {
         // set state to success
-        const accessToken: string = response.data.accessToken
+        const resAccessToken: string = response.data.accessToken
+
         // pass adminUsername, adminPassword and accessToken into auth context
-        setAuth({ adminUsername, adminPassword, accessToken })
-        await uxdelay(1000)
-        setAdminUsername('')
+        setAuth({ adminUsername, adminPassword })
+        setAdminAccessToken(resAccessToken)
+
         // reset the username and password fields
+        // three-quarter second delay
+        await uxdelay(750)
+        setAdminUsername('')
+
+        // quarter second delay
+        await uxdelay(250)
         setAdminPassword('')
-        await uxdelay(1000)
+
+        // quarter second delay
+        await uxdelay(250)
 
         setDisabled(false)
         setSuccessfulSubmit(true)
-        await uxdelay(1000)
+
+        // quarter second delay
+        await uxdelay(250)
         // push admin to dashboard page
         navigate('/dashboard', { replace: true })
+
+        // one-tenth of a second delay
         await uxdelay(100)
         setSubmitting(false)
       }
@@ -138,6 +157,7 @@ export default function LoginTextFields() {
             type='text'
             error={usernameHelperText !== ''}
             onChange={(event) => setAdminUsername(event.target.value)}
+            value={adminUsername}
             helperText={usernameHelperText}
           />
         </motion.div>

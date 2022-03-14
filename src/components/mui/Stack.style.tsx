@@ -38,7 +38,7 @@ export const AdminContainerStack = styled(
     paddingTop: '20px'
   },
   [theme.breakpoints.up('md')]: {
-    padding: '50px 0'
+    padding: '60px 0'
   }
 }))
 
