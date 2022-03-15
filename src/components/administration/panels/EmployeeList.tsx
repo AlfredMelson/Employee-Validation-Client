@@ -18,14 +18,14 @@ export default function EmployeeList() {
     }
   }
 
-  const employee = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1
-    },
-    exit: { opacity: 0 }
-  }
+  // const employee = {
+  //   hidden: { y: 20, opacity: 0 },
+  //   visible: {
+  //     y: 0,
+  //     opacity: 1
+  //   },
+  //   exit: { opacity: 0 }
+  // }
 
   return (
     <List sx={{ p: 0, backgroundColor: 'transparent' }}>
@@ -36,21 +36,14 @@ export default function EmployeeList() {
           animate='visible'
           style={{ listStyle: 'none', paddingInlineStart: 0 }}>
           {paginatedEmplList.map((empl) => (
-            <motion.div
+            <Individual
               key={empl.id}
-              variants={employee}
-              initial='hidden'
-              animate='visible'
-              exit='exit'
-              className='list-group-empl'>
-              <Individual
-                id={empl.id}
-                firstname={empl.firstname}
-                lastname={empl.lastname}
-                role={empl.role}
-                email={empl.email}
-              />
-            </motion.div>
+              emplId={empl.id}
+              emplFirstname={empl.firstname}
+              emplLastname={empl.lastname}
+              emplRole={empl.role}
+              emplEmail={empl.email}
+            />
           ))}
         </motion.ul>
       </AnimatePresence>

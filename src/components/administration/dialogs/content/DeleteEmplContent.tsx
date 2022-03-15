@@ -9,12 +9,14 @@ interface IDeleteEmplContent {
   emplId: string
   emplFirstname: string
   emplLastname: string
+  setDeleteEmplDialogState: (state: boolean) => void
 }
 
 export default function DeleteEmplContent({
   emplId,
   emplFirstname,
-  emplLastname
+  emplLastname,
+  setDeleteEmplDialogState
 }: IDeleteEmplContent) {
   // update email dialog state
 
@@ -70,7 +72,9 @@ export default function DeleteEmplContent({
         <DeleteEmplSwitch checked={checked} onChange={handleChange} />
         <DeleteEmployee
           verified={checked}
-          onClick={() => deleteEmpl(emplId)}
+          onClick={() => {
+            deleteEmpl(emplId), setDeleteEmplDialogState(false)
+          }}
           btnText='Delete'
           // submitting={submitting}
           // successSubmit={successSubmit}

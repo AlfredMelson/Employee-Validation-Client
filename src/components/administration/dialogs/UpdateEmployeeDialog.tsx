@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion'
-import { useRecoilState } from 'recoil'
-import { UpdateEmplDialogStateAtom } from '../../../recoil-state'
+import { useState } from 'react'
 import { loginCard, loginHeading } from '../../../style'
 import { SettingsIcon } from '../../icons'
 import { DialogSx, IconButtonSx, ToolTipSx } from '../../mui'
@@ -23,8 +22,7 @@ export default function UpdateEmployeeDialog({
   emplEmail
 }: IUpdateEmployeeDialog) {
   // update email dialog state
-  const [updateEmplDialogState, setUpdateEmplDialogState] =
-    useRecoilState(UpdateEmplDialogStateAtom)
+  const [updateEmplDialogState, setUpdateEmplDialogState] = useState(false)
 
   return (
     <>
@@ -58,6 +56,7 @@ export default function UpdateEmployeeDialog({
             emplLastname={emplLastname}
             emplRole={emplRole}
             emplEmail={emplEmail}
+            setUpdateEmplDialogState={setUpdateEmplDialogState}
           />
         </DialogSx>
       </motion.div>

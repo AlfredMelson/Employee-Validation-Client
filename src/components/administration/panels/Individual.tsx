@@ -6,14 +6,20 @@ import { UMSwatch } from '../../../style'
 import { DeleteEmployeeDialog, UpdateEmployeeDialog } from '../dialogs'
 
 interface IIndividual {
-  id: string
-  firstname: string
-  lastname: string
-  role: string
-  email: string
+  emplId: string
+  emplFirstname: string
+  emplLastname: string
+  emplRole: string
+  emplEmail: string
 }
 
-export default function Individual({ id, firstname, lastname, role, email }: IIndividual) {
+export default function Individual({
+  emplId,
+  emplFirstname,
+  emplLastname,
+  emplRole,
+  emplEmail
+}: IIndividual) {
   return (
     <ListItem divider>
       <ListItemAvatar>
@@ -24,26 +30,30 @@ export default function Individual({ id, firstname, lastname, role, email }: IIn
             color: UMSwatch.Black[100],
             fontWeight: 500
           }}>
-          {firstname.substring(0, 1)}
-          {lastname.substring(0, 1)}
+          {emplFirstname.substring(0, 1)}
+          {emplLastname.substring(0, 1)}
         </Avatar>
       </ListItemAvatar>
       <ListItemText
-        primary={[firstname, lastname].join(' ')}
-        secondary={email}
+        primary={[emplFirstname, emplLastname].join(' ')}
+        secondary={emplEmail}
         sx={{
           '.MuiListItemText-primary': { fontSize: '20px', color: UMSwatch.White[100] },
           '.MuiListItemText-secondary': { color: UMSwatch.White[50] }
         }}
       />
       <UpdateEmployeeDialog
-        emplId={id}
-        emplFirstname={firstname}
-        emplLastname={lastname}
-        emplRole={role}
-        emplEmail={email}
+        emplId={emplId}
+        emplFirstname={emplFirstname}
+        emplLastname={emplLastname}
+        emplRole={emplRole}
+        emplEmail={emplEmail}
       />
-      <DeleteEmployeeDialog emplId={id} emplFirstname={firstname} emplLastname={lastname} />
+      <DeleteEmployeeDialog
+        emplId={emplId}
+        emplFirstname={emplFirstname}
+        emplLastname={emplLastname}
+      />
     </ListItem>
   )
 }

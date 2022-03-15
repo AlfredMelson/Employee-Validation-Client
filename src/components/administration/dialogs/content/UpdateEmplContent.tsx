@@ -1,9 +1,7 @@
 import Stack from '@mui/material/Stack'
 import { AxiosResponse } from 'axios'
 import { useEffect, useRef, useState } from 'react'
-import { useSetRecoilState } from 'recoil'
 import axios from '../../../../api/axiosCustom'
-import { UpdateEmplDialogStateAtom } from '../../../../recoil-state'
 import { UMSwatch } from '../../../../style'
 import { API, AxiosEmplUpdateConfig, regexEmailValidation } from '../../../../utils'
 import { DialogContentSx, DialogContentTextSx, TextFieldSx } from '../../../mui'
@@ -15,6 +13,7 @@ interface IUpdateEmplContent {
   emplLastname: string
   emplRole: string
   emplEmail: string
+  setUpdateEmplDialogState: (state: boolean) => void
 }
 
 export default function UpdateEmplContent({
@@ -22,10 +21,9 @@ export default function UpdateEmplContent({
   emplFirstname,
   emplLastname,
   emplRole,
-  emplEmail
+  emplEmail,
+  setUpdateEmplDialogState
 }: IUpdateEmplContent) {
-  const setUpdateEmplDialogState = useSetRecoilState(UpdateEmplDialogStateAtom)
-
   // email address input state
   const [emailUpdate, setEmailUpdate] = useState<string>('')
   const [emailHelperText, setEmailHelperText] = useState<string>('')

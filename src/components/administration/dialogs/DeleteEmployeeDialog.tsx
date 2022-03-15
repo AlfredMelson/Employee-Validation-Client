@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion'
-import { useRecoilState } from 'recoil'
-import { DeleteEmplDialogStateAtom } from '../../../recoil-state'
+import { useState } from 'react'
 import { loginCard, loginHeading } from '../../../style'
 import { DeleteEmplIcon } from '../../icons'
 import { DialogSx, IconButtonSx, ToolTipSx } from '../../mui'
@@ -19,8 +18,7 @@ export default function DeleteEmployeeDialog({
   emplLastname
 }: IDeleteEmployeeDialog) {
   // delete email dialog state
-  const [deleteEmplDialogState, setDeleteEmplDialogState] =
-    useRecoilState(DeleteEmplDialogStateAtom)
+  const [deleteEmplDialogState, setDeleteEmplDialogState] = useState(false)
 
   return (
     <>
@@ -52,6 +50,7 @@ export default function DeleteEmployeeDialog({
             emplId={emplId}
             emplFirstname={emplFirstname}
             emplLastname={emplLastname}
+            setDeleteEmplDialogState={setDeleteEmplDialogState}
           />
         </DialogSx>
       </motion.div>
