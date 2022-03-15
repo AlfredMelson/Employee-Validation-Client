@@ -11,7 +11,7 @@ import { API, AxiosEmplUpdateConfig, regexEmailValidation } from '../../../../ut
 import { DialogContentSx, TextFieldSx, TypoTextfieldSx } from '../../../mui'
 import AddEmployee from '../submissions/AddEmployee'
 
-export default function AddEmplTextfields() {
+export default function AddEmplContent() {
   // update email dialog state
   const setAddEmplDialogState = useSetRecoilState(AddEmplDialogStateAtom)
 

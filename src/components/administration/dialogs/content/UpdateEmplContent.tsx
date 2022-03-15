@@ -9,7 +9,7 @@ import { API, AxiosEmplUpdateConfig, regexEmailValidation } from '../../../../ut
 import { DialogContentSx, DialogContentTextSx, TextFieldSx } from '../../../mui'
 import { UpdateEmployee } from '../submissions'
 
-interface IUpdateEmployeeDialog {
+interface IUpdateEmplContent {
   emplId: string
   emplFirstname: string
   emplLastname: string
@@ -17,13 +17,13 @@ interface IUpdateEmployeeDialog {
   emplEmail: string
 }
 
-export default function UpdateEmployeeDialog({
+export default function UpdateEmplContent({
   emplId,
   emplFirstname,
   emplLastname,
   emplRole,
   emplEmail
-}: IUpdateEmployeeDialog) {
+}: IUpdateEmplContent) {
   const setUpdateEmplDialogState = useSetRecoilState(UpdateEmplDialogStateAtom)
 
   // email address input state

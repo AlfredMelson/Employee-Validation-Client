@@ -1,2 +1,1 @@
-export { default as Collocation } from './Collocation'
-export { default as Pagination } from './Pagination'
+export { default as PanelControls } from './PanelControls'

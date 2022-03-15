@@ -1,18 +1,10 @@
-import Stack from '@mui/material/Stack'
 import { motion } from 'framer-motion'
 import { useEffect } from 'react'
 import { useEmployeesContext } from '../../context'
 import { useAuth } from '../../hooks'
-import {
-  adminCard,
-  adminCollocate,
-  adminHeading,
-  adminPaginate,
-  adminTabs,
-  adminTagline
-} from '../../style/UMAnimations'
+import { adminCard, adminHeading, adminTabs, adminTagline } from '../../style/UMAnimations'
 import { CardSx } from '../mui'
-import { Collocation, Pagination } from './controls'
+import { PanelControls } from './controls'
 import { HeaderSection } from './header'
 import { TabSelectors } from './tabs'
 import { Tagline } from './tagline'
@@ -41,18 +33,7 @@ export default function AdminCard() {
         <motion.div variants={adminTabs}>
           <TabSelectors />
         </motion.div>
-        <Stack
-          direction='row'
-          justifyContent='space-around'
-          alignItems='center'
-          sx={{ padding: '0 0 14px' }}>
-          <motion.div variants={adminCollocate}>
-            <Collocation />
-          </motion.div>
-          <motion.div variants={adminPaginate}>
-            <Pagination />
-          </motion.div>
-        </Stack>
+        <PanelControls />
       </CardSx>
     </motion.div>
   )
