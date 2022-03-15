@@ -1,7 +1,7 @@
 import Tabs from '@mui/material/Tabs'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import { employeeFilterStateAtom, employeeStateAtom } from '../../../recoil-state'
-import { EmailFilters } from '../../../utils'
+import { EmailErrorFilter } from '../../../utils'
 import { BadgeSx, TabStyle, TabWrapper } from '../../mui'
 import TabBackground from './TabBackground'
 import { ITabData } from './types'
@@ -18,7 +18,7 @@ export default function TabOptions() {
 
   const employeeState = useRecoilValue(employeeStateAtom)
 
-  const filteredEmails = EmailFilters(employeeState)
+  const filteredEmails = EmailErrorFilter(employeeState)
 
   const InvalidLabel = filteredEmails?.invalid.length === 0 ? 'No invalid' : 'Invalid'
   const DuplicateLabel = filteredEmails?.duplicate.length === 0 ? 'No duplicate' : 'Duplicate'

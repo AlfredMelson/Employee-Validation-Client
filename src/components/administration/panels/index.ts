@@ -1,1 +1,2 @@
-export { default as RegistrantList } from './RegistrantList'
+export { default as EmployeeList } from './EmployeeList'
+export { default as Individual } from './Individual'

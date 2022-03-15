@@ -1,1 +1,6 @@
 export { default as TabSelectors } from './TabSelectors'
+export { default as AdminErrorTabsTitle } from './AdminErrorTabsTitle'
+export { default as TabBackground } from './TabBackground'
+export { default as TabOptions } from './TabOptions'
+export { default as TabPanels } from './TabPanels'
+export * from './types'

@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
 import { useState } from 'react'
-import { CircularProgressSx, LoginButtonSx } from '../../mui'
+import { CircularProgressSx, SubmitButtonSx } from '../../mui'
 import { CheckedProgressSx } from '../../mui/Progress.style'
 import SecurityIconSx from './SecurityIconSx'
 
@@ -28,7 +28,7 @@ export default function LoginSubmission({
           margin: { xs: '20px 0 0', sm: '24px 0 0', md: '24px 0 0' },
           p: 0
         }}>
-        <LoginButtonSx
+        <SubmitButtonSx
           disabled={disabled}
           onClick={onClick}
           onMouseEnter={() => setLoginHover(true)}
@@ -37,7 +37,7 @@ export default function LoginSubmission({
             <SecurityIconSx submitting={submitting} disabled={disabled} loginHover={loginHover} />
           }>
           {!submitting && 'Login'}
-        </LoginButtonSx>
+        </SubmitButtonSx>
         {submitting && (!successSubmit ? <CircularProgressSx /> : <CheckedProgressSx />)}
       </Box>
     </Stack>

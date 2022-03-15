@@ -1,7 +1,7 @@
 import { ChangeEvent, useEffect, useState } from 'react'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { filteredEmployeeStateSelector, paginatedEmplListAtom } from '../../../recoil-state'
-import { Paginate } from '../../../services'
+import { Paginate } from '../../../utils'
 import { PaginationSx } from '../../mui'
 
 export default function Pagination() {

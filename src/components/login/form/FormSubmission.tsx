@@ -3,7 +3,7 @@ import Typography from '@mui/material/Typography'
 import { useEffect, useRef, useState } from 'react'
 import { UMSwatch } from '../../../style'
 import { CheckIcon } from '../../icons'
-import { CircularProgressSx, LoginButtonSx } from '../../mui'
+import { CircularProgressSx, SubmitButtonSx } from '../../mui'
 
 export default function FormSubmission() {
   // useRef to avoid re-renders during button handler
@@ -46,7 +46,7 @@ export default function FormSubmission() {
 
   return (
     <Box sx={{ position: 'relative' }}>
-      <LoginButtonSx aria-label='fetch api' disabled={submitting} onClick={handleDataControls}>
+      <SubmitButtonSx aria-label='fetch api' disabled={submitting} onClick={handleDataControls}>
         {!submitting ? (
           <Typography variant='button'>Login</Typography>
         ) : (
@@ -58,7 +58,7 @@ export default function FormSubmission() {
             />
           )
         )}
-      </LoginButtonSx>
+      </SubmitButtonSx>
       {submitting && <CircularProgressSx />}
     </Box>
   )

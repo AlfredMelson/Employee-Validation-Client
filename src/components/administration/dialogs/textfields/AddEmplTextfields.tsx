@@ -9,7 +9,7 @@ import { AddEmplDialogStateAtom } from '../../../../recoil-state'
 import { loginFieldTitle } from '../../../../style'
 import { API, AxiosEmplUpdateConfig, regexEmailValidation } from '../../../../utils'
 import { DialogContentSx, TextFieldSx, TypoTextfieldSx } from '../../../mui'
-import AddRegistrant from '../submissions/AddRegistrant'
+import AddEmployee from '../submissions/AddEmployee'
 
 export default function AddEmplTextfields() {
   // update email dialog state
@@ -179,7 +179,7 @@ export default function AddEmplTextfields() {
             ))}
           </TextFieldSx>
           <Box sx={{ gridColumn: 4, gridRow: 6 }}>
-            <AddRegistrant
+            <AddEmployee
               verified={formValidation}
               onClick={handleAddEmpl}
               btnText='Add'

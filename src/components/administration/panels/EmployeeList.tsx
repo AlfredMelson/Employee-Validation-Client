@@ -4,7 +4,7 @@ import { useRecoilValue } from 'recoil'
 import { paginatedEmplListAtom } from '../../../recoil-state'
 import Individual from './Individual'
 
-export default function RegistrantList() {
+export default function EmployeeList() {
   const paginatedEmplList = useRecoilValue(paginatedEmplListAtom)
 
   const container = {

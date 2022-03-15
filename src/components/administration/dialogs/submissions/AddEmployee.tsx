@@ -3,10 +3,10 @@ import Stack from '@mui/material/Stack'
 import { useState } from 'react'
 import { UMSwatch } from '../../../../style'
 import { CheckIcon } from '../../../icons'
-import { CircularProgressSx, LoginButtonSx } from '../../../mui'
+import { CircularProgressSx, SubmitButtonSx } from '../../../mui'
 import AddEmplIconSx from './AddEmplIconSx'
 
-interface IAddRegistrant {
+interface IAddEmployee {
   onClick: any
   btnText: string
   verified: boolean
@@ -14,13 +14,13 @@ interface IAddRegistrant {
   successSubmit?: boolean
 }
 
-export default function AddRegistrant({
+export default function AddEmployee({
   onClick,
   btnText,
   verified,
   submitting,
   successSubmit
-}: IAddRegistrant) {
+}: IAddEmployee) {
   const [loginHover, setLoginHover] = useState(false)
 
   return (
@@ -31,7 +31,7 @@ export default function AddRegistrant({
           margin: { xs: '20px 0 0', sm: '24px 0 0', md: '24px 0 0' },
           p: 0
         }}>
-        <LoginButtonSx
+        <SubmitButtonSx
           disabled={!verified || submitting}
           onClick={onClick}
           onMouseEnter={() => setLoginHover(true)}
@@ -48,7 +48,7 @@ export default function AddRegistrant({
                   }}
                 />
               )}
-        </LoginButtonSx>
+        </SubmitButtonSx>
         {submitting && <CircularProgressSx />}
       </Box>
     </Stack>

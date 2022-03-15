@@ -13,7 +13,7 @@ interface IIndividual {
   email: string
 }
 
-function Individual({ id, firstname, lastname, role, email }: IIndividual) {
+export default function Individual({ id, firstname, lastname, role, email }: IIndividual) {
   return (
     <ListItem divider>
       <ListItemAvatar>
@@ -47,4 +47,3 @@ function Individual({ id, firstname, lastname, role, email }: IIndividual) {
     </ListItem>
   )
 }
-export default Individual

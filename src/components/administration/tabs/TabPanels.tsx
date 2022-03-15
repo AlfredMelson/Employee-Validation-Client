@@ -1,10 +1,10 @@
 import { TabPanelWrapper } from '../../mui'
-import { RegistrantList } from '../panels'
+import { EmployeeList } from '../panels'
 
 export default function TabPanels() {
   return (
     <TabPanelWrapper>
-      <RegistrantList />
+      <EmployeeList />
     </TabPanelWrapper>
   )
 }

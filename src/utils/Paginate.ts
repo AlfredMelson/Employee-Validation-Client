@@ -10,7 +10,7 @@ interface IPaginate {
   selectedPage: number
 }
 
-export function Paginate({ totalEmpl, selectedPage }: IPaginate) {
+export default function Paginate({ totalEmpl, selectedPage }: IPaginate) {
   // FIX MOBILE - number of employees per page set to 10
   const emplPerPage = 10
   // FIX MOBILE - maximum number of pages set to 10

@@ -1,5 +1,6 @@
 export * from './constants'
-export * from './EmailFilters'
+export * from './EmailErrorFilter'
 export * from './uxdelay'
-export { default as EmailFilters } from './EmailFilters'
+export { default as EmailErrorFilter } from './EmailErrorFilter'
 export { default as SortFilteredList } from './SortFilteredList'
+export { default as Paginate } from './Paginate'

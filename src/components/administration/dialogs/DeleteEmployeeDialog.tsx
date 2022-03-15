@@ -1,31 +1,27 @@
-import FormControlLabel from '@mui/material/FormControlLabel'
 import Stack from '@mui/material/Stack'
-import { useTheme } from '@mui/material/styles'
-import Switch from '@mui/material/Switch'
-import useMediaQuery from '@mui/material/useMediaQuery'
 import { ChangeEvent, useState } from 'react'
-import { EmplProvider } from '../../../context'
-import { UMSwatch } from '../../../style'
-import { RemoveEmplIcon } from '../../icons'
-import {
-  DialogContentSx,
-  DialogContentTextSx,
-  DialogSx,
-  IconButtonSx,
-  SubmissionButtonSx,
-  ToolTipSx
-} from '../../mui'
+import { useEmpl } from '../../../hooks'
+import { DeleteEmplIcon } from '../../icons'
+import { DialogContentSx, DialogContentTextSx, DialogSx, IconButtonSx, ToolTipSx } from '../../mui'
 import { DialogHeader } from './header'
+import { DeleteEmployee } from './submissions'
+import { DeleteEmplSwitch } from './switch'
 
-export default function DeleteEmployeeDialog(emplId, emplFirstname, emplLastname) {
+interface IDeleteEmployeeDialog {
+  emplId: string
+  emplFirstname: string
+  emplLastname: string
+}
+
+export default function DeleteEmployeeDialog({
+  emplId,
+  emplFirstname,
+  emplLastname
+}: IDeleteEmployeeDialog) {
   // update email dialog state
   const [open, setOpen] = useState(false)
-  const theme = useTheme()
 
-  const deleteEmpl = EmplProvider
-
-  // dialog width on tablet size and smaller
-  const fullScreen = useMediaQuery(theme.breakpoints.down('md'))
+  const { deleteEmpl } = useEmpl()
 
   const handleClickOpen = () => {
     setOpen(true)
@@ -69,39 +65,20 @@ export default function DeleteEmployeeDialog(emplId, emplFirstname, emplLastname
     setChecked(event.target.checked)
   }
 
-  // const HeadingText = {[emplFirstname, emplLastname].join(' ')}
+  const EmplFullName = `${emplFirstname} ${emplLastname}`
 
   return (
     <>
       <ToolTipSx tooltipTitle={'Delete'}>
         <IconButtonSx onClick={handleClickOpen} aria-label='delete registrant' sx={{ mr: '4px' }}>
-          <RemoveEmplIcon />
+          <DeleteEmplIcon />
         </IconButtonSx>
       </ToolTipSx>
-      <DialogSx fullScreen={fullScreen} open={open} onClose={handleClose}>
-        <DialogHeader title={[emplFirstname, emplLastname].join(' ')} onClick={handleClose} />
-        {/* <Stack
-          direction='row'
-          justifyContent='space-between'
-          alignItems='center'
-          sx={{ p: '20px 20px 0' }}>
-          <CRUDHeaderGroupSx startIcon={<BadgeIcon />}>
-            <Typography
-              variant='h6'
-              sx={{
-                textTransform: 'none'
-              }}>
-              {[emplFirstname, emplLastname].join(' ')}
-            </Typography>
-          </CRUDHeaderGroupSx>
-          <IconButtonSx onClick={handleClose}>
-            <CloseIcon />
-          </IconButtonSx>
-        </Stack> */}
+      <DialogSx open={open} onClose={handleClose}>
+        <DialogHeader title={EmplFullName} onClick={handleClose} />
         <DialogContentSx>
           <DialogContentTextSx>
-            `Are you sure that you wish to continue with the deletion of ${emplFirstname}$
-            {emplLastname}'s account?`
+            Are you sure that you wish to continue with the deletion of {EmplFullName}'s account?
           </DialogContentTextSx>
           <Stack
             direction='row'
@@ -109,17 +86,14 @@ export default function DeleteEmployeeDialog(emplId, emplFirstname, emplLastname
             alignItems='center'
             spacing={20}
             sx={{ mt: '20px' }}>
-            <FormControlLabel
-              sx={{ color: UMSwatch.Coral[400] }}
-              control={<Switch checked={checked} onChange={handleChange} />}
-              label={`${emplFirstname} ${emplLastname}`}
-            />
-            <SubmissionButtonSx
-              disabled={!checked}
+            <DeleteEmplSwitch checked={checked} onChange={handleChange} />
+            <DeleteEmployee
+              verified={checked}
               onClick={() => deleteEmpl(emplId)}
-              sx={{ textTransform: 'none' }}>
-              Delete
-            </SubmissionButtonSx>
+              btnText='Delete'
+              // submitting={submitting}
+              // successSubmit={successSubmit}
+            />
           </Stack>
         </DialogContentSx>
       </DialogSx>

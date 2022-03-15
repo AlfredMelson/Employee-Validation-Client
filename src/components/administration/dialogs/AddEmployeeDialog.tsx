@@ -7,7 +7,7 @@ import { loginCard, loginHeading } from '../../../style'
 import { AddEmplIcon } from '../../icons'
 import { DialogSx, IconButtonSx, ToolTipSx } from '../../mui'
 import { DialogHeader } from './header'
-import AddEmplTextfields from './textfields/AddEmplTextfields'
+import { AddEmplTextfields } from './textfields'
 
 export default function AddEmployeeDialog() {
   // update email dialog state

@@ -7,11 +7,11 @@ import { useAxiosPrivate } from '../hooks'
 import { employeeStateAtom } from '../recoil-state/controls/selector'
 import { API } from '../utils'
 
-interface Employees {
+export interface Employees {
   employees: Empl[]
   isLoading: boolean
   getEmployees: () => void
-  deleteEmpl: (email: Empl) => void
+  deleteEmpl: (id) => void
   updateEmpl: (empl: Empl) => void
   error: string
 }
@@ -57,7 +57,7 @@ export const EmplProvider = ({ children }: IEmplProvider) => {
     }
   }
 
-  const deleteEmpl = async (emplId) => {
+  const deleteEmpl = async (emplId: any) => {
     try {
       await axios.delete(API.DeleteEmployee, emplId)
       const emplList = employees.filter((empl) => empl.id !== emplId)

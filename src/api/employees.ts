@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios'
-import { Empl } from '../api/empl'
+import { Empl } from './empl'
 
 const apiClient = axios.create({
   baseURL: 'http://localhost:9003/api',

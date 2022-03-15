@@ -4,7 +4,7 @@ import { useSetRecoilState } from 'recoil'
 import axios from '../../../api/axiosCustom'
 import { useAuth } from '../../../hooks'
 import { logoutAlertErrorAtom, logoutErrorMessageAtom } from '../../../recoil-state'
-import { API, AxiosLogoutConfig, uxdelay } from '../../../utils'
+import { uxdelay } from '../../../utils'
 import { LogoutIcon } from '../../icons'
 import { IconButtonSx, ToolTipSx } from '../../mui'
 
@@ -51,11 +51,9 @@ export default function AdminLogout() {
     setSubmitting(true)
 
     try {
-      const response = await axios.post(
-        API.Logout,
-        JSON.stringify({ adminAccessToken }),
-        AxiosLogoutConfig
-      )
+      const response = await axios('/logout', {
+        withCredentials: true
+      })
 
       console.log('response', response)
 

@@ -1,7 +1,7 @@
 import { atom, selector } from 'recoil'
 import { Empl } from '../../api'
 import { TabValueType } from '../../components/administration/tabs/types'
-import { EmailFilters, SortFilteredList } from '../../utils'
+import { EmailErrorFilter, SortFilteredList } from '../../utils'
 
 /**
  * Recoil managed state representing employees list per pagination
@@ -101,7 +101,7 @@ export const filteredEmployeeStateSelector = selector<Empl[]>({
     const sort: 'alphabetical' | 'reverse' = get(alphabeticalSortAtom)
     const filter: TabValueType = get(employeeFilterStateAtom)
     const allEmployees: Empl[] = get(employeeStateAtom)
-    const filteredEmails = EmailFilters(allEmployees)
+    const filteredEmails = EmailErrorFilter(allEmployees)
 
     if (sort === 'alphabetical') {
       switch (filter) {
