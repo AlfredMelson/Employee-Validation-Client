@@ -109,6 +109,7 @@ export default function LoginTextFields() {
         // quarter second delay
         await uxdelay(250)
         // push admin to dashboard page
+        // navigate('/dashboard', { replace: true })
         navigate('/dashboard', { replace: true })
 
         // one-tenth of a second delay

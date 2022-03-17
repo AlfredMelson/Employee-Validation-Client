@@ -1,13 +1,13 @@
 import Box from '@mui/material/Box'
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
+import { useRecoilValue } from 'recoil'
+import { employeeFilterStateAtom } from '../../../recoil-state'
 import { SelectedTabSx, UnselectedTabSx } from '../../mui'
 
-interface ITabBackground {
-  employeeFilterState: string
-}
+export default function TabBackground() {
+  const employeeFilterState = useRecoilValue(employeeFilterStateAtom)
 
-export default function TabBackground({ employeeFilterState }: ITabBackground) {
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [unselectedIndexA, setUnselectedIndexA] = useState(1)
   const [unselectedIndexB, setUnselectedIndexB] = useState(2)

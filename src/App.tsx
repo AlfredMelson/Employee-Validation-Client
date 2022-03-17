@@ -15,7 +15,7 @@ export default function App() {
           {/* authenticated routes */}
           {/* <Route element={<AuthRequired />}> */}
           {/* protected routes */}
-          <Route path='dashboard/*' element={<Administration />} />
+          <Route path='dashboard' element={<Administration />} />
           {/* </Route> */}
 
           {/* mismatch route */}

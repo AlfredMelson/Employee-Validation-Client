@@ -4,7 +4,7 @@ export type TabValueType = 'all' | 'invalid' | 'duplicate' | 'old'
 
 export interface ITabData {
   label: string
-  value: 'all' | 'invalid' | 'duplicate' | 'old'
+  value: TabValueType
   errorQuantity?: number
   disable?: boolean
 }

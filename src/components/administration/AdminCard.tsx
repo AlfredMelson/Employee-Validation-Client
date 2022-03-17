@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion'
 import { useEffect } from 'react'
 import { useEmployeesContext } from '../../context'
-import { useAuth } from '../../hooks'
 import { adminCard, adminHeading, adminTabs, adminTagline } from '../../style/UMAnimations'
 import { CardSx } from '../mui'
 import { PanelControls } from './controls'
@@ -11,10 +10,6 @@ import { Tagline } from './tagline'
 
 export default function AdminCard() {
   const { getEmployees } = useEmployeesContext()
-
-  const { adminAccessToken } = useAuth()
-
-  console.log('adminAccessToken', adminAccessToken)
 
   useEffect(() => {
     getEmployees()

@@ -6,12 +6,7 @@ import { adminContainer } from '../style/UMAnimations'
 
 export default function Administration() {
   return (
-    <motion.section
-      className='dashboard-background'
-      variants={adminContainer}
-      initial='initial'
-      animate='animate'
-      exit='exit'>
+    <motion.section className='dashboard-background' variants={adminContainer}>
       <AdminContainerStack>
         <EmplProvider>
           <AdminCard />

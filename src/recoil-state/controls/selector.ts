@@ -1,6 +1,5 @@
 import { atom, selector } from 'recoil'
 import { Empl } from '../../api'
-import { TabValueType } from '../../components/administration/tabs/types'
 import { EmailErrorFilter, SortFilteredList } from '../../utils'
 
 /**
@@ -86,7 +85,7 @@ export const sortedEmplListAtom = atom<Empl[]>({
  * Utilise hooks to manage state changes and notify components subscribing to re-render.
  *
  */
-export const employeeFilterStateAtom = atom<TabValueType>({
+export const employeeFilterStateAtom = atom({
   key: 'employeeFilterState',
   default: 'all'
 })
@@ -99,7 +98,7 @@ export const filteredEmployeeStateSelector = selector<Empl[]>({
   key: 'filteredEmployeeState',
   get: ({ get }) => {
     const sort: 'alphabetical' | 'reverse' = get(alphabeticalSortAtom)
-    const filter: TabValueType = get(employeeFilterStateAtom)
+    const filter = get(employeeFilterStateAtom)
     const allEmployees: Empl[] = get(employeeStateAtom)
     const filteredEmails = EmailErrorFilter(allEmployees)
 

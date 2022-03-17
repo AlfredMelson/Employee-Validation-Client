@@ -5,13 +5,13 @@ import TabOptions from './TabOptions'
 import TabPanels from './TabPanels'
 
 export default function TabSelectors() {
-  const { isLoading: isEmployeeDataLoading } = useEmployeesContext()
+  const { isLoading } = useEmployeesContext()
 
   return (
     <>
       <AdminErrorTabsTitle />
-      {isEmployeeDataLoading ? <SkeletonTabSx /> : <TabOptions />}
-      {isEmployeeDataLoading ? <SkeletonPanelSx /> : <TabPanels />}
+      {isLoading ? <SkeletonTabSx /> : <TabOptions />}
+      {isLoading ? <SkeletonPanelSx /> : <TabPanels />}
     </>
   )
 }

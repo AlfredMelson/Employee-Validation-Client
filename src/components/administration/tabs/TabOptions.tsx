@@ -16,6 +16,8 @@ function a11yProps(value: string) {
 export default function TabOptions() {
   const [employeeFilterState, setEmployeeFilterState] = useRecoilState(employeeFilterStateAtom)
 
+  console.log('employeeFilterState', employeeFilterState)
+
   const employeeState = useRecoilValue(employeeStateAtom)
 
   const filteredEmails = EmailErrorFilter(employeeState)
@@ -51,13 +53,14 @@ export default function TabOptions() {
     }
   ]
 
-  const handleChange = (_event: React.SyntheticEvent, value) => {
+  const handleChange = (event: React.SyntheticEvent, value: string) => {
+    event.preventDefault()
     setEmployeeFilterState(value)
   }
 
   return (
     <TabWrapper>
-      <TabBackground employeeFilterState={employeeFilterState} />
+      <TabBackground />
       <Tabs
         aria-label='selector tabs'
         variant='scrollable'

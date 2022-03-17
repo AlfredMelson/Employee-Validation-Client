@@ -13,40 +13,49 @@ export default function EmployeeList() {
       opacity: 1,
       transition: {
         delayChildren: 0.3,
-        staggerChildren: 0.1
+        staggerChildren: 0.5
       }
     }
   }
 
-  // const employee = {
-  //   hidden: { y: 20, opacity: 0 },
-  //   visible: {
-  //     y: 0,
-  //     opacity: 1
-  //   },
-  //   exit: { opacity: 0 }
-  // }
+  const employee = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1
+    }
+  }
 
   return (
-    <List sx={{ p: 0, backgroundColor: 'transparent' }}>
-      <AnimatePresence exitBeforeEnter>
+    <AnimatePresence exitBeforeEnter>
+      <List sx={{ p: 0, backgroundColor: 'transparent' }}>
         <motion.ul
+          layout
           variants={container}
-          initial='hidden'
-          animate='visible'
+          initial='initial'
+          animate='animate'
+          exit='exit'
           style={{ listStyle: 'none', paddingInlineStart: 0 }}>
           {paginatedEmplList.map((empl) => (
-            <Individual
+            <motion.div
               key={empl.id}
-              emplId={empl.id}
-              emplFirstname={empl.firstname}
-              emplLastname={empl.lastname}
-              emplRole={empl.role}
-              emplEmail={empl.email}
-            />
+              className='list-group-empl'
+              layout
+              variants={employee}
+              initial='initial'
+              animate='animate'
+              exit='exit'>
+              <Individual
+                emplId={empl.id}
+                emplFirstname={empl.firstname}
+                emplLastname={empl.lastname}
+                emplRole={empl.role}
+                emplEmail={empl.email}
+              />
+            </motion.div>
           ))}
         </motion.ul>
-      </AnimatePresence>
-    </List>
+      </List>
+    </AnimatePresence>
   )
 }

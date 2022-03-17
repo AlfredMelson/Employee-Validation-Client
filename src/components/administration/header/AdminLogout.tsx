@@ -21,13 +21,19 @@ export default function AdminLogout() {
   // Login button states
   // handle disabled state
   const [disabled, setDisabled] = useState(false)
-  console.log(disabled)
+  if (disabled) {
+    console.log(disabled)
+  }
   // handle submission state
   const [submitting, setSubmitting] = useState(false)
-  console.log(submitting)
+  if (submitting) {
+    console.log(submitting)
+  }
   // handle successful submission state
   const [successSubmit, setSuccessfulSubmit] = useState(false)
-  console.log(successSubmit)
+  if (successSubmit) {
+    console.log(successSubmit)
+  }
 
   // Handle setting and updating error message and state
   useEffect(() => {

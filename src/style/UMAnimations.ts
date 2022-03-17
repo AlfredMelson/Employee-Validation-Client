@@ -69,8 +69,7 @@ export const adminContainer = {
       ease: [0.6, -0.05, 0.01, 0.99],
       delayChildren: 0.4
     }
-  },
-  exit: { opacity: 0 }
+  }
 }
 
 export const adminCard = {
