@@ -3,7 +3,7 @@ import { AxiosResponse } from 'axios'
 import { useEffect, useRef, useState } from 'react'
 import axios from '../../../../api/axiosCustom'
 import { UMSwatch } from '../../../../style'
-import { API, AxiosEmplUpdateConfig, regexEmailValidation } from '../../../../utils'
+import { API, AxiosConfig, regexEmailValidation } from '../../../../utils'
 import { DialogContentSx, DialogContentTextSx, TextFieldSx } from '../../../mui'
 import { UpdateEmployee } from '../submissions'
 
@@ -69,7 +69,7 @@ export default function UpdateEmplContent({
         JSON.stringify({ emplId, emplFirstname, emplLastname, emplRole, emplEmail }),
 
         // pull in axios update config; sending back the secure cookie with the request
-        AxiosEmplUpdateConfig
+        AxiosConfig
       )
 
       // Return JSON

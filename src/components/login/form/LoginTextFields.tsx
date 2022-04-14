@@ -9,7 +9,7 @@ import { useAuth } from '../../../hooks'
 import { loginAlertErrorAtom, loginErrorMessageAtom } from '../../../recoil-state'
 import { UMSwatch } from '../../../style'
 import { loginField, loginFieldTitle } from '../../../style/UMAnimations'
-import { API, AxiosLoginConfig, uxdelay } from '../../../utils'
+import { API, AxiosConfig, uxdelay } from '../../../utils'
 import { TextFieldSx } from '../../mui'
 import LoginSubmission from './LoginSubmission'
 
@@ -70,16 +70,14 @@ export default function LoginTextFields() {
 
     setSubmitting(true)
 
+    const loginData =
+      adminAccessToken === null
+        ? { adminUsername, adminPassword }
+        : { adminUsername, adminPassword, adminAccessToken }
+
     try {
-      console.log('adminAccessToken', adminAccessToken)
-
-      const loginData =
-        adminAccessToken === null
-          ? { adminUsername, adminPassword }
-          : { adminUsername, adminPassword, adminAccessToken }
-
-      console.log('loginData', loginData)
-      const response = await axios.post(API.Login, JSON.stringify(loginData), AxiosLoginConfig)
+      console.log('*** LOGIN ***')
+      const response = await axios.post(API.Login, JSON.stringify(loginData), AxiosConfig)
 
       console.log('response', response)
 

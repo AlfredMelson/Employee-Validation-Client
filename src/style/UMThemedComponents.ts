@@ -84,7 +84,12 @@ export default function UMThemedComponents(theme: Theme) {
       MuiDialog: {
         defaultProps: {},
         styleOverrides: {
-          root: { marginTop: theme.spacing(60) }, // Styles applied to the root element
+          root: {
+            marginTop: theme.spacing(60)
+          }, // Styles applied to the root element
+          backdrop: {
+            backgroundColor: 'transparent'
+          },
           paperAnchorTop: {}, // Styles applied to the Paper component if anchor="top"
           paper: {
             backgroundColor: '#21262d',

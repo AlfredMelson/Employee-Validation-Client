@@ -20,26 +20,8 @@ export enum API {
   RegisterEmployee = '/api/register'
 }
 
-export const AxiosLoginConfig = {
+export const AxiosConfig = {
   headers: { 'Content-Type': 'application/json' },
-  withCredentials: true
-}
-export const AxiosLogoutConfig = {
-  headers: { 'Content-Type': 'application/json' },
-  withCredentials: true
-}
-export const AxiosGetDataConfig = {
-  headers: { 'Content-Type': 'application/json' },
-  withCredentials: true
-}
-export const AxiosUpdateConfig = {
-  headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-  withCredentials: true
-}
-export const AxiosEmplUpdateConfig = { withCredentials: true }
-
-export const AXIOS_ITEMS_CONFIG = {
-  headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
   withCredentials: true
 }
 

@@ -1,3 +1,4 @@
+import DialogTitle from '@mui/material/DialogTitle'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import { UMSwatch } from '../../../../style'
@@ -11,22 +12,24 @@ interface IDialogHeader {
 
 export default function DialogHeader({ title, onClick }: IDialogHeader) {
   return (
-    <Stack
-      direction='row'
-      justifyContent='space-between'
-      alignItems='center'
-      sx={{ p: '20px 20px 0' }}>
-      <Typography
-        variant='h6'
-        sx={{
-          color: UMSwatch.Gold[50],
-          ml: '10px'
-        }}>
-        {title}
-      </Typography>
-      <IconButtonSx onClick={onClick}>
-        <CloseIcon />
-      </IconButtonSx>
-    </Stack>
+    <DialogTitle sx={{ cursor: 'move', margin: 0, padding: 0 }} id='draggable-dialog'>
+      <Stack
+        direction='row'
+        justifyContent='space-between'
+        alignItems='center'
+        sx={{ p: '20px 20px 0' }}>
+        <Typography
+          variant='h6'
+          sx={{
+            color: UMSwatch.Gold[50],
+            ml: '10px'
+          }}>
+          {title}
+        </Typography>
+        <IconButtonSx onClick={onClick}>
+          <CloseIcon />
+        </IconButtonSx>
+      </Stack>
+    </DialogTitle>
   )
 }

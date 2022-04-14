@@ -16,8 +16,6 @@ function a11yProps(value: string) {
 export default function TabOptions() {
   const [employeeFilterState, setEmployeeFilterState] = useRecoilState(employeeFilterStateAtom)
 
-  console.log('employeeFilterState', employeeFilterState)
-
   const employeeState = useRecoilValue(employeeStateAtom)
 
   const filteredEmails = EmailErrorFilter(employeeState)

@@ -2,12 +2,12 @@ import Box from '@mui/material/Box'
 import MenuItem from '@mui/material/MenuItem'
 import { AxiosResponse } from 'axios'
 import { motion } from 'framer-motion'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useSetRecoilState } from 'recoil'
 import axios from '../../../../api/axiosCustom'
 import { AddEmplDialogStateAtom } from '../../../../recoil-state'
 import { loginFieldTitle } from '../../../../style'
-import { API, AxiosEmplUpdateConfig, regexEmailValidation } from '../../../../utils'
+import { API, AxiosConfig, REGEX_Username, regexEmailValidation } from '../../../../utils'
 import { DialogContentSx, TextFieldSx, TypoTextfieldSx } from '../../../mui'
 import AddEmployee from '../submissions/AddEmployee'
 
@@ -15,63 +15,76 @@ export default function AddEmplContent() {
   // update email dialog state
   const setAddEmplDialogState = useSetRecoilState(AddEmplDialogStateAtom)
 
-  // username input state
-  const [newEmplName, setNewEmplName] = useState('')
-  const [nameHelperText, setNameHelperText] = useState<string>('')
+  // firstname input state
+  const [emplFirstname, setEmplFirstname] = useState('')
+  const [firstnameHelperText, setFirstnameHelperText] = useState<string>('')
+
+  // lastname input state
+  const [emplLastname, setEmplLastname] = useState('')
+  const [lastnameHelperText, setLastnameHelperText] = useState<string>('')
 
   // email address input state
-  const [newEmplEmail, setNewEmplEmail] = useState('')
+  const [emplEmail, setEmplEmail] = useState('')
   const [emailHelperText, setEmailHelperText] = useState<string>('')
 
   // email address input state
-  const [newEmplRole, setNewEmplRole] = useState('')
+  const [emplRole, setEmplRole] = useState('')
   const [roleHelperText, setRoleHelperText] = useState<string>('')
 
   // email address validation state
   const [emailValidation, setEmailValidation] = useState<boolean>(false)
 
-  console.log('emailValidation', emailValidation)
   // completed form validation state
   const [formValidation, setFormValidation] = useState<boolean>(false)
 
-  // error reference
-  const errorReference = useRef<HTMLParagraphElement | null>(null)
+  // handle form validation state
+  useEffect(() => {
+    const validFirstname: boolean = emplFirstname !== '' && REGEX_Username.test(emplFirstname)
+    const validLastname: boolean = emplLastname !== '' && REGEX_Username.test(emplLastname)
+    const validEmail: boolean = regexEmailValidation.test(emplEmail.toLowerCase())
+    const validRole: boolean = emplRole === 'Read' || emplRole === 'Write' || emplRole === 'Admin'
+    if (validFirstname && validLastname && validEmail && validRole)
+      return () => {
+        setFormValidation(true)
+      }
+  }, [emailValidation, emplEmail, emplFirstname, emplLastname, emplRole])
 
   // handle setting and updating error message and state
   useEffect(() => {
     return () => {
-      // reset alert when either the username or password state changes
-      setNameHelperText('')
+      // reset alert when either the firstname, lastname or password state changes
+      setFirstnameHelperText('')
+      setLastnameHelperText('')
       setEmailHelperText('')
       setRoleHelperText('')
       setFormValidation(false)
     }
-  }, [newEmplEmail])
+  }, [emplEmail])
 
   // handle email address input validation
   useEffect(() => {
-    const validateEmail = regexEmailValidation.test(newEmplEmail.toLowerCase())
+    const validateEmail = regexEmailValidation.test(emplEmail.toLowerCase())
     setEmailValidation(!validateEmail)
-  }, [newEmplEmail])
+  }, [emplEmail])
 
   const handleAddEmpl = async (event) => {
     event.preventDefault()
 
     // alert user if email address input is empty
-    if (!newEmplEmail) {
+    if (!emplEmail) {
       return setEmailHelperText('Please enter an email')
     }
 
     try {
       const response: AxiosResponse = await axios.post(
         // pull in the update endpoint
-        API.UpdateEmployee,
+        API.RegisterEmployee,
 
         // pull in the employee data
-        JSON.stringify({ newEmplName, newEmplRole, newEmplEmail }),
+        JSON.stringify({ emplFirstname, emplLastname, emplRole, emplEmail }),
 
         // pull in axios update config; sending back the secure cookie with the request
-        AxiosEmplUpdateConfig
+        AxiosConfig
       )
 
       // Return JSON
@@ -86,15 +99,13 @@ export default function AddEmplContent() {
       // open error alert if there is a caught error
     } catch (error) {
       setEmailHelperText('Invalid email address')
-
-      errorReference.current.focus()
     }
   }
 
   const roles = [
     {
       value: '',
-      label: ''
+      label: 'Role'
     },
     {
       value: 'read',
@@ -126,11 +137,11 @@ export default function AddEmplContent() {
             autoFocus
             id='firstname'
             placeholder='First name'
-            error={nameHelperText !== ''}
+            error={firstnameHelperText !== ''}
             onChange={(event) => {
-              setNewEmplName(event.target.value)
+              setEmplFirstname(event.target.value)
             }}
-            helperText={nameHelperText}
+            helperText={firstnameHelperText}
             sx={{ gridColumn: '1 / span 2', gridRow: 2, paddingRight: '24px' }}
           />
           <motion.div variants={loginFieldTitle} style={{ gridColumn: '3 / span 2', gridRow: 1 }}>
@@ -139,11 +150,11 @@ export default function AddEmplContent() {
           <TextFieldSx
             id='lastname'
             placeholder='Last name'
-            error={nameHelperText !== ''}
+            error={lastnameHelperText !== ''}
             onChange={(event) => {
-              setNewEmplName(event.target.value)
+              setEmplLastname(event.target.value)
             }}
-            helperText={nameHelperText}
+            helperText={lastnameHelperText}
             sx={{ gridColumn: '3 / span 2', gridRow: 2 }}
           />
           <motion.div variants={loginFieldTitle} style={{ gridColumn: '1 / span 3', gridRow: 3 }}>
@@ -154,7 +165,7 @@ export default function AddEmplContent() {
             placeholder='Update Email Address'
             error={emailHelperText !== ''}
             onChange={(event) => {
-              setNewEmplEmail(event.target.value)
+              setEmplEmail(event.target.value)
             }}
             helperText={emailHelperText}
             sx={{ gridColumn: '1 / span 3', gridRow: 4, paddingRight: '24px' }}
@@ -165,9 +176,9 @@ export default function AddEmplContent() {
           <TextFieldSx
             select
             id='select-role'
-            value={newEmplRole}
+            value={emplRole}
             onChange={(event) => {
-              setNewEmplRole(event.target.value)
+              setEmplRole(event.target.value)
             }}
             error={roleHelperText !== ''}
             helperText={roleHelperText}

@@ -4,7 +4,7 @@ import { useSetRecoilState } from 'recoil'
 import axios from '../../../api/axiosCustom'
 import { useAuth } from '../../../hooks'
 import { logoutAlertErrorAtom, logoutErrorMessageAtom } from '../../../recoil-state'
-import { uxdelay } from '../../../utils'
+import { API, uxdelay } from '../../../utils'
 import { LogoutIcon } from '../../icons'
 import { IconButtonSx, ToolTipSx } from '../../mui'
 
@@ -57,7 +57,7 @@ export default function AdminLogout() {
     setSubmitting(true)
 
     try {
-      const response = await axios('/logout', {
+      const response = await axios(API.Logout, {
         withCredentials: true
       })
 
@@ -83,6 +83,13 @@ export default function AdminLogout() {
       await uxdelay(100)
       setSubmitting(false)
 
+      //
+      //
+      //
+      //
+      //
+      //
+      //
       // empty context
       setAuth({})
       setAdminAccessToken(null)
@@ -130,7 +137,7 @@ export default function AdminLogout() {
 //    const response = await axios.post(
 //      API.Logout,
 //      JSON.stringify({ adminUsername, adminPassword }),
-//      AxiosLoginConfig
+//      AxiosConfig
 //    )
 
 //    if (response.status === 200) {
@@ -145,3 +152,4 @@ export default function AdminLogout() {
 //  } catch (error) {
 //    console.log(error)
 //  }
+

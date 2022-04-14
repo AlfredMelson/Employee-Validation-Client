@@ -1,5 +1,5 @@
 import axios from '../api/axiosCustom'
-import { API, AxiosLogoutConfig } from '../utils'
+import { API, AxiosConfig } from '../utils'
 import useAuth from './useAuth'
 
 export default function useLogout() {
@@ -7,11 +7,7 @@ export default function useLogout() {
 
   const logoutAdmin = async () => {
     try {
-      const response = await axios.post(
-        API.Logout,
-        JSON.stringify(adminAccessToken),
-        AxiosLogoutConfig
-      )
+      const response = await axios.post(API.Logout, JSON.stringify(adminAccessToken), AxiosConfig)
 
       console.log('logoutAdmin response: ', response)
 
