@@ -14,7 +14,7 @@ const useAxiosPrivate = () => {
   useEffect(() => {
     // similar to vanilla JS event listeners, interceptors get attached but will need to be removed to avoid multiple attachments
     const requestIntercept = axiosPrivate.interceptors.request.use(
-      config => {
+      (config) => {
         // check the config and if the authorization header doesn't exist, then the request is not a re-try.
         if (!config.headers['Authorization']) {
           // As the first attempt, set the authorization header equal to the access token from auth state. This access token could be either the initial toekn at login or the token at refresh.
@@ -24,15 +24,15 @@ const useAxiosPrivate = () => {
       },
 
       // make sure to handle an error
-      error => Promise.reject(error)
+      (error) => Promise.reject(error)
     )
 
     const responseIntercept = axiosPrivate.interceptors.response.use(
       // get the reponse, returning it if it's not a 401
-      response => response,
+      (response) => response,
 
       // otherwise handle the error asynchronous - this will handle situations like token expired
-      async error => {
+      async (error) => {
         // first: get the previous request via axios by accessing the config proeprty
         const prevRequest = error?.config
 

@@ -7,7 +7,6 @@ interface IAuthRequired {
 
 export default function AuthRequired({ children }: IAuthRequired) {
   const { auth } = useAuth()
-  console.log('auth', auth)
   const location = useLocation()
 
   if (auth.adminAccessToken === '') {

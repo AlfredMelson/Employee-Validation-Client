@@ -8,12 +8,12 @@ export default function App() {
   return (
     <AnimatePresence exitBeforeEnter>
       <Routes key={location.pathname}>
-        <Route path='/' element={<AppLayout />}>
-          {/* public routes */}
+        <Route element={<AppLayout />}>
+          {/* public route */}
           <Route index element={<Login />} />
 
-          {/* protected routes */}
-          <Route path='dashboard' element={<Administration />} />
+          {/* protected route */}
+          <Route path='/dashboard' element={<Administration />} />
 
           {/* mismatch route */}
           <Route path='*' element={<Mismatch />} />
@@ -22,4 +22,3 @@ export default function App() {
     </AnimatePresence>
   )
 }
-

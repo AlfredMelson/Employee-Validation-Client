@@ -36,7 +36,7 @@ const deleteEmpl = async (emplId): Promise<void> => {
   try {
     await api.delete(API.DeleteEmployee, emplId)
   } catch (error) {
-    throw new Error(error.message)
+    console.log(error)
   }
 }
 
@@ -48,7 +48,7 @@ const updateEmpl = async (empl: Empl): Promise<void> => {
     })
     console.log(response)
   } catch (error) {
-    throw new Error(error.message)
+    console.log(error)
   }
 }
 

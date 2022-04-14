@@ -14,7 +14,7 @@ export default function AddEmployeeDialog() {
 
   return (
     <>
-      <ToolTipSx tooltipTitle={'Add Registrant'}>
+      <ToolTipSx tooltipTitle={'Add Registrant'} placement='top'>
         <IconButtonSx
           onClick={() => {
             setAddEmplDialogState(true)

@@ -14,17 +14,15 @@ export default function AdminLogout() {
 
     await uxdelay(1000)
     setAuth({})
-    await uxdelay(1000)
     // push admin to login page
-    navigate('/', { replace: true })
+    navigate(-1)
   }
 
   return (
-    <ToolTipSx tooltipTitle={'Logout'}>
+    <ToolTipSx tooltipTitle={'Logout'} placement='top'>
       <IconButtonSx onClick={handleAdminLogout} sx={{ mr: '4px' }}>
         <LogoutIcon />
       </IconButtonSx>
     </ToolTipSx>
   )
 }
-

@@ -1,3 +1,4 @@
+// TESTING COMPONENT
 import { AxiosRequestTransformer, AxiosResponseTransformer } from 'axios'
 import { useEffect, useState } from 'react'
 
@@ -44,7 +45,6 @@ const useAxios = (configObj) => {
   const { axiosInstance, method, url, requestConfig = {} } = configObj
 
   const [axiosResponse, setAxiosResponse] = useState([])
-  const [error, setError] = useState<string>('')
   const [loading, setLoading] = useState<boolean>(true)
   const [reload, setReload] = useState(0)
 
@@ -63,9 +63,8 @@ const useAxios = (configObj) => {
           signal: controller.signal
         })
         setAxiosResponse(response.data)
-      } catch (err) {
-        console.log(err.message)
-        setError(err.message)
+      } catch (error) {
+        console.log(error)
       } finally {
         setLoading(false)
       }
@@ -80,7 +79,7 @@ const useAxios = (configObj) => {
     // eslint-disable-next-line
   }, [reload])
 
-  return [axiosResponse, error, loading, refetch]
+  return [axiosResponse, loading, refetch]
 }
 
 export default useAxios

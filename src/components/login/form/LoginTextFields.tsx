@@ -17,9 +17,6 @@ export default function LoginTextFields() {
   const navigate = useNavigate()
   // Hook up auth state
   const { auth, setAuth } = useAuth()
-  console.log('auth', auth)
-
-  // const from = location.state?.from.pathname || '/'
 
   // Error message display transition
   const setLoginAlertError = useSetRecoilState(loginAlertErrorAtom)
@@ -75,49 +72,34 @@ export default function LoginTextFields() {
     const adminAccessToken = auth.accessToken
 
     const loginData =
-      adminAccessToken === null
+      adminAccessToken === null || adminAccessToken === undefined
         ? { adminUsername, adminPassword }
         : { adminUsername, adminPassword, adminAccessToken }
 
     try {
-      console.log('*** LOGIN ***', loginData)
       const response = await axios.post(API.Login, JSON.stringify(loginData), AxiosConfig)
 
-      console.log('response', response)
-
       if (response.status === 200) {
-        console.log('*** Status 200 ***')
         // set state to success
         const responseAccessToken: string = await response.data.accessToken
 
         // pass adminUsername, adminPassword and accessToken into auth context
         setAuth({ adminUsername, adminPassword, responseAccessToken })
 
-        // reset the username and password fields
-        // three-quarter second delay
-        await uxdelay(750)
-        setAdminUsername('')
-
-        // quarter second delay
-        await uxdelay(250)
-        setAdminPassword('')
-
-        // quarter second delay
-        await uxdelay(250)
-
+        // reset the username and password fields after 1 sec delay
+        await uxdelay(1000)
         setDisabled(false)
-        setSuccessfulSubmit(true)
 
         // quarter second delay
-        await uxdelay(250)
+        await uxdelay(500)
+        setAdminUsername('')
+        setAdminPassword('')
+        setSuccessfulSubmit(true)
+        await uxdelay(500)
         // push admin to dashboard page
         navigate('/dashboard')
-
-        // one-tenth of a second delay
-        await uxdelay(100)
         setSubmitting(false)
       }
-
       // open error alert if there is a caught error
     } catch (error) {
       setSubmitting(false)
@@ -126,15 +108,15 @@ export default function LoginTextFields() {
       setLoginAlertError(true)
 
       // handle no response from the server
-      if (!error.response) {
+      if (!error) {
         setLoginErrorMessage('No Server Response')
 
         // handle invalid syntax (400 Bad Request)
-      } else if (error.response.status === 400) {
+      } else if (error === 400) {
         setLoginErrorMessage('Missing Username or Password')
 
         // handle unauthenticated (401 Unauthorized)
-      } else if (error.response.status === 401) {
+      } else if (error === 401) {
         setLoginErrorMessage('Unauthorized Creditentials')
 
         // handle catch-all-other-errors
