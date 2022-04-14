@@ -1,17 +1,18 @@
-import { Navigate, Outlet, useLocation } from 'react-router-dom'
+import { Navigate, useLocation } from 'react-router-dom'
 import useAuth from '../../hooks/useAuth'
 
-const AuthRequired = () => {
-  const { auth } = useAuth()
-  const location = useLocation()
-
-  return auth ? (
-    // Outlet represents and protects any nested child components
-    <Outlet />
-  ) : (
-    // anyone not logged in will be redirected to the login page by replacing the location they came from with login path within their history
-    <Navigate to='/' state={{ from: location }} replace />
-  )
+interface IAuthRequired {
+  children: JSX.Element
 }
 
-export default AuthRequired
+export default function AuthRequired({ children }: IAuthRequired) {
+  const { auth } = useAuth()
+  console.log('auth', auth)
+  const location = useLocation()
+
+  if (auth.adminAccessToken === '') {
+    // Redirect them to the /login page, but save the current location they were trying to go to when they were redirected. This allows us to send them along to that page after they login, which is a nicer user experience than dropping them off on the home page.
+    return <Navigate to='/login' state={{ from: location }} replace />
+  }
+  return children
+}

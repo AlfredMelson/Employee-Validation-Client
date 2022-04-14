@@ -12,11 +12,8 @@ export default function App() {
           {/* public routes */}
           <Route index element={<Login />} />
 
-          {/* authenticated routes */}
-          {/* <Route element={<AuthRequired />}> */}
           {/* protected routes */}
           <Route path='dashboard' element={<Administration />} />
-          {/* </Route> */}
 
           {/* mismatch route */}
           <Route path='*' element={<Mismatch />} />
@@ -25,3 +22,4 @@ export default function App() {
     </AnimatePresence>
   )
 }
+

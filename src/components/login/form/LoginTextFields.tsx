@@ -15,9 +15,11 @@ import LoginSubmission from './LoginSubmission'
 
 export default function LoginTextFields() {
   const navigate = useNavigate()
+  // Hook up auth state
+  const { auth, setAuth } = useAuth()
+  console.log('auth', auth)
 
-  // Hook up admin authentication state
-  const { setAuth, adminAccessToken, setAdminAccessToken } = useAuth()
+  // const from = location.state?.from.pathname || '/'
 
   // Error message display transition
   const setLoginAlertError = useSetRecoilState(loginAlertErrorAtom)
@@ -70,24 +72,26 @@ export default function LoginTextFields() {
 
     setSubmitting(true)
 
+    const adminAccessToken = auth.accessToken
+
     const loginData =
       adminAccessToken === null
         ? { adminUsername, adminPassword }
         : { adminUsername, adminPassword, adminAccessToken }
 
     try {
-      console.log('*** LOGIN ***')
+      console.log('*** LOGIN ***', loginData)
       const response = await axios.post(API.Login, JSON.stringify(loginData), AxiosConfig)
 
       console.log('response', response)
 
       if (response.status === 200) {
+        console.log('*** Status 200 ***')
         // set state to success
-        const resAccessToken: string = response.data.accessToken
+        const responseAccessToken: string = await response.data.accessToken
 
         // pass adminUsername, adminPassword and accessToken into auth context
-        setAuth({ adminUsername, adminPassword })
-        setAdminAccessToken(resAccessToken)
+        setAuth({ adminUsername, adminPassword, responseAccessToken })
 
         // reset the username and password fields
         // three-quarter second delay
@@ -107,8 +111,7 @@ export default function LoginTextFields() {
         // quarter second delay
         await uxdelay(250)
         // push admin to dashboard page
-        // navigate('/dashboard', { replace: true })
-        navigate('/dashboard', { replace: true })
+        navigate('/dashboard')
 
         // one-tenth of a second delay
         await uxdelay(100)

@@ -10,6 +10,7 @@ const useRefreshToken = () => {
       // setting that allows the secure cookie with response to be sent
       withCredentials: true
     })
+    console.log('useRefreshToken', response)
     setAuth((prev) => {
       return {
         ...prev,

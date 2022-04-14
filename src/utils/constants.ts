@@ -11,10 +11,9 @@ export enum AppRoutes {
 export enum API {
   Login = '/admin/auth',
   Logout = '/admin/logout',
+  Refresh = '/admin/refresh',
   Employee = '/api/id',
   Employees = '/api/ids',
-  Refresh = '/admin/refresh',
-  Register = '/admin/register',
   DeleteEmployee = '/api/delete',
   UpdateEmployee = '/api/update',
   RegisterEmployee = '/api/register'
@@ -44,3 +43,4 @@ export const REGEX_Password = /^[A-z][A-z0-9-_]{3,23}$/
  */
 export const REGEX_EmailAddress =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+
