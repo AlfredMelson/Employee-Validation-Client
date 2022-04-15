@@ -12,6 +12,7 @@ import { loginField, loginFieldTitle } from '../../../style/UMAnimations'
 import { API, AxiosConfig, uxdelay } from '../../../utils'
 import { TextFieldSx } from '../../mui'
 import LoginSubmission from './LoginSubmission'
+import PersistCheck from './PersistCheck'
 
 export default function LoginTextFields() {
   const navigate = useNavigate()
@@ -69,22 +70,22 @@ export default function LoginTextFields() {
 
     setSubmitting(true)
 
-    const adminAccessToken = auth.accessToken
+    const accessToken = auth.accessToken
 
     const loginData =
-      adminAccessToken === null || adminAccessToken === undefined
+      accessToken === null || accessToken === undefined
         ? { adminUsername, adminPassword }
-        : { adminUsername, adminPassword, adminAccessToken }
+        : { adminUsername, adminPassword, accessToken }
 
     try {
       const response = await axios.post(API.Login, JSON.stringify(loginData), AxiosConfig)
 
       if (response.status === 200) {
         // set state to success
-        const responseAccessToken: string = await response.data.accessToken
+        const accessToken = response?.data?.accessToken
 
         // pass adminUsername, adminPassword and accessToken into auth context
-        setAuth({ adminUsername, adminPassword, responseAccessToken })
+        setAuth({ adminUsername, adminPassword, accessToken })
 
         // reset the username and password fields after 1 sec delay
         await uxdelay(1000)
@@ -161,6 +162,9 @@ export default function LoginTextFields() {
             value={adminPassword}
             helperText={passwordHelperText}
           />
+        </motion.div>
+        <motion.div variants={loginField}>
+          <PersistCheck />
         </motion.div>
         <motion.div variants={loginField}>
           <LoginSubmission

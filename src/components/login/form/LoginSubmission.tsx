@@ -25,7 +25,7 @@ export default function LoginSubmission({
       <Box
         sx={{
           position: 'relative',
-          margin: { xs: '20px 0 0', sm: '24px 0 0', md: '24px 0 0' },
+          margin: { xs: '10px 0 0', sm: '12px 0 0', md: '12px 0 0' },
           p: 0
         }}>
         <SubmitButtonSx

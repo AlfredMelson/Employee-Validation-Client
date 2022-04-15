@@ -1,5 +1,6 @@
 export { AdminCard } from './administration'
-export { AuthRequired } from './authorization'
 export { LoginCard } from './login'
-export { AppLayout } from './layout'
 export { RouteMismatch } from './no-match'
+export { Layout } from './layout'
+export { Persistence } from './layout'
+export { Authentication } from './layout'

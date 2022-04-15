@@ -39,7 +39,7 @@ export const SelectedTabSx = styled(Tab, {
 })(() => ({
   minWidth: '120px',
   margin: '0 10px',
-  backgroundColor: alpha(UMSwatch.Grey[500], 0.15)
+  backgroundColor: alpha(UMSwatch.Grey[500], 0.1)
 }))
 export const UnselectedTabSx = styled(Tab, {
   name: 'MotionTab',
