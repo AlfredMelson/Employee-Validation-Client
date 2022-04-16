@@ -1,4 +1,6 @@
-import { createContext, ReactNode, useState } from 'react'
+import { createContext, ReactNode, useEffect, useState } from 'react'
+import { useSetRecoilState } from 'recoil'
+import { pushAdminStateAtom } from '../recoil-state'
 
 // export interface IAuth {
 //   adminUsername?: string
@@ -24,14 +26,29 @@ interface IAuthProvider {
   children: ReactNode
 }
 
+interface IAuth {
+  username: string
+  password: string
+  accessToken: string
+}
+
 export const AuthProvider = ({ children }: IAuthProvider) => {
-  const [auth, setAuth] = useState({
+  const setPushAdminState = useSetRecoilState(pushAdminStateAtom)
+  const [auth, setAuth] = useState<IAuth>({
     username: '',
     password: '',
     accessToken: ''
   })
 
-  const [persist, setPersist] = useState(JSON.parse(localStorage.getItem('persist')) || false)
+  useEffect(() => {
+    setPushAdminState(auth.accessToken)
+  }, [auth, setPushAdminState])
+
+  console.log('AuthProvider', auth)
+
+  const [persist, setPersist] = useState<boolean>(
+    JSON.parse(localStorage.getItem('persist')) || false
+  )
 
   return (
     <AuthContext.Provider value={{ auth, setAuth, persist, setPersist }}>
