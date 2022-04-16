@@ -14,7 +14,7 @@ export default function App() {
           {/* protected route */}
           <Route element={<Persistence />}>
             <Route element={<Authentication />}>
-              <Route path='/dashboard' element={<Administration />} />
+              <Route path='dashboard' element={<Administration />} />
             </Route>
           </Route>
           {/* <Route path='/dashboard' element={<Administration />} /> */}
