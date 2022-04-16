@@ -12,7 +12,7 @@ const SelectedTabSx = styled(Tab, {
   slot: 'styled'
 })(() => ({
   minWidth: '127px',
-  margin: '0 10px',
+  margin: '0 2px',
   borderRadius: '4px',
   backgroundColor: UMSwatch.Grey[700]
 }))
@@ -22,7 +22,7 @@ const UnselectedTabSx = styled(Tab, {
   slot: 'styled'
 })(() => ({
   minWidth: '127px',
-  margin: '0 10px',
+  margin: '0 2px',
   backgroundColor: 'transparent'
 }))
 

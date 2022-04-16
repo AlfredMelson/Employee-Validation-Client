@@ -17,7 +17,7 @@ const ErrorTabsTitleContainer = styled(Box)(({ theme }) => ({
 export default function AdminErrorTabsTitle() {
   return (
     <ErrorTabsTitleContainer>
-      <Divider sx={{ gridColumn: 3, color: UMSwatch.Grey[500], pb: '12px' }}>
+      <Divider sx={{ gridColumn: 3, color: UMSwatch.Grey[500], pb: '12px', pl: '2px', pr: '10px' }}>
         <Box sx={{ mx: '8px' }}>registration errors</Box>
       </Divider>
     </ErrorTabsTitleContainer>

@@ -7,7 +7,7 @@ export const TabStyle = styled(Tab, {
   slot: 'styled'
 })(({ theme }) => ({
   minWidth: '127px',
-  margin: '0 10px',
+  margin: '0 2px',
   fontWeight: 600,
   textTransform: 'none',
   borderRadius: '4px',
