@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { useEffect } from 'react'
-import { useEmployeesContext } from '../../context'
+import { useEmpl } from '../../hooks'
 import { adminCard, adminHeading, adminTabs, adminTagline } from '../../style/UMAnimations'
 import { CardSx } from '../mui'
 import { PanelControls } from './controls'
@@ -9,7 +9,7 @@ import { TabSelectors } from './tabs'
 import { Tagline } from './tagline'
 
 export default function AdminCard() {
-  const { getEmployees } = useEmployeesContext()
+  const { getEmployees } = useEmpl()
 
   useEffect(() => {
     getEmployees()

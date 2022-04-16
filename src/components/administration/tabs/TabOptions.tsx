@@ -1,6 +1,7 @@
 import { Badge } from '@mui/material'
 import Tabs from '@mui/material/Tabs'
 import { useRecoilState, useRecoilValue } from 'recoil'
+import { useEmpl } from '../../../hooks'
 import { employeeFilterStateAtom, employeeStateAtom } from '../../../recoil-state'
 import { EmailErrorFilter } from '../../../utils'
 import { TabStyle, TabWrapper } from '../../mui'
@@ -17,6 +18,8 @@ function a11yProps(value: string) {
 export default function TabOptions() {
   const [employeeFilterState, setEmployeeFilterState] = useRecoilState(employeeFilterStateAtom)
 
+  const { employees } = useEmpl()
+
   const employeeState = useRecoilValue(employeeStateAtom)
 
   const filteredEmails = EmailErrorFilter(employeeState)
@@ -29,7 +32,7 @@ export default function TabOptions() {
     {
       label: 'Registrants',
       value: 'all',
-      errorQuantity: 20,
+      errorQuantity: employees.length,
       disable: false
     },
     {
