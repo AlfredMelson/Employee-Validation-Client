@@ -1,4 +1,3 @@
-// UNUSED
 import { useEffect } from 'react'
 import { axiosPrivate } from '../api/axiosCustom'
 import useAuth from './useAuth'
