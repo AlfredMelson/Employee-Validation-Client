@@ -1,4 +1,4 @@
-import { alpha, styled } from '@mui/material/styles'
+import { styled } from '@mui/material/styles'
 import Tab from '@mui/material/Tab'
 import { UMSwatch } from '../../style'
 
@@ -6,7 +6,7 @@ export const TabStyle = styled(Tab, {
   name: 'Tab',
   slot: 'styled'
 })(({ theme }) => ({
-  minWidth: '120px',
+  minWidth: '127px',
   margin: '0 10px',
   fontWeight: 600,
   textTransform: 'none',
@@ -31,21 +31,4 @@ export const TabStyle = styled(Tab, {
     minHeight: '30px',
     height: '48px'
   }
-}))
-
-export const SelectedTabSx = styled(Tab, {
-  name: 'MotionTab',
-  slot: 'styled'
-})(() => ({
-  minWidth: '120px',
-  margin: '0 10px',
-  backgroundColor: alpha(UMSwatch.Grey[500], 0.1)
-}))
-export const UnselectedTabSx = styled(Tab, {
-  name: 'MotionTab',
-  slot: 'styled'
-})(() => ({
-  minWidth: '120px',
-  margin: '0 10px',
-  backgroundColor: 'transparent'
 }))

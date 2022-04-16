@@ -1,6 +1,5 @@
 export * from './TextField.style'
 export * from './Button.style'
-export * from './Badge.style'
 export * from './IconButton.style'
 export * from './Dialog.style'
 export * from './Box.style'

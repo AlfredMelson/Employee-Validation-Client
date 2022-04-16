@@ -1,8 +1,9 @@
+import { Badge } from '@mui/material'
 import Tabs from '@mui/material/Tabs'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import { employeeFilterStateAtom, employeeStateAtom } from '../../../recoil-state'
 import { EmailErrorFilter } from '../../../utils'
-import { BadgeSx, TabStyle, TabWrapper } from '../../mui'
+import { TabStyle, TabWrapper } from '../../mui'
 import TabBackground from './TabBackground'
 import { ITabData } from './types'
 
@@ -24,11 +25,11 @@ export default function TabOptions() {
   const DuplicateLabel = filteredEmails?.duplicate.length === 0 ? 'No duplicate' : 'Duplicate'
   const OldLabel = filteredEmails?.old.length === 0 ? 'No old' : 'Old'
 
-  const TabData: ITabData[] = [
+  const tabData: ITabData[] = [
     {
       label: 'Registrants',
       value: 'all',
-      errorQuantity: 0,
+      errorQuantity: 20,
       disable: false
     },
     {
@@ -66,7 +67,7 @@ export default function TabOptions() {
         value={employeeFilterState}
         onChange={handleChange}
         sx={{ gridColumn: 2, gridRow: 1 }}>
-        {TabData.map((tab) => (
+        {tabData.map((tab) => (
           <TabStyle
             key={tab.value}
             label={tab.label}
@@ -74,9 +75,14 @@ export default function TabOptions() {
             disabled={tab.disable}
             {...a11yProps(tab.value)}
             icon={
-              <BadgeSx
+              <Badge
+                color={tab.value === 'all' ? 'info' : 'error'}
                 badgeContent={tab.errorQuantity}
                 sx={{
+                  pl: '14px',
+                  mr: '14px',
+                  right: -4,
+                  top: -2,
                   display: tab.errorQuantity === 0 && 'contents'
                 }}
               />

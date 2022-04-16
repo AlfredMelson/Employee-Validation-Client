@@ -1,9 +1,30 @@
 import Box from '@mui/material/Box'
+import { styled } from '@mui/material/styles'
+import Tab from '@mui/material/Tab'
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { useRecoilValue } from 'recoil'
 import { employeeFilterStateAtom } from '../../../recoil-state'
-import { SelectedTabSx, UnselectedTabSx } from '../../mui'
+import { UMSwatch } from '../../../style'
+
+const SelectedTabSx = styled(Tab, {
+  name: 'MotionTab',
+  slot: 'styled'
+})(() => ({
+  minWidth: '127px',
+  margin: '0 10px',
+  borderRadius: '4px',
+  backgroundColor: UMSwatch.Grey[700]
+}))
+
+const UnselectedTabSx = styled(Tab, {
+  name: 'MotionTab',
+  slot: 'styled'
+})(() => ({
+  minWidth: '127px',
+  margin: '0 10px',
+  backgroundColor: 'transparent'
+}))
 
 export default function TabBackground() {
   const employeeFilterState = useRecoilValue(employeeFilterStateAtom)
@@ -46,7 +67,7 @@ export default function TabBackground() {
       <Box
         sx={{
           display: 'grid',
-          gridTemplateColumn: 'repeat(4, min(120px))'
+          gridTemplateColumn: 'repeat(4, min(127px))'
         }}>
         <UnselectedTabSx sx={{ gridColumn: unselectedIndexA, gridRow: 1 }} />
         <UnselectedTabSx sx={{ gridColumn: unselectedIndexB, gridRow: 1 }} />

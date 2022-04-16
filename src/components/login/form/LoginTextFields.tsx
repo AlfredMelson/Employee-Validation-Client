@@ -16,8 +16,8 @@ import PersistCheck from './PersistCheck'
 
 export default function LoginTextFields() {
   const navigate = useNavigate()
-  // Hook up auth state
-  const { auth, setAuth } = useAuth()
+  // setAuth state in context
+  const { setAuth } = useAuth()
 
   // Error message display transition
   const setLoginAlertError = useSetRecoilState(loginAlertErrorAtom)
@@ -70,22 +70,16 @@ export default function LoginTextFields() {
 
     setSubmitting(true)
 
-    const accessToken = auth.accessToken
-
-    const loginData =
-      accessToken === null || accessToken === undefined
-        ? { adminUsername, adminPassword }
-        : { adminUsername, adminPassword, accessToken }
-
     try {
-      const response = await axios.post(API.Login, JSON.stringify(loginData), AxiosConfig)
+      const response = await axios.post(
+        API.Login,
+        JSON.stringify({ adminUsername, adminPassword }),
+        AxiosConfig
+      )
 
       if (response.status === 200) {
-        // set state to success
-        const accessToken = response?.data?.accessToken
-
         // pass adminUsername, adminPassword and accessToken into auth context
-        setAuth({ adminUsername, adminPassword, accessToken })
+        setAuth({ username: adminUsername, password: adminPassword, accessToken: response.data })
 
         // reset the username and password fields after 1 sec delay
         await uxdelay(1000)

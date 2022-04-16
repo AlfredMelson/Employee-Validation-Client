@@ -3,7 +3,7 @@ import { styled } from '@mui/material/styles'
 
 export const TabWrapper = styled(Box, { name: 'Tab', slot: 'wrapper' })(() => ({
   display: 'grid',
-  gridTemplateColumns: '20px 1fr 20px',
+  gridTemplateColumns: '10px 1fr 10px',
   alignItems: 'center',
   justifyItems: 'center'
 }))
