@@ -71,3 +71,33 @@ export const logoutErrorMessageAtom = atom<string>({
 // const setLogoutErrorMessage = useSetRecoilState(logoutErrorMessageAtom)
 // const logoutErrorMessage = useRecoilValue(logoutErrorMessageAtom)
 // const resetLogoutErrorMessage = useResetRecoilState(logoutErrorMessageAtom)
+
+/**
+ * Recoil managed state representing errors during admin login
+ *
+ * @return {Object} a writeable RecoilState object
+ * @bug Objects stored in atoms will freeze in development mode when bugs are detected
+ *
+ * Utilise hooks to manage state changes and notify components subscribing to re-render.
+ *
+ */
+export const logoutErrorHandlingAtom = atom<{
+  logoutAlertError: boolean
+  logoutErrorMessage: string
+  logoutDisabled: boolean
+  logoutSubmitting: boolean
+  logoutSuccessfulSubmit: boolean
+}>({
+  key: 'logoutErrorHandling',
+  default: {
+    logoutAlertError: false,
+    logoutErrorMessage: '',
+    logoutDisabled: false,
+    logoutSubmitting: false,
+    logoutSuccessfulSubmit: false
+  }
+})
+// const [logoutErrorHandling, setLogoutErrorHandling] = useRecoilState(logoutErrorHandlingAtom)
+// const setLogoutErrorHandling = useSetRecoilState(logoutErrorHandlingAtom)
+// const logoutErrorHandling = useRecoilValue(logoutErrorHandlingAtom)
+// const resetLogoutErrorHandling = useResetRecoilState(logoutErrorHandlingAtom)
