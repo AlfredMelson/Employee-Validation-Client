@@ -1,17 +1,15 @@
 import { Navigate, Outlet, useLocation } from 'react-router-dom'
-import { useAuth } from '../../hooks'
+import { useRecoilValue } from 'recoil'
+import { pushAdminStateAtom } from '../../recoil-state'
 
 export default function Authentication() {
-  const { auth } = useAuth()
   const location = useLocation()
 
-  console.log('auth', auth)
-  console.log('auth.accessToken', auth.accessToken)
+  const pushAdminState = useRecoilValue(pushAdminStateAtom)
 
-  return (
-    <>
-      <Outlet />
-      {!auth.accessToken && <Navigate to='/dashboard' state={{ from: location }} replace />}
-    </>
+  return pushAdminState === '' ? (
+    <Navigate to='/login' state={{ from: location }} replace />
+  ) : (
+    <Outlet />
   )
 }
