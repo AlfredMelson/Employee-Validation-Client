@@ -12,6 +12,8 @@ export enum API {
   Login = '/admin/auth',
   Logout = '/admin/logout',
   Refresh = '/admin/refresh',
+  AWSEBEmployee = '/employee',
+  AWSEBEmployees = '/employee/all',
   Employee = '/api/id',
   Employees = '/api/ids',
   DeleteEmployee = '/api/delete',

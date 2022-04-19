@@ -44,7 +44,7 @@ export const EmplProvider = ({ children }: IEmplProvider) => {
     const controller = new AbortController()
     try {
       // check if the component is mounted and set the response
-      const response: AxiosResponse = await axiosPrivate.get(API.Employees, {
+      const response: AxiosResponse = await axiosPrivate.get(API.AWSEBEmployees, {
         signal: controller.signal
       })
 

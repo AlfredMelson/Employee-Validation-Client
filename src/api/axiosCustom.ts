@@ -1,6 +1,6 @@
 import axios from 'axios'
-const BASE_URL = 'https://o98ppihcv9.execute-api.eu-central-1.amazonaws.com'
-// const DEV_URL = 'http://localhost:9003'
+const BASE_URL = 'http://employeeverification-env.eba-7siefvt9.eu-central-1.elasticbeanstalk.com/'
+// const BASE_URL = 'http://localhost:9003'
 
 export default axios.create({
   baseURL: BASE_URL

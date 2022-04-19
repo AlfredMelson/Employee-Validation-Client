@@ -1,6 +1,6 @@
 import { AnimatePresence } from 'framer-motion'
 import { Route, Routes } from 'react-router-dom'
-import { Authentication, Layout, Persistence } from './components'
+import { Layout } from './components'
 import { Administration, Login, Mismatch } from './pages'
 
 export default function App() {
@@ -12,11 +12,11 @@ export default function App() {
           <Route path='/' element={<Login />} />
 
           {/* protected route */}
-          <Route element={<Persistence />}>
-            <Route element={<Authentication />}>
-              <Route path='dashboard' element={<Administration />} />
-            </Route>
-          </Route>
+          {/* <Route element={<Persistence />}> */}
+          {/* <Route element={<Authentication />}> */}
+          <Route path='dashboard' element={<Administration />} />
+          {/* </Route> */}
+          {/* </Route> */}
           {/* <Route path='/dashboard' element={<Administration />} /> */}
 
           {/* mismatch route */}
