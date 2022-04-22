@@ -39,6 +39,8 @@ export const EmplProvider = ({ children }: IEmplProvider) => {
   const [employees, setEmployees] = useState<Empl[]>([])
   const axiosPrivate = useAxiosPrivate()
 
+  console.log('EmplProvider', employees)
+
   const getEmployees = async () => {
     setIsLoading(true)
     const controller = new AbortController()
@@ -47,9 +49,8 @@ export const EmplProvider = ({ children }: IEmplProvider) => {
       const response: AxiosResponse = await axiosPrivate.get(API.AWSEBEmployees, {
         signal: controller.signal
       })
-
-      setEmployees(response.data)
-      setEmployeeState(response.data)
+      setEmployees(response.data.employees)
+      setEmployeeState(response.data.employees)
       setIsLoading(false)
     } catch (error) {
       setIsLoading(false)
