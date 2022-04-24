@@ -4,8 +4,7 @@ import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSetRecoilState } from 'recoil'
-import axios from '../../../api/axiosCustom'
-import { useAuth } from '../../../hooks'
+import { useAuth, useAxiosPrivate } from '../../../hooks'
 import { loginAlertErrorAtom, loginErrorMessageAtom } from '../../../recoil-state'
 import { UMSwatch } from '../../../style'
 import { loginField, loginFieldTitle } from '../../../style/UMAnimations'
@@ -54,6 +53,8 @@ export default function LoginTextFields() {
     }
   }, [adminUsername, adminPassword, setLoginErrorMessage, setLoginAlertError])
 
+  const axiosPrivate = useAxiosPrivate()
+
   const handleLoginSubmission = async (event) => {
     event.preventDefault()
     setSuccessfulSubmit(false)
@@ -69,13 +70,20 @@ export default function LoginTextFields() {
     }
 
     setSubmitting(true)
-
     try {
-      const response = await axios.post(
+      // check if the component is mounted and set the response
+      const response = await axiosPrivate.post(
         API.Login,
         JSON.stringify({ adminUsername, adminPassword }),
         AxiosConfig
       )
+
+      // try {
+      //   const response = await axios.post(
+      //     API.Login,
+      //     JSON.stringify({ adminUsername, adminPassword }),
+      //     AxiosConfig
+      //   )
 
       if (response.status === 200) {
         // pass adminUsername, adminPassword and accessToken into auth context

@@ -22,12 +22,9 @@ export enum API {
 }
 
 export const AxiosConfig = {
-  headers: { 'Content-Type': 'application/json' }
+  headers: { 'Content-Type': 'application/json' },
+  withCredentials: true
 }
-// export const AxiosConfig = {
-//   headers: { 'Content-Type': 'application/json' },
-//   withCredentials: true
-// }
 
 /*
  * Username requirements:
