@@ -1,5 +1,5 @@
 import axios from 'axios'
-const BASE_URL = 'https://emplverify.eu-central-1.elasticbeanstalk.com/'
+const BASE_URL = 'https://emplVerify.eu-central-1.elasticbeanstalk.com'
 // const BASE_URL = 'http://localhost:9003'
 
 export default axios.create({
