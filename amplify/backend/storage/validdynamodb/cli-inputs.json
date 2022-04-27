@@ -1,0 +1,10 @@
+{
+  "resourceName": "validdynamodb",
+  "tableName": "employee-validation",
+  "partitionKey": {
+    "fieldName": "id",
+    "fieldType": "string"
+  },
+  "gsi": [],
+  "triggerFunctions": []
+}

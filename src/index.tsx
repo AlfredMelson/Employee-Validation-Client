@@ -1,12 +1,16 @@
 import CssBaseline from '@mui/material/CssBaseline'
+import { Amplify } from 'aws-amplify'
 import React from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { RecoilRoot } from 'recoil'
 import App from './App'
+import awsExports from './aws-exports'
 import { AuthProvider } from './context/AuthProvider'
 import { UMThemeProvider } from './style'
 import './style/global.css'
+
+Amplify.configure(awsExports)
 
 // create entry point using unique id from Document
 const rootElement = document.getElementById('root')
