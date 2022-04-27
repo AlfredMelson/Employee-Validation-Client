@@ -1,42 +1,9 @@
-import { API } from 'aws-amplify'
 import { AnimatePresence } from 'framer-motion'
-import { useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { Layout } from './components'
 import { Administration, Login, Mismatch } from './pages'
 
-const myAPI = 'validapi'
-const path = '/employee'
-
 export default function App() {
-  const [employees, setEmployees] = useState([])
-
-  // fetch from the backend and update employees array
-  function getEmployees() {
-    API.get(
-      // api name
-      myAPI,
-      // path
-      path + '/' + employees,
-      // options
-      {}
-    )
-      .then((response) => {
-        console.log(response)
-        const newEmployees = [...employees]
-        newEmployees.push(response)
-        setEmployees(newEmployees)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  }
-
-  const callApi = getEmployees
-
-  console.log('callApi: ', callApi)
-  console.log('employees array: ', employees)
-
   return (
     <AnimatePresence exitBeforeEnter>
       <Routes>
